@@ -1,0 +1,9 @@
+node_modules/
+dist/
+src-tauri/target/
+src-tauri/gen/
+src-tauri/resources/tuck-reader
+test-results/
+playwright-report/
+.DS_Store
+*.local
