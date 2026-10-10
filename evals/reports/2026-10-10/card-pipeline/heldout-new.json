@@ -1,0 +1,349 @@
+{
+  "rows": [
+    {
+      "chars": 135,
+      "confident": true,
+      "file": "diverse-aster-grades.txt",
+      "filed": "Education",
+      "format": "txt",
+      "gold": "Education",
+      "reason": "This record lists completed courses, credits and final grades. Matches Education.",
+      "suggested": "Education",
+      "title": "Transcript - Aster University"
+    },
+    {
+      "chars": 123,
+      "confident": true,
+      "file": "diverse-bicycle-warranty.txt",
+      "filed": "Warranties",
+      "format": "txt",
+      "gold": "Warranties",
+      "reason": "Warranty registration for a bicycle frame defect covering five years. Matches Warranties.",
+      "suggested": "Warranty",
+      "title": "Warranty - manufacturer"
+    },
+    {
+      "chars": 139,
+      "confident": true,
+      "file": "diverse-blood-results.txt",
+      "filed": "Health",
+      "format": "txt",
+      "gold": "Health",
+      "reason": "The report lists blood test measurements and their reference intervals. Matches Health.",
+      "suggested": "Health",
+      "title": "Medical Report - Harbor Clinic"
+    },
+    {
+      "chars": 133,
+      "confident": true,
+      "file": "diverse-camera-warranty.txt",
+      "filed": "Warranties",
+      "format": "txt",
+      "gold": "Warranties",
+      "reason": "Product warranty certificate for a Lensco L2 camera with two-year coverage for defects. Matches Warranties.",
+      "suggested": "Warranty",
+      "title": "Warranty - manufacturer"
+    },
+    {
+      "chars": 107,
+      "confident": true,
+      "file": "diverse-diverse-unknown.txt",
+      "filed": "Work",
+      "format": "txt",
+      "gold": "Needs Review",
+      "reason": "The document confirms receipt of details linked to reference ZX-17. Matches Work.",
+      "suggested": "Finance",
+      "title": "Reference"
+    },
+    {
+      "chars": 107,
+      "confident": true,
+      "file": "diverse-harbor-invoice.txt",
+      "filed": "Invoices",
+      "format": "txt",
+      "gold": "Invoices",
+      "reason": "The customer is charged EUR 180 for office equipment supplied. Matches Invoices.",
+      "suggested": "Finance",
+      "title": "Invoice - Harbor Office Ltd"
+    },
+    {
+      "chars": 106,
+      "confident": true,
+      "file": "diverse-heldout-alder-bill.txt",
+      "filed": "Invoices",
+      "format": "txt",
+      "gold": "Invoices",
+      "reason": "Office materials delivered. Payment is due for the listed goods. Matches Invoices.",
+      "suggested": "Finance",
+      "title": "Invoice - Alder Supplies"
+    },
+    {
+      "chars": 114,
+      "confident": true,
+      "file": "diverse-heldout-atlas-report.txt",
+      "filed": "Work",
+      "format": "txt",
+      "gold": "Work",
+      "reason": "The engineer recorded equipment condition and completed the inspection. Matches Work.",
+      "suggested": "Home",
+      "title": "Report"
+    },
+    {
+      "chars": 104,
+      "confident": true,
+      "file": "diverse-heldout-bergen-stay.txt",
+      "filed": "Travel",
+      "format": "txt",
+      "gold": "Travel",
+      "reason": "Hotel reservation confirmation for accommodation booked for the traveller in Bergen. Matches Travel.",
+      "suggested": "Travel",
+      "title": "Reservation - Hotel"
+    },
+    {
+      "chars": 111,
+      "confident": true,
+      "file": "diverse-heldout-birch-medical.txt",
+      "filed": "Health",
+      "format": "txt",
+      "gold": "Health",
+      "reason": "The physician prescribed a medication and recorded the dosage. Matches Health.",
+      "suggested": "Health",
+      "title": "Medical Report - Birch Health Centre"
+    },
+    {
+      "chars": 124,
+      "confident": true,
+      "file": "diverse-heldout-brook-certificate.txt",
+      "filed": "Education",
+      "format": "txt",
+      "gold": "Education",
+      "reason": "The student completed an academic course and passed its assessment. Matches Education.",
+      "suggested": "Home",
+      "title": "Certificate - Brook College"
+    },
+    {
+      "chars": 213,
+      "confident": true,
+      "file": "diverse-heldout-combined-records.txt",
+      "filed": "Education",
+      "format": "txt",
+      "gold": "Needs Review",
+      "reason": "A university diploma for an engineering degree and a flight booking confirmation for a separate passenger to Porto. Matches Education.",
+      "suggested": "Education",
+      "title": "Diploma - Lake University"
+    },
+    {
+      "chars": 99,
+      "confident": true,
+      "file": "diverse-heldout-echo-bill.txt",
+      "filed": "Invoices",
+      "format": "txt",
+      "gold": "Invoices",
+      "reason": "Design services were completed and billed to the customer. Matches Invoices.",
+      "suggested": "Finance",
+      "title": "Invoice - Echo Design"
+    },
+    {
+      "chars": 94,
+      "confident": true,
+      "file": "diverse-heldout-juniper-minutes.txt",
+      "filed": "Work",
+      "format": "txt",
+      "gold": "Work",
+      "reason": "The team recorded agreed tasks, owners and decisions. Matches Work.",
+      "suggested": "Work",
+      "title": "Meeting Minutes - Juniper"
+    },
+    {
+      "chars": 101,
+      "confident": true,
+      "file": "diverse-heldout-lake-diploma.txt",
+      "filed": "Education",
+      "format": "txt",
+      "gold": "Education",
+      "reason": "This certifies completion of a degree in engineering. Matches Education.",
+      "suggested": "Education",
+      "title": "Diploma - Lake University"
+    },
+    {
+      "chars": 116,
+      "confident": true,
+      "file": "diverse-heldout-maple-clinical.txt",
+      "filed": "Health",
+      "format": "txt",
+      "gold": "Health",
+      "reason": "The laboratory records examined specimen findings and clinical observations. Matches Health.",
+      "suggested": "Health",
+      "title": "Medical Report - Maple Hospital"
+    },
+    {
+      "chars": 111,
+      "confident": true,
+      "file": "diverse-heldout-mixer-cover.txt",
+      "filed": "Warranties",
+      "format": "txt",
+      "gold": "Warranties",
+      "reason": "The manufacturer covers defects in this kitchen mixer for one year. Matches Warranties.",
+      "suggested": "Warranty",
+      "title": "Warranty Certificate - manufacturer"
+    },
+    {
+      "chars": 101,
+      "confident": true,
+      "file": "diverse-heldout-porto-ticket.txt",
+      "filed": "Travel",
+      "format": "txt",
+      "gold": "Travel",
+      "reason": "Flight booking confirmation for a passenger flight and itinerary to Porto. Matches Travel.",
+      "suggested": "Travel",
+      "title": "Flight Booking"
+    },
+    {
+      "chars": 108,
+      "confident": true,
+      "file": "diverse-heldout-printer-cover.txt",
+      "filed": "Warranties",
+      "format": "txt",
+      "gold": "Warranties",
+      "reason": "A warranty certificate for a printer stating the manufacturer covers defects for two years. Matches Warranties.",
+      "suggested": "Warranty",
+      "title": "Warranty Certificate"
+    },
+    {
+      "chars": 101,
+      "confident": false,
+      "file": "diverse-heldout-unidentified.txt",
+      "filed": "Needs Review",
+      "format": "txt",
+      "gold": "Needs Review",
+      "reason": "No folder fits this transaction. Choose a folder for it.",
+      "suggested": "Finance",
+      "title": ""
+    },
+    {
+      "chars": 132,
+      "confident": true,
+      "file": "diverse-imaging-results.txt",
+      "filed": "Health",
+      "format": "txt",
+      "gold": "Health",
+      "reason": "This report describes the findings of the completed X-ray examination. Matches Health.",
+      "suggested": "Health",
+      "title": "Medical Report - Meadow Clinic"
+    },
+    {
+      "chars": 113,
+      "confident": true,
+      "file": "diverse-lisbon-booking.txt",
+      "filed": "Travel",
+      "format": "txt",
+      "gold": "Travel",
+      "reason": "A hotel room is booked for three nights from 12 April in Lisbon for Taylor Sample. Matches Travel.",
+      "suggested": "Travel",
+      "title": "Hotel Reservation"
+    },
+    {
+      "chars": 111,
+      "confident": true,
+      "file": "diverse-meadow-invoice.txt",
+      "filed": "Invoices",
+      "format": "txt",
+      "gold": "Invoices",
+      "reason": "Invoice for printing posters for the customer, amount due EUR 90. Matches Invoices.",
+      "suggested": "Finance",
+      "title": "Invoice - Meadow Print Ltd"
+    },
+    {
+      "chars": 255,
+      "confident": true,
+      "file": "diverse-mixed-clinical-warranty.txt",
+      "filed": "Health",
+      "format": "txt",
+      "gold": "Needs Review",
+      "reason": "The document contains a laboratory test report with blood test measurements and a product warranty certificate for a bicycle with five-year coverage for defects in the frame. Matches Health.",
+      "suggested": "Health",
+      "title": "Medical Report - Harbor Clinic"
+    },
+    {
+      "chars": 88,
+      "confident": true,
+      "file": "diverse-no-project.txt",
+      "filed": "Work",
+      "format": "txt",
+      "gold": "Work",
+      "reason": "The team agreed its next tasks. No project is identified in these notes. Matches Work.",
+      "suggested": "Work",
+      "title": "Meeting Minutes"
+    },
+    {
+      "chars": 93,
+      "confident": true,
+      "file": "diverse-orion-minutes.txt",
+      "filed": "Work",
+      "format": "txt",
+      "gold": "Work",
+      "reason": "The engineering team agreed the next release tasks and owners. Matches Work.",
+      "suggested": "Work",
+      "title": "Meeting Minutes"
+    },
+    {
+      "chars": 123,
+      "confident": true,
+      "file": "diverse-oslo-booking.txt",
+      "filed": "Travel",
+      "format": "txt",
+      "gold": "Travel",
+      "reason": "Train booking confirmation for a journey to Oslo on 18 May with one seat reserved for Taylor Sample. Matches Travel.",
+      "suggested": "Travel",
+      "title": "Train Booking"
+    },
+    {
+      "chars": 126,
+      "confident": true,
+      "file": "diverse-pine-grades.txt",
+      "filed": "Education",
+      "format": "txt",
+      "gold": "Education",
+      "reason": "Completed courses and awarded grades for the academic term. Matches Education.",
+      "suggested": "Education",
+      "title": "Transcript - Pine College"
+    },
+    {
+      "chars": 99,
+      "confident": true,
+      "file": "diverse-vega-minutes.txt",
+      "filed": "Work",
+      "format": "txt",
+      "gold": "Work",
+      "reason": "Project meeting notes for Vega, including design review decisions and action items for the new interface. Matches Work.",
+      "suggested": "Work",
+      "title": "Meeting Notes"
+    }
+  ],
+  "summary": {
+    "documents": 29,
+    "filing": {
+      "correct": 25,
+      "medianSeconds": 0.643080208,
+      "review": 1,
+      "wrong": 3
+    },
+    "nesting": 2,
+    "suggest": {
+      "error": null,
+      "folders": [
+        "Finance",
+        "Health",
+        "Education",
+        "Travel",
+        "Warranty",
+        "Work",
+        "Home"
+      ],
+      "pairPrecision": 0.9705882352941176,
+      "pairRecall": 0.825,
+      "placed": 29,
+      "seconds": 51.909471334
+    }
+  }
+}

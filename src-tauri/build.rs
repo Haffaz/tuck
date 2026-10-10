@@ -1,6 +1,21 @@
+/// True when `output` exists and is newer than every source. Helpers in `resources/` are
+/// bundled, so tauri-build reruns this script when they change; recompiling them on every
+/// run would then make `tauri dev` rebuild forever.
+fn up_to_date(output: &str, sources: &[&str]) -> bool {
+    let modified = |path: &str| std::fs::metadata(path).and_then(|m| m.modified()).ok();
+    match modified(output) {
+        Some(built) => sources
+            .iter()
+            .all(|source| modified(source).is_some_and(|changed| changed <= built)),
+        None => false,
+    }
+}
+
 fn main() {
     println!("cargo:rerun-if-changed=swift/TuckReader.swift");
-    if std::env::var("CARGO_CFG_TARGET_OS").as_deref() == Ok("macos") {
+    if std::env::var("CARGO_CFG_TARGET_OS").as_deref() == Ok("macos")
+        && !up_to_date("resources/tuck-reader", &["swift/TuckReader.swift"])
+    {
         std::fs::create_dir_all("resources").expect("create reader directory");
         let status = std::process::Command::new("swiftc")
             .args([
@@ -23,22 +38,25 @@ fn main() {
     println!("cargo:rerun-if-changed=swift/TuckRoles.swift");
     println!("cargo:rerun-if-changed=swift/TuckRoleValidation.swift");
     println!("cargo:rerun-if-changed=swift/TuckApple.swift");
+    println!("cargo:rerun-if-changed=swift/TuckCards.swift");
     println!("cargo:rerun-if-changed=swift/TuckModelSupport.swift");
-    if std::env::var("CARGO_CFG_TARGET_OS").as_deref() == Ok("macos") {
+    const HELPER_SOURCES: &[&str] = &[
+        "swift/TuckApple.swift",
+        "swift/TuckRoles.swift",
+        "swift/TuckCategorization.swift",
+        "swift/TuckLocalTransport.swift",
+        "swift/TuckConnections.swift",
+        "swift/TuckRoleValidation.swift",
+        "swift/TuckModelSupport.swift",
+        "swift/TuckCards.swift",
+    ];
+    if std::env::var("CARGO_CFG_TARGET_OS").as_deref() == Ok("macos")
+        && !up_to_date("resources/tuck-apple", HELPER_SOURCES)
+    {
         let status = std::process::Command::new("swiftc")
-            .args([
-                "-parse-as-library",
-                "-O",
-                "swift/TuckApple.swift",
-                "swift/TuckRoles.swift",
-                "swift/TuckCategorization.swift",
-                "swift/TuckLocalTransport.swift",
-                "swift/TuckConnections.swift",
-                "swift/TuckRoleValidation.swift",
-                "swift/TuckModelSupport.swift",
-                "-o",
-                "resources/tuck-apple",
-            ])
+            .args(["-parse-as-library", "-O"])
+            .args(HELPER_SOURCES)
+            .args(["-o", "resources/tuck-apple"])
             .status()
             .expect("Swift compiler is required for Apple Intelligence");
         assert!(

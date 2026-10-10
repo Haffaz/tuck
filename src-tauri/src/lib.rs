@@ -1,12 +1,13 @@
-mod agent;
 mod apple;
+mod card_filing;
+mod card_suggest;
+mod cards;
 mod categories;
-mod category_evidence;
 mod classifier;
+mod cluster;
 mod collection;
 mod config;
 mod coordinator;
-mod description;
 mod engine;
 #[cfg(test)]
 mod evaluation;
@@ -14,6 +15,7 @@ mod files;
 mod instructions;
 mod model;
 mod native;
+mod parallel;
 mod provider;
 mod rule_check;
 mod watching;

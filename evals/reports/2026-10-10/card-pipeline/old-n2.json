@@ -1,0 +1,418 @@
+{
+  "rows": [
+    {
+      "chars": 167,
+      "confident": true,
+      "file": "bank-barclays-scan.pdf",
+      "filed": "Banking & Taxes",
+      "format": "scan-pdf",
+      "gold": "Banking & Taxes",
+      "reason": "Selected Banking & Taxes from the configured categories. Original filename kept because a new name could not be established.",
+      "suggested": "Banking",
+      "title": ""
+    },
+    {
+      "chars": 194,
+      "confident": true,
+      "file": "bank-chase.txt",
+      "filed": "Banking & Taxes",
+      "format": "txt",
+      "gold": "Banking & Taxes",
+      "reason": "Selected Banking & Taxes from the configured categories.",
+      "suggested": "Banking",
+      "title": "Checking account statement"
+    },
+    {
+      "chars": 172,
+      "confident": true,
+      "file": "bank-deutsche-de.txt",
+      "filed": "Banking & Taxes",
+      "format": "txt",
+      "gold": "Banking & Taxes",
+      "reason": "Selected Banking & Taxes from the configured categories.",
+      "suggested": "Needs review",
+      "title": "Bank statement for account 123456700"
+    },
+    {
+      "chars": 190,
+      "confident": true,
+      "file": "bank-nordea-sv.txt",
+      "filed": "Banking & Taxes",
+      "format": "txt",
+      "gold": "Banking & Taxes",
+      "reason": "Selected Banking & Taxes from the configured categories.",
+      "suggested": "Banking",
+      "title": "Bank statement Nordea Bank Abp"
+    },
+    {
+      "chars": 142,
+      "confident": true,
+      "file": "car-insurance-sv.txt",
+      "filed": "Insurance",
+      "format": "txt",
+      "gold": "Insurance",
+      "reason": "Selected Insurance from the configured categories.",
+      "suggested": "Insurance",
+      "title": "Insurance policy for vehicle coverage"
+    },
+    {
+      "chars": 7567,
+      "confident": false,
+      "file": "contract-employment-long.txt",
+      "filed": "Needs Review",
+      "format": "txt",
+      "gold": "Employment & Pay",
+      "reason": "The document needs more information. Choose a folder.",
+      "suggested": "Needs review",
+      "title": ""
+    },
+    {
+      "chars": 156,
+      "confident": true,
+      "file": "contract-employment-short.txt",
+      "filed": "Employment & Pay",
+      "format": "txt",
+      "gold": "Employment & Pay",
+      "reason": "Selected Employment & Pay from the configured categories. Original filename kept because a new name could not be established.",
+      "suggested": "Work",
+      "title": ""
+    },
+    {
+      "chars": 168,
+      "confident": true,
+      "file": "credit-card-amex.txt",
+      "filed": "Banking & Taxes",
+      "format": "txt",
+      "gold": "Banking & Taxes",
+      "reason": "Selected Banking & Taxes from the configured categories.",
+      "suggested": "Receipts",
+      "title": "Credit card statement"
+    },
+    {
+      "chars": 166,
+      "confident": true,
+      "file": "diploma.txt",
+      "filed": "Education",
+      "format": "txt",
+      "gold": "Education",
+      "reason": "Selected Education from the configured categories. Original filename kept because a new name could not be established.",
+      "suggested": "Education",
+      "title": ""
+    },
+    {
+      "chars": 133,
+      "confident": false,
+      "file": "electricity-edf-scan.png",
+      "filed": "Needs Review",
+      "format": "scan-png",
+      "gold": "Housing & Utilities",
+      "reason": "Apple Intelligence could not complete match (invalid_document_scope). The document stays available for your input.",
+      "suggested": "Housing",
+      "title": ""
+    },
+    {
+      "chars": 117,
+      "confident": true,
+      "file": "electricity-vattenfall-sv.txt",
+      "filed": "Housing & Utilities",
+      "format": "txt",
+      "gold": "Housing & Utilities",
+      "reason": "Selected Housing & Utilities from the configured categories.",
+      "suggested": "Housing",
+      "title": "Electricity bill from Vattenfall"
+    },
+    {
+      "chars": 174,
+      "confident": true,
+      "file": "employment-certificate.txt",
+      "filed": "Employment & Pay",
+      "format": "txt",
+      "gold": "Employment & Pay",
+      "reason": "Selected Employment & Pay from the configured categories.",
+      "suggested": "Work",
+      "title": "Certificate of Employment for Jordan Example"
+    },
+    {
+      "chars": 170,
+      "confident": true,
+      "file": "flight-booking.txt",
+      "filed": "Travel",
+      "format": "txt",
+      "gold": "Travel",
+      "reason": "Selected Travel from the configured categories.",
+      "suggested": "Travel",
+      "title": "Booking confirmation SAS Scandinavian Airlines"
+    },
+    {
+      "chars": 140,
+      "confident": true,
+      "file": "flight-eticket.txt",
+      "filed": "Travel",
+      "format": "txt",
+      "gold": "Travel",
+      "reason": "Selected Travel from the configured categories.",
+      "suggested": "Travel",
+      "title": "Electronic ticket receipt for Lufthansa flight"
+    },
+    {
+      "chars": 6154,
+      "confident": false,
+      "file": "home-insurance-long.txt",
+      "filed": "Needs Review",
+      "format": "txt",
+      "gold": "Insurance",
+      "reason": "The document needs more information. Choose a folder.",
+      "suggested": "Needs review",
+      "title": ""
+    },
+    {
+      "chars": 127,
+      "confident": false,
+      "file": "hotel-booking-scan.png",
+      "filed": "Needs Review",
+      "format": "scan-png",
+      "gold": "Travel",
+      "reason": "Local text recognition timed out",
+      "suggested": "Needs review",
+      "title": ""
+    },
+    {
+      "chars": 173,
+      "confident": true,
+      "file": "hotel-booking.txt",
+      "filed": "Travel",
+      "format": "txt",
+      "gold": "Travel",
+      "reason": "Selected Travel from the configured categories. Original filename kept because a new name could not be established.",
+      "suggested": "Travel",
+      "title": ""
+    },
+    {
+      "chars": 129,
+      "confident": true,
+      "file": "lab-results-scan.pdf",
+      "filed": "Medical Records",
+      "format": "scan-pdf",
+      "gold": "Medical Records",
+      "reason": "Selected Medical Records from the configured categories.",
+      "suggested": "Health",
+      "title": "Laboratory report for patient Jordan Example"
+    },
+    {
+      "chars": 147,
+      "confident": true,
+      "file": "lab-results.txt",
+      "filed": "Medical Records",
+      "format": "txt",
+      "gold": "Medical Records",
+      "reason": "Selected Medical Records from the configured categories.",
+      "suggested": "Health",
+      "title": "Laboratory results for Jordan Example"
+    },
+    {
+      "chars": 7509,
+      "confident": false,
+      "file": "lease-long.txt",
+      "filed": "Needs Review",
+      "format": "txt",
+      "gold": "Housing & Utilities",
+      "reason": "The document needs more information. Choose a folder.",
+      "suggested": "Needs review",
+      "title": ""
+    },
+    {
+      "chars": 158,
+      "confident": true,
+      "file": "lease-sv.txt",
+      "filed": "Housing & Utilities",
+      "format": "txt",
+      "gold": "Housing & Utilities",
+      "reason": "Selected Housing & Utilities from the configured categories.",
+      "suggested": "Housing",
+      "title": "Hyresavtal for apartment"
+    },
+    {
+      "chars": 158,
+      "confident": true,
+      "file": "passport-scan.png",
+      "filed": "Identity & Immigration",
+      "format": "scan-png",
+      "gold": "Identity & Immigration",
+      "reason": "Selected Identity & Immigration from the configured categories.",
+      "suggested": "Travel",
+      "title": "Passport record for GBR citizen JORDAN"
+    },
+    {
+      "chars": 125,
+      "confident": true,
+      "file": "payslip-acme.txt",
+      "filed": "Employment & Pay",
+      "format": "txt",
+      "gold": "Employment & Pay",
+      "reason": "Selected Employment & Pay from the configured categories.",
+      "suggested": "Work",
+      "title": "Payslip March 2026"
+    },
+    {
+      "chars": 127,
+      "confident": true,
+      "file": "payslip-scan.pdf",
+      "filed": "Employment & Pay",
+      "format": "scan-pdf",
+      "gold": "Employment & Pay",
+      "reason": "Selected Employment & Pay from the configured categories.",
+      "suggested": "Work",
+      "title": "Salary statement May 2026"
+    },
+    {
+      "chars": 113,
+      "confident": true,
+      "file": "payslip-volvo-sv.txt",
+      "filed": "Employment & Pay",
+      "format": "txt",
+      "gold": "Employment & Pay",
+      "reason": "Selected Employment & Pay from the configured categories.",
+      "suggested": "Work",
+      "title": "Payslip april 2026"
+    },
+    {
+      "chars": 150,
+      "confident": true,
+      "file": "prescription.txt",
+      "filed": "Medical Records",
+      "format": "txt",
+      "gold": "Medical Records",
+      "reason": "Selected Medical Records from the configured categories.",
+      "suggested": "Health",
+      "title": "Prescription for Amoxicillin"
+    },
+    {
+      "chars": 173,
+      "confident": true,
+      "file": "radiology.txt",
+      "filed": "Medical Records",
+      "format": "txt",
+      "gold": "Medical Records",
+      "reason": "Selected Medical Records from the configured categories.",
+      "suggested": "Health",
+      "title": "Chest X-ray Radiology Report"
+    },
+    {
+      "chars": 151,
+      "confident": true,
+      "file": "residence-card-sv.txt",
+      "filed": "Identity & Immigration",
+      "format": "txt",
+      "gold": "Identity & Immigration",
+      "reason": "Selected Identity & Immigration from the configured categories.",
+      "suggested": "Immigration",
+      "title": "Permanent residence card for Sweden"
+    },
+    {
+      "chars": 6009,
+      "confident": false,
+      "file": "tax-return-us.txt",
+      "filed": "Needs Review",
+      "format": "txt",
+      "gold": "Banking & Taxes",
+      "reason": "The document needs more information. Choose a folder.",
+      "suggested": "Needs review",
+      "title": ""
+    },
+    {
+      "chars": 127,
+      "confident": true,
+      "file": "tax-skatteverket-sv.png",
+      "filed": "Banking & Taxes",
+      "format": "scan-png",
+      "gold": "Banking & Taxes",
+      "reason": "Selected Banking & Taxes from the configured categories.",
+      "suggested": "Tax",
+      "title": "Tax notice final tax calculation"
+    },
+    {
+      "chars": 143,
+      "confident": true,
+      "file": "transcript-aster.txt",
+      "filed": "Education",
+      "format": "txt",
+      "gold": "Education",
+      "reason": "Selected Education from the configured categories.",
+      "suggested": "Education",
+      "title": "Academic transcript - BSc Computer Science"
+    },
+    {
+      "chars": 120,
+      "confident": true,
+      "file": "transcript-pine-scan.pdf",
+      "filed": "Education",
+      "format": "scan-pdf",
+      "gold": "Education",
+      "reason": "Selected Education from the configured categories.",
+      "suggested": "Education",
+      "title": "Official Transcript of Records"
+    },
+    {
+      "chars": 191,
+      "confident": true,
+      "file": "travel-insurance.txt",
+      "filed": "Insurance",
+      "format": "txt",
+      "gold": "Insurance",
+      "reason": "Selected Insurance from the configured categories.",
+      "suggested": "Insurance",
+      "title": "Certificate of travel insurance"
+    },
+    {
+      "chars": 182,
+      "confident": true,
+      "file": "visa-decision.txt",
+      "filed": "Identity & Immigration",
+      "format": "txt",
+      "gold": "Identity & Immigration",
+      "reason": "Selected Identity & Immigration from the configured categories.",
+      "suggested": "Immigration",
+      "title": "Visa approval record"
+    },
+    {
+      "chars": 136,
+      "confident": true,
+      "file": "water-bill.txt",
+      "filed": "Housing & Utilities",
+      "format": "txt",
+      "gold": "Housing & Utilities",
+      "reason": "Selected Housing & Utilities from the configured categories.",
+      "suggested": "Housing",
+      "title": "Water bill Thames Water"
+    }
+  ],
+  "summary": {
+    "documents": 35,
+    "filing": {
+      "correct": 29,
+      "medianSeconds": 3.107105,
+      "review": 6,
+      "wrong": 0
+    },
+    "nesting": 2,
+    "suggest": {
+      "error": null,
+      "folders": [
+        "Banking",
+        "Education",
+        "Health",
+        "Housing",
+        "Immigration",
+        "Insurance",
+        "Receipts",
+        "Tax",
+        "Travel",
+        "Work"
+      ],
+      "pairPrecision": 0.9166666666666666,
+      "pairRecall": 0.4925373134328358,
+      "placed": 29,
+      "seconds": 107.52616825
+    }
+  }
+}

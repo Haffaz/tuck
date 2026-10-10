@@ -10,6 +10,9 @@ use std::{
     time::{Duration, Instant},
 };
 
+/// Concurrent document reads while mapping; OCR scaled about 3x up to four.
+const READ_WORKERS: usize = 4;
+
 struct Runtime {
     preferences: Preferences,
     items: Vec<ReviewItem>,
@@ -356,21 +359,20 @@ impl Engine {
         let result: Result<crate::collection::Collection, String> = (|| {
             let paths = files::existing_documents(Path::new(&p.root), true)?;
             let total = paths.len();
-            let mut documents = Vec::new();
-            for (index, path) in paths.iter().enumerate() {
-                {
+            // Text recognition runs several documents at once; order is preserved.
+            let documents = crate::parallel::map(
+                &paths,
+                READ_WORKERS,
+                |path| crate::collection::read(path, Path::new(&p.root), &self.reader),
+                |done| {
                     let mut state = self.state.lock().unwrap();
                     if state.generation != generation {
                         return Err("Mapping cancelled.".into());
                     }
-                    state.processing = Some(format!("Mapping document {} of {total}", index + 1));
-                }
-                documents.push(crate::collection::read(
-                    path,
-                    Path::new(&p.root),
-                    &self.reader,
-                ));
-            }
+                    state.processing = Some(format!("Reading document {done} of {total}"));
+                    Ok(())
+                },
+            )?;
             Ok(crate::collection::build(documents, &p))
         })();
         let mut state = self.state.lock().unwrap();
@@ -1194,20 +1196,20 @@ from pathlib import Path
 with Path(__file__).with_name('requests.jsonl').open('a') as log:
     log.write(json.dumps(request) + '\n')
 assert request.get('operation') != 'language', 'Language preflight was removed'
-if request.get('operation') == 'describe':
-    print(json.dumps({'description':'Document concerns: ' + request['text'][:300], 'quotes':request['quotes'][:1], 'uncertainty':'', 'action':'finish', 'page':0}))
-elif request.get('operation') == 'group_documents':
-    print(json.dumps({'assignments':[{'id':d['id'],'category':'Home' if 'rental' in d['description'] else 'Banking & Taxes'} for d in request['documents']]}))
-elif request.get('operation') == 'match':
-    assert request['input']['understanding']['description']
-    print(json.dumps({'action':'finish','selection':0,'reason':'Matched description','quote':request['input']['quotes'][0],'source_group':''}))
-elif request.get('operation') == 'verify_match':
- print(json.dumps({'supported':True}))
-elif request.get('operation') == 'name':
-    print(json.dumps({'title':''}))
-elif 'understanding' in request:
-    assert request['understanding']['description']
-    print(json.dumps({'reply':{'action':'finish','page':0,'query':'','folder':'Banking & Taxes','title':'','reason':'Matched description','confident':True}}))
+if request.get('operation') == 'card':
+    text = request['text']
+    kind = 'rental agreement' if 'rental' in text else 'bank statement'
+    print(json.dumps({'kind':kind, 'issuer':'', 'date':'', 'tags':['synthetic'], 'embedding':[0.0, 1.0] if 'rental' in text else [1.0, 0.0]}))
+elif request.get('operation') == 'name_group':
+    print(json.dumps({'name':'Home' if any('rental' in c['kind'] for c in request['cards']) else 'Banking & Taxes'}))
+elif request.get('operation') == 'merge_names':
+    print(json.dumps({'merges':[]}))
+elif request.get('operation') == 'group_subjects':
+    print(json.dumps({'subjects':{}}))
+elif request.get('operation') == 'embed':
+    print(json.dumps({'embeddings':[[1.0, 0.0] for _ in request['texts']]}))
+elif request.get('operation') == 'choose_folder':
+    print(json.dumps({'folder':request['candidates'][0]['folder']}))
 elif request.get('operation') == 'rule':
     print(json.dumps({'instruction':'Keep immigration applications and residence permits here.'}))
 else:
@@ -1315,7 +1317,7 @@ else:
         assert!(restarted.snapshot().items.is_empty());
     }
     #[test]
-    fn category_suggestions_include_every_readable_mapped_document_across_batches() {
+    fn category_suggestions_include_every_readable_mapped_document() {
         let (temp, engine, root) = category_setup(false);
         for n in 0..33 {
             fs::write(
@@ -1333,44 +1335,21 @@ else:
         assert_eq!(proposal.skipped, 1);
         let requests = fs::read_to_string(temp.path().join("requests.jsonl")).unwrap();
         let mut sent = std::collections::BTreeSet::new();
-        let mut calls = 0;
         for line in requests.lines() {
             let request: serde_json::Value = serde_json::from_str(line).unwrap();
-            if request["operation"] != "group_documents" {
-                continue;
-            }
-            calls += 1;
-            let established = request["establishedSubjects"].as_array().unwrap();
-            if calls == 1 {
-                assert!(established.is_empty());
-            } else {
-                assert!(established.iter().any(|v| v == "Banking & Taxes"));
-            }
-            let samples = request["documents"].as_array().unwrap();
-            assert!(samples.len() <= 4);
-            for sample in samples {
-                let description = sample["description"]
-                    .as_str()
-                    .expect("Planner gets grounded descriptions");
-                assert!(sample["quote"]
-                    .as_str()
-                    .unwrap()
-                    .contains("Synthetic document"));
-                sent.insert(description.to_owned());
+            if request["operation"] == "card" {
+                sent.insert(request["text"].as_str().unwrap().to_owned());
             }
         }
-        assert_eq!(calls, 9);
-        for n in 0..33 {
-            assert!(sent
-                .iter()
-                .any(|s| s.contains(&format!("Synthetic document {n} with"))));
-        }
-
+        assert_eq!(sent.len(), 33, "every readable document is described once");
+        // Similar documents share one folder instead of one folder per batch.
+        assert_eq!(proposal.rules.len(), 1);
+        assert_eq!(proposal.rules[0].folder, "Banking & Taxes");
         assert!(engine.snapshot().items.is_empty());
         assert_eq!(files::existing_documents(&root, true).unwrap().len(), 34);
     }
     #[test]
-    fn descriptions_are_reused_across_suggestions_rules_renames_and_filing() {
+    fn cards_are_reused_across_suggestions_rules_renames_and_filing() {
         let (temp, engine, root) = category_setup(false);
         let documents = category_documents(&root);
         let count = || {
@@ -1378,8 +1357,7 @@ else:
                 .unwrap()
                 .lines()
                 .filter(|line| {
-                    serde_json::from_str::<serde_json::Value>(line).unwrap()["operation"]
-                        == "describe"
+                    serde_json::from_str::<serde_json::Value>(line).unwrap()["operation"] == "card"
                 })
                 .count()
         };

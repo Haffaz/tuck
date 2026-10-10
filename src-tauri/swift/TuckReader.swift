@@ -12,6 +12,12 @@ func plainOCR(_ image: CGImage) throws -> String {
     try VNImageRequestHandler(cgImage: image, options: [:]).perform([request])
     return (request.results ?? []).compactMap { $0.topCandidates(1).first?.string }.joined(separator: "\n")
 }
+func photoLabels(_ image: CGImage) -> [String] {
+    let request = VNClassifyImageRequest()
+    guard (try? VNImageRequestHandler(cgImage: image, options: [:]).perform([request])) != nil else { return [] }
+    return (request.results ?? []).filter { $0.confidence > 0.3 }.prefix(5)
+        .map { $0.identifier.replacingOccurrences(of: "_", with: " ") }
+}
 func escaped(_ text: String) -> String {
     text.replacingOccurrences(of: "&", with: "&amp;").replacingOccurrences(of: "<", with: "&lt;")
         .replacingOccurrences(of: ">", with: "&gt;").replacingOccurrences(of: "\n", with: "<br>")
@@ -117,6 +123,11 @@ func correctedPhoto(_ image: CGImage) -> CGImage? {
                       let image = CGImageSourceCreateThumbnailAtIndex(source, 0, [kCGImageSourceCreateThumbnailFromImageAlways: true, kCGImageSourceThumbnailMaxPixelSize: 2200, kCGImageSourceCreateThumbnailWithTransform: true] as CFDictionary) else { exit(3) }
                 if let corrected = correctedPhoto(image), let recognized = try? await recognize(corrected), !recognized.isEmpty { text = recognized }
                 else { text = try await recognize(image) }
+                // A picture rather than a document: describe what it shows so it can still be grouped.
+                if text.filter(\.isLetter).count < 25 {
+                    let labels = photoLabels(image)
+                    if !labels.isEmpty { text += "\n[Photo labels: \(labels.joined(separator: ", "))]" }
+                }
             }
             let bounded = String(decoding: Array(text.utf8.prefix(14000)), as: UTF8.self)
                 + (text.utf8.count > 14000 ? "\n[Text truncated]" : "")

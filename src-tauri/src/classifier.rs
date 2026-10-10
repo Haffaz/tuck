@@ -89,14 +89,8 @@ pub fn classify_with_tools(
     let Some((path, reader)) = source else {
         return review("Local model helper unavailable");
     };
-    crate::coordinator::run(
-        name,
-        text,
-        p,
-        path,
-        reader,
-        &crate::provider::configured(reader, p),
-    )
+    let _ = name;
+    crate::card_filing::run(text, p, path, &crate::provider::configured(reader, p))
 }
 
 pub(crate) fn finalize(result: Result<Decision, String>, p: &Preferences) -> Decision {
@@ -131,41 +125,6 @@ fn review(reason: &str) -> Decision {
     }
 }
 
-pub fn read_page(
-    path: &Path,
-    reader: &Path,
-    page: usize,
-    force_ocr: bool,
-    remaining: Duration,
-) -> Result<String, String> {
-    if !(1..=50).contains(&page) {
-        return Err("Page must be between 1 and 50".into());
-    }
-    let ext = path
-        .extension()
-        .unwrap_or_default()
-        .to_string_lossy()
-        .to_lowercase();
-    if ext == "txt" || ext == "md" {
-        if force_ocr {
-            return Err("OCR is available for PDF and images only".into());
-        }
-        let data = fs::read(path).map_err(|e| e.to_string())?;
-        let text = String::from_utf8_lossy(&data);
-        let chunk: String = text.chars().skip((page - 1) * 4000).take(4000).collect();
-        return if chunk.is_empty() {
-            Err("Page is beyond the document".into())
-        } else {
-            Ok(chunk)
-        };
-    }
-    run_reader(
-        path,
-        reader,
-        &[page.to_string(), force_ocr.to_string()],
-        remaining.min(Duration::from_secs(30)),
-    )
-}
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -218,18 +177,6 @@ mod tests {
         assert_eq!(decision.folder, "Needs Review");
         assert!(decision.title.is_empty());
         assert!(!decision.confident);
-    }
-    #[test]
-    fn page_tool_is_bounded_and_rejects_unsupported_ocr() {
-        let dir = tempfile::tempdir().unwrap();
-        let path = dir.path().join("document.txt");
-        fs::write(&path, format!("{}evidence", "x".repeat(4000))).unwrap();
-        assert_eq!(
-            read_page(&path, Path::new(""), 2, false, Duration::from_secs(1)).unwrap(),
-            "evidence"
-        );
-        assert!(read_page(&path, Path::new(""), 51, false, Duration::from_secs(1)).is_err());
-        assert!(read_page(&path, Path::new(""), 1, true, Duration::from_secs(1)).is_err());
     }
     #[test]
     #[ignore = "Requires Apple Intelligence enabled; uses only synthetic documents"]

@@ -59,7 +59,7 @@ struct Input: Decodable {
         // String generation skips runtime guardrail checks. Model refusals,
         // strict response validation, verification and Rust file checks remain.
         // Rule suggestions and legacy calls keep defaults.
-        let transformsDocument = ["describe", "categories", "group_documents", "match", "verify_match", "name"].contains(operation ?? "")
+        let transformsDocument = ["describe", "categories", "group_documents", "match", "verify_match", "name", "card", "name_group", "group_subjects", "merge_names", "choose_folder"].contains(operation ?? "")
         let model = transformsDocument ? SystemLanguageModel(guardrails:.permissiveContentTransformations) : SystemLanguageModel.default
         // On-device only; no cloud fallback.
         if LocalModelTransport.selection == "apple", let error = availabilityError(model) { emit(["error": error]); return }
@@ -91,6 +91,10 @@ struct Input: Decodable {
         }
         if CommandLine.arguments.contains("--check") || operation == "status" {
             emit(["status": "Apple Intelligence is ready — on-device", "contextTokens": model.contextSize, "pipeline": "serial-roles-v7-evidence", "imageInput": supportsImages(model)]); return
+        }
+        if let request = try? JSONSerialization.jsonObject(with:data) as? [String:Any],
+           let response = await handleCardOperation(request, model:model) {
+            emit(response); return
         }
         if LocalModelTransport.evidenceWorkflow,
            let request = try? JSONSerialization.jsonObject(with:data) as? [String:Any],

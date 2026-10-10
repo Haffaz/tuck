@@ -1,6 +1,6 @@
 # How Tuck works
 
-Current implementation, checked against the source on 5 October 2026.
+Current implementation, checked against the source on 10 October 2026.
 
 Tuck reads documents, proposes a filing decision, and checks that decision before changing files. You choose the folder structure and start the filing session. The AI returns suggestions; Rust owns the file operations.
 
@@ -11,7 +11,7 @@ flowchart TD
     UI["Mac app · React in Tauri<br/>Organize · Folders · Settings"]
     CORE["Rust engine<br/>Session, queue, rules and revision checks"]
     EXTRACT["Native document reader<br/>Swift · PDFKit · Vision OCR · text"]
-    AI["AI workflow<br/>Read evidence · group · match · verify · name"]
+    AI["AI workflow<br/>Card per document · cluster · name · choose folder"]
     SELECT["Configured model adapter<br/>Swift helper · validated responses"]
     APPLE["Apple Intelligence<br/>Default · on this Mac"]
     CUSTOM["Custom connection<br/>Ollama · OpenAI-compatible · Anthropic"]
@@ -38,31 +38,31 @@ Apple processes text on this Mac. Custom connections receive extracted text and 
 ```mermaid
 flowchart TD
     INPUT["Choose a folder, add files,<br/>or receive a watched-file change"]
-    READ["Extract text and build grounded understanding<br/>Description plus exact source evidence"]
-    GROUP["Suggest categories<br/>Check complete source scope<br/>Apply type-scoped labels and grouping<br/>Copy verified values; keep missing details broad<br/>Maximum 1–2 levels and creation preferences"]
+    READ["Extract text · PDFKit, Vision OCR<br/>Photos without text get Vision labels"]
+    CARD["One card per document<br/>kind · issuer · date · 3 tags · summary<br/>+ local NLEmbedding of kind and tags<br/>Cached by content"]
+    KINDS["Cluster cards by kind<br/>Average-linkage, cosine ≥ 0.75<br/>Model names each cluster; synonyms merged"]
+    SUBJECTS["One model call places kinds under subjects<br/>Finance, Home, Health, Identity & Immigration…"]
+    LAYOUT["Two levels: keep a kind as a subfolder only with ≥3 documents<br/>and a meaningful alternative; otherwise file in the subject"]
     APPROVE["Review and approve the folder draft<br/>Save folder rules; documents stay put"]
-    MATCH["Start Tuck: select an enabled saved folder<br/>Interpret subject for broad label rules<br/>Check multipage record consistency<br/>Compare bounded candidate batches<br/>Retain every accepted type<br/>Apply saved and inherited folder rules"]
-    VERIFY["Check selected type; compare competing folders<br/>Validate filename words against verified facts"]
+    MATCH["Start Tuck: rank enabled folders by embedding<br/>One model choice per batch of six, rules visible"]
     CHECK{"Authorized decision?<br/>Current rules, unchanged source,<br/>safe available destination?"}
     WRITE["Rust moves or copies the file<br/>Existing files are never overwritten"]
     REVIEW["Needs your input<br/>Review, choose a folder, retry or skip"]
-    INPUT --> READ
-    READ -->|"Optional structure setup"| GROUP
-    GROUP --> LAYOUT["Combine all batches<br/>Collapse unnecessary children<br/>Store complete type scopes"]
-    LAYOUT --> APPROVE
-    APPROVE -->|"Start Tuck and analyze with saved rules"| MATCH
-    READ -->|"Filing into existing folders"| MATCH
-    MATCH --> VERIFY
-    VERIFY -->|"Supported decision"| CHECK
-    READ -->|"Insufficient evidence"| REVIEW
-    MATCH -->|"No clear match"| REVIEW
-    VERIFY -->|"Rejected or failed"| REVIEW
+    INPUT --> READ --> CARD
+    CARD -->|"Suggest folders"| KINDS --> SUBJECTS --> LAYOUT --> APPROVE
+    APPROVE -->|"Start Tuck"| MATCH
+    CARD -->|"Filing into existing folders"| MATCH
+    CARD -->|"Unreadable or model failure"| REVIEW
+    MATCH -->|"Chosen folder"| CHECK
+    MATCH -->|"No folder fits"| REVIEW
     CHECK -->|"Yes"| WRITE
     CHECK -->|"No"| REVIEW
     REVIEW -->|"Explicit filing approval"| CHECK
 ```
 
-Category planning and document filing are separate operations. A category proposal creates no files until you approve it, and approving categories does not start filing. Optional watching lasts only for the active session. Naming failure keeps the original filename rather than discarding a supported folder decision.
+Grouping is deterministic once cards exist. The model writes cards, names groups, places kinds under subjects and chooses among folders; a failed naming or subject reply degrades a name, not a document's placement. Long documents are read from the start (first 5,000 characters) instead of being rejected. Apple's guardrails still apply to guided output in permissive mode, so cards and folder choices fall back to plain-text replies when guided output is blocked; identity, tax and immigration papers otherwise fail routinely. Filenames are built from the card as `Kind - Issuer - Date`; the issuer and date are kept only when the document text contains them.
+
+Category planning and document filing are separate operations. A category proposal creates no files until you approve it, and approving categories does not start filing. Optional watching lasts only for the active session.
 
 ## Nesting and the three rules
 
@@ -81,7 +81,7 @@ The nesting setting is a maximum: one or two levels including the subject. Missi
 | Root `.tuck/settings.json`            | Model connection, folder nesting, folder creation preferences and other persisted settings. No API key.          |
 | Root `.tuck/instructions.md`          | Document instructions.                                                                                           |
 | Each folder's `.tuck/instructions.md` | Folder rule, complete accepted types, scope hash, saved examples, enabled state and priority.                    |
-| Root `.tuck/cache/`                   | Rebuildable descriptions and short verified quotes, keyed by content, extraction and provider identity.          |
+| Root `.tuck/cache/cards/`             | Rebuildable document cards and embeddings, keyed by content, extracted text and model/helper identity.           |
 | macOS Keychain                        | Connection API keys, scoped to the connection type and endpoint.                                                 |
 | App memory                            | Collection map, queue, review decisions, activity and watch authorization. These are not resumed after quitting. |
 
@@ -89,22 +89,22 @@ The app also remembers the last selected root in Application Support. There is n
 
 ## Code map
 
-| Responsibility                            | Main files                                                                                |
-| ----------------------------------------- | ----------------------------------------------------------------------------------------- |
-| Screens, drafts and folder editor         | `src/App.tsx`, `src/Settings.tsx`, `src/FolderTree.tsx`                                   |
-| Tauri commands and session lifecycle      | `src-tauri/src/lib.rs`, `src-tauri/src/engine.rs`                                         |
-| Document extraction                       | `src-tauri/swift/TuckReader.swift`, `src-tauri/src/classifier.rs`                         |
-| Evidence, cache and filing workflow       | `src-tauri/src/description.rs`, `src-tauri/src/coordinator.rs`                            |
-| Folder proposals and coverage checks      | `src-tauri/src/categories.rs`, `src-tauri/src/category_evidence.rs`                       |
-| Provider selection and request contracts  | `src-tauri/src/provider.rs`                                                               |
-| AI prompts and response validation        | `src-tauri/swift/TuckCategorization.swift`, `TuckRoles.swift`, `TuckRoleValidation.swift` |
-| Custom APIs and Keychain                  | `src-tauri/swift/TuckConnections.swift`                                                   |
-| Settings, inherited rules and file writes | `src-tauri/src/config.rs`, `instructions.rs`, `files.rs`                                  |
+| Responsibility                            | Main files                                                                |
+| ----------------------------------------- | ------------------------------------------------------------------------- |
+| Screens, drafts and folder editor         | `src/App.tsx`, `src/Settings.tsx`, `src/FolderTree.tsx`                   |
+| Tauri commands and session lifecycle      | `src-tauri/src/lib.rs`, `src-tauri/src/engine.rs`                         |
+| Document extraction                       | `src-tauri/swift/TuckReader.swift`, `src-tauri/src/classifier.rs`         |
+| Cards and their cache                     | `src-tauri/src/cards.rs`, `src-tauri/swift/TuckCards.swift`               |
+| Folder suggestions                        | `src-tauri/src/card_suggest.rs`, `src-tauri/src/cluster.rs`               |
+| Filing                                    | `src-tauri/src/card_filing.rs`                                            |
+| Provider selection and request contracts  | `src-tauri/src/provider.rs`                                               |
+| Custom APIs and Keychain                  | `src-tauri/swift/TuckConnections.swift`                                   |
+| Settings, inherited rules and file writes | `src-tauri/src/config.rs`, `instructions.rs`, `files.rs`                  |
 
-The diagrams describe the current implementation, including conservative review behavior. Valid JSON and a successful verification call do not guarantee a semantically correct classification. Technical budgets and evidence limits remain automatic.
+Valid output and a chosen folder do not guarantee a semantically correct classification; review the draft before approving it.
 
 ## Work and compatibility limits
 
-New suggestions and active destinations have at most two levels. Old three-level rule files remain on disk and are excluded from active destinations; saving preferences preserves them. Folder planning carries established subject names across batches of up to four documents. Matching compares at most eight candidate scopes per call, uses readable, unique IDs for type alternatives, and compares winners before verifying the chosen destination. A helper operation has a maximum of 32 underlying generations; the Rust filing deadline remains 90 seconds.
+New suggestions and active destinations have at most two levels and 40 folders. Old three-level rule files remain on disk and are excluded from active destinations. Cards read the first 5,000 characters (2,500 when dense text exceeds the model's context). Embeddings come from Apple's English sentence model; cards are written in English, so non-English documents group by their English description. Clustering is O(n³) and comfortable up to roughly 1,000 documents. Filing compares at most six folders per model call; the Rust filing deadline remains 90 seconds per document.
 
-Generated rule metadata is persisted separately from the short description. Manual description edits invalidate its hash so stale generated types cannot override an edited scope. The UI lists all included document types. The reader still requires complete short documents; the larger-document limitation is described in [the current workflow](apple-evidence-workflow.md).
+Folder creation preferences are passed to folder naming and subject placement; they cannot force a grouping field (for example "group invoices by supplier"), which the previous pipeline supported.

@@ -1,120 +1,61 @@
 //! Provider-neutral role contracts. Add another adapter here without giving models file access.
-use crate::{apple, description::Understanding, model::Rule};
-use serde::{Deserialize, Serialize};
+use crate::{apple, cards::Card};
+use serde::Serialize;
 use serde_json::{json, Value};
 use std::{
     path::{Path, PathBuf},
     time::Duration,
 };
 
-#[derive(Debug, Deserialize)]
-#[serde(tag = "action", rename_all = "snake_case")]
-pub enum ReaderReply {
-    Finish {
-        description: String,
-        quotes: Vec<String>,
-        uncertainty: String,
-    },
-    ReadPage {
-        #[serde(default)]
-        page: Option<usize>,
-    },
-    RetryOcr {
-        #[serde(default)]
-        page: Option<usize>,
-    },
-}
+/// A filing destination as the card chooser sees it.
 #[derive(Clone, Serialize)]
-pub struct Destination {
-    #[serde(rename = "documentTypes")]
-    pub document_types: Vec<String>,
+#[serde(rename_all = "camelCase")]
+pub struct Candidate {
     pub folder: String,
     pub instruction: String,
-    pub context: String,
-}
-#[derive(Serialize)]
-#[serde(rename_all = "camelCase")]
-pub struct MatchInput<'a> {
-    pub understanding: &'a Understanding,
-    pub evidence: &'a str,
-    pub quotes: Vec<String>,
-    pub destinations: Vec<Destination>,
-    pub source_folders: Vec<String>,
-    pub root_rules: &'a str,
-    pub can_read_more: bool,
-}
-#[derive(Debug, Deserialize)]
-#[serde(tag = "action", rename_all = "snake_case")]
-pub enum MatchReply {
-    Finish {
-        selection: usize,
-        reason: String,
-        quote: String,
-        #[serde(default)]
-        source_group: String,
-    },
-    NeedEvidence {
-        #[serde(default)]
-        page: Option<usize>,
-    },
-    Uncertain {
-        reason: String,
-    },
-}
-#[derive(Serialize)]
-#[serde(rename_all = "camelCase")]
-pub struct NameInput<'a> {
-    pub root_rules: &'a str,
-    pub understanding: &'a Understanding,
-    pub evidence: &'a str,
-    pub rules: &'a str,
+    pub document_types: Vec<String>,
 }
 
-/// Synchronous by design: the coordinator completes one stage before starting the next.
+/// Synchronous by design: one stage completes before the next starts.
 /// Adapters return data only. None receive document paths or write tools.
-pub trait ModelProvider {
+pub trait ModelProvider: Sync {
     fn status(&self) -> Result<String, String>;
     fn suggest_rule(&self, folder: &str, context: &str) -> Result<String, String>;
+    /// Identifies the model and helper build; cached cards are keyed by it.
     fn identity(&self) -> Result<String, String>;
-    fn describe(
+    /// One short guided description of a document plus a local embedding.
+    fn card(&self, text: &str, file_name: &str, timeout: Duration) -> Result<Card, String>;
+    /// Local sentence embeddings; no language model is involved.
+    fn embed(&self, texts: &[String], timeout: Duration) -> Result<Vec<Vec<f64>>, String>;
+    fn name_group(
         &self,
-        text: &str,
-        actions: &[&str],
-        completed: &[Value],
+        cards: &[&Card],
+        parent: &str,
         timeout: Duration,
-    ) -> Result<ReaderReply, String>;
-    fn uses_evidence_categories(&self) -> bool {
-        false
-    }
-    fn group_documents(
+    ) -> Result<String, String>;
+    /// A broader subject for each folder name, in the same order; empty when unplaced.
+    /// `details` describes what each folder holds.
+    fn group_subjects(
         &self,
-        _: &[crate::category_evidence::Sample],
-        _: Duration,
-    ) -> Result<Vec<crate::category_evidence::Assignment>, String> {
-        Err("Evidence grouping is unavailable for this provider".into())
-    }
-    fn group_documents_with_context(
-        &self,
-        samples: &[crate::category_evidence::Sample],
-        subjects: &[String],
+        names: &[String],
+        details: &[String],
         timeout: Duration,
-    ) -> Result<Vec<crate::category_evidence::Assignment>, String> {
-        let _ = subjects;
-        self.group_documents(samples, timeout)
-    }
-    fn categories(&self, descriptions: &[String], timeout: Duration) -> Result<Vec<Rule>, String>;
-    fn match_document(
+    ) -> Result<Vec<String>, String>;
+    /// Pairs (from, into) of names that mean the same thing.
+    fn merge_names(
         &self,
-        input: &MatchInput<'_>,
+        names: &[String],
         timeout: Duration,
-    ) -> Result<MatchReply, String>;
-    fn verify_match(
+    ) -> Result<Vec<(String, String)>, String>;
+    /// Index into `candidates`, or None when no folder fits.
+    fn choose_folder(
         &self,
-        input: &MatchInput<'_>,
-        selection: usize,
+        card: &Card,
+        excerpt: &str,
+        candidates: &[Candidate],
+        root_rules: &str,
         timeout: Duration,
-    ) -> Result<bool, String>;
-    fn name(&self, input: &NameInput<'_>, timeout: Duration) -> Result<String, String>;
+    ) -> Result<Option<usize>, String>;
 }
 pub struct LocalProvider {
     model: crate::model::LocalModel,
@@ -133,10 +74,6 @@ pub fn configured(reader: &Path, p: &crate::model::Preferences) -> LocalProvider
     let mut provider = selected(reader, p.ai_model);
     provider.preferences = Some(p.clone());
     provider
-}
-#[cfg(test)]
-pub fn local(reader: &Path) -> LocalProvider {
-    selected(reader, crate::model::LocalModel::Apple)
 }
 impl LocalProvider {
     fn invoke(&self, mut input: Value, timeout: Duration) -> Result<Value, String> {
@@ -186,136 +123,106 @@ impl ModelProvider for LocalProvider {
                 .to_owned()
         };
         Ok(format!(
-            "{}:roles-v7-evidence:{}:{}",
+            "{}:cards-v1:{}:{}",
             self.model.key(),
             digest,
             crate::files::digest(&self.helper)?
         ))
     }
-
-    fn describe(
-        &self,
-        text: &str,
-        actions: &[&str],
-        completed: &[Value],
-        timeout: Duration,
-    ) -> Result<ReaderReply, String> {
-        serde_json::from_value(self.invoke(
-            if self.uses_evidence_categories() {
-                json!({"operation":"describe", "text":text, "quotes":crate::category_evidence::source_lines(text)})
-            } else { apple::description_request(text, actions, completed) },
-            timeout,
-        )?)
-        .map_err(|_| "Invalid reader response".into())
-    }
-    fn uses_evidence_categories(&self) -> bool {
-        matches!(
-            self.model,
-            crate::model::LocalModel::Apple | crate::model::LocalModel::Custom
-        )
-    }
-    fn group_documents(
-        &self,
-        samples: &[crate::category_evidence::Sample],
-        timeout: Duration,
-    ) -> Result<Vec<crate::category_evidence::Assignment>, String> {
-        self.group_documents_with_context(samples, &[], timeout)
-    }
-    fn group_documents_with_context(
-        &self,
-        samples: &[crate::category_evidence::Sample],
-        subjects: &[String],
-        timeout: Duration,
-    ) -> Result<Vec<crate::category_evidence::Assignment>, String> {
+    fn card(&self, text: &str, file_name: &str, timeout: Duration) -> Result<Card, String> {
         let value = self.invoke(
-            json!({"operation":"group_documents", "documents":samples, "includeLayoutHints":true,"establishedSubjects":subjects}),
+            json!({"operation":"card", "text":text, "fileName":file_name}),
             timeout,
         )?;
-        let assignments: Vec<crate::category_evidence::Assignment> =
-            serde_json::from_value(value["assignments"].clone())
-                .map_err(|_| "Invalid document assignments")?;
-        crate::category_evidence::validate_assignments_with_depth(
-            samples,
-            &assignments,
-            self.preferences
-                .as_ref()
-                .map_or(2, |p| p.folder_nesting as usize),
-        )?;
-        Ok(assignments)
+        serde_json::from_value(value).map_err(|_| "Invalid document description".into())
     }
-    fn categories(&self, descriptions: &[String], timeout: Duration) -> Result<Vec<Rule>, String> {
-        let value = self.invoke(
-            json!({"operation":"categories","samples":descriptions}),
-            timeout,
-        )?;
-        crate::categories::validate_rules_with_depth(
-            value["rules"].clone(),
-            self.preferences
-                .as_ref()
-                .map_or(2, |p| p.folder_nesting as usize),
-        )
-    }
-    fn match_document(
-        &self,
-        input: &MatchInput<'_>,
-        timeout: Duration,
-    ) -> Result<MatchReply, String> {
-        let value = self.invoke(json!({"operation":"match", "input":input}), timeout)?;
-        serde_json::from_value(value).map_err(|_| "Invalid matcher response".into())
-    }
-    fn verify_match(
-        &self,
-        input: &MatchInput<'_>,
-        selection: usize,
-        timeout: Duration,
-    ) -> Result<bool, String> {
-        let value = self.invoke(
-            json!({"operation":"verify_match", "input":{"match":input,"selection":selection}}),
-            timeout,
-        )?;
-        value["supported"]
-            .as_bool()
-            .ok_or_else(|| "Invalid verification response".into())
-    }
-    fn name(&self, input: &NameInput<'_>, timeout: Duration) -> Result<String, String> {
-        let value = self.invoke(json!({"operation":"name", "input":input}), timeout)?;
-        let title = value["title"].as_str().ok_or("Invalid naming response")?;
-        if title.chars().count() > 120 {
-            return Err("Suggested name is too long".into());
+    fn embed(&self, texts: &[String], timeout: Duration) -> Result<Vec<Vec<f64>>, String> {
+        let value = self.invoke(json!({"operation":"embed", "texts":texts}), timeout)?;
+        let vectors: Vec<Vec<f64>> = serde_json::from_value(value["embeddings"].clone())
+            .map_err(|_| "Invalid embedding response")?;
+        if vectors.len() != texts.len() {
+            return Err("Invalid embedding response".into());
         }
-        Ok(title.into())
+        Ok(vectors)
     }
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-    #[test]
-    fn page_is_optional_for_read_requests_and_absent_for_finish() {
-        assert!(matches!(
-            serde_json::from_value::<ReaderReply>(json!({"action":"read_page"})).unwrap(),
-            ReaderReply::ReadPage { page: None }
-        ));
-        assert!(matches!(
-            serde_json::from_value::<ReaderReply>(
-                json!({"action":"finish","description":"Policy","quotes":[],"uncertainty":""})
-            )
-            .unwrap(),
-            ReaderReply::Finish { .. }
-        ));
-        assert!(matches!(
-            serde_json::from_value::<MatchReply>(json!({"action":"need_evidence"})).unwrap(),
-            MatchReply::NeedEvidence { page: None }
-        ));
+    fn name_group(
+        &self,
+        cards: &[&Card],
+        parent: &str,
+        timeout: Duration,
+    ) -> Result<String, String> {
+        let samples: Vec<_> = cards
+            .iter()
+            .take(10)
+            .map(|c| json!({"kind":c.kind, "tags":c.tags}))
+            .collect();
+        let value = self.invoke(
+            json!({"operation":"name_group", "cards":samples, "parent":parent}),
+            timeout,
+        )?;
+        value["name"]
+            .as_str()
+            .map(|n| n.trim().to_owned())
+            .filter(|n| !n.is_empty())
+            .ok_or_else(|| "Invalid folder name".into())
     }
-    #[test]
-    fn providers_cannot_return_arbitrary_tools_or_folder_paths() {
-        assert!(
-            serde_json::from_value::<ReaderReply>(json!({"action":"move_file","page":1})).is_err()
-        );
-        assert!(serde_json::from_value::<MatchReply>(
-            json!({"action":"finish","folder":"../escape","quote":"evidence","reason":"match"})
-        )
-        .is_err());
+    fn group_subjects(
+        &self,
+        names: &[String],
+        details: &[String],
+        timeout: Duration,
+    ) -> Result<Vec<String>, String> {
+        let value = self.invoke(
+            json!({"operation":"group_subjects", "names":names, "details":details}),
+            timeout,
+        )?;
+        let subjects = value["subjects"]
+            .as_object()
+            .ok_or("Invalid subject response")?;
+        Ok(names
+            .iter()
+            .map(|n| {
+                subjects
+                    .get(n)
+                    .and_then(Value::as_str)
+                    .unwrap_or_default()
+                    .trim()
+                    .to_owned()
+            })
+            .collect())
+    }
+    fn merge_names(
+        &self,
+        names: &[String],
+        timeout: Duration,
+    ) -> Result<Vec<(String, String)>, String> {
+        let value = self.invoke(json!({"operation":"merge_names", "names":names}), timeout)?;
+        Ok(value["merges"]
+            .as_array()
+            .into_iter()
+            .flatten()
+            .filter_map(|m| {
+                Some((
+                    m["from"].as_str()?.to_owned(),
+                    m["into"].as_str()?.to_owned(),
+                ))
+            })
+            .collect())
+    }
+    fn choose_folder(
+        &self,
+        card: &Card,
+        excerpt: &str,
+        candidates: &[Candidate],
+        root_rules: &str,
+        timeout: Duration,
+    ) -> Result<Option<usize>, String> {
+        let summary = json!({"kind":card.kind, "issuer":card.issuer, "tags":card.tags});
+        let value = self.invoke(
+            json!({"operation":"choose_folder", "card":summary, "excerpt":excerpt, "candidates":candidates, "rootRules":root_rules}),
+            timeout,
+        )?;
+        let folder = value["folder"].as_str().ok_or("Invalid folder choice")?;
+        Ok(candidates.iter().position(|c| c.folder == folder))
     }
 }
