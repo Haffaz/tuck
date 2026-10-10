@@ -1,0 +1,192 @@
+{
+  "ollama": {
+    "version": "0.34.4"
+  },
+  "source_sha256": {
+    "evals/simple-pipeline/comparison.json": "acc973d4f7bc32794c4340fffc61635caffdb3cff90a1f408accb29ed326a581",
+    "src-tauri/swift/TuckApple.swift": "b87a81e927b07004c253cc20a20536527245c5b7ccbe6db6d4d4665f03fcea0b",
+    "src-tauri/swift/TuckModelSupport.swift": "899dd57c2f2ff98e4d0d9cd6f357c5cc7d8d9d9be05a31343e63a7d3a67c2e7b",
+    "evals/ollama/OllamaTransport.swift": "4b22cd0e7663a90b3c757809c126db7502aa7f90da7e3369be0bb629bc571bb9",
+    "src-tauri/src/agent.rs": "2249bd9fc8f4ad1cdb642b579a9bd368f0687db392e3cf62112426050723c0c6",
+    "src-tauri/src/apple.rs": "c3d0f9f5e88759c12a71f791fa9d322b22ec6257e80f51c2f05487e566ba7b5a",
+    "src-tauri/src/classifier.rs": "9fd9d03232cb81a5b3624087ae40bf500f41427067141228fdf82131a900e45e",
+    "src-tauri/src/evaluation.rs": "2bb30bc8c6a8c1837169699a95ec4aab488a23d05b4836a9207b7d3a224ad776",
+    "evals/ollama/build.py": "d60e9a59bb59d812898679fb782b63222e3e2aadf54f9c4f0d0cd1452d9c1b09",
+    "evals/ollama/run.py": "a3afe2970aa02033eb484e4fd5a23052a4c5a6d787d79838fa597e52e3143cd5"
+  },
+  "models": {
+    "qwen3.5:9b": {
+      "tag": {
+        "name": "qwen3.5:9b",
+        "model": "qwen3.5:9b",
+        "modified_at": "2026-09-28T17:57:32.751025729+02:00",
+        "size": 6594474711,
+        "digest": "6488c96fa5faab64bb65cbd30d4289e20e6130ef535a93ef9a49f42eda893ea7",
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "qwen35",
+          "families": [
+            "qwen35"
+          ],
+          "parameter_size": "9.7B",
+          "quantization_level": "Q4_K_M",
+          "context_length": 262144,
+          "embedding_length": 4096
+        },
+        "capabilities": [
+          "completion",
+          "vision",
+          "tools",
+          "thinking"
+        ]
+      },
+      "details": {
+        "parent_model": "",
+        "format": "gguf",
+        "family": "qwen35",
+        "families": [
+          "qwen35"
+        ],
+        "parameter_size": "9.7B",
+        "quantization_level": "Q4_K_M"
+      },
+      "capabilities": [
+        "completion",
+        "vision",
+        "tools",
+        "thinking"
+      ],
+      "warmup_seconds": 4.4994545,
+      "warmup_load_nanoseconds": 4094419958,
+      "running": {
+        "models": [
+          {
+            "name": "qwen3.5:9b",
+            "model": "qwen3.5:9b",
+            "size": 5665686813,
+            "digest": "6488c96fa5faab64bb65cbd30d4289e20e6130ef535a93ef9a49f42eda893ea7",
+            "details": {
+              "parent_model": "",
+              "format": "gguf",
+              "family": "qwen35",
+              "families": [
+                "qwen35"
+              ],
+              "parameter_size": "9.7B",
+              "quantization_level": "Q4_K_M"
+            },
+            "expires_at": "2026-09-28T18:22:53.261805+02:00",
+            "size_vram": 5665686813,
+            "context_length": 8192
+          }
+        ]
+      }
+    },
+    "qwen3.5:4b": {
+      "tag": {
+        "name": "qwen3.5:4b",
+        "model": "qwen3.5:4b",
+        "modified_at": "2026-09-28T17:56:34.748972896+02:00",
+        "size": 3389983735,
+        "digest": "2a654d98e6fba55d452b7043684e9b57a947e393bbffa62485a7aac05ee4eefd",
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "qwen35",
+          "families": [
+            "qwen35"
+          ],
+          "parameter_size": "4.7B",
+          "quantization_level": "Q4_K_M",
+          "context_length": 262144,
+          "embedding_length": 2560
+        },
+        "capabilities": [
+          "completion",
+          "vision",
+          "tools",
+          "thinking"
+        ]
+      },
+      "details": {
+        "parent_model": "",
+        "format": "gguf",
+        "family": "qwen35",
+        "families": [
+          "qwen35"
+        ],
+        "parameter_size": "4.7B",
+        "quantization_level": "Q4_K_M"
+      },
+      "capabilities": [
+        "completion",
+        "vision",
+        "tools",
+        "thinking"
+      ],
+      "warmup_seconds": 4.264178333003656,
+      "warmup_load_nanoseconds": 3891625125,
+      "running": {
+        "models": [
+          {
+            "name": "qwen3.5:4b",
+            "size": 3410283723,
+            "size_vram": 3410283723,
+            "context_length": 8192
+          }
+        ]
+      }
+    }
+  },
+  "hardware": {
+    "chip": "Apple M4",
+    "memory_gb": 16
+  },
+  "os": "27.0",
+  "pipeline": "filing-v6",
+  "git_commit": "3ae9cce55c99768357ed4383b926e9e846cb6199",
+  "run_order": [
+    "qwen3.5:4b",
+    "qwen3.5:9b",
+    "Apple"
+  ],
+  "settings": {
+    "temperature": 0,
+    "seed": 42,
+    "thinking": false,
+    "num_ctx": 8192,
+    "default_num_predict": 600,
+    "presence_penalty": 0,
+    "repeat_penalty": 1,
+    "http_timeout_seconds": 85,
+    "coordinator_deadline_seconds": 90
+  },
+  "note": "4B run used the same compiled adapter and harness via direct environment variables; 9B and fresh Apple were run using evals/ollama/run.py. Existing UI-only working changes were preserved. No files were moved.",
+  "call_summary": {
+    "qwen3.5-4b": {
+      "calls": 67,
+      "image_calls": 4,
+      "max_prompt_tokens": 2930,
+      "output_tokens": 3211,
+      "output_tokens_per_second": 29.262186457520134,
+      "errors": 0,
+      "output_length_stops": 0
+    },
+    "qwen3.5-9b": {
+      "calls": 67,
+      "image_calls": 4,
+      "max_prompt_tokens": 2930,
+      "output_tokens": 3551,
+      "output_tokens_per_second": 18.02154550631581,
+      "errors": 0,
+      "output_length_stops": 0
+    }
+  },
+  "verification": {
+    "case_ids_match": true,
+    "case_count": 30,
+    "extracted_character_counts_match": true,
+    "full_source_fixture_sha256": "acc973d4f7bc32794c4340fffc61635caffdb3cff90a1f408accb29ed326a581"
+  }
+}

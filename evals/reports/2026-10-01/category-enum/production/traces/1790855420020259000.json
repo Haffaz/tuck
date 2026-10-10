@@ -1,0 +1,20 @@
+{
+  "case": "sv_tenancy",
+  "started": 1790855420.002918,
+  "seconds": 0.01727914810180664,
+  "request": {
+    "operation": "language",
+    "text": "HYRESAVTAL FÖR BOSTADSLÄGENHET\nHyresvärden upplåter lägenheten till hyresgästen för boende. Hyran betalas månadsvis. Avtalet gäller tills vidare."
+  },
+  "response": {
+    "blocked": false,
+    "language": {
+      "code": "sv",
+      "message": "Recognized as Swedish · supported by this Mac's model",
+      "name": "Swedish",
+      "status": "supported"
+    },
+    "text": "HYRESAVTAL FÖR BOSTADSLÄGENHET\nHyresvärden upplåter lägenheten till hyresgästen för boende. Hyran betalas månadsvis. Avtalet gäller tills vidare."
+  },
+  "exit": 0
+}

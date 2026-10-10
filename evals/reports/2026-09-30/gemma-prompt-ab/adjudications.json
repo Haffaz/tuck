@@ -1,0 +1,26 @@
+{
+  "h1|Power of Attorney/Fullmakt": {
+    "accept": true,
+    "reason": "Power of Attorney is the exact expected identity; Fullmakt repeats it in Swedish. Count identity as correct while noting it is not English-only."
+  },
+  "h2|Acknowledgement of ETA application": {
+    "accept": true,
+    "reason": "Same meaning as the frozen ETA Application Acknowledgement label, with different word order."
+  },
+  "h3|Booking Details": {
+    "accept": true,
+    "reason": "Describes the supplied filled booking record. Generic booking labels were allowed in the frozen aliases (Booking Confirmation); taxi-specific wording is therefore not required."
+  },
+  "h3|Booking Form": {
+    "accept": true,
+    "reason": "Identifies the supplied filled booking form. Apply the same acceptance of generic booking labels to both prompts; do not require the vehicle subtype."
+  },
+  "h2|ETA Confirmation": {
+    "accept": false,
+    "reason": "Does not distinguish an application acknowledgement from an authorization approval. The frozen rubric requires acknowledgement or receipt of the application. This label is ambiguous, not proof that the model asserts approval."
+  },
+  "h2|ETA Acknowledgement": {
+    "accept": true,
+    "reason": "Identifies an acknowledgement for the ETA application, equivalent to the frozen ETA Application Acknowledgement label. Applies equally to both prompts."
+  }
+}

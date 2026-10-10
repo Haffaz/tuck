@@ -1,0 +1,93 @@
+{
+  "description": "First-run multilingual validation set authored before testing. Synthetic text; some cases pass through rendered PNG and Apple Vision OCR. Never tune against the reported held-out scores.",
+  "cases": [
+    {
+      "id": "de_bank_rendered",
+      "language": "German",
+      "render": true,
+      "text": "KONTOAUSZUG\nBankhaus Beispiel\nKontobewegungen im Februar\nAnfangssaldo: 1250 Euro\nGutschriften: 900 Euro\nLastschriften: 450 Euro\nEndsaldo: 1700 Euro",
+      "folder": "Finances",
+      "concepts": [
+        [
+          "bank statement",
+          "account statement"
+        ]
+      ],
+      "forbidden": []
+    },
+    {
+      "id": "fr_rental_rendered",
+      "language": "French",
+      "render": true,
+      "text": "CONTRAT DE LOCATION\nLe propriétaire loue cet appartement au locataire pour son habitation principale.\nLe loyer est payable chaque mois. Le bail précise les obligations du propriétaire et du locataire.",
+      "folder": "Home",
+      "concepts": [
+        [
+          "rental agreement",
+          "tenancy agreement",
+          "lease agreement"
+        ]
+      ],
+      "forbidden": [
+        "insurance"
+      ]
+    },
+    {
+      "id": "es_medical_rendered",
+      "language": "Spanish",
+      "render": true,
+      "text": "CERTIFICADO MÉDICO\nLa médica certifica que el paciente ha sido examinado en la consulta.\nSe recomienda reposo por enfermedad durante tres días.\nEste certificado se entrega para justificar la ausencia laboral.",
+      "folder": "Health",
+      "concepts": [
+        [
+          "medical certificate"
+        ]
+      ],
+      "forbidden": [
+        "employment contract"
+      ]
+    },
+    {
+      "id": "ja_employment",
+      "language": "Japanese",
+      "text": "在職証明書\nこの者は当社の従業員として正社員で勤務していることを証明します。職種はソフトウェア開発です。本書は在職の事実を証明するものであり、雇用契約書や給与明細書ではありません。",
+      "folder": "Work",
+      "concepts": [
+        [
+          "employment certificate",
+          "certificate of employment"
+        ]
+      ],
+      "forbidden": [
+        "contract",
+        "payslip"
+      ]
+    },
+    {
+      "id": "pl_bank",
+      "language": "Polish",
+      "text": "WYCIĄG BANKOWY\nZestawienie operacji na rachunku bankowym za miesiąc styczeń. Saldo początkowe wynosi 2000 złotych. Wpłaty i wypłaty zostały wymienione poniżej. Saldo końcowe wynosi 2800 złotych.",
+      "folder": "Finances",
+      "concepts": [
+        [
+          "bank statement",
+          "account statement"
+        ]
+      ],
+      "forbidden": []
+    },
+    {
+      "id": "ta_language_help",
+      "language": "Tamil",
+      "text": "வங்கிக் கணக்கு அறிக்கை. இந்த ஆவணம் வங்கிக் கணக்கில் செய்யப்பட்ட பண வரவுகள் மற்றும் செலவுகளைக் காட்டுகிறது. தொடக்க இருப்பு மற்றும் இறுதி இருப்பு கீழே குறிப்பிடப்பட்டுள்ளன. இது மாதாந்திர வங்கிக் கணக்கு விவரமாகும்.",
+      "folder": "Finances",
+      "concepts": [
+        [
+          "bank statement",
+          "account statement"
+        ]
+      ],
+      "forbidden": []
+    }
+  ]
+}

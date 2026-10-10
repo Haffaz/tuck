@@ -1,0 +1,15 @@
+{
+  "case": "sv_home_insurance_image",
+  "started": 1790855448.831519,
+  "seconds": 0.029911041259765625,
+  "request": {
+    "operation": "check"
+  },
+  "response": {
+    "contextTokens": 8192,
+    "imageInput": true,
+    "pipeline": "serial-roles-v4-category-enum",
+    "status": "Apple Intelligence is ready — on-device"
+  },
+  "exit": 0
+}

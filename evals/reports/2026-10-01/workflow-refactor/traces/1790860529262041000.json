@@ -1,0 +1,26 @@
+{
+  "case": "sv_home_insurance",
+  "started": 1790860527.574702,
+  "seconds": 1.6872799396514893,
+  "request": {
+    "actions": [
+      "finish"
+    ],
+    "completed": [],
+    "operation": "describe",
+    "quotes": [
+      "FÖRSÄKRINGSBREV",
+      "Hemförsäkring. Försäkringen omfattar lösöre, ansvarsskydd och rättsskydd för den försäkrades bostad."
+    ],
+    "text": "FÖRSÄKRINGSBREV\nHemförsäkring. Försäkringen omfattar lösöre, ansvarsskydd och rättsskydd för den försäkrades bostad."
+  },
+  "response": {
+    "action": "finish",
+    "description": "A home insurance document detailing coverage for property, liability, and legal protection.",
+    "quotes": [
+      "Hemförsäkring. Försäkringen omfattar lösöre, ansvarsskydd och rättsskydd för den försäkrades bostad."
+    ],
+    "uncertainty": ""
+  },
+  "exit": 0
+}

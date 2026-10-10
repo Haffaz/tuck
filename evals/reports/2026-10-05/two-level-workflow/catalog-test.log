@@ -1,0 +1,15 @@
+   Compiling tuck v0.1.0 (/Users/mohomedhaffaz/Projects/tuck/src-tauri)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 29.36s
+     Running unittests src/lib.rs (src-tauri/target/debug/deps/tuck_lib-8a9a9621b991a6b6)
+
+running 1 test
+test engine::tests::category_suggestions_include_every_readable_mapped_document_across_batches ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 110 filtered out; finished in 2.54s
+
+     Running unittests src/main.rs (src-tauri/target/debug/deps/tuck-dbe46014f319284a)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

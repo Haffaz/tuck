@@ -1,0 +1,38 @@
+{
+  "categoryDefinitions": {
+    "Identity & Immigration": "Identity documents, residence permits, visas and immigration decisions or applications.",
+    "Banking & Taxes": "Bank statements, account records and tax documents.",
+    "Employment & Pay": "Employment contracts, employment certificates, payslips and other employment or pay records.",
+    "Housing & Utilities": "Rental agreements and household utility bills, including electricity bills.",
+    "Insurance": "Insurance policies and certificates of cover, including home and travel insurance.",
+    "Medical Records": "Medical certificates, reports, prescriptions and other clinical records.",
+    "Maintenance & Repairs": "Equipment inspections, maintenance reports and repair records."
+  },
+  "expected": {
+    "sv_residence_card": "Identity & Immigration",
+    "sv_bank_statement": "Banking & Taxes",
+    "sv_payslip": "Employment & Pay",
+    "sv_tenancy": "Housing & Utilities",
+    "sv_home_insurance": "Insurance",
+    "sv_medical_certificate": "Medical Records",
+    "en_agency_attachment": "Employment & Pay",
+    "en_electricity_bill": "Housing & Utilities",
+    "en_injected_insurance": "Insurance",
+    "en_employment_certificate": "Employment & Pay",
+    "ambiguous_fragment": "Needs input",
+    "unreadable_scan": "Needs input",
+    "sv_residence_card_image": "Identity & Immigration",
+    "sv_home_insurance_image": "Insurance",
+    "en_employment_certificate_pdf": "Employment & Pay",
+    "en_later_page_maintenance": "Maintenance & Repairs"
+  },
+  "basis": "Underlying document type; no source-specific bundle category. Former AGENCY attachment is an employment contract even though it supports an immigration application. Unclear documents require input. Frozen before inference. Category descriptions are for scoring and the common verifier only; matchers see names only.",
+  "changedFields": [
+    "payload.categories",
+    "expected",
+    "verificationInput.destinations",
+    "verificationInput.rootRules",
+    "verificationInput.sourceFolders"
+  ],
+  "unchanged": "All document descriptions, quotes, uncertainty, source evidence and matching instructions remain byte-equivalent in parsed data."
+}

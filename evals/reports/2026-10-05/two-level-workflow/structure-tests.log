@@ -1,0 +1,74 @@
+     Locking 76 packages to latest compatible versions
+   Compiling proc-macro2 v1.0.107
+   Compiling unicode-ident v1.0.26
+   Compiling quote v1.0.47
+   Compiling stable_deref_trait v1.2.1
+   Compiling libc v0.2.189
+   Compiling litemap v0.8.3
+   Compiling writeable v0.6.4
+   Compiling version_check v0.9.5
+   Compiling icu_normalizer_data v2.3.0
+   Compiling icu_properties_data v2.3.0
+   Compiling utf8_iter v1.0.4
+   Compiling typenum v1.20.1
+   Compiling smallvec v1.16.2
+   Compiling cfg-if v1.0.5
+   Compiling generic-array v0.14.7
+   Compiling serde_core v1.0.229
+   Compiling getrandom v0.4.3
+   Compiling zmij v1.0.23
+   Compiling rustix v1.1.5
+   Compiling serde_json v1.0.151
+   Compiling percent-encoding v2.3.2
+   Compiling bitflags v2.13.2
+   Compiling serde v1.0.229
+   Compiling form_urlencoded v1.2.2
+   Compiling fastrand v2.5.0
+   Compiling once_cell v1.21.4
+   Compiling memchr v2.8.3
+   Compiling itoa v1.0.18
+   Compiling errno v0.3.14
+   Compiling cpufeatures v0.2.17
+   Compiling block-buffer v0.10.4
+   Compiling crypto-common v0.1.7
+   Compiling wait-timeout v0.2.1
+   Compiling digest v0.10.7
+   Compiling uuid v1.26.1
+   Compiling syn v3.0.6
+   Compiling syn v2.0.119
+   Compiling sha2 v0.10.9
+   Compiling tempfile v3.27.0
+   Compiling synstructure v0.14.0
+   Compiling synstructure v0.13.2
+   Compiling yoke-derive v0.8.2
+   Compiling zerofrom-derive v0.1.8
+   Compiling zerovec-derive v0.11.6
+   Compiling displaydoc v0.2.7
+   Compiling serde_derive v1.0.229
+   Compiling zerofrom v0.1.8
+   Compiling yoke v0.8.3
+   Compiling zerovec v0.11.8
+   Compiling zerotrie v0.2.5
+   Compiling tinystr v0.8.4
+   Compiling potential_utf v0.1.6
+   Compiling icu_collections v2.3.0
+   Compiling icu_locale_core v2.3.0
+   Compiling icu_provider v2.3.1
+   Compiling icu_normalizer v2.3.0
+   Compiling icu_properties v2.3.0
+   Compiling idna_adapter v1.2.2
+   Compiling idna v1.1.0
+   Compiling url v2.5.8
+   Compiling tuck-structure-eval v0.0.0 (/private/tmp/tuck-two-level-structure/harness)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 11.50s
+     Running unittests src/lib.rs (/private/tmp/tuck-two-level-structure/harness/target/debug/deps/tuck_structure_eval-696e5cc97d299c55)
+
+running 4 tests
+test matrix::collection_structure_private_replay_when_requested ... ok
+test matrix::collection_structure_retains_every_document_type ... ok
+test matrix::collection_structure_after_batches_and_before_rules ... ok
+16 frozen structure cases passed in both input orders
+test category_evidence::tests::collection_structure_matches_frozen_examples ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 70 filtered out; finished in 0.00s
+

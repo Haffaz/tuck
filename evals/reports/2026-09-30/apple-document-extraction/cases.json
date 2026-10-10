@@ -1,0 +1,119 @@
+[
+  {
+    "key": "s1-D1",
+    "split": "development",
+    "kind": "synthetic",
+    "pageCount": 4,
+    "expected": "Immigration Decision",
+    "baselineTextHash": "69702f6dae5f73e37d13aeb2af20486d93751435887f4b8d3369ac40179d3e1a",
+    "structuredTextHash": "6334dc085d396167ba26ed425de0dc5b83849ee79f8d66edf19b48663c87831c"
+  },
+  {
+    "key": "s2-D1",
+    "split": "development",
+    "kind": "synthetic",
+    "pageCount": 4,
+    "expected": "Employment Certificate",
+    "baselineTextHash": "ddbd0ff410df4300fda30a34285f7fb6496116e1f93a26ee313c71e1f54d14d3",
+    "structuredTextHash": "10511e8709268de31fc6ee1eaaf0257ed543f4e7db65652f09611f9e66d107bb"
+  },
+  {
+    "key": "s3-D1",
+    "split": "development",
+    "kind": "synthetic",
+    "pageCount": 4,
+    "expected": "Home Insurance Policy",
+    "baselineTextHash": "ebe6c1046ea7ba7bb82a4ca99f91b1b42ebe04445cb12f32ffbf530c44ded1e4",
+    "structuredTextHash": "a9190d920be28d44784d746a5449b429f3163a3e6049c69f478625d734ec136f"
+  },
+  {
+    "key": "s4-D1",
+    "split": "development",
+    "kind": "synthetic",
+    "pageCount": 4,
+    "expected": "Bank Statement",
+    "baselineTextHash": "9e77cc1dcc6ebe1345b5357c66c566535d3dcd526988b9513ec09ac10254b7fc",
+    "structuredTextHash": "b11a635ff9f7c60ab5e545cdbf29db2ee964159b04393b699dc20bedc31a8eb5"
+  },
+  {
+    "key": "s5-D1",
+    "split": "development",
+    "kind": "synthetic",
+    "pageCount": 4,
+    "expected": "Rental Agreement",
+    "baselineTextHash": "3442558596b5c5436d8fdb8fef97a174e92bca5163126881d9dda52751c0c047",
+    "structuredTextHash": "bc508c55695b21074896d3971ce2e979b622f66e01d8c82c938122550a79151d"
+  },
+  {
+    "key": "s6-D1",
+    "split": "development",
+    "kind": "synthetic",
+    "pageCount": 4,
+    "expected": "Unknown",
+    "baselineTextHash": "7bf0a1fc7cb3696a7c1340ab9d7c328506313672f1337c81b5f25158bd3a042f",
+    "structuredTextHash": "c1ce6b030191b6c3d13521d8868b601a075b39439c3e25ade9fd8a63b691dbc0"
+  },
+  {
+    "key": "r1-D1",
+    "split": "development",
+    "kind": "personal",
+    "pageCount": 4,
+    "expected": "Immigration Decision",
+    "baselineTextHash": "36f7b44eb4a2836d0a80f8d8d9edc71fa866ef9a08924ab84916a39ff55cee94",
+    "structuredTextHash": "5d9884c405c4c3018c36a070340f626021238948061972d1ce1685610376c537"
+  },
+  {
+    "key": "r2-D1",
+    "split": "development",
+    "kind": "personal",
+    "pageCount": 2,
+    "expected": "Hotel Booking",
+    "baselineTextHash": "1e56e2b45a988096e50784ff14b79b40b2242a19f785ed854ad8b4c858757378",
+    "structuredTextHash": "850913a7fd0619c22c31ee755f2fd0c32db0d00fdc6418f3a16a723de36db4e2"
+  },
+  {
+    "key": "r2-D2",
+    "split": "development",
+    "kind": "personal",
+    "pageCount": 1,
+    "expected": "Membership Confirmation",
+    "baselineTextHash": "2b25d99a0d644267ab5ea1361d1b010b513a354f33ecad699785efd33d00d8ac",
+    "structuredTextHash": "86e15f96bfa871f895c4b2e909a1ec968fd76e0a5cd22760401a027be7bace3c"
+  },
+  {
+    "key": "r2-D3",
+    "split": "development",
+    "kind": "personal",
+    "pageCount": 1,
+    "expected": "Hotel Booking",
+    "baselineTextHash": "039d08966b1f3c5bccfef352d6948ff9942a2012de00b6b98112e5e973f97783",
+    "structuredTextHash": "e93209bbf243ac434a2eca3a6cff815ae1418d9bc17e3154d49804685e707d4a"
+  },
+  {
+    "key": "h1",
+    "split": "fresh",
+    "kind": "personal",
+    "pageCount": 1,
+    "expected": "Power of Attorney",
+    "baselineTextHash": "9bb665289cf349e4f445df819525d89ad023b5cdf6c9b6375ad8c720f2a0a3d1",
+    "structuredTextHash": "c81b6241de2826c8f2871058bacf3a0b52a596036b13ea8dc3034062254a01b0"
+  },
+  {
+    "key": "h2",
+    "split": "fresh",
+    "kind": "personal",
+    "pageCount": 1,
+    "expected": "ETA Application Acknowledgement",
+    "baselineTextHash": "6a1994a509039f324d685ac25ff0e9f7468cf7ed4ed79a10fa16fcbd74eb0e15",
+    "structuredTextHash": "d6d5bd5687a2367c9ab01b935b8ac48bc59b4480f8af852ed1a1b8a255b8b954"
+  },
+  {
+    "key": "h3",
+    "split": "fresh",
+    "kind": "personal",
+    "pageCount": 1,
+    "expected": "Taxi Booking",
+    "baselineTextHash": "efac648d5e818649c65cf220bea74072757d9fa6718a90bcac482d38949b569c",
+    "structuredTextHash": "64ba1040bbaad7853bc6db6b17d41cacdf3a65114ddb14330ae1b6ac36cf8c74"
+  }
+]

@@ -1,0 +1,71 @@
+     Locking 76 packages to latest compatible versions
+   Compiling tuck-core-d9e551b7-eval v0.0.0 (/Users/mohomedhaffaz/Documents/Codex/2026-10-02/tuck-category-accuracy/outputs/rules-nesting-fixes/candidate-44-core/harness)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 2.71s
+     Running unittests src/lib.rs (work/rules-nesting-eval/harness/target/debug/deps/tuck_core_d9e551b7_eval-959a2d3afc16a1fe)
+
+running 1 test
+test matrix::live_rules_nesting_matrix ... depth1-D0C0F0-r1: proposal returned
+depth1-D0C0F0-r1: 10/10 filing decisions correct in 34.8s
+depth1-D1C0F0-r1: proposal returned
+depth1-D1C0F0-r1: 10/10 filing decisions correct in 23.9s
+depth1-D0C1F0-r1: proposal returned
+depth1-D0C1F0-r1: 10/10 filing decisions correct in 25.1s
+depth1-D1C1F0-r1: proposal returned
+depth1-D1C1F0-r1: 10/10 filing decisions correct in 24.5s
+depth1-D0C0F1-r1: proposal returned
+depth1-D0C0F1-r1: 10/10 filing decisions correct in 27.1s
+depth1-D1C0F1-r1: proposal returned
+depth1-D1C0F1-r1: 10/10 filing decisions correct in 28.6s
+depth1-D0C1F1-r1: proposal returned
+depth1-D0C1F1-r1: 10/10 filing decisions correct in 29.3s
+depth1-D1C1F1-r1: proposal returned
+depth1-D1C1F1-r1: 10/10 filing decisions correct in 29.3s
+depth2-D0C0F0-r1: proposal returned
+depth2-D0C0F0-r1: 10/10 filing decisions correct in 36.4s
+depth2-D1C0F0-r1: proposal returned
+depth2-D1C0F0-r1: 10/10 filing decisions correct in 36.3s
+depth2-D0C1F0-r1: proposal returned
+depth2-D0C1F0-r1: 10/10 filing decisions correct in 36.8s
+depth2-D1C1F0-r1: proposal returned
+depth2-D1C1F0-r1: 10/10 filing decisions correct in 37.0s
+depth2-D0C0F1-r1: proposal returned
+depth2-D0C0F1-r1: 10/10 filing decisions correct in 44.0s
+depth2-D1C0F1-r1: proposal returned
+depth2-D1C0F1-r1: 10/10 filing decisions correct in 46.3s
+depth2-D0C1F1-r1: proposal returned
+depth2-D0C1F1-r1: 10/10 filing decisions correct in 46.1s
+depth2-D1C1F1-r1: proposal returned
+depth2-D1C1F1-r1: 10/10 filing decisions correct in 49.3s
+depth3-D0C0F0-r1: proposal returned
+depth3-D0C0F0-r1: 10/10 filing decisions correct in 41.6s
+depth3-D1C0F0-r1: proposal returned
+depth3-D1C0F0-r1: 10/10 filing decisions correct in 42.3s
+depth3-D0C1F0-r1: proposal returned
+depth3-D0C1F0-r1: 10/10 filing decisions correct in 43.4s
+depth3-D1C1F0-r1: proposal returned
+depth3-D1C1F0-r1: 10/10 filing decisions correct in 43.3s
+depth3-D0C0F1-r1: proposal returned
+depth3-D0C0F1-r1: 10/10 filing decisions correct in 51.5s
+depth3-D1C0F1-r1: proposal returned
+depth3-D1C0F1-r1: 10/10 filing decisions correct in 51.3s
+depth3-D0C1F1-r1: proposal returned
+depth3-D0C1F1-r1: 10/10 filing decisions correct in 52.9s
+depth3-D1C1F1-r1: proposal returned
+depth3-D1C1F1-r1: 10/10 filing decisions correct in 53.4s
+depth1-D0C0F0-r2: proposal returned
+depth1-D0C0F0-r2: 10/10 filing decisions correct in 22.7s
+depth1-D1C1F1-r2: proposal returned
+depth1-D1C1F1-r2: 10/10 filing decisions correct in 27.4s
+depth2-D0C0F0-r2: proposal returned
+depth2-D0C0F0-r2: 10/10 filing decisions correct in 35.4s
+depth2-D1C1F1-r2: proposal returned
+depth2-D1C1F1-r2: 10/10 filing decisions correct in 45.8s
+depth3-D0C0F0-r2: proposal returned
+depth3-D0C0F0-r2: 10/10 filing decisions correct in 41.0s
+depth3-D1C1F1-r2: proposal returned
+depth3-D1C1F1-r2: 10/10 filing decisions correct in 52.8s
+Evaluation complete: 30 runs, 10 edge cases
+ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 70 filtered out; finished in 1179.70s
+

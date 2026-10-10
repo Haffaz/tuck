@@ -1,0 +1,93 @@
+[
+  {
+    "key": "s1-D1",
+    "seconds": 0.2812854580115527,
+    "characters": 1707,
+    "textHash": "69702f6dae5f73e37d13aeb2af20486d93751435887f4b8d3369ac40179d3e1a",
+    "matchesStoredBaseline": true
+  },
+  {
+    "key": "s2-D1",
+    "seconds": 0.1573115419887472,
+    "characters": 1690,
+    "textHash": "ddbd0ff410df4300fda30a34285f7fb6496116e1f93a26ee313c71e1f54d14d3",
+    "matchesStoredBaseline": true
+  },
+  {
+    "key": "s3-D1",
+    "seconds": 0.15352824999717996,
+    "characters": 1659,
+    "textHash": "ebe6c1046ea7ba7bb82a4ca99f91b1b42ebe04445cb12f32ffbf530c44ded1e4",
+    "matchesStoredBaseline": true
+  },
+  {
+    "key": "s4-D1",
+    "seconds": 0.1610096250078641,
+    "characters": 1692,
+    "textHash": "9e77cc1dcc6ebe1345b5357c66c566535d3dcd526988b9513ec09ac10254b7fc",
+    "matchesStoredBaseline": true
+  },
+  {
+    "key": "s5-D1",
+    "seconds": 0.17042162499274127,
+    "characters": 1683,
+    "textHash": "3442558596b5c5436d8fdb8fef97a174e92bca5163126881d9dda52751c0c047",
+    "matchesStoredBaseline": true
+  },
+  {
+    "key": "s6-D1",
+    "seconds": 0.14817937501356937,
+    "characters": 1668,
+    "textHash": "7bf0a1fc7cb3696a7c1340ab9d7c328506313672f1337c81b5f25158bd3a042f",
+    "matchesStoredBaseline": true
+  },
+  {
+    "key": "r1-D1",
+    "seconds": 1.3585912910057232,
+    "characters": 5642,
+    "textHash": "36f7b44eb4a2836d0a80f8d8d9edc71fa866ef9a08924ab84916a39ff55cee94",
+    "matchesStoredBaseline": true
+  },
+  {
+    "key": "r2-D1",
+    "seconds": 0.08713787500164472,
+    "characters": 3925,
+    "textHash": "1e56e2b45a988096e50784ff14b79b40b2242a19f785ed854ad8b4c858757378",
+    "matchesStoredBaseline": true
+  },
+  {
+    "key": "r2-D2",
+    "seconds": 0.3465178329788614,
+    "characters": 1601,
+    "textHash": "2b25d99a0d644267ab5ea1361d1b010b513a354f33ecad699785efd33d00d8ac",
+    "matchesStoredBaseline": true
+  },
+  {
+    "key": "r2-D3",
+    "seconds": 0.0497684589936398,
+    "characters": 3276,
+    "textHash": "039d08966b1f3c5bccfef352d6948ff9942a2012de00b6b98112e5e973f97783",
+    "matchesStoredBaseline": true
+  },
+  {
+    "key": "h1",
+    "seconds": 0.3859195830009412,
+    "characters": 1547,
+    "textHash": "9bb665289cf349e4f445df819525d89ad023b5cdf6c9b6375ad8c720f2a0a3d1",
+    "matchesStoredBaseline": true
+  },
+  {
+    "key": "h2",
+    "seconds": 0.03702724998584017,
+    "characters": 1016,
+    "textHash": "6a1994a509039f324d685ac25ff0e9f7468cf7ed4ed79a10fa16fcbd74eb0e15",
+    "matchesStoredBaseline": true
+  },
+  {
+    "key": "h3",
+    "seconds": 0.041461832995992154,
+    "characters": 555,
+    "textHash": "efac648d5e818649c65cf220bea74072757d9fa6718a90bcac482d38949b569c",
+    "matchesStoredBaseline": true
+  }
+]

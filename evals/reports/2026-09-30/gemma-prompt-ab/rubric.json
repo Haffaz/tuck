@@ -1,0 +1,173 @@
+{
+  "criterion": "Identify the underlying document type. Equivalent English names accepted. Generic wrapper labels fail; generic Decision fails immigration specificity; generic Insurance Policy fails Home Insurance specificity. Hotel booking aliases preserved from previous run. ETA must denote acknowledgement/receipt of application, not approval. New semantically equivalent labels are adjudicated under these frozen definitions, with annotations recorded.",
+  "cases": [
+    {
+      "key": "s1-D1",
+      "split": "development",
+      "expected": "Immigration Decision",
+      "acceptedTypes": [
+        "Residence Permit",
+        "Residence Permit Decision",
+        "Decision on Residence Permit",
+        "Immigration Decision",
+        "Residence Permit Approval",
+        "Residence Permit Approval Decision"
+      ]
+    },
+    {
+      "key": "s2-D1",
+      "split": "development",
+      "expected": "Employment Certificate",
+      "acceptedTypes": [
+        "Employment Certificate",
+        "Certificate of Employment",
+        "Employment Verification",
+        "Employment Verification Letter"
+      ]
+    },
+    {
+      "key": "s3-D1",
+      "split": "development",
+      "expected": "Home Insurance Policy",
+      "acceptedTypes": [
+        "Home Insurance Policy",
+        "Home Insurance Certificate",
+        "Home Insurance Policy Document",
+        "Home Insurance Policy Certificate"
+      ]
+    },
+    {
+      "key": "s4-D1",
+      "split": "development",
+      "expected": "Bank Statement",
+      "acceptedTypes": [
+        "Bank Statement",
+        "Bank Account Statement",
+        "Account Statement"
+      ]
+    },
+    {
+      "key": "s5-D1",
+      "split": "development",
+      "expected": "Rental Agreement",
+      "acceptedTypes": [
+        "Rental Agreement",
+        "Residential Rental Agreement",
+        "Residential Lease Agreement",
+        "Residential Tenancy Agreement",
+        "Tenancy Agreement",
+        "Lease Agreement",
+        "Residential Lease",
+        "Apartment Rental Agreement"
+      ]
+    },
+    {
+      "key": "s6-D1",
+      "split": "development",
+      "expected": "Unknown",
+      "acceptedTypes": [
+        "Unknown",
+        "Unidentified",
+        "Undetermined"
+      ]
+    },
+    {
+      "key": "r1-D1",
+      "split": "development",
+      "expected": "Immigration Decision",
+      "acceptedTypes": [
+        "Immigration Decision",
+        "Immigration Decision Letter",
+        "Residence Permit Decision",
+        "Decision on Residence Permit",
+        "Residence Permit Approval Decision"
+      ]
+    },
+    {
+      "key": "r2-D1",
+      "split": "development",
+      "expected": "Hotel Booking",
+      "acceptedTypes": [
+        "Hotel Booking",
+        "Hotel Booking Confirmation",
+        "Hotel Reservation",
+        "Hotel Reservation Confirmation",
+        "Booking Confirmation",
+        "Reservation Confirmation",
+        "Accommodation Booking Confirmation"
+      ]
+    },
+    {
+      "key": "r2-D2",
+      "split": "development",
+      "expected": "Membership Confirmation",
+      "acceptedTypes": [
+        "Membership Confirmation",
+        "Gym Membership Confirmation",
+        "Order Confirmation",
+        "Receipt",
+        "Membership Order Confirmation",
+        "Gym Membership Order Confirmation",
+        "Membership Purchase Confirmation"
+      ]
+    },
+    {
+      "key": "r2-D3",
+      "split": "development",
+      "expected": "Hotel Booking",
+      "acceptedTypes": [
+        "Hotel Booking",
+        "Hotel Booking Confirmation",
+        "Hotel Reservation",
+        "Hotel Reservation Confirmation",
+        "Booking Confirmation",
+        "Reservation Confirmation",
+        "Accommodation Booking Confirmation"
+      ]
+    },
+    {
+      "key": "h1",
+      "split": "fresh",
+      "expected": "Power of Attorney",
+      "acceptedTypes": [
+        "Power of Attorney",
+        "Power of Attorney Form",
+        "Authorization to Represent"
+      ]
+    },
+    {
+      "key": "h2",
+      "split": "fresh",
+      "expected": "ETA Application Acknowledgement",
+      "acceptedTypes": [
+        "ETA Application Acknowledgement",
+        "ETA Application Acknowledgment",
+        "Electronic Travel Authorization Application Acknowledgement",
+        "Electronic Travel Authorization Application Acknowledgment",
+        "ETA Application Receipt",
+        "ETA Receipt",
+        "Travel Authorization Application Receipt",
+        "Electronic Travel Authorization Receipt",
+        "Electronic Travel Authorization Application Receipt",
+        "Visa Application Acknowledgement",
+        "Visa Application Acknowledgment",
+        "Visa Application Receipt"
+      ]
+    },
+    {
+      "key": "h3",
+      "split": "fresh",
+      "expected": "Taxi Booking",
+      "acceptedTypes": [
+        "Taxi Booking",
+        "Taxi Booking Confirmation",
+        "Cab Booking",
+        "Cab Booking Confirmation",
+        "Transport Booking Confirmation",
+        "Booking Confirmation",
+        "Taxi Reservation",
+        "Taxi Reservation Confirmation"
+      ]
+    }
+  ]
+}

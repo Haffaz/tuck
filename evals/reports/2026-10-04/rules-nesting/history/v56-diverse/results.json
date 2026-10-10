@@ -1,0 +1,2009 @@
+{
+  "completed": true,
+  "runs": [
+    {
+      "customized": false,
+      "decisions": [
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Work",
+            "language": null,
+            "reason": "Selected Work from the configured categories.",
+            "title": "Meeting minutes Project Orion"
+          },
+          "expected": "Work",
+          "id": "orion-minutes",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Work",
+            "language": null,
+            "reason": "Selected Work from the configured categories.",
+            "title": "Project meeting notes Vega interface"
+          },
+          "expected": "Work",
+          "id": "vega-minutes",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Work",
+            "language": null,
+            "reason": "Selected Work from the configured categories.",
+            "title": "Meeting minutes"
+          },
+          "expected": "Work",
+          "id": "no-project",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Invoices",
+            "language": null,
+            "reason": "Selected Invoices from the configured categories.",
+            "title": "Supplier invoice office equipment"
+          },
+          "expected": "Invoices",
+          "id": "harbor-invoice",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Invoices",
+            "language": null,
+            "reason": "Selected Invoices from the configured categories.",
+            "title": "Commercial invoice for printing posters"
+          },
+          "expected": "Invoices",
+          "id": "meadow-invoice",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Health",
+            "language": null,
+            "reason": "Selected Health from the configured categories.",
+            "title": "Laboratory test report"
+          },
+          "expected": "Health",
+          "id": "blood-results",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Health",
+            "language": null,
+            "reason": "Selected Health from the configured categories.",
+            "title": "Radiology report of X-ray examination"
+          },
+          "expected": "Health",
+          "id": "imaging-results",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Education",
+            "language": null,
+            "reason": "Selected Education from the configured categories.",
+            "title": "transcript"
+          },
+          "expected": "Education",
+          "id": "aster-grades",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Education",
+            "language": null,
+            "reason": "Selected Education from the configured categories.",
+            "title": "Course transcript Pine College"
+          },
+          "expected": "Education",
+          "id": "pine-grades",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Warranties",
+            "language": null,
+            "reason": "Selected Warranties from the configured categories.",
+            "title": "Warranty Certificate Camera"
+          },
+          "expected": "Warranties",
+          "id": "camera-warranty",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Warranties",
+            "language": null,
+            "reason": "Selected Warranties from the configured categories.",
+            "title": "Warranty registration for Bicycle"
+          },
+          "expected": "Warranties",
+          "id": "bicycle-warranty",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Travel",
+            "language": null,
+            "reason": "Selected Travel from the configured categories.",
+            "title": "Hotel reservation Lisbon"
+          },
+          "expected": "Travel",
+          "id": "lisbon-booking",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Travel",
+            "language": null,
+            "reason": "Selected Travel from the configured categories.",
+            "title": "Train booking confirmation"
+          },
+          "expected": "Travel",
+          "id": "oslo-booking",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": false,
+            "folder": "Needs Review",
+            "language": null,
+            "reason": "The document needs more information. Choose a folder.",
+            "title": ""
+          },
+          "expected": null,
+          "id": "diverse-unknown",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": false,
+            "folder": "Needs Review",
+            "language": null,
+            "reason": "The source does not establish one clear document type and subject. Review the whole file before choosing a folder.",
+            "title": ""
+          },
+          "expected": null,
+          "id": "mixed-clinical-warranty",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        }
+      ],
+      "depth": 1,
+      "proposal": {
+        "assignments": [
+          {
+            "category": "Work",
+            "id": "d0000"
+          },
+          {
+            "category": "Work",
+            "id": "d0001"
+          },
+          {
+            "category": "Work",
+            "id": "d0002"
+          },
+          {
+            "category": "Invoices",
+            "id": "d0003"
+          },
+          {
+            "category": "Invoices",
+            "id": "d0004"
+          },
+          {
+            "category": "Health",
+            "id": "d0005"
+          },
+          {
+            "category": "Health",
+            "id": "d0006"
+          },
+          {
+            "category": "Education",
+            "id": "d0007"
+          },
+          {
+            "category": "Education",
+            "id": "d0008"
+          },
+          {
+            "category": "Warranty",
+            "id": "d0009"
+          },
+          {
+            "category": "Warranty",
+            "id": "d0010"
+          },
+          {
+            "category": "Hotel",
+            "id": "d0011"
+          },
+          {
+            "category": "Travel",
+            "id": "d0012"
+          },
+          {
+            "category": "Needs review",
+            "id": "d0014"
+          }
+        ],
+        "ok": true,
+        "rules": [
+          {
+            "enabled": true,
+            "folder": "Education",
+            "instruction": "File documents about Education here. Required document scope: Academic transcript showing courses, credits and grades; Course transcript for Pine College. Match these document types, including equivalent names. Use a supported more specific child folder when available; otherwise use this broad subject."
+          },
+          {
+            "enabled": true,
+            "folder": "Health",
+            "instruction": "File documents about Health here. Required document scope: Laboratory test report; Radiology report of X-ray examination. Match these document types, including equivalent names. Use a supported more specific child folder when available; otherwise use this broad subject."
+          },
+          {
+            "enabled": true,
+            "folder": "Hotel",
+            "instruction": "File documents about Hotel here. Required document scope: Hotel reservation for Lisbon from 12 April. Match these document types, including equivalent names. Use a supported more specific child folder when available; otherwise use this broad subject."
+          },
+          {
+            "enabled": true,
+            "folder": "Invoices",
+            "instruction": "File documents about Invoices here. Required document scope: Commercial invoice for printing posters; Supplier invoice for office equipment. Match these document types, including equivalent names. Use a supported more specific child folder when available; otherwise use this broad subject."
+          },
+          {
+            "enabled": true,
+            "folder": "Travel",
+            "instruction": "File documents about Travel here. Required document scope: Train booking confirmation. Match these document types, including equivalent names. Use a supported more specific child folder when available; otherwise use this broad subject."
+          },
+          {
+            "enabled": true,
+            "folder": "Warranty",
+            "instruction": "File documents about Warranty here. Required document scope: Product warranty certificate for Camera; Warranty registration for Bicycle. Match these document types, including equivalent names. Use a supported more specific child folder when available; otherwise use this broad subject."
+          },
+          {
+            "enabled": true,
+            "folder": "Work",
+            "instruction": "File documents about Work here. Required document scope: Meeting minutes; Meeting minutes for Project Orion; Project meeting notes for Vega interface. Match these document types, including equivalent names. Use a supported more specific child folder when available; otherwise use this broad subject."
+          }
+        ]
+      }
+    },
+    {
+      "customized": true,
+      "decisions": [
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Work",
+            "language": null,
+            "reason": "Selected Work from the configured categories.",
+            "title": "Record Meeting minutes Project Orion"
+          },
+          "expected": "Work",
+          "id": "orion-minutes",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Work",
+            "language": null,
+            "reason": "Selected Work from the configured categories.",
+            "title": "Record Project meeting notes Vega interface"
+          },
+          "expected": "Work",
+          "id": "vega-minutes",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Work",
+            "language": null,
+            "reason": "Selected Work from the configured categories.",
+            "title": "Record meeting minutes"
+          },
+          "expected": "Work",
+          "id": "no-project",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Invoices",
+            "language": null,
+            "reason": "Selected Invoices from the configured categories.",
+            "title": "Record Supplier Invoice Office Equipment"
+          },
+          "expected": "Invoices",
+          "id": "harbor-invoice",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Invoices",
+            "language": null,
+            "reason": "Selected Invoices from the configured categories.",
+            "title": "Record commercial invoice printing"
+          },
+          "expected": "Invoices",
+          "id": "meadow-invoice",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Health",
+            "language": null,
+            "reason": "Selected Health from the configured categories.",
+            "title": "Record Laboratory test report"
+          },
+          "expected": "Health",
+          "id": "blood-results",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Health",
+            "language": null,
+            "reason": "Selected Health from the configured categories.",
+            "title": "Record Radiology report of X-ray examination"
+          },
+          "expected": "Health",
+          "id": "imaging-results",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Education",
+            "language": null,
+            "reason": "Selected Education from the configured categories.",
+            "title": "Record academic transcript"
+          },
+          "expected": "Education",
+          "id": "aster-grades",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Education",
+            "language": null,
+            "reason": "Selected Education from the configured categories.",
+            "title": "Record Course transcript Pine College"
+          },
+          "expected": "Education",
+          "id": "pine-grades",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Warranties",
+            "language": null,
+            "reason": "Selected Warranties from the configured categories.",
+            "title": "Record Warranty Camera"
+          },
+          "expected": "Warranties",
+          "id": "camera-warranty",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Warranties",
+            "language": null,
+            "reason": "Selected Warranties from the configured categories.",
+            "title": "Record Warranty Bicycle"
+          },
+          "expected": "Warranties",
+          "id": "bicycle-warranty",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Travel",
+            "language": null,
+            "reason": "Selected Travel from the configured categories.",
+            "title": "Record Hotel Reservation Lisbon"
+          },
+          "expected": "Travel",
+          "id": "lisbon-booking",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Travel",
+            "language": null,
+            "reason": "Selected Travel from the configured categories.",
+            "title": "Record Train booking confirmation"
+          },
+          "expected": "Travel",
+          "id": "oslo-booking",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": false,
+            "folder": "Needs Review",
+            "language": null,
+            "reason": "The document needs more information. Choose a folder.",
+            "title": ""
+          },
+          "expected": null,
+          "id": "diverse-unknown",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": false,
+            "folder": "Needs Review",
+            "language": null,
+            "reason": "The source does not establish one clear document type and subject. Review the whole file before choosing a folder.",
+            "title": ""
+          },
+          "expected": null,
+          "id": "mixed-clinical-warranty",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        }
+      ],
+      "depth": 1,
+      "proposal": {
+        "assignments": [
+          {
+            "category": "Work",
+            "id": "d0000"
+          },
+          {
+            "category": "Work",
+            "id": "d0001"
+          },
+          {
+            "category": "Work",
+            "id": "d0002"
+          },
+          {
+            "category": "Invoices",
+            "id": "d0003"
+          },
+          {
+            "category": "Invoices",
+            "id": "d0004"
+          },
+          {
+            "category": "Health",
+            "id": "d0005"
+          },
+          {
+            "category": "Health",
+            "id": "d0006"
+          },
+          {
+            "category": "Education",
+            "id": "d0007"
+          },
+          {
+            "category": "Education",
+            "id": "d0008"
+          },
+          {
+            "category": "Warranty",
+            "id": "d0009"
+          },
+          {
+            "category": "Warranty",
+            "id": "d0010"
+          },
+          {
+            "category": "Hotel",
+            "id": "d0011"
+          },
+          {
+            "category": "Travel",
+            "id": "d0012"
+          },
+          {
+            "category": "Needs review",
+            "id": "d0014"
+          }
+        ],
+        "ok": true,
+        "rules": [
+          {
+            "enabled": true,
+            "folder": "Education",
+            "instruction": "File documents about Education here. Required document scope: Academic transcript showing courses, credits and grades; Course transcript for Pine College. Match these document types, including equivalent names. Use a supported more specific child folder when available; otherwise use this broad subject."
+          },
+          {
+            "enabled": true,
+            "folder": "Health",
+            "instruction": "File documents about Health here. Required document scope: Laboratory test report; Radiology report of X-ray examination. Match these document types, including equivalent names. Use a supported more specific child folder when available; otherwise use this broad subject."
+          },
+          {
+            "enabled": true,
+            "folder": "Hotel",
+            "instruction": "File documents about Hotel here. Required document scope: Hotel reservation for Lisbon from 12 April. Match these document types, including equivalent names. Use a supported more specific child folder when available; otherwise use this broad subject."
+          },
+          {
+            "enabled": true,
+            "folder": "Invoices",
+            "instruction": "File documents about Invoices here. Required document scope: Commercial invoice for printing posters; Supplier invoice for office equipment. Match these document types, including equivalent names. Use a supported more specific child folder when available; otherwise use this broad subject."
+          },
+          {
+            "enabled": true,
+            "folder": "Travel",
+            "instruction": "File documents about Travel here. Required document scope: Train booking confirmation. Match these document types, including equivalent names. Use a supported more specific child folder when available; otherwise use this broad subject."
+          },
+          {
+            "enabled": true,
+            "folder": "Warranty",
+            "instruction": "File documents about Warranty here. Required document scope: Product warranty certificate for Camera; Warranty registration for Bicycle. Match these document types, including equivalent names. Use a supported more specific child folder when available; otherwise use this broad subject."
+          },
+          {
+            "enabled": true,
+            "folder": "Work",
+            "instruction": "File documents about Work here. Required document scope: Meeting minutes; Meeting minutes for Project Orion; Project meeting notes for Vega interface. Match these document types, including equivalent names. Use a supported more specific child folder when available; otherwise use this broad subject."
+          }
+        ]
+      }
+    },
+    {
+      "customized": false,
+      "decisions": [
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Work/Orion",
+            "language": null,
+            "reason": "Selected Work/Orion from the configured categories.",
+            "title": "Meeting minutes"
+          },
+          "expected": "Work/Orion",
+          "id": "orion-minutes",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Work/Vega",
+            "language": null,
+            "reason": "Selected Work/Vega from the configured categories.",
+            "title": "Project meeting notes"
+          },
+          "expected": "Work/Vega",
+          "id": "vega-minutes",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": false,
+          "decision": {
+            "confident": false,
+            "folder": "Needs Review",
+            "language": null,
+            "reason": "The folder check could not confirm this match. Choose a folder for this document.",
+            "title": ""
+          },
+          "expected": "Work",
+          "id": "no-project",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Invoices/Harbor",
+            "language": null,
+            "reason": "Selected Invoices/Harbor from the configured categories.",
+            "title": "Supplier invoice - Harbor"
+          },
+          "expected": "Invoices/Harbor",
+          "id": "harbor-invoice",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Invoices/Meadow",
+            "language": null,
+            "reason": "Selected Invoices/Meadow from the configured categories.",
+            "title": "Commercial invoice for printing posters"
+          },
+          "expected": "Invoices/Meadow",
+          "id": "meadow-invoice",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Health/Harbor Clinic",
+            "language": null,
+            "reason": "Selected Health/Harbor Clinic from the configured categories.",
+            "title": "Laboratory test report"
+          },
+          "expected": "Health/Harbor Clinic",
+          "id": "blood-results",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Health/Meadow Clinic",
+            "language": null,
+            "reason": "Selected Health/Meadow Clinic from the configured categories.",
+            "title": "Radiology report of X-ray examination"
+          },
+          "expected": "Health/Meadow Clinic",
+          "id": "imaging-results",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Education/Aster University",
+            "language": null,
+            "reason": "Selected Education/Aster University from the configured categories.",
+            "title": "Academic transcript Aster University"
+          },
+          "expected": "Education/Aster University",
+          "id": "aster-grades",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Education/Pine College",
+            "language": null,
+            "reason": "Selected Education/Pine College from the configured categories.",
+            "title": "Course transcript Pine College"
+          },
+          "expected": "Education/Pine College",
+          "id": "pine-grades",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Warranties/Camera",
+            "language": null,
+            "reason": "Selected Warranties/Camera from the configured categories.",
+            "title": "Product warranty certificate Camera"
+          },
+          "expected": "Warranties/Camera",
+          "id": "camera-warranty",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Warranties/Bicycle",
+            "language": null,
+            "reason": "Selected Warranties/Bicycle from the configured categories.",
+            "title": "Warranty registration Bicycle"
+          },
+          "expected": "Warranties/Bicycle",
+          "id": "bicycle-warranty",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Travel/Lisbon",
+            "language": null,
+            "reason": "Selected Travel/Lisbon from the configured categories.",
+            "title": "Hotel reservation Lisbon"
+          },
+          "expected": "Travel/Lisbon",
+          "id": "lisbon-booking",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Travel/Oslo",
+            "language": null,
+            "reason": "Selected Travel/Oslo from the configured categories.",
+            "title": "Train booking confirmation Oslo"
+          },
+          "expected": "Travel/Oslo",
+          "id": "oslo-booking",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": false,
+            "folder": "Needs Review",
+            "language": null,
+            "reason": "The document needs more information. Choose a folder.",
+            "title": ""
+          },
+          "expected": null,
+          "id": "diverse-unknown",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": false,
+            "folder": "Needs Review",
+            "language": null,
+            "reason": "The source does not establish one clear document type and subject. Review the whole file before choosing a folder.",
+            "title": ""
+          },
+          "expected": null,
+          "id": "mixed-clinical-warranty",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        }
+      ],
+      "depth": 2,
+      "proposal": {
+        "assignments": [
+          {
+            "category": "Work/Orion",
+            "id": "d0000"
+          },
+          {
+            "category": "Work/Vega",
+            "id": "d0001"
+          },
+          {
+            "category": "Work",
+            "id": "d0002"
+          },
+          {
+            "category": "Invoices/Supplier invoice",
+            "id": "d0003"
+          },
+          {
+            "category": "Invoices/Commercial invoice",
+            "id": "d0004"
+          },
+          {
+            "category": "Health/Laboratory test report",
+            "id": "d0005"
+          },
+          {
+            "category": "Health/Radiology report",
+            "id": "d0006"
+          },
+          {
+            "category": "Education/Academic transcript",
+            "id": "d0007"
+          },
+          {
+            "category": "Education/Course transcript",
+            "id": "d0008"
+          },
+          {
+            "category": "Warranty/Camera",
+            "id": "d0009"
+          },
+          {
+            "category": "Warranty/Bicycle",
+            "id": "d0010"
+          },
+          {
+            "category": "Hotel",
+            "id": "d0011"
+          },
+          {
+            "category": "Travel/Train booking confirmation",
+            "id": "d0012"
+          },
+          {
+            "category": "Needs review",
+            "id": "d0014"
+          }
+        ],
+        "ok": true,
+        "rules": [
+          {
+            "enabled": true,
+            "folder": "Education/Academic transcript",
+            "instruction": "File documents about Education/Academic transcript here. Required document scope: Academic transcript showing courses, credits and grades. Match these document types, including equivalent names. Each subgroup must match a distinguishing source fact, such as a named subject, organization, project, product, location or document type. Names require source evidence; document type synonyms are allowed."
+          },
+          {
+            "enabled": true,
+            "folder": "Education/Course transcript",
+            "instruction": "File documents about Education/Course transcript here. Required document scope: Course transcript for Pine College. Match these document types, including equivalent names. Each subgroup must match a distinguishing source fact, such as a named subject, organization, project, product, location or document type. Names require source evidence; document type synonyms are allowed."
+          },
+          {
+            "enabled": true,
+            "folder": "Health/Laboratory test report",
+            "instruction": "File documents about Health/Laboratory test report here. Required document scope: Laboratory test report. Match these document types, including equivalent names. Each subgroup must match a distinguishing source fact, such as a named subject, organization, project, product, location or document type. Names require source evidence; document type synonyms are allowed."
+          },
+          {
+            "enabled": true,
+            "folder": "Health/Radiology report",
+            "instruction": "File documents about Health/Radiology report here. Required document scope: Radiology report of X-ray examination. Match these document types, including equivalent names. Each subgroup must match a distinguishing source fact, such as a named subject, organization, project, product, location or document type. Names require source evidence; document type synonyms are allowed."
+          },
+          {
+            "enabled": true,
+            "folder": "Hotel",
+            "instruction": "File documents about Hotel here. Required document scope: Hotel reservation for Lisbon from 12 April. Match these document types, including equivalent names. Use a supported more specific child folder when available; otherwise use this broad subject."
+          },
+          {
+            "enabled": true,
+            "folder": "Invoices/Commercial invoice",
+            "instruction": "File documents about Invoices/Commercial invoice here. Required document scope: Commercial invoice for printing posters. Match these document types, including equivalent names. Each subgroup must match a distinguishing source fact, such as a named subject, organization, project, product, location or document type. Names require source evidence; document type synonyms are allowed."
+          },
+          {
+            "enabled": true,
+            "folder": "Invoices/Supplier invoice",
+            "instruction": "File documents about Invoices/Supplier invoice here. Required document scope: Supplier invoice for office equipment. Match these document types, including equivalent names. Each subgroup must match a distinguishing source fact, such as a named subject, organization, project, product, location or document type. Names require source evidence; document type synonyms are allowed."
+          },
+          {
+            "enabled": true,
+            "folder": "Travel/Train booking confirmation",
+            "instruction": "File documents about Travel/Train booking confirmation here. Required document scope: Train booking confirmation. Match these document types, including equivalent names. Each subgroup must match a distinguishing source fact, such as a named subject, organization, project, product, location or document type. Names require source evidence; document type synonyms are allowed."
+          },
+          {
+            "enabled": true,
+            "folder": "Warranty/Bicycle",
+            "instruction": "File documents about Warranty/Bicycle here. Required document scope: Warranty registration for Bicycle. Match these document types, including equivalent names. Required source details: (Product: Bicycle). Each subgroup must match a distinguishing source fact, such as a named subject, organization, project, product, location or document type. Names require source evidence; document type synonyms are allowed."
+          },
+          {
+            "enabled": true,
+            "folder": "Warranty/Camera",
+            "instruction": "File documents about Warranty/Camera here. Required document scope: Product warranty certificate for Camera. Match these document types, including equivalent names. Required source details: (Product: Camera). Each subgroup must match a distinguishing source fact, such as a named subject, organization, project, product, location or document type. Names require source evidence; document type synonyms are allowed."
+          },
+          {
+            "enabled": true,
+            "folder": "Work",
+            "instruction": "File documents about Work here. Required document scope: Meeting minutes. Match these document types, including equivalent names. Use a supported more specific child folder when available; otherwise use this broad subject."
+          },
+          {
+            "enabled": true,
+            "folder": "Work/Orion",
+            "instruction": "File documents about Work/Orion here. Required document scope: Meeting minutes for Project Orion. Match these document types, including equivalent names. Required source details: (Project: Orion). Each subgroup must match a distinguishing source fact, such as a named subject, organization, project, product, location or document type. Names require source evidence; document type synonyms are allowed."
+          },
+          {
+            "enabled": true,
+            "folder": "Work/Vega",
+            "instruction": "File documents about Work/Vega here. Required document scope: Project meeting notes for Vega interface. Match these document types, including equivalent names. Required source details: (Project: Vega). Each subgroup must match a distinguishing source fact, such as a named subject, organization, project, product, location or document type. Names require source evidence; document type synonyms are allowed."
+          }
+        ]
+      }
+    },
+    {
+      "customized": true,
+      "decisions": [
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Work/Orion",
+            "language": null,
+            "reason": "Selected Work/Orion from the configured categories.",
+            "title": "Record Meeting minutes Orion"
+          },
+          "expected": "Work/Orion",
+          "id": "orion-minutes",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Work/Vega",
+            "language": null,
+            "reason": "Selected Work/Vega from the configured categories.",
+            "title": "Record Project meeting notes Vega"
+          },
+          "expected": "Work/Vega",
+          "id": "vega-minutes",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Work",
+            "language": null,
+            "reason": "Selected Work from the configured categories.",
+            "title": "Record meeting minutes"
+          },
+          "expected": "Work",
+          "id": "no-project",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Invoices/Harbor",
+            "language": null,
+            "reason": "Selected Invoices/Harbor from the configured categories.",
+            "title": "Record Supplier invoice Harbor"
+          },
+          "expected": "Invoices/Harbor",
+          "id": "harbor-invoice",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Invoices/Meadow",
+            "language": null,
+            "reason": "Selected Invoices/Meadow from the configured categories.",
+            "title": "Record Commercial invoice for printing posters"
+          },
+          "expected": "Invoices/Meadow",
+          "id": "meadow-invoice",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Health/Harbor Clinic",
+            "language": null,
+            "reason": "Selected Health/Harbor Clinic from the configured categories.",
+            "title": "Record Laboratory test report"
+          },
+          "expected": "Health/Harbor Clinic",
+          "id": "blood-results",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Health/Meadow Clinic",
+            "language": null,
+            "reason": "Selected Health/Meadow Clinic from the configured categories.",
+            "title": "Record Radiology report"
+          },
+          "expected": "Health/Meadow Clinic",
+          "id": "imaging-results",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Education/Aster University",
+            "language": null,
+            "reason": "Selected Education/Aster University from the configured categories.",
+            "title": "Record Academic transcript Aster University"
+          },
+          "expected": "Education/Aster University",
+          "id": "aster-grades",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Education/Pine College",
+            "language": null,
+            "reason": "Selected Education/Pine College from the configured categories.",
+            "title": "Record Course transcript Pine College"
+          },
+          "expected": "Education/Pine College",
+          "id": "pine-grades",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Warranties/Camera",
+            "language": null,
+            "reason": "Selected Warranties/Camera from the configured categories.",
+            "title": "Record warranty certificate Camera"
+          },
+          "expected": "Warranties/Camera",
+          "id": "camera-warranty",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Warranties/Bicycle",
+            "language": null,
+            "reason": "Selected Warranties/Bicycle from the configured categories.",
+            "title": "Record Warranty registration Bicycle"
+          },
+          "expected": "Warranties/Bicycle",
+          "id": "bicycle-warranty",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Travel/Lisbon",
+            "language": null,
+            "reason": "Selected Travel/Lisbon from the configured categories.",
+            "title": "Record Hotel reservation Lisbon"
+          },
+          "expected": "Travel/Lisbon",
+          "id": "lisbon-booking",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Travel/Oslo",
+            "language": null,
+            "reason": "Selected Travel/Oslo from the configured categories.",
+            "title": "Record Train booking confirmation Oslo"
+          },
+          "expected": "Travel/Oslo",
+          "id": "oslo-booking",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": false,
+            "folder": "Needs Review",
+            "language": null,
+            "reason": "The document needs more information. Choose a folder.",
+            "title": ""
+          },
+          "expected": null,
+          "id": "diverse-unknown",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": false,
+            "folder": "Needs Review",
+            "language": null,
+            "reason": "The source does not establish one clear document type and subject. Review the whole file before choosing a folder.",
+            "title": ""
+          },
+          "expected": null,
+          "id": "mixed-clinical-warranty",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        }
+      ],
+      "depth": 2,
+      "proposal": {
+        "assignments": [
+          {
+            "category": "Work/Orion",
+            "id": "d0000"
+          },
+          {
+            "category": "Work/Vega",
+            "id": "d0001"
+          },
+          {
+            "category": "Work",
+            "id": "d0002"
+          },
+          {
+            "category": "Invoices/Harbor Office Ltd",
+            "id": "d0003"
+          },
+          {
+            "category": "Invoices/Meadow Print Ltd",
+            "id": "d0004"
+          },
+          {
+            "category": "Health/Harbor Clinic",
+            "id": "d0005"
+          },
+          {
+            "category": "Health/Meadow Clinic",
+            "id": "d0006"
+          },
+          {
+            "category": "Education/Aster University",
+            "id": "d0007"
+          },
+          {
+            "category": "Education/Pine College",
+            "id": "d0008"
+          },
+          {
+            "category": "Warranty/Camera",
+            "id": "d0009"
+          },
+          {
+            "category": "Warranty/Bicycle",
+            "id": "d0010"
+          },
+          {
+            "category": "Hotel/Lisbon",
+            "id": "d0011"
+          },
+          {
+            "category": "Travel/Oslo",
+            "id": "d0012"
+          },
+          {
+            "category": "Needs review",
+            "id": "d0014"
+          }
+        ],
+        "ok": true,
+        "rules": [
+          {
+            "enabled": true,
+            "folder": "Education/Aster University",
+            "instruction": "File documents about Education/Aster University here. Required document scope: Academic transcript showing courses, credits and grades. Match these document types, including equivalent names. Required source details: (Institution: Aster University). Each subgroup must match a distinguishing source fact, such as a named subject, organization, project, product, location or document type. Names require source evidence; document type synonyms are allowed."
+          },
+          {
+            "enabled": true,
+            "folder": "Education/Pine College",
+            "instruction": "File documents about Education/Pine College here. Required document scope: Course transcript for Pine College. Match these document types, including equivalent names. Required source details: (Institution: Pine College). Each subgroup must match a distinguishing source fact, such as a named subject, organization, project, product, location or document type. Names require source evidence; document type synonyms are allowed."
+          },
+          {
+            "enabled": true,
+            "folder": "Health/Harbor Clinic",
+            "instruction": "File documents about Health/Harbor Clinic here. Required document scope: Laboratory test report. Match these document types, including equivalent names. Required source details: (Clinic: Harbor Clinic). Each subgroup must match a distinguishing source fact, such as a named subject, organization, project, product, location or document type. Names require source evidence; document type synonyms are allowed."
+          },
+          {
+            "enabled": true,
+            "folder": "Health/Meadow Clinic",
+            "instruction": "File documents about Health/Meadow Clinic here. Required document scope: Radiology report of X-ray examination. Match these document types, including equivalent names. Required source details: (Clinic: Meadow Clinic). Each subgroup must match a distinguishing source fact, such as a named subject, organization, project, product, location or document type. Names require source evidence; document type synonyms are allowed."
+          },
+          {
+            "enabled": true,
+            "folder": "Hotel/Lisbon",
+            "instruction": "File documents about Hotel/Lisbon here. Required document scope: Hotel reservation for Lisbon from 12 April. Match these document types, including equivalent names. Required source details: (Destination: Lisbon). Each subgroup must match a distinguishing source fact, such as a named subject, organization, project, product, location or document type. Names require source evidence; document type synonyms are allowed."
+          },
+          {
+            "enabled": true,
+            "folder": "Invoices/Harbor Office Ltd",
+            "instruction": "File documents about Invoices/Harbor Office Ltd here. Required document scope: Supplier invoice for office equipment. Match these document types, including equivalent names. Required source details: (Supplier: Harbor Office Ltd). Each subgroup must match a distinguishing source fact, such as a named subject, organization, project, product, location or document type. Names require source evidence; document type synonyms are allowed."
+          },
+          {
+            "enabled": true,
+            "folder": "Invoices/Meadow Print Ltd",
+            "instruction": "File documents about Invoices/Meadow Print Ltd here. Required document scope: Commercial invoice for printing posters. Match these document types, including equivalent names. Required source details: (Supplier: Meadow Print Ltd). Each subgroup must match a distinguishing source fact, such as a named subject, organization, project, product, location or document type. Names require source evidence; document type synonyms are allowed."
+          },
+          {
+            "enabled": true,
+            "folder": "Travel/Oslo",
+            "instruction": "File documents about Travel/Oslo here. Required document scope: Train booking confirmation. Match these document types, including equivalent names. Required source details: (Destination: Oslo). Each subgroup must match a distinguishing source fact, such as a named subject, organization, project, product, location or document type. Names require source evidence; document type synonyms are allowed."
+          },
+          {
+            "enabled": true,
+            "folder": "Warranty/Bicycle",
+            "instruction": "File documents about Warranty/Bicycle here. Required document scope: Warranty registration for Bicycle. Match these document types, including equivalent names. Required source details: (Product: Bicycle). Each subgroup must match a distinguishing source fact, such as a named subject, organization, project, product, location or document type. Names require source evidence; document type synonyms are allowed."
+          },
+          {
+            "enabled": true,
+            "folder": "Warranty/Camera",
+            "instruction": "File documents about Warranty/Camera here. Required document scope: Product warranty certificate for Camera. Match these document types, including equivalent names. Required source details: (Product: Camera). Each subgroup must match a distinguishing source fact, such as a named subject, organization, project, product, location or document type. Names require source evidence; document type synonyms are allowed."
+          },
+          {
+            "enabled": true,
+            "folder": "Work",
+            "instruction": "File documents about Work here. Required document scope: Meeting minutes. Match these document types, including equivalent names. Use a supported more specific child folder when available; otherwise use this broad subject."
+          },
+          {
+            "enabled": true,
+            "folder": "Work/Orion",
+            "instruction": "File documents about Work/Orion here. Required document scope: Meeting minutes for Project Orion. Match these document types, including equivalent names. Required source details: (Project: Orion). Each subgroup must match a distinguishing source fact, such as a named subject, organization, project, product, location or document type. Names require source evidence; document type synonyms are allowed."
+          },
+          {
+            "enabled": true,
+            "folder": "Work/Vega",
+            "instruction": "File documents about Work/Vega here. Required document scope: Project meeting notes for Vega interface. Match these document types, including equivalent names. Required source details: (Project: Vega). Each subgroup must match a distinguishing source fact, such as a named subject, organization, project, product, location or document type. Names require source evidence; document type synonyms are allowed."
+          }
+        ]
+      }
+    },
+    {
+      "customized": false,
+      "decisions": [
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Work/Orion/Notes",
+            "language": null,
+            "reason": "Selected Work/Orion/Notes from the configured categories.",
+            "title": "Meeting minutes"
+          },
+          "expected": "Work/Orion/Notes",
+          "id": "orion-minutes",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Work/Vega/Notes",
+            "language": null,
+            "reason": "Selected Work/Vega/Notes from the configured categories.",
+            "title": "Project meeting notes"
+          },
+          "expected": "Work/Vega/Notes",
+          "id": "vega-minutes",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": false,
+          "decision": {
+            "confident": false,
+            "folder": "Needs Review",
+            "language": null,
+            "reason": "The folder check could not confirm this match. Choose a folder for this document.",
+            "title": ""
+          },
+          "expected": "Work",
+          "id": "no-project",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Invoices/Harbor/Invoices",
+            "language": null,
+            "reason": "Selected Invoices/Harbor/Invoices from the configured categories.",
+            "title": "Supplier invoice for office equipment"
+          },
+          "expected": "Invoices/Harbor/Invoices",
+          "id": "harbor-invoice",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Invoices/Meadow/Invoices",
+            "language": null,
+            "reason": "Selected Invoices/Meadow/Invoices from the configured categories.",
+            "title": "Commercial invoice for printing posters"
+          },
+          "expected": "Invoices/Meadow/Invoices",
+          "id": "meadow-invoice",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Health/Harbor Clinic/Lab Results",
+            "language": null,
+            "reason": "Selected Health/Harbor Clinic/Lab Results from the configured categories.",
+            "title": "Laboratory test report"
+          },
+          "expected": "Health/Harbor Clinic/Lab Results",
+          "id": "blood-results",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Health/Meadow Clinic/Imaging",
+            "language": null,
+            "reason": "Selected Health/Meadow Clinic/Imaging from the configured categories.",
+            "title": "Radiology report of X-ray examination"
+          },
+          "expected": "Health/Meadow Clinic/Imaging",
+          "id": "imaging-results",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Education/Aster University/Transcripts",
+            "language": null,
+            "reason": "Selected Education/Aster University/Transcripts from the configured categories.",
+            "title": "Academic transcript Aster University"
+          },
+          "expected": "Education/Aster University/Transcripts",
+          "id": "aster-grades",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Education/Pine College/Transcripts",
+            "language": null,
+            "reason": "Selected Education/Pine College/Transcripts from the configured categories.",
+            "title": "Course transcript Pine College"
+          },
+          "expected": "Education/Pine College/Transcripts",
+          "id": "pine-grades",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Warranties/Camera/Warranty",
+            "language": null,
+            "reason": "Selected Warranties/Camera/Warranty from the configured categories.",
+            "title": "Product warranty certificate Camera"
+          },
+          "expected": "Warranties/Camera/Warranty",
+          "id": "camera-warranty",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Warranties/Bicycle/Warranty",
+            "language": null,
+            "reason": "Selected Warranties/Bicycle/Warranty from the configured categories.",
+            "title": "Warranty registration Bicycle"
+          },
+          "expected": "Warranties/Bicycle/Warranty",
+          "id": "bicycle-warranty",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Travel/Lisbon/Bookings",
+            "language": null,
+            "reason": "Selected Travel/Lisbon/Bookings from the configured categories.",
+            "title": "Hotel reservation Lisbon"
+          },
+          "expected": "Travel/Lisbon/Bookings",
+          "id": "lisbon-booking",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Travel/Oslo/Bookings",
+            "language": null,
+            "reason": "Selected Travel/Oslo/Bookings from the configured categories.",
+            "title": "Train booking confirmation Oslo"
+          },
+          "expected": "Travel/Oslo/Bookings",
+          "id": "oslo-booking",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": false,
+            "folder": "Needs Review",
+            "language": null,
+            "reason": "The document needs more information. Choose a folder.",
+            "title": ""
+          },
+          "expected": null,
+          "id": "diverse-unknown",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": false,
+            "folder": "Needs Review",
+            "language": null,
+            "reason": "The source does not establish one clear document type and subject. Review the whole file before choosing a folder.",
+            "title": ""
+          },
+          "expected": null,
+          "id": "mixed-clinical-warranty",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        }
+      ],
+      "depth": 3,
+      "proposal": {
+        "assignments": [
+          {
+            "category": "Work/Orion/Meeting minutes",
+            "id": "d0000"
+          },
+          {
+            "category": "Work/Vega/Meeting notes",
+            "id": "d0001"
+          },
+          {
+            "category": "Work",
+            "id": "d0002"
+          },
+          {
+            "category": "Invoices/Supplier Invoice",
+            "id": "d0003"
+          },
+          {
+            "category": "Invoices/Commercial invoice",
+            "id": "d0004"
+          },
+          {
+            "category": "Health/Laboratory test report",
+            "id": "d0005"
+          },
+          {
+            "category": "Health/Radiology report",
+            "id": "d0006"
+          },
+          {
+            "category": "Education/Academic transcript",
+            "id": "d0007"
+          },
+          {
+            "category": "Education/Course transcript",
+            "id": "d0008"
+          },
+          {
+            "category": "Warranty/Camera",
+            "id": "d0009"
+          },
+          {
+            "category": "Warranty/Bicycle",
+            "id": "d0010"
+          },
+          {
+            "category": "Hotel/Reservation",
+            "id": "d0011"
+          },
+          {
+            "category": "Travel/Train booking confirmation",
+            "id": "d0012"
+          },
+          {
+            "category": "Needs review",
+            "id": "d0014"
+          }
+        ],
+        "ok": true,
+        "rules": [
+          {
+            "enabled": true,
+            "folder": "Education/Academic transcript",
+            "instruction": "File documents about Education/Academic transcript here. Required document scope: Academic transcript showing courses, credits and grades. Match these document types, including equivalent names. Each subgroup must match a distinguishing source fact, such as a named subject, organization, project, product, location or document type. Names require source evidence; document type synonyms are allowed."
+          },
+          {
+            "enabled": true,
+            "folder": "Education/Course transcript",
+            "instruction": "File documents about Education/Course transcript here. Required document scope: Course transcript for Pine College. Match these document types, including equivalent names. Each subgroup must match a distinguishing source fact, such as a named subject, organization, project, product, location or document type. Names require source evidence; document type synonyms are allowed."
+          },
+          {
+            "enabled": true,
+            "folder": "Health/Laboratory test report",
+            "instruction": "File documents about Health/Laboratory test report here. Required document scope: Laboratory test report. Match these document types, including equivalent names. Each subgroup must match a distinguishing source fact, such as a named subject, organization, project, product, location or document type. Names require source evidence; document type synonyms are allowed."
+          },
+          {
+            "enabled": true,
+            "folder": "Health/Radiology report",
+            "instruction": "File documents about Health/Radiology report here. Required document scope: Radiology report of X-ray examination. Match these document types, including equivalent names. Each subgroup must match a distinguishing source fact, such as a named subject, organization, project, product, location or document type. Names require source evidence; document type synonyms are allowed."
+          },
+          {
+            "enabled": true,
+            "folder": "Hotel/Reservation",
+            "instruction": "File documents about Hotel/Reservation here. Required document scope: Hotel reservation for Lisbon from 12 April. Match these document types, including equivalent names. Each subgroup must match a distinguishing source fact, such as a named subject, organization, project, product, location or document type. Names require source evidence; document type synonyms are allowed."
+          },
+          {
+            "enabled": true,
+            "folder": "Invoices/Commercial invoice",
+            "instruction": "File documents about Invoices/Commercial invoice here. Required document scope: Commercial invoice for printing posters. Match these document types, including equivalent names. Each subgroup must match a distinguishing source fact, such as a named subject, organization, project, product, location or document type. Names require source evidence; document type synonyms are allowed."
+          },
+          {
+            "enabled": true,
+            "folder": "Invoices/Supplier Invoice",
+            "instruction": "File documents about Invoices/Supplier Invoice here. Required document scope: Supplier invoice for office equipment. Match these document types, including equivalent names. Each subgroup must match a distinguishing source fact, such as a named subject, organization, project, product, location or document type. Names require source evidence; document type synonyms are allowed."
+          },
+          {
+            "enabled": true,
+            "folder": "Travel/Train booking confirmation",
+            "instruction": "File documents about Travel/Train booking confirmation here. Required document scope: Train booking confirmation. Match these document types, including equivalent names. Each subgroup must match a distinguishing source fact, such as a named subject, organization, project, product, location or document type. Names require source evidence; document type synonyms are allowed."
+          },
+          {
+            "enabled": true,
+            "folder": "Warranty/Bicycle",
+            "instruction": "File documents about Warranty/Bicycle here. Required document scope: Warranty registration for Bicycle. Match these document types, including equivalent names. Required source details: (Product: Bicycle). Each subgroup must match a distinguishing source fact, such as a named subject, organization, project, product, location or document type. Names require source evidence; document type synonyms are allowed."
+          },
+          {
+            "enabled": true,
+            "folder": "Warranty/Camera",
+            "instruction": "File documents about Warranty/Camera here. Required document scope: Product warranty certificate for Camera. Match these document types, including equivalent names. Required source details: (Product: Camera). Each subgroup must match a distinguishing source fact, such as a named subject, organization, project, product, location or document type. Names require source evidence; document type synonyms are allowed."
+          },
+          {
+            "enabled": true,
+            "folder": "Work",
+            "instruction": "File documents about Work here. Required document scope: Meeting minutes. Match these document types, including equivalent names. Use a supported more specific child folder when available; otherwise use this broad subject."
+          },
+          {
+            "enabled": true,
+            "folder": "Work/Orion/Meeting minutes",
+            "instruction": "File documents about Work/Orion/Meeting minutes here. Required document scope: Meeting minutes for Project Orion. Match these document types, including equivalent names. Required source details: (Project: Orion). Each subgroup must match a distinguishing source fact, such as a named subject, organization, project, product, location or document type. Names require source evidence; document type synonyms are allowed."
+          },
+          {
+            "enabled": true,
+            "folder": "Work/Vega/Meeting notes",
+            "instruction": "File documents about Work/Vega/Meeting notes here. Required document scope: Project meeting notes for Vega interface. Match these document types, including equivalent names. Required source details: (Project: Vega). Each subgroup must match a distinguishing source fact, such as a named subject, organization, project, product, location or document type. Names require source evidence; document type synonyms are allowed."
+          }
+        ]
+      }
+    },
+    {
+      "customized": true,
+      "decisions": [
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Work/Orion/Notes",
+            "language": null,
+            "reason": "Selected Work/Orion/Notes from the configured categories.",
+            "title": "Record Meeting minutes Orion"
+          },
+          "expected": "Work/Orion/Notes",
+          "id": "orion-minutes",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Work/Vega/Notes",
+            "language": null,
+            "reason": "Selected Work/Vega/Notes from the configured categories.",
+            "title": "Record Project meeting notes Vega"
+          },
+          "expected": "Work/Vega/Notes",
+          "id": "vega-minutes",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Work",
+            "language": null,
+            "reason": "Selected Work from the configured categories.",
+            "title": "Record meeting minutes"
+          },
+          "expected": "Work",
+          "id": "no-project",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Invoices/Harbor/Invoices",
+            "language": null,
+            "reason": "Selected Invoices/Harbor/Invoices from the configured categories.",
+            "title": "Record Supplier invoice"
+          },
+          "expected": "Invoices/Harbor/Invoices",
+          "id": "harbor-invoice",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Invoices/Meadow/Invoices",
+            "language": null,
+            "reason": "Selected Invoices/Meadow/Invoices from the configured categories.",
+            "title": "Record Commercial invoice for printing posters"
+          },
+          "expected": "Invoices/Meadow/Invoices",
+          "id": "meadow-invoice",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Health/Harbor Clinic/Lab Results",
+            "language": null,
+            "reason": "Selected Health/Harbor Clinic/Lab Results from the configured categories.",
+            "title": "Record Laboratory test report"
+          },
+          "expected": "Health/Harbor Clinic/Lab Results",
+          "id": "blood-results",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Health/Meadow Clinic/Imaging",
+            "language": null,
+            "reason": "Selected Health/Meadow Clinic/Imaging from the configured categories.",
+            "title": "Record Radiology report"
+          },
+          "expected": "Health/Meadow Clinic/Imaging",
+          "id": "imaging-results",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Education/Aster University/Transcripts",
+            "language": null,
+            "reason": "Selected Education/Aster University/Transcripts from the configured categories.",
+            "title": "Record Academic transcript"
+          },
+          "expected": "Education/Aster University/Transcripts",
+          "id": "aster-grades",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Education/Pine College/Transcripts",
+            "language": null,
+            "reason": "Selected Education/Pine College/Transcripts from the configured categories.",
+            "title": "Record_Pine College_Transcript"
+          },
+          "expected": "Education/Pine College/Transcripts",
+          "id": "pine-grades",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Warranties/Camera/Warranty",
+            "language": null,
+            "reason": "Selected Warranties/Camera/Warranty from the configured categories.",
+            "title": "Record Warranty Camera"
+          },
+          "expected": "Warranties/Camera/Warranty",
+          "id": "camera-warranty",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Warranties/Bicycle/Warranty",
+            "language": null,
+            "reason": "Selected Warranties/Bicycle/Warranty from the configured categories.",
+            "title": "Record Warranty Bicycle"
+          },
+          "expected": "Warranties/Bicycle/Warranty",
+          "id": "bicycle-warranty",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Travel/Lisbon/Bookings",
+            "language": null,
+            "reason": "Selected Travel/Lisbon/Bookings from the configured categories.",
+            "title": "Record Hotel reservation Lisbon"
+          },
+          "expected": "Travel/Lisbon/Bookings",
+          "id": "lisbon-booking",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Travel/Oslo/Bookings",
+            "language": null,
+            "reason": "Selected Travel/Oslo/Bookings from the configured categories.",
+            "title": "Record Train booking confirmation Oslo"
+          },
+          "expected": "Travel/Oslo/Bookings",
+          "id": "oslo-booking",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": false,
+            "folder": "Needs Review",
+            "language": null,
+            "reason": "The document needs more information. Choose a folder.",
+            "title": ""
+          },
+          "expected": null,
+          "id": "diverse-unknown",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": false,
+            "folder": "Needs Review",
+            "language": null,
+            "reason": "The source does not establish one clear document type and subject. Review the whole file before choosing a folder.",
+            "title": ""
+          },
+          "expected": null,
+          "id": "mixed-clinical-warranty",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        }
+      ],
+      "depth": 3,
+      "proposal": {
+        "assignments": [
+          {
+            "category": "Work/Orion/Meeting minutes",
+            "id": "d0000"
+          },
+          {
+            "category": "Work/Vega/Meeting notes",
+            "id": "d0001"
+          },
+          {
+            "category": "Work",
+            "id": "d0002"
+          },
+          {
+            "category": "Invoices/Harbor Office Ltd/Supplier Invoice",
+            "id": "d0003"
+          },
+          {
+            "category": "Invoices/Meadow Print Ltd/Commercial invoice",
+            "id": "d0004"
+          },
+          {
+            "category": "Health/Harbor Clinic/Laboratory test report",
+            "id": "d0005"
+          },
+          {
+            "category": "Health/Meadow Clinic/Radiology report",
+            "id": "d0006"
+          },
+          {
+            "category": "Education/Aster University/Academic transcript",
+            "id": "d0007"
+          },
+          {
+            "category": "Education/Pine College/Course transcript",
+            "id": "d0008"
+          },
+          {
+            "category": "Warranty/Camera/Warranty certificate",
+            "id": "d0009"
+          },
+          {
+            "category": "Warranty/Bicycle/Registration",
+            "id": "d0010"
+          },
+          {
+            "category": "Hotel/Lisbon/Reservation",
+            "id": "d0011"
+          },
+          {
+            "category": "Travel/Oslo/Train booking confirmation",
+            "id": "d0012"
+          },
+          {
+            "category": "Needs review",
+            "id": "d0014"
+          }
+        ],
+        "ok": true,
+        "rules": [
+          {
+            "enabled": true,
+            "folder": "Education/Aster University/Academic transcript",
+            "instruction": "File documents about Education/Aster University/Academic transcript here. Required document scope: Academic transcript showing courses, credits and grades. Match these document types, including equivalent names. Required source details: (Institution: Aster University). Each subgroup must match a distinguishing source fact, such as a named subject, organization, project, product, location or document type. Names require source evidence; document type synonyms are allowed."
+          },
+          {
+            "enabled": true,
+            "folder": "Education/Pine College/Course transcript",
+            "instruction": "File documents about Education/Pine College/Course transcript here. Required document scope: Course transcript for Pine College. Match these document types, including equivalent names. Required source details: (Institution: Pine College). Each subgroup must match a distinguishing source fact, such as a named subject, organization, project, product, location or document type. Names require source evidence; document type synonyms are allowed."
+          },
+          {
+            "enabled": true,
+            "folder": "Health/Harbor Clinic/Laboratory test report",
+            "instruction": "File documents about Health/Harbor Clinic/Laboratory test report here. Required document scope: Laboratory test report. Match these document types, including equivalent names. Required source details: (Clinic: Harbor Clinic). Each subgroup must match a distinguishing source fact, such as a named subject, organization, project, product, location or document type. Names require source evidence; document type synonyms are allowed."
+          },
+          {
+            "enabled": true,
+            "folder": "Health/Meadow Clinic/Radiology report",
+            "instruction": "File documents about Health/Meadow Clinic/Radiology report here. Required document scope: Radiology report of X-ray examination. Match these document types, including equivalent names. Required source details: (Clinic: Meadow Clinic). Each subgroup must match a distinguishing source fact, such as a named subject, organization, project, product, location or document type. Names require source evidence; document type synonyms are allowed."
+          },
+          {
+            "enabled": true,
+            "folder": "Hotel/Lisbon/Reservation",
+            "instruction": "File documents about Hotel/Lisbon/Reservation here. Required document scope: Hotel reservation for Lisbon from 12 April. Match these document types, including equivalent names. Required source details: (Destination: Lisbon). Each subgroup must match a distinguishing source fact, such as a named subject, organization, project, product, location or document type. Names require source evidence; document type synonyms are allowed."
+          },
+          {
+            "enabled": true,
+            "folder": "Invoices/Harbor Office Ltd/Supplier Invoice",
+            "instruction": "File documents about Invoices/Harbor Office Ltd/Supplier Invoice here. Required document scope: Supplier invoice for office equipment. Match these document types, including equivalent names. Required source details: (Supplier: Harbor Office Ltd). Each subgroup must match a distinguishing source fact, such as a named subject, organization, project, product, location or document type. Names require source evidence; document type synonyms are allowed."
+          },
+          {
+            "enabled": true,
+            "folder": "Invoices/Meadow Print Ltd/Commercial invoice",
+            "instruction": "File documents about Invoices/Meadow Print Ltd/Commercial invoice here. Required document scope: Commercial invoice for printing posters. Match these document types, including equivalent names. Required source details: (Supplier: Meadow Print Ltd). Each subgroup must match a distinguishing source fact, such as a named subject, organization, project, product, location or document type. Names require source evidence; document type synonyms are allowed."
+          },
+          {
+            "enabled": true,
+            "folder": "Travel/Oslo/Train booking confirmation",
+            "instruction": "File documents about Travel/Oslo/Train booking confirmation here. Required document scope: Train booking confirmation. Match these document types, including equivalent names. Required source details: (Destination: Oslo). Each subgroup must match a distinguishing source fact, such as a named subject, organization, project, product, location or document type. Names require source evidence; document type synonyms are allowed."
+          },
+          {
+            "enabled": true,
+            "folder": "Warranty/Bicycle/Registration",
+            "instruction": "File documents about Warranty/Bicycle/Registration here. Required document scope: Warranty registration for Bicycle. Match these document types, including equivalent names. Required source details: (Product: Bicycle). Each subgroup must match a distinguishing source fact, such as a named subject, organization, project, product, location or document type. Names require source evidence; document type synonyms are allowed."
+          },
+          {
+            "enabled": true,
+            "folder": "Warranty/Camera/Warranty certificate",
+            "instruction": "File documents about Warranty/Camera/Warranty certificate here. Required document scope: Product warranty certificate for Camera. Match these document types, including equivalent names. Required source details: (Product: Camera). Each subgroup must match a distinguishing source fact, such as a named subject, organization, project, product, location or document type. Names require source evidence; document type synonyms are allowed."
+          },
+          {
+            "enabled": true,
+            "folder": "Work",
+            "instruction": "File documents about Work here. Required document scope: Meeting minutes. Match these document types, including equivalent names. Use a supported more specific child folder when available; otherwise use this broad subject."
+          },
+          {
+            "enabled": true,
+            "folder": "Work/Orion/Meeting minutes",
+            "instruction": "File documents about Work/Orion/Meeting minutes here. Required document scope: Meeting minutes for Project Orion. Match these document types, including equivalent names. Required source details: (Project: Orion). Each subgroup must match a distinguishing source fact, such as a named subject, organization, project, product, location or document type. Names require source evidence; document type synonyms are allowed."
+          },
+          {
+            "enabled": true,
+            "folder": "Work/Vega/Meeting notes",
+            "instruction": "File documents about Work/Vega/Meeting notes here. Required document scope: Project meeting notes for Vega interface. Match these document types, including equivalent names. Required source details: (Project: Vega). Each subgroup must match a distinguishing source fact, such as a named subject, organization, project, product, location or document type. Names require source evidence; document type synonyms are allowed."
+          }
+        ]
+      }
+    }
+  ]
+}

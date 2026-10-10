@@ -1,0 +1,26 @@
+{
+  "case": "sv_home_insurance",
+  "started": 1790860530.162978,
+  "seconds": 0.40003204345703125,
+  "request": {
+    "input": {
+      "evidence": "FÖRSÄKRINGSBREV\nHemförsäkring. Försäkringen omfattar lösöre, ansvarsskydd och rättsskydd för den försäkrades bostad.",
+      "rules": "Use clear English document names. Describe the document accurately without inventing names or dates.\n\nInsurance: Insurance policies and certificates of cover, including home and travel insurance.",
+      "understanding": {
+        "description": "A home insurance document detailing coverage for property, liability, and legal protection.",
+        "evidence": [
+          {
+            "page": null,
+            "quote": "Hemförsäkring. Försäkringen omfattar lösöre, ansvarsskydd och rättsskydd för den försäkrades bostad."
+          }
+        ],
+        "uncertainty": ""
+      }
+    },
+    "operation": "name"
+  },
+  "response": {
+    "title": "Home Insurance Coverage Details"
+  },
+  "exit": 0
+}

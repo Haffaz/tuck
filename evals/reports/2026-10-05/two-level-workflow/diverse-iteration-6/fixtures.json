@@ -1,0 +1,114 @@
+[
+  {
+    "id": "atlas-report",
+    "subject": "Work",
+    "entity": "Atlas",
+    "kind": "Inspections",
+    "text": "Technical inspection report\nProject: Atlas\nThe engineer recorded equipment condition and completed the inspection.",
+    "sha256": "98574a398c379baa0fd79a6a8cb258ff27bfec605d53a54f295cdecbdc15e6e3"
+  },
+  {
+    "id": "juniper-minutes",
+    "subject": "Work",
+    "entity": "Juniper",
+    "kind": "Minutes",
+    "text": "Project meeting minutes\nProject: Juniper\nThe team recorded agreed tasks, owners and decisions.",
+    "sha256": "0b2eec19b22e5674f668177ed4d1aede46612e86940de0c55cf585c956b77ae4"
+  },
+  {
+    "id": "alder-bill",
+    "subject": "Invoices",
+    "entity": "Alder Supplies",
+    "kind": "Invoices",
+    "text": "Supplier invoice\nSupplier: Alder Supplies\nOffice materials delivered. Payment is due for the listed goods.",
+    "sha256": "088a2580d1a4cdd0ca6f5623109a1086782807ed9eff66f9b6999ff80925b6a0"
+  },
+  {
+    "id": "echo-bill",
+    "subject": "Invoices",
+    "entity": "Echo Design",
+    "kind": "Invoices",
+    "text": "Commercial invoice\nSupplier: Echo Design\nDesign services were completed and billed to the customer.",
+    "sha256": "33f46eb916b6ab69cc3834b9a45a9c836038698d71cc5eb836f9f58930982495"
+  },
+  {
+    "id": "maple-clinical",
+    "subject": "Health",
+    "entity": "Maple Hospital",
+    "kind": "Pathology",
+    "text": "Pathology report\nClinic: Maple Hospital\nThe laboratory records examined specimen findings and clinical observations.",
+    "sha256": "eb64aea8a7cd102f5d9fb4de2c38c5d37555e199e9b699cb3bedc58c1ba2caef"
+  },
+  {
+    "id": "birch-medical",
+    "subject": "Health",
+    "entity": "Birch Health Centre",
+    "kind": "Prescriptions",
+    "text": "Medical prescription\nClinic: Birch Health Centre\nThe physician prescribed a medication and recorded the dosage.",
+    "sha256": "a9ceea36bafcc09b87cbb7d157e344ffd240d640887c02bb247130d521afeaba"
+  },
+  {
+    "id": "lake-diploma",
+    "subject": "Education",
+    "entity": "Lake University",
+    "kind": "Diplomas",
+    "text": "University diploma\nInstitution: Lake University\nThis certifies completion of a degree in engineering.",
+    "sha256": "98b6b91fb7099166cbc989ecbe4dd9f8f30420ca66aab9146035a6a30368e916"
+  },
+  {
+    "id": "brook-certificate",
+    "subject": "Education",
+    "entity": "Brook College",
+    "kind": "Certificates",
+    "text": "Course completion certificate\nInstitution: Brook College\nThe student completed an academic course and passed its assessment.",
+    "sha256": "277fbc484407599aaf46204b2cdc13425552747582d1cc9610141cc6de18e777"
+  },
+  {
+    "id": "printer-cover",
+    "subject": "Warranties",
+    "entity": "Printer",
+    "kind": "Certificates",
+    "text": "Product warranty certificate\nProduct: Printer\nThe manufacturer covers defects in this printer for two years.",
+    "sha256": "8553f586a23038d03081c96280bb42e8a4904e159702fdc47ccffb04a86b6771"
+  },
+  {
+    "id": "mixer-cover",
+    "subject": "Warranties",
+    "entity": "Mixer",
+    "kind": "Certificates",
+    "text": "Product warranty certificate\nProduct: Mixer\nThe manufacturer covers defects in this kitchen mixer for one year.",
+    "sha256": "aa9578c2871d98c4310b6bba4bb260161d50a3ccb448f67dddd2587acdb43f2c"
+  },
+  {
+    "id": "porto-ticket",
+    "subject": "Travel",
+    "entity": "Porto",
+    "kind": "Flights",
+    "text": "Flight booking confirmation\nDestination: Porto\nThis confirms a booked passenger flight and itinerary.",
+    "sha256": "cefd13cb54bd9ca3f79e5c84d0928c401249102b9e2f3727fb82c6e4da0ae87e"
+  },
+  {
+    "id": "bergen-stay",
+    "subject": "Travel",
+    "entity": "Bergen",
+    "kind": "Hotels",
+    "text": "Hotel reservation confirmation\nDestination: Bergen\nThis confirms accommodation booked for the traveller.",
+    "sha256": "fb031b5fc988289e504216a84fa649f5c2c1a69a2bb1c0131a190781f8450259"
+  },
+  {
+    "id": "unidentified",
+    "subject": null,
+    "entity": null,
+    "kind": null,
+    "text": "Reference: 48319\nAmount: 417.00\nStatus: accepted\nNo description of the underlying record is provided.",
+    "sha256": "be54d9aa5266a14b2a0ed2835b95e9d4e9a1f2cc2b3b7d166f49e4749e320fa3"
+  },
+  {
+    "id": "combined-records",
+    "subject": null,
+    "entity": null,
+    "kind": null,
+    "text": "[Document has 2 pages.]\n[Page 1]\nUniversity diploma\nInstitution: Lake University\nCompletion of an engineering degree.\n[Page 2]\nFlight booking confirmation\nDestination: Porto\nA separate unrelated passenger booking.",
+    "sha256": "30d1d815cb2da41fc43d8e95f64a024f53373d0b70bf12c718ec668ff7395b9b"
+  }
+]

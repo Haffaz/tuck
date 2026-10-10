@@ -1,0 +1,154 @@
+{
+  "generated_at_unix": 1790592435,
+  "os": "27.0",
+  "pipeline": "filing-v3-examples",
+  "results": [
+    {
+      "automated_title_check": false,
+      "decision": {
+        "confident": true,
+        "folder": "Migration/AGENCY",
+        "language": {
+          "code": "en",
+          "message": "Recognized as English · supported by this Mac's model",
+          "name": "English",
+          "status": "supported"
+        },
+        "reason": "Folder checked. Original filename kept because the suggested name could not be verified.. Direct classification",
+        "title": ""
+      },
+      "expected_folder": "Migration/AGENCY",
+      "extracted_characters": 85,
+      "folder_correct": true,
+      "forbidden_title_claim": false,
+      "id": "bundle_bank",
+      "rendered_ocr": false,
+      "review": false,
+      "seconds": 2.997660792
+    },
+    {
+      "automated_title_check": false,
+      "decision": {
+        "confident": false,
+        "folder": "Needs Review",
+        "language": {
+          "code": "en",
+          "message": "Recognized as English · supported by this Mac's model",
+          "name": "English",
+          "status": "supported"
+        },
+        "reason": "Apple Intelligence could not complete folder selection (refused). Try Analyze again or review manually.",
+        "title": ""
+      },
+      "expected_folder": "Finances",
+      "extracted_characters": 98,
+      "folder_correct": false,
+      "forbidden_title_claim": false,
+      "id": "ordinary_bank",
+      "rendered_ocr": false,
+      "review": true,
+      "seconds": 2.097485666
+    },
+    {
+      "automated_title_check": true,
+      "decision": {
+        "confident": true,
+        "folder": "Finances",
+        "language": {
+          "code": "sv",
+          "message": "Recognized as Swedish · supported by this Mac's model",
+          "name": "Swedish",
+          "status": "supported"
+        },
+        "reason": "The document is a bank statement with no application association, which fits the Finances folder instruction.. Direct classification",
+        "title": "Bank Statement"
+      },
+      "expected_folder": "Finances",
+      "extracted_characters": 83,
+      "folder_correct": true,
+      "forbidden_title_claim": false,
+      "id": "swedish_bank",
+      "rendered_ocr": false,
+      "review": false,
+      "seconds": 2.550650792
+    },
+    {
+      "automated_title_check": false,
+      "decision": {
+        "confident": false,
+        "folder": "Needs Review",
+        "language": {
+          "code": "en",
+          "message": "Recognized as English · supported by this Mac's model",
+          "name": "English",
+          "status": "supported"
+        },
+        "reason": "The local model was uncertain. The document evidence shows a home insurance policy, which does not belong in the Home folder as it is a policy, not a bill.. Direct classification",
+        "title": ""
+      },
+      "expected_folder": "Insurance",
+      "extracted_characters": 100,
+      "folder_correct": false,
+      "forbidden_title_claim": false,
+      "id": "home_insurance",
+      "rendered_ocr": false,
+      "review": true,
+      "seconds": 2.710739416
+    },
+    {
+      "automated_title_check": true,
+      "decision": {
+        "confident": true,
+        "folder": "Home",
+        "language": {
+          "code": "en",
+          "message": "Recognized as English · supported by this Mac's model",
+          "name": "English",
+          "status": "supported"
+        },
+        "reason": "The document evidence includes a filename and a description that aligns with the instruction to keep household documents in the Home folder, specifically mentioning a residential electricity bill.. Direct classification",
+        "title": "Electricity Bill"
+      },
+      "expected_folder": "Home",
+      "extracted_characters": 89,
+      "folder_correct": true,
+      "forbidden_title_claim": false,
+      "id": "utility_bill",
+      "rendered_ocr": false,
+      "review": false,
+      "seconds": 2.68562575
+    },
+    {
+      "automated_title_check": true,
+      "decision": {
+        "confident": false,
+        "folder": "Needs Review",
+        "language": {
+          "code": "en",
+          "message": "Recognized as English · supported by this Mac's model",
+          "name": "English",
+          "status": "supported"
+        },
+        "reason": "The local model was uncertain. No verifiable document-type quote was found. Choose a folder manually.. Direct classification",
+        "title": ""
+      },
+      "expected_folder": "Needs Review",
+      "extracted_characters": 85,
+      "folder_correct": true,
+      "forbidden_title_claim": false,
+      "id": "insufficient_evidence",
+      "rendered_ocr": false,
+      "review": true,
+      "seconds": 1.29615925
+    }
+  ],
+  "scope": "Synthetic example-learning comparison, authored before the first live run. No personal documents.",
+  "summary": {
+    "automated_title_checks": 3,
+    "cases": 6,
+    "correct_folders": 4,
+    "forbidden_title_claims": 0,
+    "median_seconds": 2.618138271,
+    "review_count": 3
+  }
+}

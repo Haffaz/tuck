@@ -1,0 +1,20 @@
+{
+  "case": "en_employment_certificate_pdf",
+  "started": 1790855452.894985,
+  "seconds": 0.015313148498535156,
+  "request": {
+    "operation": "language",
+    "text": "[Document has 1 pages.]\n\n[Page 1]\nCERTIFICATE OF EMPLOYMENT\n\nhis is to certify that the holder is employed full-time as a software developer. This certificate confirms mployment and is not a salary statement or employment contract."
+  },
+  "response": {
+    "blocked": false,
+    "language": {
+      "code": "en",
+      "message": "Recognized as English · supported by this Mac's model",
+      "name": "English",
+      "status": "supported"
+    },
+    "text": "[Document has 1 pages.]\n\n[Page 1]\nCERTIFICATE OF EMPLOYMENT\n\nhis is to certify that the holder is employed full-time as a software developer. This certificate confirms mployment and is not a salary statement or employment contract."
+  },
+  "exit": 0
+}

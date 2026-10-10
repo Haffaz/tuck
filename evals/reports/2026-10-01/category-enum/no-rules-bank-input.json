@@ -1,0 +1,20 @@
+{
+  "document": {
+    "description": "A bank statement showing incoming and outgoing balances with transaction details.",
+    "evidence": [
+      "KONTOUTDRAG",
+      "Ingående saldo 5 000 kr. Insättningar 2 000 kr. Uttag 800 kr. Utgående saldo 6 200 kr. Kontohändelser redovisas nedan."
+    ],
+    "uncertainty": ""
+  },
+  "categories": [
+    "Migration/AGENCY",
+    "Migration",
+    "Finances",
+    "Work",
+    "Home",
+    "Insurance",
+    "Health"
+  ],
+  "noMatch": "Needs input"
+}

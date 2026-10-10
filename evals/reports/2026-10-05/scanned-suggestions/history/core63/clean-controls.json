@@ -1,0 +1,980 @@
+{
+  "completed": true,
+  "note": "Post-matrix controls: excludes injected policy, unclear amount and mixed records. Simulates accepting proposed rules in memory; no saves or moves.",
+  "runs": [
+    {
+      "decisions": [
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Income",
+            "language": null,
+            "reason": "Selected Income from the configured categories.",
+            "title": "Monthly salary payslip for September"
+          },
+          "employer": "Acme",
+          "id": "acme-september",
+          "proposedFolder": "Income",
+          "sourceUnchanged": true,
+          "subject": "Income"
+        },
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Income",
+            "language": null,
+            "reason": "Selected Income from the configured categories.",
+            "title": "Monthly salary payslip"
+          },
+          "employer": "Acme",
+          "id": "acme-october",
+          "proposedFolder": "Income",
+          "sourceUnchanged": true,
+          "subject": "Income"
+        },
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Income",
+            "language": null,
+            "reason": "Selected Income from the configured categories.",
+            "title": "Monthly salary payslip for September"
+          },
+          "employer": "Beta",
+          "id": "beta-salary",
+          "proposedFolder": "Income",
+          "sourceUnchanged": true,
+          "subject": "Income"
+        },
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Work",
+            "language": null,
+            "reason": "Selected Work from the configured categories.",
+            "title": "Employment contract permanent design position"
+          },
+          "employer": "Acme",
+          "id": "employment",
+          "proposedFolder": "Work",
+          "sourceUnchanged": true,
+          "subject": "Employment"
+        },
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Housing",
+            "language": null,
+            "reason": "Selected Housing from the configured categories.",
+            "title": "Residential tenancy agreement concerning renting an apartment"
+          },
+          "employer": null,
+          "id": "tenancy",
+          "proposedFolder": "Housing",
+          "sourceUnchanged": true,
+          "subject": "Housing"
+        },
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Insurance",
+            "language": null,
+            "reason": "Selected Insurance from the configured categories.",
+            "title": "Travel insurance certificate"
+          },
+          "employer": null,
+          "id": "travel-policy",
+          "proposedFolder": "Insurance",
+          "sourceUnchanged": true,
+          "subject": "Insurance"
+        },
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Income",
+            "language": null,
+            "reason": "Selected Income from the configured categories.",
+            "title": "Monthly salary payslip for September"
+          },
+          "employer": null,
+          "id": "salary-no-employer",
+          "proposedFolder": "Income",
+          "sourceUnchanged": true,
+          "subject": "Income"
+        }
+      ],
+      "depth": 1,
+      "guided": false,
+      "proposal": {
+        "assignments": [
+          {
+            "category": "Income",
+            "id": "d0000"
+          },
+          {
+            "category": "Income",
+            "id": "d0001"
+          },
+          {
+            "category": "Income",
+            "id": "d0002"
+          },
+          {
+            "category": "Work",
+            "id": "d0003"
+          },
+          {
+            "category": "Housing",
+            "id": "d0004"
+          },
+          {
+            "category": "Insurance",
+            "id": "d0005"
+          },
+          {
+            "category": "Income",
+            "id": "d0006"
+          }
+        ],
+        "ok": true,
+        "rules": [
+          {
+            "enabled": true,
+            "folder": "Housing",
+            "instruction": "File documents about Housing here. Required document scope: Residential tenancy agreement concerning renting an apartment. Match these document types, including equivalent names. Use a supported more specific child folder when available; otherwise use this broad subject."
+          },
+          {
+            "enabled": true,
+            "folder": "Income",
+            "instruction": "File documents about Income here. Required document scope: Monthly salary payslip for October 2026; Monthly salary payslip for September 2026. Match these document types, including equivalent names. Use a supported more specific child folder when available; otherwise use this broad subject."
+          },
+          {
+            "enabled": true,
+            "folder": "Insurance",
+            "instruction": "File documents about Insurance here. Required document scope: Travel insurance certificate. Match these document types, including equivalent names. Use a supported more specific child folder when available; otherwise use this broad subject."
+          },
+          {
+            "enabled": true,
+            "folder": "Work",
+            "instruction": "File documents about Work here. Required document scope: Employment contract: permanent design position from September 2026. Match these document types, including equivalent names. Use a supported more specific child folder when available; otherwise use this broad subject."
+          }
+        ]
+      }
+    },
+    {
+      "decisions": [
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Income",
+            "language": null,
+            "reason": "Selected Income from the configured categories.",
+            "title": "Monthly salary payslip for September"
+          },
+          "employer": "Acme",
+          "id": "acme-september",
+          "proposedFolder": "Income",
+          "sourceUnchanged": true,
+          "subject": "Income"
+        },
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Income",
+            "language": null,
+            "reason": "Selected Income from the configured categories.",
+            "title": "Monthly salary payslip"
+          },
+          "employer": "Acme",
+          "id": "acme-october",
+          "proposedFolder": "Income",
+          "sourceUnchanged": true,
+          "subject": "Income"
+        },
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Income",
+            "language": null,
+            "reason": "Selected Income from the configured categories.",
+            "title": "Monthly salary payslip for September"
+          },
+          "employer": "Beta",
+          "id": "beta-salary",
+          "proposedFolder": "Income",
+          "sourceUnchanged": true,
+          "subject": "Income"
+        },
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Employment",
+            "language": null,
+            "reason": "Selected Employment from the configured categories.",
+            "title": "Employment contract permanent design position"
+          },
+          "employer": "Acme",
+          "id": "employment",
+          "proposedFolder": "Employment",
+          "sourceUnchanged": true,
+          "subject": "Employment"
+        },
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Housing",
+            "language": null,
+            "reason": "Selected Housing from the configured categories.",
+            "title": "Residential tenancy agreement concerning renting an apartment"
+          },
+          "employer": null,
+          "id": "tenancy",
+          "proposedFolder": "Housing",
+          "sourceUnchanged": true,
+          "subject": "Housing"
+        },
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Insurance",
+            "language": null,
+            "reason": "Selected Insurance from the configured categories.",
+            "title": "Travel insurance certificate"
+          },
+          "employer": null,
+          "id": "travel-policy",
+          "proposedFolder": "Insurance",
+          "sourceUnchanged": true,
+          "subject": "Insurance"
+        },
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Income",
+            "language": null,
+            "reason": "Selected Income from the configured categories.",
+            "title": "Monthly salary payslip for September"
+          },
+          "employer": null,
+          "id": "salary-no-employer",
+          "proposedFolder": "Income",
+          "sourceUnchanged": true,
+          "subject": "Income"
+        }
+      ],
+      "depth": 1,
+      "guided": true,
+      "proposal": {
+        "assignments": [
+          {
+            "category": "Income",
+            "id": "d0000"
+          },
+          {
+            "category": "Income",
+            "id": "d0001"
+          },
+          {
+            "category": "Income",
+            "id": "d0002"
+          },
+          {
+            "category": "Employment",
+            "id": "d0003"
+          },
+          {
+            "category": "Housing",
+            "id": "d0004"
+          },
+          {
+            "category": "Insurance",
+            "id": "d0005"
+          },
+          {
+            "category": "Income",
+            "id": "d0006"
+          }
+        ],
+        "ok": true,
+        "rules": [
+          {
+            "enabled": true,
+            "folder": "Employment",
+            "instruction": "File documents about Employment here. Required document scope: Employment contract: permanent design position from September 2026. Match these document types, including equivalent names. Use a supported more specific child folder when available; otherwise use this broad subject."
+          },
+          {
+            "enabled": true,
+            "folder": "Housing",
+            "instruction": "File documents about Housing here. Required document scope: Residential tenancy agreement concerning renting an apartment. Match these document types, including equivalent names. Use a supported more specific child folder when available; otherwise use this broad subject."
+          },
+          {
+            "enabled": true,
+            "folder": "Income",
+            "instruction": "File documents about Income here. Required document scope: Monthly salary payslip for October 2026; Monthly salary payslip for September 2026. Match these document types, including equivalent names. Use a supported more specific child folder when available; otherwise use this broad subject."
+          },
+          {
+            "enabled": true,
+            "folder": "Insurance",
+            "instruction": "File documents about Insurance here. Required document scope: Travel insurance certificate. Match these document types, including equivalent names. Use a supported more specific child folder when available; otherwise use this broad subject."
+          }
+        ]
+      }
+    },
+    {
+      "decisions": [
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Income/Payslip",
+            "language": null,
+            "reason": "Selected Income/Payslip from the configured categories.",
+            "title": "Monthly salary payslip for September"
+          },
+          "employer": "Acme",
+          "id": "acme-september",
+          "proposedFolder": "Income/Payslip",
+          "sourceUnchanged": true,
+          "subject": "Income"
+        },
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Income/Payslip",
+            "language": null,
+            "reason": "Selected Income/Payslip from the configured categories.",
+            "title": "Monthly salary payslip for October"
+          },
+          "employer": "Acme",
+          "id": "acme-october",
+          "proposedFolder": "Income/Payslip",
+          "sourceUnchanged": true,
+          "subject": "Income"
+        },
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Income/Payslip",
+            "language": null,
+            "reason": "Selected Income/Payslip from the configured categories.",
+            "title": "Monthly salary payslip for September"
+          },
+          "employer": "Beta",
+          "id": "beta-salary",
+          "proposedFolder": "Income/Payslip",
+          "sourceUnchanged": true,
+          "subject": "Income"
+        },
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Work/Employment contract",
+            "language": null,
+            "reason": "Selected Work/Employment contract from the configured categories.",
+            "title": "Employment contract permanent design position"
+          },
+          "employer": "Acme",
+          "id": "employment",
+          "proposedFolder": "Work/Employment contract",
+          "sourceUnchanged": true,
+          "subject": "Employment"
+        },
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Housing/Residential tenancy agreement",
+            "language": null,
+            "reason": "Selected Housing/Residential tenancy agreement from the configured categories.",
+            "title": "Residential tenancy agreement concerning renting an apartment"
+          },
+          "employer": null,
+          "id": "tenancy",
+          "proposedFolder": "Housing/Residential tenancy agreement",
+          "sourceUnchanged": true,
+          "subject": "Housing"
+        },
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Insurance/Travel insurance certificate",
+            "language": null,
+            "reason": "Selected Insurance/Travel insurance certificate from the configured categories.",
+            "title": "Travel insurance certificate"
+          },
+          "employer": null,
+          "id": "travel-policy",
+          "proposedFolder": "Insurance/Travel insurance certificate",
+          "sourceUnchanged": true,
+          "subject": "Insurance"
+        },
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Income/Payslip",
+            "language": null,
+            "reason": "Selected Income/Payslip from the configured categories.",
+            "title": "Monthly salary payslip for September"
+          },
+          "employer": null,
+          "id": "salary-no-employer",
+          "proposedFolder": "Income/Payslip",
+          "sourceUnchanged": true,
+          "subject": "Income"
+        }
+      ],
+      "depth": 2,
+      "guided": false,
+      "proposal": {
+        "assignments": [
+          {
+            "category": "Income/Payslip",
+            "id": "d0000"
+          },
+          {
+            "category": "Income/Payslip",
+            "id": "d0001"
+          },
+          {
+            "category": "Income/Payslip",
+            "id": "d0002"
+          },
+          {
+            "category": "Work/Employment contract",
+            "id": "d0003"
+          },
+          {
+            "category": "Housing/Residential tenancy agreement",
+            "id": "d0004"
+          },
+          {
+            "category": "Insurance/Travel insurance certificate",
+            "id": "d0005"
+          },
+          {
+            "category": "Income/Payslip",
+            "id": "d0006"
+          }
+        ],
+        "ok": true,
+        "rules": [
+          {
+            "enabled": true,
+            "folder": "Housing/Residential tenancy agreement",
+            "instruction": "File documents about Housing/Residential tenancy agreement here. Required document scope: Residential tenancy agreement concerning renting an apartment. Match these document types, including equivalent names. Each subgroup must match a distinguishing source fact, such as a named subject, organization, project, product, location or document type. Names require source evidence; document type synonyms are allowed."
+          },
+          {
+            "enabled": true,
+            "folder": "Income/Payslip",
+            "instruction": "File documents about Income/Payslip here. Required document scope: Monthly salary payslip for October 2026; Monthly salary payslip for September 2026. Match these document types, including equivalent names. Each subgroup must match a distinguishing source fact, such as a named subject, organization, project, product, location or document type. Names require source evidence; document type synonyms are allowed."
+          },
+          {
+            "enabled": true,
+            "folder": "Insurance/Travel insurance certificate",
+            "instruction": "File documents about Insurance/Travel insurance certificate here. Required document scope: Travel insurance certificate. Match these document types, including equivalent names. Each subgroup must match a distinguishing source fact, such as a named subject, organization, project, product, location or document type. Names require source evidence; document type synonyms are allowed."
+          },
+          {
+            "enabled": true,
+            "folder": "Work/Employment contract",
+            "instruction": "File documents about Work/Employment contract here. Required document scope: Employment contract: permanent design position from September 2026. Match these document types, including equivalent names. Each subgroup must match a distinguishing source fact, such as a named subject, organization, project, product, location or document type. Names require source evidence; document type synonyms are allowed."
+          }
+        ]
+      }
+    },
+    {
+      "decisions": [
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Income/Acme Corporation",
+            "language": null,
+            "reason": "Selected Income/Acme Corporation from the configured categories.",
+            "title": "Monthly salary payslip for September"
+          },
+          "employer": "Acme",
+          "id": "acme-september",
+          "proposedFolder": "Income/Acme Corporation",
+          "sourceUnchanged": true,
+          "subject": "Income"
+        },
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Income/Acme Corporation",
+            "language": null,
+            "reason": "Selected Income/Acme Corporation from the configured categories.",
+            "title": "Monthly salary payslip for October"
+          },
+          "employer": "Acme",
+          "id": "acme-october",
+          "proposedFolder": "Income/Acme Corporation",
+          "sourceUnchanged": true,
+          "subject": "Income"
+        },
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Income/Beta Studio",
+            "language": null,
+            "reason": "Selected Income/Beta Studio from the configured categories.",
+            "title": "Monthly salary payslip for Beta Studio"
+          },
+          "employer": "Beta",
+          "id": "beta-salary",
+          "proposedFolder": "Income/Beta Studio",
+          "sourceUnchanged": true,
+          "subject": "Income"
+        },
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Employment/Acme Corporation",
+            "language": null,
+            "reason": "Selected Employment/Acme Corporation from the configured categories.",
+            "title": "Employment contract permanent design position from September 2026"
+          },
+          "employer": "Acme",
+          "id": "employment",
+          "proposedFolder": "Employment/Acme Corporation",
+          "sourceUnchanged": true,
+          "subject": "Employment"
+        },
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Housing/Residential tenancy agreement",
+            "language": null,
+            "reason": "Selected Housing/Residential tenancy agreement from the configured categories.",
+            "title": "Residential tenancy agreement concerning renting an apartment"
+          },
+          "employer": null,
+          "id": "tenancy",
+          "proposedFolder": "Housing/Residential tenancy agreement",
+          "sourceUnchanged": true,
+          "subject": "Housing"
+        },
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Insurance",
+            "language": null,
+            "reason": "Selected Insurance from the configured categories.",
+            "title": "Travel insurance certificate"
+          },
+          "employer": null,
+          "id": "travel-policy",
+          "proposedFolder": "Insurance",
+          "sourceUnchanged": true,
+          "subject": "Insurance"
+        },
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Income",
+            "language": null,
+            "reason": "Selected Income from the configured categories.",
+            "title": "Monthly salary payslip"
+          },
+          "employer": null,
+          "id": "salary-no-employer",
+          "proposedFolder": "Income",
+          "sourceUnchanged": true,
+          "subject": "Income"
+        }
+      ],
+      "depth": 2,
+      "guided": true,
+      "proposal": {
+        "assignments": [
+          {
+            "category": "Income/Acme Corporation",
+            "id": "d0000"
+          },
+          {
+            "category": "Income/Acme Corporation",
+            "id": "d0001"
+          },
+          {
+            "category": "Income/Beta Studio",
+            "id": "d0002"
+          },
+          {
+            "category": "Employment/Acme Corporation",
+            "id": "d0003"
+          },
+          {
+            "category": "Housing/Residential tenancy agreement",
+            "id": "d0004"
+          },
+          {
+            "category": "Insurance",
+            "id": "d0005"
+          },
+          {
+            "category": "Income",
+            "id": "d0006"
+          }
+        ],
+        "ok": true,
+        "rules": [
+          {
+            "enabled": true,
+            "folder": "Employment/Acme Corporation",
+            "instruction": "File documents about Employment/Acme Corporation here. Required document scope: Employment contract: permanent design position from September 2026. Match these document types, including equivalent names. Required source details: (Employer: Acme Corporation). Each subgroup must match a distinguishing source fact, such as a named subject, organization, project, product, location or document type. Names require source evidence; document type synonyms are allowed."
+          },
+          {
+            "enabled": true,
+            "folder": "Housing/Residential tenancy agreement",
+            "instruction": "File documents about Housing/Residential tenancy agreement here. Required document scope: Residential tenancy agreement concerning renting an apartment. Match these document types, including equivalent names. Each subgroup must match a distinguishing source fact, such as a named subject, organization, project, product, location or document type. Names require source evidence; document type synonyms are allowed."
+          },
+          {
+            "enabled": true,
+            "folder": "Income",
+            "instruction": "File documents about Income here. Required document scope: Monthly salary payslip for September 2026. Match these document types, including equivalent names. Use a supported more specific child folder when available; otherwise use this broad subject."
+          },
+          {
+            "enabled": true,
+            "folder": "Income/Acme Corporation",
+            "instruction": "File documents about Income/Acme Corporation here. Required document scope: Monthly salary payslip for October 2026; Monthly salary payslip for September 2026. Match these document types, including equivalent names. Required source details: (Employer: Acme Corporation). Each subgroup must match a distinguishing source fact, such as a named subject, organization, project, product, location or document type. Names require source evidence; document type synonyms are allowed."
+          },
+          {
+            "enabled": true,
+            "folder": "Income/Beta Studio",
+            "instruction": "File documents about Income/Beta Studio here. Required document scope: Monthly salary payslip for September 2026. Match these document types, including equivalent names. Required source details: (Employer: Beta Studio). Each subgroup must match a distinguishing source fact, such as a named subject, organization, project, product, location or document type. Names require source evidence; document type synonyms are allowed."
+          },
+          {
+            "enabled": true,
+            "folder": "Insurance",
+            "instruction": "File documents about Insurance here. Required document scope: Travel insurance certificate. Match these document types, including equivalent names. Use a supported more specific child folder when available; otherwise use this broad subject."
+          }
+        ]
+      }
+    },
+    {
+      "decisions": [
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Income/Payslip",
+            "language": null,
+            "reason": "Selected Income/Payslip from the configured categories.",
+            "title": "Monthly salary payslip for September"
+          },
+          "employer": "Acme",
+          "id": "acme-september",
+          "proposedFolder": "Income/Payslip",
+          "sourceUnchanged": true,
+          "subject": "Income"
+        },
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Income/Payslip",
+            "language": null,
+            "reason": "Selected Income/Payslip from the configured categories.",
+            "title": "Monthly salary payslip for October"
+          },
+          "employer": "Acme",
+          "id": "acme-october",
+          "proposedFolder": "Income/Payslip",
+          "sourceUnchanged": true,
+          "subject": "Income"
+        },
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Income/Payslip",
+            "language": null,
+            "reason": "Selected Income/Payslip from the configured categories.",
+            "title": "Monthly salary payslip for September"
+          },
+          "employer": "Beta",
+          "id": "beta-salary",
+          "proposedFolder": "Income/Payslip",
+          "sourceUnchanged": true,
+          "subject": "Income"
+        },
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Work/Employment contract",
+            "language": null,
+            "reason": "Selected Work/Employment contract from the configured categories.",
+            "title": "Employment contract permanent design position"
+          },
+          "employer": "Acme",
+          "id": "employment",
+          "proposedFolder": "Work/Employment contract",
+          "sourceUnchanged": true,
+          "subject": "Employment"
+        },
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Housing/Residential tenancy agreement",
+            "language": null,
+            "reason": "Selected Housing/Residential tenancy agreement from the configured categories.",
+            "title": "Residential tenancy agreement concerning renting an apartment"
+          },
+          "employer": null,
+          "id": "tenancy",
+          "proposedFolder": "Housing/Residential tenancy agreement",
+          "sourceUnchanged": true,
+          "subject": "Housing"
+        },
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Insurance/Travel insurance certificate",
+            "language": null,
+            "reason": "Selected Insurance/Travel insurance certificate from the configured categories.",
+            "title": "Travel insurance certificate"
+          },
+          "employer": null,
+          "id": "travel-policy",
+          "proposedFolder": "Insurance/Travel insurance certificate",
+          "sourceUnchanged": true,
+          "subject": "Insurance"
+        },
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Income/Payslip",
+            "language": null,
+            "reason": "Selected Income/Payslip from the configured categories.",
+            "title": "Monthly salary payslip for September"
+          },
+          "employer": null,
+          "id": "salary-no-employer",
+          "proposedFolder": "Income/Payslip",
+          "sourceUnchanged": true,
+          "subject": "Income"
+        }
+      ],
+      "depth": 3,
+      "guided": false,
+      "proposal": {
+        "assignments": [
+          {
+            "category": "Income/Payslip",
+            "id": "d0000"
+          },
+          {
+            "category": "Income/Payslip",
+            "id": "d0001"
+          },
+          {
+            "category": "Income/Payslip",
+            "id": "d0002"
+          },
+          {
+            "category": "Work/Employment contract",
+            "id": "d0003"
+          },
+          {
+            "category": "Housing/Residential tenancy agreement",
+            "id": "d0004"
+          },
+          {
+            "category": "Insurance/Travel insurance certificate",
+            "id": "d0005"
+          },
+          {
+            "category": "Income/Payslip",
+            "id": "d0006"
+          }
+        ],
+        "ok": true,
+        "rules": [
+          {
+            "enabled": true,
+            "folder": "Housing/Residential tenancy agreement",
+            "instruction": "File documents about Housing/Residential tenancy agreement here. Required document scope: Residential tenancy agreement concerning renting an apartment. Match these document types, including equivalent names. Each subgroup must match a distinguishing source fact, such as a named subject, organization, project, product, location or document type. Names require source evidence; document type synonyms are allowed."
+          },
+          {
+            "enabled": true,
+            "folder": "Income/Payslip",
+            "instruction": "File documents about Income/Payslip here. Required document scope: Monthly salary payslip for October 2026; Monthly salary payslip for September 2026. Match these document types, including equivalent names. Each subgroup must match a distinguishing source fact, such as a named subject, organization, project, product, location or document type. Names require source evidence; document type synonyms are allowed."
+          },
+          {
+            "enabled": true,
+            "folder": "Insurance/Travel insurance certificate",
+            "instruction": "File documents about Insurance/Travel insurance certificate here. Required document scope: Travel insurance certificate. Match these document types, including equivalent names. Each subgroup must match a distinguishing source fact, such as a named subject, organization, project, product, location or document type. Names require source evidence; document type synonyms are allowed."
+          },
+          {
+            "enabled": true,
+            "folder": "Work/Employment contract",
+            "instruction": "File documents about Work/Employment contract here. Required document scope: Employment contract: permanent design position from September 2026. Match these document types, including equivalent names. Each subgroup must match a distinguishing source fact, such as a named subject, organization, project, product, location or document type. Names require source evidence; document type synonyms are allowed."
+          }
+        ]
+      }
+    },
+    {
+      "decisions": [
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Income/Acme Corporation/Payslips",
+            "language": null,
+            "reason": "Selected Income/Acme Corporation/Payslips from the configured categories.",
+            "title": "Monthly salary payslip for September"
+          },
+          "employer": "Acme",
+          "id": "acme-september",
+          "proposedFolder": "Income/Acme Corporation/Payslips",
+          "sourceUnchanged": true,
+          "subject": "Income"
+        },
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Income/Acme Corporation/Payslips",
+            "language": null,
+            "reason": "Selected Income/Acme Corporation/Payslips from the configured categories.",
+            "title": "Monthly salary payslip for October"
+          },
+          "employer": "Acme",
+          "id": "acme-october",
+          "proposedFolder": "Income/Acme Corporation/Payslips",
+          "sourceUnchanged": true,
+          "subject": "Income"
+        },
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Income/Beta Studio/Payslips",
+            "language": null,
+            "reason": "Selected Income/Beta Studio/Payslips from the configured categories.",
+            "title": "Monthly salary payslip for Beta Studio"
+          },
+          "employer": "Beta",
+          "id": "beta-salary",
+          "proposedFolder": "Income/Beta Studio/Payslips",
+          "sourceUnchanged": true,
+          "subject": "Income"
+        },
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Work",
+            "language": null,
+            "reason": "Selected Work from the configured categories.",
+            "title": "Employment contract permanent design position"
+          },
+          "employer": "Acme",
+          "id": "employment",
+          "proposedFolder": "Work",
+          "sourceUnchanged": true,
+          "subject": "Employment"
+        },
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Housing/Residential tenancy agreement",
+            "language": null,
+            "reason": "Selected Housing/Residential tenancy agreement from the configured categories.",
+            "title": "Residential tenancy agreement concerning renting an apartment"
+          },
+          "employer": null,
+          "id": "tenancy",
+          "proposedFolder": "Housing/Residential tenancy agreement",
+          "sourceUnchanged": true,
+          "subject": "Housing"
+        },
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Insurance",
+            "language": null,
+            "reason": "Selected Insurance from the configured categories.",
+            "title": "Travel insurance certificate"
+          },
+          "employer": null,
+          "id": "travel-policy",
+          "proposedFolder": "Insurance",
+          "sourceUnchanged": true,
+          "subject": "Insurance"
+        },
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Income",
+            "language": null,
+            "reason": "Selected Income from the configured categories.",
+            "title": "Monthly salary payslip"
+          },
+          "employer": null,
+          "id": "salary-no-employer",
+          "proposedFolder": "Income",
+          "sourceUnchanged": true,
+          "subject": "Income"
+        }
+      ],
+      "depth": 3,
+      "guided": true,
+      "proposal": {
+        "assignments": [
+          {
+            "category": "Income/Acme Corporation/Payslips",
+            "id": "d0000"
+          },
+          {
+            "category": "Income/Acme Corporation/Payslips",
+            "id": "d0001"
+          },
+          {
+            "category": "Income/Beta Studio/Payslips",
+            "id": "d0002"
+          },
+          {
+            "category": "Work",
+            "id": "d0003"
+          },
+          {
+            "category": "Housing/Residential tenancy agreement",
+            "id": "d0004"
+          },
+          {
+            "category": "Insurance",
+            "id": "d0005"
+          },
+          {
+            "category": "Income",
+            "id": "d0006"
+          }
+        ],
+        "ok": true,
+        "rules": [
+          {
+            "enabled": true,
+            "folder": "Housing/Residential tenancy agreement",
+            "instruction": "File documents about Housing/Residential tenancy agreement here. Required document scope: Residential tenancy agreement concerning renting an apartment. Match these document types, including equivalent names. Each subgroup must match a distinguishing source fact, such as a named subject, organization, project, product, location or document type. Names require source evidence; document type synonyms are allowed."
+          },
+          {
+            "enabled": true,
+            "folder": "Income",
+            "instruction": "File documents about Income here. Required document scope: Monthly salary payslip for September 2026. Match these document types, including equivalent names. Use a supported more specific child folder when available; otherwise use this broad subject."
+          },
+          {
+            "enabled": true,
+            "folder": "Income/Acme Corporation/Payslips",
+            "instruction": "File documents about Income/Acme Corporation/Payslips here. Required document scope: Monthly salary payslip for October 2026; Monthly salary payslip for September 2026. Match these document types, including equivalent names. Required source details: (Employer: Acme Corporation). Each subgroup must match a distinguishing source fact, such as a named subject, organization, project, product, location or document type. Names require source evidence; document type synonyms are allowed."
+          },
+          {
+            "enabled": true,
+            "folder": "Income/Beta Studio/Payslips",
+            "instruction": "File documents about Income/Beta Studio/Payslips here. Required document scope: Monthly salary payslip for September 2026. Match these document types, including equivalent names. Required source details: (Employer: Beta Studio). Each subgroup must match a distinguishing source fact, such as a named subject, organization, project, product, location or document type. Names require source evidence; document type synonyms are allowed."
+          },
+          {
+            "enabled": true,
+            "folder": "Insurance",
+            "instruction": "File documents about Insurance here. Required document scope: Travel insurance certificate. Match these document types, including equivalent names. Use a supported more specific child folder when available; otherwise use this broad subject."
+          },
+          {
+            "enabled": true,
+            "folder": "Work",
+            "instruction": "File documents about Work here. Required document scope: Employment contract: permanent design position from September 2026. Match these document types, including equivalent names. Use a supported more specific child folder when available; otherwise use this broad subject."
+          }
+        ]
+      }
+    }
+  ]
+}

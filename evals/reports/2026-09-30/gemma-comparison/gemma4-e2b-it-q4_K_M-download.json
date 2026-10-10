@@ -1,0 +1,29 @@
+{
+  "seconds": 82.62958466698183,
+  "model": {
+    "name": "gemma4:e2b-it-q4_K_M",
+    "model": "gemma4:e2b-it-q4_K_M",
+    "modified_at": "2026-09-30T21:36:14.44514152+02:00",
+    "size": 4587156505,
+    "digest": "b37049369adfe3d2b653af0ab301a062ca5cbe96ace6aa0d3f2559ee9b563fc2",
+    "details": {
+      "parent_model": "gemma4-validation-20260929:e2b-imatrix-attention-q6-q8-draft2",
+      "format": "gguf",
+      "family": "gemma4",
+      "families": [
+        "gemma4"
+      ],
+      "parameter_size": "4.6B",
+      "quantization_level": "Q4_K_M",
+      "context_length": 131072,
+      "embedding_length": 1536
+    },
+    "capabilities": [
+      "completion",
+      "vision",
+      "audio",
+      "tools",
+      "thinking"
+    ]
+  }
+}

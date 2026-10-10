@@ -1,0 +1,20 @@
+{
+  "case": "sv_residence_card",
+  "started": 1790855409.895205,
+  "seconds": 0.09650993347167969,
+  "request": {
+    "operation": "language",
+    "text": "UPPEHÅLLSTILLSTÅNDSKORT\nMigrationsverket. Tillståndstyp: permanent uppehållstillstånd. Kortet visar att innehavaren har rätt att bo i Sverige."
+  },
+  "response": {
+    "blocked": false,
+    "language": {
+      "code": "sv",
+      "message": "Recognized as Swedish · supported by this Mac's model",
+      "name": "Swedish",
+      "status": "supported"
+    },
+    "text": "UPPEHÅLLSTILLSTÅNDSKORT\nMigrationsverket. Tillståndstyp: permanent uppehållstillstånd. Kortet visar att innehavaren har rätt att bo i Sverige."
+  },
+  "exit": 0
+}

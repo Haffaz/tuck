@@ -1,0 +1,14 @@
+{
+  "fixture_sha256": "acc973d4f7bc32794c4340fffc61635caffdb3cff90a1f408accb29ed326a581",
+  "baseline_source_sha256": "fc8c082622d750c7582e73ded6052029fa9d72ea49cc4cd6ae0c45148df9787c",
+  "support_source_sha256": "899dd57c2f2ff98e4d0d9cd6f357c5cc7d8d9d9be05a31343e63a7d3a67c2e7b",
+  "baseline_helper_sha256": "4209bca2b00e1c823d2772af7236bc68b488e66e6fc92610c1e461811206cb68",
+  "candidate_helper_sha256": {
+    "v1": "7719a1a204d20398bf4b4e24e5ea142d9174e94297ae89f977143b7a44441128",
+    "v2": "b300fea0247d12130b894ebd206cf4c31c4eea0a8f61a89d2aac94dc75757c87",
+    "v3": "38c7d8214675d58fcb4c6edc40effb53aa2f87d08fdd523432de502a13ba7a39"
+  },
+  "installed_pipeline": "filing-v5",
+  "production_sources_unchanged": true,
+  "personal_files_moved": false
+}

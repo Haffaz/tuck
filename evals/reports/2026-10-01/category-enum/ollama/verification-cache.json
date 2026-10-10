@@ -1,0 +1,128 @@
+{
+  "sv_residence_card|Migration": {
+    "response": {
+      "supported": true
+    },
+    "seconds": 1.5866594999999961
+  },
+  "sv_bank_statement|Finances": {
+    "response": {
+      "supported": true
+    },
+    "seconds": 0.357568624999999
+  },
+  "sv_payslip|Finances": {
+    "response": {
+      "supported": false
+    },
+    "seconds": 0.35984066599999665
+  },
+  "sv_tenancy|Home": {
+    "response": {
+      "supported": true
+    },
+    "seconds": 0.3636929999999978
+  },
+  "sv_home_insurance|Insurance": {
+    "response": {
+      "supported": true
+    },
+    "seconds": 0.3599122500000078
+  },
+  "sv_medical_certificate|Health": {
+    "response": {
+      "supported": true
+    },
+    "seconds": 0.3478364160000069
+  },
+  "en_agency_attachment|Migration/AGENCY": {
+    "response": {
+      "supported": true
+    },
+    "seconds": 0.3535954579999867
+  },
+  "en_electricity_bill|Finances": {
+    "response": {
+      "supported": false
+    },
+    "seconds": 0.3241753749999958
+  },
+  "en_injected_insurance|Insurance": {
+    "response": {
+      "supported": true
+    },
+    "seconds": 0.3363513339999997
+  },
+  "en_employment_certificate|Work": {
+    "response": {
+      "supported": true
+    },
+    "seconds": 0.36873233299999697
+  },
+  "sv_residence_card_image|Migration/AGENCY": {
+    "response": {
+      "supported": false
+    },
+    "seconds": 0.3615124589999965
+  },
+  "sv_home_insurance_image|Insurance": {
+    "response": {
+      "supported": true
+    },
+    "seconds": 0.3588084579999986
+  },
+  "en_employment_certificate_pdf|Work": {
+    "response": {
+      "supported": false
+    },
+    "seconds": 0.3607836249999963
+  },
+  "en_later_page_maintenance|Equipment": {
+    "response": {
+      "supported": true
+    },
+    "seconds": 0.30172145800000294
+  },
+  "sv_residence_card|Migration/AGENCY": {
+    "response": {
+      "supported": false
+    },
+    "seconds": 0.35467950000000315
+  },
+  "sv_medical_certificate|Work": {
+    "response": {
+      "supported": false
+    },
+    "seconds": 0.3564232080000096
+  },
+  "ambiguous_fragment|Migration/AGENCY": {
+    "response": {
+      "supported": false
+    },
+    "seconds": 0.3540002499999986
+  },
+  "ambiguous_fragment|Migration": {
+    "response": {
+      "supported": false
+    },
+    "seconds": 0.3375625420000006
+  },
+  "ambiguous_fragment|Home": {
+    "response": {
+      "supported": false
+    },
+    "seconds": 0.33582070799999997
+  },
+  "en_electricity_bill|Home": {
+    "response": {
+      "supported": false
+    },
+    "seconds": 0.3444061250000061
+  },
+  "sv_home_insurance_image|Home": {
+    "response": {
+      "supported": false
+    },
+    "seconds": 0.34617000000000075
+  }
+}

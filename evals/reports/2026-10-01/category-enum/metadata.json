@@ -1,0 +1,7 @@
+{
+  "scope": "Same 16 synthetic fixtures; no personal documents or file moves. Production source unchanged.",
+  "baseline": "evals/reports/2026-10-01/refusal-investigation/approved-production.json",
+  "baselineHelperSHA256": "1edb2ac7ea2adf60c063f93d2773276c0a3a675c19ffd582d648327067f986cb",
+  "candidateHelperSHA256": "5bc0d1bb2a14fc576d5cb6038ce9466a15ec0d8ed9e864e39b2260276207c47b",
+  "alignedExampleHelperSHA256": "02e61b1a7d0794779cf8f3a06142509b2821559be6b0a451b7477d0d8570e709"
+}

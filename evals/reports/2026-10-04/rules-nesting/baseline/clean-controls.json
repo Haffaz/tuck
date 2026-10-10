@@ -1,0 +1,990 @@
+{
+  "completed": true,
+  "note": "Post-matrix controls: excludes injected policy, unclear amount and mixed records. Simulates accepting proposed rules in memory; no saves or moves.",
+  "runs": [
+    {
+      "decisions": [
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Income",
+            "language": null,
+            "reason": "Selected Income from the configured categories.",
+            "title": "Payslip - Monthly salary"
+          },
+          "employer": "Acme",
+          "id": "acme-september",
+          "proposedFolder": "Income",
+          "sourceUnchanged": true,
+          "subject": "Income"
+        },
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Income",
+            "language": null,
+            "reason": "Selected Income from the configured categories.",
+            "title": "Payslip - Monthly salary"
+          },
+          "employer": "Acme",
+          "id": "acme-october",
+          "proposedFolder": "Income",
+          "sourceUnchanged": true,
+          "subject": "Income"
+        },
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Income",
+            "language": null,
+            "reason": "Selected Income from the configured categories.",
+            "title": "Payslip - Monthly salary"
+          },
+          "employer": "Beta",
+          "id": "beta-salary",
+          "proposedFolder": "Income",
+          "sourceUnchanged": true,
+          "subject": "Income"
+        },
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Income",
+            "language": null,
+            "reason": "Selected Income from the configured categories.",
+            "title": "Employment contract - Permanent employment as a designer"
+          },
+          "employer": "Acme",
+          "id": "employment",
+          "proposedFolder": "Housing",
+          "sourceUnchanged": true,
+          "subject": "Employment"
+        },
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Housing",
+            "language": null,
+            "reason": "Selected Housing from the configured categories.",
+            "title": "Residential tenancy agreement renting an apartment"
+          },
+          "employer": null,
+          "id": "tenancy",
+          "proposedFolder": "Housing",
+          "sourceUnchanged": true,
+          "subject": "Housing"
+        },
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Insurance",
+            "language": null,
+            "reason": "Selected Insurance from the configured categories.",
+            "title": "Travel insurance certificate"
+          },
+          "employer": null,
+          "id": "travel-policy",
+          "proposedFolder": "Insurance",
+          "sourceUnchanged": true,
+          "subject": "Insurance"
+        },
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Income",
+            "language": null,
+            "reason": "Selected Income from the configured categories.",
+            "title": "Payslip - Monthly salary"
+          },
+          "employer": null,
+          "id": "salary-no-employer",
+          "proposedFolder": "Income",
+          "sourceUnchanged": true,
+          "subject": "Income"
+        }
+      ],
+      "depth": 1,
+      "guided": false,
+      "proposal": {
+        "assignments": [
+          {
+            "category": "Income",
+            "id": "d0000"
+          },
+          {
+            "category": "Income",
+            "id": "d0001"
+          },
+          {
+            "category": "Income",
+            "id": "d0002"
+          },
+          {
+            "category": "Housing",
+            "id": "d0003"
+          },
+          {
+            "category": "Housing",
+            "id": "d0004"
+          },
+          {
+            "category": "Insurance",
+            "id": "d0005"
+          },
+          {
+            "category": "Income",
+            "id": "d0006"
+          }
+        ],
+        "ok": true,
+        "rules": [
+          {
+            "enabled": true,
+            "folder": "Housing",
+            "instruction": "File documents about Housing here. Examples: Employment contract: Permanent employment as a designer; Residential tenancy agreement: renting an apartment."
+          },
+          {
+            "enabled": true,
+            "folder": "Income",
+            "instruction": "File documents about Income here. Examples: Payslip - Monthly salary."
+          },
+          {
+            "enabled": true,
+            "folder": "Insurance",
+            "instruction": "File documents about Insurance here. Examples: Travel insurance certificate."
+          }
+        ]
+      }
+    },
+    {
+      "decisions": [
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Income",
+            "language": null,
+            "reason": "Selected Income from the configured categories.",
+            "title": "Payslip - Monthly salary"
+          },
+          "employer": "Acme",
+          "id": "acme-september",
+          "proposedFolder": "Income",
+          "sourceUnchanged": true,
+          "subject": "Income"
+        },
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Income",
+            "language": null,
+            "reason": "Selected Income from the configured categories.",
+            "title": "Payslip - Monthly salary"
+          },
+          "employer": "Acme",
+          "id": "acme-october",
+          "proposedFolder": "Income",
+          "sourceUnchanged": true,
+          "subject": "Income"
+        },
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Income",
+            "language": null,
+            "reason": "Selected Income from the configured categories.",
+            "title": "Payslip - Monthly salary"
+          },
+          "employer": "Beta",
+          "id": "beta-salary",
+          "proposedFolder": "Income",
+          "sourceUnchanged": true,
+          "subject": "Income"
+        },
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Employment",
+            "language": null,
+            "reason": "Selected Employment from the configured categories.",
+            "title": "Employment contract Permanent employment as a designer"
+          },
+          "employer": "Acme",
+          "id": "employment",
+          "proposedFolder": "Employment",
+          "sourceUnchanged": true,
+          "subject": "Employment"
+        },
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Housing",
+            "language": null,
+            "reason": "Selected Housing from the configured categories.",
+            "title": "Residential tenancy agreement renting an apartment"
+          },
+          "employer": null,
+          "id": "tenancy",
+          "proposedFolder": "Housing",
+          "sourceUnchanged": true,
+          "subject": "Housing"
+        },
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Insurance",
+            "language": null,
+            "reason": "Selected Insurance from the configured categories.",
+            "title": "Travel insurance certificate"
+          },
+          "employer": null,
+          "id": "travel-policy",
+          "proposedFolder": "Insurance",
+          "sourceUnchanged": true,
+          "subject": "Insurance"
+        },
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Income",
+            "language": null,
+            "reason": "Selected Income from the configured categories.",
+            "title": "Payslip - Monthly salary"
+          },
+          "employer": null,
+          "id": "salary-no-employer",
+          "proposedFolder": "Income",
+          "sourceUnchanged": true,
+          "subject": "Income"
+        }
+      ],
+      "depth": 1,
+      "guided": true,
+      "proposal": {
+        "assignments": [
+          {
+            "category": "Income",
+            "id": "d0000"
+          },
+          {
+            "category": "Income",
+            "id": "d0001"
+          },
+          {
+            "category": "Income",
+            "id": "d0002"
+          },
+          {
+            "category": "Employment",
+            "id": "d0003"
+          },
+          {
+            "category": "Housing",
+            "id": "d0004"
+          },
+          {
+            "category": "Insurance",
+            "id": "d0005"
+          },
+          {
+            "category": "Income",
+            "id": "d0006"
+          }
+        ],
+        "ok": true,
+        "rules": [
+          {
+            "enabled": true,
+            "folder": "Employment",
+            "instruction": "File documents about Employment here. Examples: Employment contract: Permanent employment as a designer."
+          },
+          {
+            "enabled": true,
+            "folder": "Housing",
+            "instruction": "File documents about Housing here. Examples: Residential tenancy agreement: renting an apartment."
+          },
+          {
+            "enabled": true,
+            "folder": "Income",
+            "instruction": "File documents about Income here. Examples: Payslip - Monthly salary."
+          },
+          {
+            "enabled": true,
+            "folder": "Insurance",
+            "instruction": "File documents about Insurance here. Examples: Travel insurance certificate."
+          }
+        ]
+      }
+    },
+    {
+      "decisions": [
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Income",
+            "language": null,
+            "reason": "Selected Income from the configured categories.",
+            "title": "Payslip - Monthly salary"
+          },
+          "employer": "Acme",
+          "id": "acme-september",
+          "proposedFolder": "Income/Acme",
+          "sourceUnchanged": true,
+          "subject": "Income"
+        },
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Income",
+            "language": null,
+            "reason": "Selected Income from the configured categories.",
+            "title": "Payslip - Monthly salary"
+          },
+          "employer": "Acme",
+          "id": "acme-october",
+          "proposedFolder": "Income/Acme",
+          "sourceUnchanged": true,
+          "subject": "Income"
+        },
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Income",
+            "language": null,
+            "reason": "Selected Income from the configured categories.",
+            "title": "Payslip - Monthly salary"
+          },
+          "employer": "Beta",
+          "id": "beta-salary",
+          "proposedFolder": "Income/Beta",
+          "sourceUnchanged": true,
+          "subject": "Income"
+        },
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Income",
+            "language": null,
+            "reason": "Selected Income from the configured categories.",
+            "title": "Employment contract Permanent employment as a designer"
+          },
+          "employer": "Acme",
+          "id": "employment",
+          "proposedFolder": "Income",
+          "sourceUnchanged": true,
+          "subject": "Employment"
+        },
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Housing",
+            "language": null,
+            "reason": "Selected Housing from the configured categories.",
+            "title": "Residential tenancy agreement renting an apartment"
+          },
+          "employer": null,
+          "id": "tenancy",
+          "proposedFolder": "Housing",
+          "sourceUnchanged": true,
+          "subject": "Housing"
+        },
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Insurance",
+            "language": null,
+            "reason": "Selected Insurance from the configured categories.",
+            "title": "Travel insurance certificate"
+          },
+          "employer": null,
+          "id": "travel-policy",
+          "proposedFolder": "Insurance",
+          "sourceUnchanged": true,
+          "subject": "Insurance"
+        },
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Income",
+            "language": null,
+            "reason": "Selected Income from the configured categories.",
+            "title": "Payslip - Monthly salary"
+          },
+          "employer": null,
+          "id": "salary-no-employer",
+          "proposedFolder": "Income",
+          "sourceUnchanged": true,
+          "subject": "Income"
+        }
+      ],
+      "depth": 2,
+      "guided": false,
+      "proposal": {
+        "assignments": [
+          {
+            "category": "Income/Acme",
+            "id": "d0000"
+          },
+          {
+            "category": "Income/Acme",
+            "id": "d0001"
+          },
+          {
+            "category": "Income/Beta",
+            "id": "d0002"
+          },
+          {
+            "category": "Income",
+            "id": "d0003"
+          },
+          {
+            "category": "Housing",
+            "id": "d0004"
+          },
+          {
+            "category": "Insurance",
+            "id": "d0005"
+          },
+          {
+            "category": "Income",
+            "id": "d0006"
+          }
+        ],
+        "ok": true,
+        "rules": [
+          {
+            "enabled": true,
+            "folder": "Housing",
+            "instruction": "File documents about Housing here. Examples: Residential tenancy agreement: renting an apartment."
+          },
+          {
+            "enabled": true,
+            "folder": "Income",
+            "instruction": "File documents about Income here. Examples: Employment contract: Permanent employment as a designer; Payslip - Monthly salary."
+          },
+          {
+            "enabled": true,
+            "folder": "Income/Acme",
+            "instruction": "File documents about Income/Acme here. Examples: Payslip - Monthly salary."
+          },
+          {
+            "enabled": true,
+            "folder": "Income/Beta",
+            "instruction": "File documents about Income/Beta here. Examples: Payslip - Monthly salary."
+          },
+          {
+            "enabled": true,
+            "folder": "Insurance",
+            "instruction": "File documents about Insurance here. Examples: Travel insurance certificate."
+          }
+        ]
+      }
+    },
+    {
+      "decisions": [
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Income/Acme",
+            "language": null,
+            "reason": "Selected Income/Acme from the configured categories.",
+            "title": "Payslip - Monthly salary"
+          },
+          "employer": "Acme",
+          "id": "acme-september",
+          "proposedFolder": "Income/Acme",
+          "sourceUnchanged": true,
+          "subject": "Income"
+        },
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Income/Acme",
+            "language": null,
+            "reason": "Selected Income/Acme from the configured categories.",
+            "title": "Payslip - Monthly salary"
+          },
+          "employer": "Acme",
+          "id": "acme-october",
+          "proposedFolder": "Income/Acme",
+          "sourceUnchanged": true,
+          "subject": "Income"
+        },
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Income/Acme",
+            "language": null,
+            "reason": "Selected Income/Acme from the configured categories.",
+            "title": "Payslip - Monthly salary"
+          },
+          "employer": "Beta",
+          "id": "beta-salary",
+          "proposedFolder": "Income/Beta",
+          "sourceUnchanged": true,
+          "subject": "Income"
+        },
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Employment/Acme",
+            "language": null,
+            "reason": "Selected Employment/Acme from the configured categories.",
+            "title": "Employment contract Permanent employment as a designer"
+          },
+          "employer": "Acme",
+          "id": "employment",
+          "proposedFolder": "Employment/Acme",
+          "sourceUnchanged": true,
+          "subject": "Employment"
+        },
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Housing",
+            "language": null,
+            "reason": "Selected Housing from the configured categories.",
+            "title": "Residential tenancy agreement renting an apartment"
+          },
+          "employer": null,
+          "id": "tenancy",
+          "proposedFolder": "Housing",
+          "sourceUnchanged": true,
+          "subject": "Housing"
+        },
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Insurance",
+            "language": null,
+            "reason": "Selected Insurance from the configured categories.",
+            "title": "Travel insurance certificate"
+          },
+          "employer": null,
+          "id": "travel-policy",
+          "proposedFolder": "Insurance",
+          "sourceUnchanged": true,
+          "subject": "Insurance"
+        },
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Income/Acme",
+            "language": null,
+            "reason": "Selected Income/Acme from the configured categories.",
+            "title": "Payslip - Monthly salary"
+          },
+          "employer": null,
+          "id": "salary-no-employer",
+          "proposedFolder": "Income",
+          "sourceUnchanged": true,
+          "subject": "Income"
+        }
+      ],
+      "depth": 2,
+      "guided": true,
+      "proposal": {
+        "assignments": [
+          {
+            "category": "Income/Acme",
+            "id": "d0000"
+          },
+          {
+            "category": "Income/Acme",
+            "id": "d0001"
+          },
+          {
+            "category": "Income/Beta",
+            "id": "d0002"
+          },
+          {
+            "category": "Employment/Acme",
+            "id": "d0003"
+          },
+          {
+            "category": "Housing",
+            "id": "d0004"
+          },
+          {
+            "category": "Insurance",
+            "id": "d0005"
+          },
+          {
+            "category": "Income",
+            "id": "d0006"
+          }
+        ],
+        "ok": true,
+        "rules": [
+          {
+            "enabled": true,
+            "folder": "Employment/Acme",
+            "instruction": "File documents about Employment/Acme here. Examples: Employment contract: Permanent employment as a designer."
+          },
+          {
+            "enabled": true,
+            "folder": "Housing",
+            "instruction": "File documents about Housing here. Examples: Residential tenancy agreement: renting an apartment."
+          },
+          {
+            "enabled": true,
+            "folder": "Income",
+            "instruction": "File documents about Income here. Examples: Payslip - Monthly salary."
+          },
+          {
+            "enabled": true,
+            "folder": "Income/Acme",
+            "instruction": "File documents about Income/Acme here. Examples: Payslip - Monthly salary."
+          },
+          {
+            "enabled": true,
+            "folder": "Income/Beta",
+            "instruction": "File documents about Income/Beta here. Examples: Payslip - Monthly salary."
+          },
+          {
+            "enabled": true,
+            "folder": "Insurance",
+            "instruction": "File documents about Insurance here. Examples: Travel insurance certificate."
+          }
+        ]
+      }
+    },
+    {
+      "decisions": [
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Income/Acme/Payslips",
+            "language": null,
+            "reason": "Selected Income/Acme/Payslips from the configured categories.",
+            "title": "Payslip - Monthly salary"
+          },
+          "employer": "Acme",
+          "id": "acme-september",
+          "proposedFolder": "Income/Acme/Payslips",
+          "sourceUnchanged": true,
+          "subject": "Income"
+        },
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Income/Acme/Payslips",
+            "language": null,
+            "reason": "Selected Income/Acme/Payslips from the configured categories.",
+            "title": "Payslip - Monthly salary"
+          },
+          "employer": "Acme",
+          "id": "acme-october",
+          "proposedFolder": "Income/Acme/Payslips",
+          "sourceUnchanged": true,
+          "subject": "Income"
+        },
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Income/Acme/Payslips",
+            "language": null,
+            "reason": "Selected Income/Acme/Payslips from the configured categories.",
+            "title": "Payslip - Monthly salary"
+          },
+          "employer": "Beta",
+          "id": "beta-salary",
+          "proposedFolder": "Income/Beta/Payslips",
+          "sourceUnchanged": true,
+          "subject": "Income"
+        },
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Employment",
+            "language": null,
+            "reason": "Selected Employment from the configured categories.",
+            "title": "Employment contract Permanent employment as a designer"
+          },
+          "employer": "Acme",
+          "id": "employment",
+          "proposedFolder": "Employment",
+          "sourceUnchanged": true,
+          "subject": "Employment"
+        },
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Housing",
+            "language": null,
+            "reason": "Selected Housing from the configured categories.",
+            "title": "Residential tenancy agreement renting an apartment"
+          },
+          "employer": null,
+          "id": "tenancy",
+          "proposedFolder": "Housing",
+          "sourceUnchanged": true,
+          "subject": "Housing"
+        },
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Insurance",
+            "language": null,
+            "reason": "Selected Insurance from the configured categories.",
+            "title": "Travel insurance certificate"
+          },
+          "employer": null,
+          "id": "travel-policy",
+          "proposedFolder": "Insurance",
+          "sourceUnchanged": true,
+          "subject": "Insurance"
+        },
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Income/Acme/Payslips",
+            "language": null,
+            "reason": "Selected Income/Acme/Payslips from the configured categories.",
+            "title": "Payslip - Monthly salary"
+          },
+          "employer": null,
+          "id": "salary-no-employer",
+          "proposedFolder": "Income/Unspecified/Payslips",
+          "sourceUnchanged": true,
+          "subject": "Income"
+        }
+      ],
+      "depth": 3,
+      "guided": false,
+      "proposal": {
+        "assignments": [
+          {
+            "category": "Income/Acme/Payslips",
+            "id": "d0000"
+          },
+          {
+            "category": "Income/Acme/Payslips",
+            "id": "d0001"
+          },
+          {
+            "category": "Income/Beta/Payslips",
+            "id": "d0002"
+          },
+          {
+            "category": "Employment",
+            "id": "d0003"
+          },
+          {
+            "category": "Housing",
+            "id": "d0004"
+          },
+          {
+            "category": "Insurance",
+            "id": "d0005"
+          },
+          {
+            "category": "Income/Unspecified/Payslips",
+            "id": "d0006"
+          }
+        ],
+        "ok": true,
+        "rules": [
+          {
+            "enabled": true,
+            "folder": "Employment",
+            "instruction": "File documents about Employment here. Examples: Employment contract: Permanent employment as a designer."
+          },
+          {
+            "enabled": true,
+            "folder": "Housing",
+            "instruction": "File documents about Housing here. Examples: Residential tenancy agreement: renting an apartment."
+          },
+          {
+            "enabled": true,
+            "folder": "Income/Acme/Payslips",
+            "instruction": "File documents about Income/Acme/Payslips here. Examples: Payslip - Monthly salary."
+          },
+          {
+            "enabled": true,
+            "folder": "Income/Beta/Payslips",
+            "instruction": "File documents about Income/Beta/Payslips here. Examples: Payslip - Monthly salary."
+          },
+          {
+            "enabled": true,
+            "folder": "Income/Unspecified/Payslips",
+            "instruction": "File documents about Income/Unspecified/Payslips here. Examples: Payslip - Monthly salary."
+          },
+          {
+            "enabled": true,
+            "folder": "Insurance",
+            "instruction": "File documents about Insurance here. Examples: Travel insurance certificate."
+          }
+        ]
+      }
+    },
+    {
+      "decisions": [
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Income/Acme/Payslips",
+            "language": null,
+            "reason": "Selected Income/Acme/Payslips from the configured categories.",
+            "title": "Payslip - Monthly salary"
+          },
+          "employer": "Acme",
+          "id": "acme-september",
+          "proposedFolder": "Income/Acme/Payslips",
+          "sourceUnchanged": true,
+          "subject": "Income"
+        },
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Income/Acme/Payslips",
+            "language": null,
+            "reason": "Selected Income/Acme/Payslips from the configured categories.",
+            "title": "Payslip - Monthly salary"
+          },
+          "employer": "Acme",
+          "id": "acme-october",
+          "proposedFolder": "Income/Acme/Payslips",
+          "sourceUnchanged": true,
+          "subject": "Income"
+        },
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Income/Acme/Payslips",
+            "language": null,
+            "reason": "Selected Income/Acme/Payslips from the configured categories.",
+            "title": "Payslip - Monthly salary"
+          },
+          "employer": "Beta",
+          "id": "beta-salary",
+          "proposedFolder": "Income/Beta/Payslips",
+          "sourceUnchanged": true,
+          "subject": "Income"
+        },
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Employment/Acme/Contracts",
+            "language": null,
+            "reason": "Selected Employment/Acme/Contracts from the configured categories.",
+            "title": "Employment contract Permanent employment as a designer"
+          },
+          "employer": "Acme",
+          "id": "employment",
+          "proposedFolder": "Employment/Acme/Contracts",
+          "sourceUnchanged": true,
+          "subject": "Employment"
+        },
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Housing",
+            "language": null,
+            "reason": "Selected Housing from the configured categories.",
+            "title": "Residential tenancy agreement renting an apartment"
+          },
+          "employer": null,
+          "id": "tenancy",
+          "proposedFolder": "Housing",
+          "sourceUnchanged": true,
+          "subject": "Housing"
+        },
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Insurance",
+            "language": null,
+            "reason": "Selected Insurance from the configured categories.",
+            "title": "Travel insurance certificate"
+          },
+          "employer": null,
+          "id": "travel-policy",
+          "proposedFolder": "Insurance",
+          "sourceUnchanged": true,
+          "subject": "Insurance"
+        },
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Income/Acme/Payslips",
+            "language": null,
+            "reason": "Selected Income/Acme/Payslips from the configured categories.",
+            "title": "Payslip - Monthly salary"
+          },
+          "employer": null,
+          "id": "salary-no-employer",
+          "proposedFolder": "Income",
+          "sourceUnchanged": true,
+          "subject": "Income"
+        }
+      ],
+      "depth": 3,
+      "guided": true,
+      "proposal": {
+        "assignments": [
+          {
+            "category": "Income/Acme/Payslips",
+            "id": "d0000"
+          },
+          {
+            "category": "Income/Acme/Payslips",
+            "id": "d0001"
+          },
+          {
+            "category": "Income/Beta/Payslips",
+            "id": "d0002"
+          },
+          {
+            "category": "Employment/Acme/Contracts",
+            "id": "d0003"
+          },
+          {
+            "category": "Housing",
+            "id": "d0004"
+          },
+          {
+            "category": "Insurance",
+            "id": "d0005"
+          },
+          {
+            "category": "Income",
+            "id": "d0006"
+          }
+        ],
+        "ok": true,
+        "rules": [
+          {
+            "enabled": true,
+            "folder": "Employment/Acme/Contracts",
+            "instruction": "File documents about Employment/Acme/Contracts here. Examples: Employment contract: Permanent employment as a designer."
+          },
+          {
+            "enabled": true,
+            "folder": "Housing",
+            "instruction": "File documents about Housing here. Examples: Residential tenancy agreement: renting an apartment."
+          },
+          {
+            "enabled": true,
+            "folder": "Income",
+            "instruction": "File documents about Income here. Examples: Payslip - Monthly salary."
+          },
+          {
+            "enabled": true,
+            "folder": "Income/Acme/Payslips",
+            "instruction": "File documents about Income/Acme/Payslips here. Examples: Payslip - Monthly salary."
+          },
+          {
+            "enabled": true,
+            "folder": "Income/Beta/Payslips",
+            "instruction": "File documents about Income/Beta/Payslips here. Examples: Payslip - Monthly salary."
+          },
+          {
+            "enabled": true,
+            "folder": "Insurance",
+            "instruction": "File documents about Insurance here. Examples: Travel insurance certificate."
+          }
+        ]
+      }
+    }
+  ]
+}

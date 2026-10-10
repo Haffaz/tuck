@@ -1,0 +1,316 @@
+[
+  {
+    "name": "small education collection",
+    "groups": [
+      {
+        "path": "Education/Degree",
+        "count": 1,
+        "preserveDepth": 0,
+        "expected": "Education"
+      },
+      {
+        "path": "Education/Certification",
+        "count": 1,
+        "preserveDepth": 0,
+        "expected": "Education"
+      },
+      {
+        "path": "Education/Transcript",
+        "count": 1,
+        "preserveDepth": 0,
+        "expected": "Education"
+      }
+    ]
+  },
+  {
+    "name": "one redundant child even with many files",
+    "groups": [
+      {
+        "path": "Travel/Bookings",
+        "count": 12,
+        "preserveDepth": 0,
+        "expected": "Travel"
+      }
+    ]
+  },
+  {
+    "name": "two small groups still stay broad",
+    "groups": [
+      {
+        "path": "Health/Laboratory reports",
+        "count": 2,
+        "preserveDepth": 0,
+        "expected": "Health"
+      },
+      {
+        "path": "Health/Prescriptions",
+        "count": 2,
+        "preserveDepth": 0,
+        "expected": "Health"
+      }
+    ]
+  },
+  {
+    "name": "two established groups",
+    "groups": [
+      {
+        "path": "Education/Degrees",
+        "count": 3,
+        "preserveDepth": 0,
+        "expected": "Education/Degrees"
+      },
+      {
+        "path": "Education/Transcripts",
+        "count": 3,
+        "preserveDepth": 0,
+        "expected": "Education/Transcripts"
+      }
+    ]
+  },
+  {
+    "name": "one large group and an outlier",
+    "groups": [
+      {
+        "path": "Invoices/Harbor",
+        "count": 8,
+        "preserveDepth": 0,
+        "expected": "Invoices"
+      },
+      {
+        "path": "Invoices/Meadow",
+        "count": 1,
+        "preserveDepth": 0,
+        "expected": "Invoices"
+      }
+    ]
+  },
+  {
+    "name": "useful child and substantial parent",
+    "groups": [
+      {
+        "path": "Warranties/Laptops",
+        "count": 3,
+        "preserveDepth": 0,
+        "expected": "Warranties/Laptops"
+      },
+      {
+        "path": "Warranties",
+        "count": 3,
+        "preserveDepth": 0,
+        "expected": "Warranties"
+      }
+    ]
+  },
+  {
+    "name": "small outlier stays at parent",
+    "groups": [
+      {
+        "path": "Work/Orion",
+        "count": 3,
+        "preserveDepth": 0,
+        "expected": "Work/Orion"
+      },
+      {
+        "path": "Work/Vega",
+        "count": 3,
+        "preserveDepth": 0,
+        "expected": "Work/Vega"
+      },
+      {
+        "path": "Work/Atlas",
+        "count": 1,
+        "preserveDepth": 0,
+        "expected": "Work"
+      }
+    ]
+  },
+  {
+    "name": "review and unrelated subjects unchanged",
+    "groups": [
+      {
+        "path": "Education/Transcript",
+        "count": 1,
+        "preserveDepth": 0,
+        "expected": "Education"
+      },
+      {
+        "path": "Birth certificate",
+        "count": 1,
+        "preserveDepth": 0,
+        "expected": "Birth certificate"
+      },
+      {
+        "path": "Needs review",
+        "count": 4,
+        "preserveDepth": 0,
+        "expected": "Needs review"
+      }
+    ]
+  },
+  {
+    "name": "deep level requires its own support",
+    "groups": [
+      {
+        "path": "Work/Orion/Minutes",
+        "count": 2,
+        "preserveDepth": 0,
+        "expected": "Work/Orion"
+      },
+      {
+        "path": "Work/Orion/Reports",
+        "count": 1,
+        "preserveDepth": 0,
+        "expected": "Work/Orion"
+      },
+      {
+        "path": "Work/Vega/Minutes",
+        "count": 2,
+        "preserveDepth": 0,
+        "expected": "Work/Vega"
+      },
+      {
+        "path": "Work/Vega/Reports",
+        "count": 1,
+        "preserveDepth": 0,
+        "expected": "Work/Vega"
+      }
+    ]
+  },
+  {
+    "name": "useful three level tree",
+    "groups": [
+      {
+        "path": "Work/Orion/Minutes",
+        "count": 3,
+        "preserveDepth": 0,
+        "expected": "Work/Orion/Minutes"
+      },
+      {
+        "path": "Work/Orion/Reports",
+        "count": 3,
+        "preserveDepth": 0,
+        "expected": "Work/Orion/Reports"
+      },
+      {
+        "path": "Work/Vega/Minutes",
+        "count": 3,
+        "preserveDepth": 0,
+        "expected": "Work/Vega/Minutes"
+      },
+      {
+        "path": "Work/Vega/Reports",
+        "count": 3,
+        "preserveDepth": 0,
+        "expected": "Work/Vega/Reports"
+      }
+    ]
+  },
+  {
+    "name": "explicit folders may be small",
+    "groups": [
+      {
+        "path": "Education/Degrees",
+        "count": 1,
+        "preserveDepth": 2,
+        "expected": "Education/Degrees"
+      },
+      {
+        "path": "Education/Transcripts",
+        "count": 1,
+        "preserveDepth": 2,
+        "expected": "Education/Transcripts"
+      }
+    ]
+  },
+  {
+    "name": "explicit second level does not force third",
+    "groups": [
+      {
+        "path": "Invoices/Harbor/Invoices",
+        "count": 1,
+        "preserveDepth": 2,
+        "expected": "Invoices/Harbor"
+      }
+    ]
+  },
+  {
+    "name": "explicit third level stays",
+    "groups": [
+      {
+        "path": "Invoices/Harbor/Invoices",
+        "count": 1,
+        "preserveDepth": 3,
+        "expected": "Invoices/Harbor/Invoices"
+      }
+    ]
+  },
+  {
+    "name": "rule for one subject does not fragment another",
+    "groups": [
+      {
+        "path": "Invoices/Harbor",
+        "count": 1,
+        "preserveDepth": 2,
+        "expected": "Invoices/Harbor"
+      },
+      {
+        "path": "Education/Degree",
+        "count": 1,
+        "preserveDepth": 0,
+        "expected": "Education"
+      },
+      {
+        "path": "Education/Transcript",
+        "count": 1,
+        "preserveDepth": 0,
+        "expected": "Education"
+      }
+    ]
+  },
+  {
+    "name": "global counts span batch boundary",
+    "groups": [
+      {
+        "path": "Research/Orion",
+        "count": 12,
+        "preserveDepth": 0,
+        "expected": "Research/Orion"
+      },
+      {
+        "path": "Research/Vega",
+        "count": 12,
+        "preserveDepth": 0,
+        "expected": "Research/Vega"
+      }
+    ]
+  },
+  {
+    "name": "all tiny children collapse without catchall",
+    "groups": [
+      {
+        "path": "Receipts/Food",
+        "count": 1,
+        "preserveDepth": 0,
+        "expected": "Receipts"
+      },
+      {
+        "path": "Receipts/Clothing",
+        "count": 1,
+        "preserveDepth": 0,
+        "expected": "Receipts"
+      },
+      {
+        "path": "Receipts/Hardware",
+        "count": 1,
+        "preserveDepth": 0,
+        "expected": "Receipts"
+      },
+      {
+        "path": "Receipts/Books",
+        "count": 1,
+        "preserveDepth": 0,
+        "expected": "Receipts"
+      }
+    ]
+  }
+]

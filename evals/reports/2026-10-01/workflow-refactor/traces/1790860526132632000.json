@@ -1,0 +1,26 @@
+{
+  "case": "sv_tenancy",
+  "started": 1790860524.7148302,
+  "seconds": 1.41774582862854,
+  "request": {
+    "actions": [
+      "finish"
+    ],
+    "completed": [],
+    "operation": "describe",
+    "quotes": [
+      "HYRESAVTAL FÖR BOSTADSLÄGENHET",
+      "Hyresvärden upplåter lägenheten till hyresgästen för boende. Hyran betalas månadsvis. Avtalet gäller tills vidare."
+    ],
+    "text": "HYRESAVTAL FÖR BOSTADSLÄGENHET\nHyresvärden upplåter lägenheten till hyresgästen för boende. Hyran betalas månadsvis. Avtalet gäller tills vidare."
+  },
+  "response": {
+    "action": "finish",
+    "description": "A rental agreement for an apartment.",
+    "quotes": [
+      "Hyresvärden upplåter lägenheten till hyresgästen för boende. Hyran betalas månadsvis. Avtalet gäller tills vidare."
+    ],
+    "uncertainty": ""
+  },
+  "exit": 0
+}

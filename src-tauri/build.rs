@@ -4,6 +4,7 @@ fn main() {
         std::fs::create_dir_all("resources").expect("create reader directory");
         let status = std::process::Command::new("swiftc")
             .args([
+                "-parse-as-library",
                 "-O",
                 "swift/TuckReader.swift",
                 "-o",
@@ -15,6 +16,59 @@ fn main() {
             status.success(),
             "Could not compile the local document reader"
         );
+    }
+    println!("cargo:rerun-if-changed=swift/TuckConnections.swift");
+    println!("cargo:rerun-if-changed=swift/TuckLocalTransport.swift");
+    println!("cargo:rerun-if-changed=swift/TuckCategorization.swift");
+    println!("cargo:rerun-if-changed=swift/TuckRoles.swift");
+    println!("cargo:rerun-if-changed=swift/TuckRoleValidation.swift");
+    println!("cargo:rerun-if-changed=swift/TuckApple.swift");
+    println!("cargo:rerun-if-changed=swift/TuckModelSupport.swift");
+    if std::env::var("CARGO_CFG_TARGET_OS").as_deref() == Ok("macos") {
+        let status = std::process::Command::new("swiftc")
+            .args([
+                "-parse-as-library",
+                "-O",
+                "swift/TuckApple.swift",
+                "swift/TuckRoles.swift",
+                "swift/TuckCategorization.swift",
+                "swift/TuckLocalTransport.swift",
+                "swift/TuckConnections.swift",
+                "swift/TuckRoleValidation.swift",
+                "swift/TuckModelSupport.swift",
+                "-o",
+                "resources/tuck-apple",
+            ])
+            .status()
+            .expect("Swift compiler is required for Apple Intelligence");
+        assert!(
+            status.success(),
+            "Could not compile the Apple Intelligence helper"
+        );
+    }
+    println!("cargo:rerun-if-changed=swift/TuckMac.swift");
+    if std::env::var("CARGO_CFG_TARGET_OS").as_deref() == Ok("macos") {
+        let output = std::path::PathBuf::from(std::env::var_os("OUT_DIR").unwrap());
+        let status = std::process::Command::new("swiftc")
+            .args([
+                "-parse-as-library",
+                "-emit-library",
+                "-static",
+                "-O",
+                "swift/TuckMac.swift",
+                "-o",
+            ])
+            .arg(output.join("libtuck_mac.a"))
+            .status()
+            .expect("Swift compiler is required for native Mac integration");
+        assert!(status.success(), "Could not compile native Mac integration");
+        println!("cargo:rustc-link-search=native={}", output.display());
+        println!("cargo:rustc-link-lib=static=tuck_mac");
+        println!("cargo:rustc-link-lib=framework=AppKit");
+        println!("cargo:rustc-link-lib=framework=Foundation");
+        println!("cargo:rustc-link-lib=framework=QuickLookUI");
+        println!("cargo:rustc-link-search=native=/usr/lib/swift");
+        println!("cargo:rustc-link-arg=-Wl,-rpath,/usr/lib/swift");
     }
     tauri_build::build()
 }

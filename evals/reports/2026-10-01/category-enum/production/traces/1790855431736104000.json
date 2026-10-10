@@ -1,0 +1,20 @@
+{
+  "case": "en_electricity_bill",
+  "started": 1790855431.718221,
+  "seconds": 0.017827272415161133,
+  "request": {
+    "operation": "language",
+    "text": "ELECTRICITY INVOICE\nResidential electricity supply. Charges include electricity consumption, network service and energy tax. Total amount due: 480 SEK."
+  },
+  "response": {
+    "blocked": false,
+    "language": {
+      "code": "en",
+      "message": "Recognized as English · supported by this Mac's model",
+      "name": "English",
+      "status": "supported"
+    },
+    "text": "ELECTRICITY INVOICE\nResidential electricity supply. Charges include electricity consumption, network service and energy tax. Total amount due: 480 SEK."
+  },
+  "exit": 0
+}

@@ -1,0 +1,55 @@
+{
+  "description": "New synthetic preference-transfer cases, authored after the prompt was selected and before their first live run. The example adds a user filing preference absent from the baseline.",
+  "cases": [
+    {
+      "id": "new_application_bundle",
+      "source_folder": "Aster application",
+      "folder": "Migration",
+      "text": "EMPLOYMENT CERTIFICATE\nThis certificate confirms that the employee works at the company. It is proof of employment.",
+      "rules": [
+        {
+          "folder": "Work",
+          "instruction": "Keep employment certificates and employment contracts here."
+        },
+        {
+          "folder": "Migration",
+          "instruction": "Keep immigration applications and their supporting documents here."
+        }
+      ],
+      "concepts": [
+        [
+          "employment certificate"
+        ]
+      ],
+      "forbidden": [
+        "contract",
+        "passport"
+      ]
+    },
+    {
+      "id": "new_unrelated_certificate",
+      "source_folder": "Incoming",
+      "folder": "Work",
+      "text": "EMPLOYMENT CERTIFICATE\nThis certificate confirms that the employee works at the company. It is proof of employment.",
+      "rules": [
+        {
+          "folder": "Work",
+          "instruction": "Keep employment certificates and employment contracts here."
+        },
+        {
+          "folder": "Migration",
+          "instruction": "Keep immigration applications and their supporting documents here."
+        }
+      ],
+      "concepts": [
+        [
+          "employment certificate"
+        ]
+      ],
+      "forbidden": [
+        "contract",
+        "passport"
+      ]
+    }
+  ]
+}

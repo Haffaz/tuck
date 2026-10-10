@@ -1,0 +1,86 @@
+{
+  "summary": {
+    "runs": 6,
+    "acceptedProposals": 6,
+    "proposalSubjectCorrect": 42,
+    "proposalSubjectTotal": 42,
+    "proposedFolderMatched": 39,
+    "filingTotal": 42,
+    "wrongAutomatic": 1,
+    "wrongEmployerAutomatic": 0
+  },
+  "runs": [
+    {
+      "depth": 1,
+      "guided": false,
+      "proposalAccepted": true,
+      "proposalSubjectCorrect": 7,
+      "proposalSubjectTotal": 7,
+      "proposalFolderMatched": 7,
+      "filingTotal": 7,
+      "wrongAutomatic": 0,
+      "wrongEmployerAutomatic": 0,
+      "employerFailures": []
+    },
+    {
+      "depth": 1,
+      "guided": true,
+      "proposalAccepted": true,
+      "proposalSubjectCorrect": 7,
+      "proposalSubjectTotal": 7,
+      "proposalFolderMatched": 7,
+      "filingTotal": 7,
+      "wrongAutomatic": 0,
+      "wrongEmployerAutomatic": 0,
+      "employerFailures": []
+    },
+    {
+      "depth": 2,
+      "guided": false,
+      "proposalAccepted": true,
+      "proposalSubjectCorrect": 7,
+      "proposalSubjectTotal": 7,
+      "proposalFolderMatched": 6,
+      "filingTotal": 7,
+      "wrongAutomatic": 0,
+      "wrongEmployerAutomatic": 0,
+      "employerFailures": []
+    },
+    {
+      "depth": 2,
+      "guided": true,
+      "proposalAccepted": true,
+      "proposalSubjectCorrect": 7,
+      "proposalSubjectTotal": 7,
+      "proposalFolderMatched": 7,
+      "filingTotal": 7,
+      "wrongAutomatic": 0,
+      "wrongEmployerAutomatic": 0,
+      "employerFailures": []
+    },
+    {
+      "depth": 3,
+      "guided": false,
+      "proposalAccepted": true,
+      "proposalSubjectCorrect": 7,
+      "proposalSubjectTotal": 7,
+      "proposalFolderMatched": 5,
+      "filingTotal": 7,
+      "wrongAutomatic": 1,
+      "wrongEmployerAutomatic": 0,
+      "employerFailures": []
+    },
+    {
+      "depth": 3,
+      "guided": true,
+      "proposalAccepted": true,
+      "proposalSubjectCorrect": 7,
+      "proposalSubjectTotal": 7,
+      "proposalFolderMatched": 7,
+      "filingTotal": 7,
+      "wrongAutomatic": 0,
+      "wrongEmployerAutomatic": 0,
+      "employerFailures": []
+    }
+  ]
+}

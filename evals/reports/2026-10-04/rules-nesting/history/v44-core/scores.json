@@ -1,0 +1,3939 @@
+{
+  "summary": {
+    "runs": 30,
+    "filingDecisions": 300,
+    "clearCorrect": 240,
+    "clearTotal": 240,
+    "reviewCorrect": 60,
+    "reviewTotal": 60,
+    "wrongAutomatic": 0,
+    "acceptedProposals": 30,
+    "rejectedProposals": 0,
+    "proposalClearCorrect": 240,
+    "proposalClearTotal": 240,
+    "acceptedProposalClearCorrect": 240,
+    "acceptedProposalClearTotal": 240,
+    "depthViolations": 0,
+    "unsupportedSubgroups": 0,
+    "prefixChecks": 120,
+    "namingFailures": 0,
+    "keptOriginal": 0,
+    "seconds": 1179.6919335,
+    "completed": true,
+    "guidedEmployerCorrect": 40,
+    "guidedEmployerTotal": 40,
+    "wrongSubjectAutomatic": 0,
+    "wrongBroadAutomatic": 0
+  },
+  "acceptance": {
+    "depthLimits": true,
+    "filingRecall": true,
+    "noWrongAutomatic": true,
+    "reviewSafety": true,
+    "proposalQuality": true,
+    "sourceGroundedSubgroups": true,
+    "naming": true,
+    "guidedEmployerGrouping": true,
+    "generatedFolders": false,
+    "generatedFolderSafety": false,
+    "scopeEdgeSafety": true
+  },
+  "runs": [
+    {
+      "id": "depth1-D0C0F0-r1",
+      "depth": 1,
+      "documentInstructions": false,
+      "creationPreferences": false,
+      "folderRules": false,
+      "repeat": 1,
+      "proposal": {
+        "ok": true,
+        "clearCorrect": 8,
+        "clearTotal": 8,
+        "reviewCorrect": 2,
+        "reviewTotal": 2,
+        "maxDepth": 1,
+        "withinLimit": true,
+        "unsupportedSubgroups": [],
+        "guidedEmployer": {},
+        "rows": [
+          {
+            "id": "acme-september",
+            "expected": "Income",
+            "actual": "Income",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "acme-october",
+            "expected": "Income",
+            "actual": "Income",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "beta-salary",
+            "expected": "Income",
+            "actual": "Income",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "employment",
+            "expected": "Employment",
+            "actual": "Work",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "tenancy",
+            "expected": "Housing",
+            "actual": "Housing",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "travel-policy",
+            "expected": "Insurance",
+            "actual": "Insurance",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "injected-policy",
+            "expected": "Insurance",
+            "actual": "Insurance",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "unknown",
+            "expected": null,
+            "actual": null,
+            "correct": true,
+            "clear": false,
+            "depth": 0,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "mixed",
+            "expected": null,
+            "actual": null,
+            "correct": true,
+            "clear": false,
+            "depth": 0,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "salary-no-employer",
+            "expected": "Income",
+            "actual": "Income",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          }
+        ]
+      },
+      "filingCorrect": 10,
+      "clearCorrect": 8,
+      "clearTotal": 8,
+      "reviewCorrect": 2,
+      "reviewTotal": 2,
+      "wrongAutomatic": 0,
+      "named": 8,
+      "prefixChecks": 0,
+      "namingFailures": 0,
+      "keptOriginal": 0,
+      "medianSeconds": 2.4881526455,
+      "seconds": 34.832738625
+    },
+    {
+      "id": "depth1-D1C0F0-r1",
+      "depth": 1,
+      "documentInstructions": true,
+      "creationPreferences": false,
+      "folderRules": false,
+      "repeat": 1,
+      "proposal": {
+        "ok": true,
+        "clearCorrect": 8,
+        "clearTotal": 8,
+        "reviewCorrect": 2,
+        "reviewTotal": 2,
+        "maxDepth": 1,
+        "withinLimit": true,
+        "unsupportedSubgroups": [],
+        "guidedEmployer": {},
+        "rows": [
+          {
+            "id": "acme-september",
+            "expected": "Income",
+            "actual": "Income",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "acme-october",
+            "expected": "Income",
+            "actual": "Income",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "beta-salary",
+            "expected": "Income",
+            "actual": "Income",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "employment",
+            "expected": "Employment",
+            "actual": "Work",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "tenancy",
+            "expected": "Housing",
+            "actual": "Housing",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "travel-policy",
+            "expected": "Insurance",
+            "actual": "Insurance",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "injected-policy",
+            "expected": "Insurance",
+            "actual": "Insurance",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "unknown",
+            "expected": null,
+            "actual": null,
+            "correct": true,
+            "clear": false,
+            "depth": 0,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "mixed",
+            "expected": null,
+            "actual": null,
+            "correct": true,
+            "clear": false,
+            "depth": 0,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "salary-no-employer",
+            "expected": "Income",
+            "actual": "Income",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          }
+        ]
+      },
+      "filingCorrect": 10,
+      "clearCorrect": 8,
+      "clearTotal": 8,
+      "reviewCorrect": 2,
+      "reviewTotal": 2,
+      "wrongAutomatic": 0,
+      "named": 8,
+      "prefixChecks": 8,
+      "namingFailures": 0,
+      "keptOriginal": 0,
+      "medianSeconds": 2.131618667,
+      "seconds": 23.877802166
+    },
+    {
+      "id": "depth1-D0C1F0-r1",
+      "depth": 1,
+      "documentInstructions": false,
+      "creationPreferences": true,
+      "folderRules": false,
+      "repeat": 1,
+      "proposal": {
+        "ok": true,
+        "clearCorrect": 8,
+        "clearTotal": 8,
+        "reviewCorrect": 2,
+        "reviewTotal": 2,
+        "maxDepth": 1,
+        "withinLimit": true,
+        "unsupportedSubgroups": [],
+        "guidedEmployer": {},
+        "rows": [
+          {
+            "id": "acme-september",
+            "expected": "Income",
+            "actual": "Income",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "acme-october",
+            "expected": "Income",
+            "actual": "Income",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "beta-salary",
+            "expected": "Income",
+            "actual": "Income",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "employment",
+            "expected": "Employment",
+            "actual": "Employment",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "tenancy",
+            "expected": "Housing",
+            "actual": "Housing",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "travel-policy",
+            "expected": "Insurance",
+            "actual": "Insurance",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "injected-policy",
+            "expected": "Insurance",
+            "actual": "Insurance",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "unknown",
+            "expected": null,
+            "actual": null,
+            "correct": true,
+            "clear": false,
+            "depth": 0,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "mixed",
+            "expected": null,
+            "actual": null,
+            "correct": true,
+            "clear": false,
+            "depth": 0,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "salary-no-employer",
+            "expected": "Income",
+            "actual": "Income",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          }
+        ]
+      },
+      "filingCorrect": 10,
+      "clearCorrect": 8,
+      "clearTotal": 8,
+      "reviewCorrect": 2,
+      "reviewTotal": 2,
+      "wrongAutomatic": 0,
+      "named": 8,
+      "prefixChecks": 0,
+      "namingFailures": 0,
+      "keptOriginal": 0,
+      "medianSeconds": 2.2388896455,
+      "seconds": 25.093422333
+    },
+    {
+      "id": "depth1-D1C1F0-r1",
+      "depth": 1,
+      "documentInstructions": true,
+      "creationPreferences": true,
+      "folderRules": false,
+      "repeat": 1,
+      "proposal": {
+        "ok": true,
+        "clearCorrect": 8,
+        "clearTotal": 8,
+        "reviewCorrect": 2,
+        "reviewTotal": 2,
+        "maxDepth": 1,
+        "withinLimit": true,
+        "unsupportedSubgroups": [],
+        "guidedEmployer": {},
+        "rows": [
+          {
+            "id": "acme-september",
+            "expected": "Income",
+            "actual": "Income",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "acme-october",
+            "expected": "Income",
+            "actual": "Income",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "beta-salary",
+            "expected": "Income",
+            "actual": "Income",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "employment",
+            "expected": "Employment",
+            "actual": "Employment",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "tenancy",
+            "expected": "Housing",
+            "actual": "Housing",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "travel-policy",
+            "expected": "Insurance",
+            "actual": "Insurance",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "injected-policy",
+            "expected": "Insurance",
+            "actual": "Insurance",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "unknown",
+            "expected": null,
+            "actual": null,
+            "correct": true,
+            "clear": false,
+            "depth": 0,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "mixed",
+            "expected": null,
+            "actual": null,
+            "correct": true,
+            "clear": false,
+            "depth": 0,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "salary-no-employer",
+            "expected": "Income",
+            "actual": "Income",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          }
+        ]
+      },
+      "filingCorrect": 10,
+      "clearCorrect": 8,
+      "clearTotal": 8,
+      "reviewCorrect": 2,
+      "reviewTotal": 2,
+      "wrongAutomatic": 0,
+      "named": 8,
+      "prefixChecks": 8,
+      "namingFailures": 0,
+      "keptOriginal": 0,
+      "medianSeconds": 2.2600200625,
+      "seconds": 24.5384465
+    },
+    {
+      "id": "depth1-D0C0F1-r1",
+      "depth": 1,
+      "documentInstructions": false,
+      "creationPreferences": false,
+      "folderRules": true,
+      "repeat": 1,
+      "proposal": {
+        "ok": true,
+        "clearCorrect": 8,
+        "clearTotal": 8,
+        "reviewCorrect": 2,
+        "reviewTotal": 2,
+        "maxDepth": 1,
+        "withinLimit": true,
+        "unsupportedSubgroups": [],
+        "guidedEmployer": {},
+        "rows": [
+          {
+            "id": "acme-september",
+            "expected": "Income",
+            "actual": "Income",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "acme-october",
+            "expected": "Income",
+            "actual": "Income",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "beta-salary",
+            "expected": "Income",
+            "actual": "Income",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "employment",
+            "expected": "Employment",
+            "actual": "Work",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "tenancy",
+            "expected": "Housing",
+            "actual": "Housing",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "travel-policy",
+            "expected": "Insurance",
+            "actual": "Insurance",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "injected-policy",
+            "expected": "Insurance",
+            "actual": "Insurance",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "unknown",
+            "expected": null,
+            "actual": null,
+            "correct": true,
+            "clear": false,
+            "depth": 0,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "mixed",
+            "expected": null,
+            "actual": null,
+            "correct": true,
+            "clear": false,
+            "depth": 0,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "salary-no-employer",
+            "expected": "Income",
+            "actual": "Income",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          }
+        ]
+      },
+      "filingCorrect": 10,
+      "clearCorrect": 8,
+      "clearTotal": 8,
+      "reviewCorrect": 2,
+      "reviewTotal": 2,
+      "wrongAutomatic": 0,
+      "named": 8,
+      "prefixChecks": 0,
+      "namingFailures": 0,
+      "keptOriginal": 0,
+      "medianSeconds": 2.5606910625,
+      "seconds": 27.09167875
+    },
+    {
+      "id": "depth1-D1C0F1-r1",
+      "depth": 1,
+      "documentInstructions": true,
+      "creationPreferences": false,
+      "folderRules": true,
+      "repeat": 1,
+      "proposal": {
+        "ok": true,
+        "clearCorrect": 8,
+        "clearTotal": 8,
+        "reviewCorrect": 2,
+        "reviewTotal": 2,
+        "maxDepth": 1,
+        "withinLimit": true,
+        "unsupportedSubgroups": [],
+        "guidedEmployer": {},
+        "rows": [
+          {
+            "id": "acme-september",
+            "expected": "Income",
+            "actual": "Income",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "acme-october",
+            "expected": "Income",
+            "actual": "Income",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "beta-salary",
+            "expected": "Income",
+            "actual": "Income",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "employment",
+            "expected": "Employment",
+            "actual": "Work",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "tenancy",
+            "expected": "Housing",
+            "actual": "Housing",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "travel-policy",
+            "expected": "Insurance",
+            "actual": "Insurance",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "injected-policy",
+            "expected": "Insurance",
+            "actual": "Insurance",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "unknown",
+            "expected": null,
+            "actual": null,
+            "correct": true,
+            "clear": false,
+            "depth": 0,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "mixed",
+            "expected": null,
+            "actual": null,
+            "correct": true,
+            "clear": false,
+            "depth": 0,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "salary-no-employer",
+            "expected": "Income",
+            "actual": "Income",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          }
+        ]
+      },
+      "filingCorrect": 10,
+      "clearCorrect": 8,
+      "clearTotal": 8,
+      "reviewCorrect": 2,
+      "reviewTotal": 2,
+      "wrongAutomatic": 0,
+      "named": 8,
+      "prefixChecks": 8,
+      "namingFailures": 0,
+      "keptOriginal": 0,
+      "medianSeconds": 2.754368542,
+      "seconds": 28.57110375
+    },
+    {
+      "id": "depth1-D0C1F1-r1",
+      "depth": 1,
+      "documentInstructions": false,
+      "creationPreferences": true,
+      "folderRules": true,
+      "repeat": 1,
+      "proposal": {
+        "ok": true,
+        "clearCorrect": 8,
+        "clearTotal": 8,
+        "reviewCorrect": 2,
+        "reviewTotal": 2,
+        "maxDepth": 1,
+        "withinLimit": true,
+        "unsupportedSubgroups": [],
+        "guidedEmployer": {},
+        "rows": [
+          {
+            "id": "acme-september",
+            "expected": "Income",
+            "actual": "Income",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "acme-october",
+            "expected": "Income",
+            "actual": "Income",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "beta-salary",
+            "expected": "Income",
+            "actual": "Income",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "employment",
+            "expected": "Employment",
+            "actual": "Employment",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "tenancy",
+            "expected": "Housing",
+            "actual": "Housing",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "travel-policy",
+            "expected": "Insurance",
+            "actual": "Insurance",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "injected-policy",
+            "expected": "Insurance",
+            "actual": "Insurance",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "unknown",
+            "expected": null,
+            "actual": null,
+            "correct": true,
+            "clear": false,
+            "depth": 0,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "mixed",
+            "expected": null,
+            "actual": null,
+            "correct": true,
+            "clear": false,
+            "depth": 0,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "salary-no-employer",
+            "expected": "Income",
+            "actual": "Income",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          }
+        ]
+      },
+      "filingCorrect": 10,
+      "clearCorrect": 8,
+      "clearTotal": 8,
+      "reviewCorrect": 2,
+      "reviewTotal": 2,
+      "wrongAutomatic": 0,
+      "named": 8,
+      "prefixChecks": 0,
+      "namingFailures": 0,
+      "keptOriginal": 0,
+      "medianSeconds": 2.5848777915000003,
+      "seconds": 29.34199375
+    },
+    {
+      "id": "depth1-D1C1F1-r1",
+      "depth": 1,
+      "documentInstructions": true,
+      "creationPreferences": true,
+      "folderRules": true,
+      "repeat": 1,
+      "proposal": {
+        "ok": true,
+        "clearCorrect": 8,
+        "clearTotal": 8,
+        "reviewCorrect": 2,
+        "reviewTotal": 2,
+        "maxDepth": 1,
+        "withinLimit": true,
+        "unsupportedSubgroups": [],
+        "guidedEmployer": {},
+        "rows": [
+          {
+            "id": "acme-september",
+            "expected": "Income",
+            "actual": "Income",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "acme-october",
+            "expected": "Income",
+            "actual": "Income",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "beta-salary",
+            "expected": "Income",
+            "actual": "Income",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "employment",
+            "expected": "Employment",
+            "actual": "Employment",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "tenancy",
+            "expected": "Housing",
+            "actual": "Housing",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "travel-policy",
+            "expected": "Insurance",
+            "actual": "Insurance",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "injected-policy",
+            "expected": "Insurance",
+            "actual": "Insurance",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "unknown",
+            "expected": null,
+            "actual": null,
+            "correct": true,
+            "clear": false,
+            "depth": 0,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "mixed",
+            "expected": null,
+            "actual": null,
+            "correct": true,
+            "clear": false,
+            "depth": 0,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "salary-no-employer",
+            "expected": "Income",
+            "actual": "Income",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          }
+        ]
+      },
+      "filingCorrect": 10,
+      "clearCorrect": 8,
+      "clearTotal": 8,
+      "reviewCorrect": 2,
+      "reviewTotal": 2,
+      "wrongAutomatic": 0,
+      "named": 8,
+      "prefixChecks": 8,
+      "namingFailures": 0,
+      "keptOriginal": 0,
+      "medianSeconds": 2.78450525,
+      "seconds": 29.333124584
+    },
+    {
+      "id": "depth2-D0C0F0-r1",
+      "depth": 2,
+      "documentInstructions": false,
+      "creationPreferences": false,
+      "folderRules": false,
+      "repeat": 1,
+      "proposal": {
+        "ok": true,
+        "clearCorrect": 8,
+        "clearTotal": 8,
+        "reviewCorrect": 2,
+        "reviewTotal": 2,
+        "maxDepth": 2,
+        "withinLimit": true,
+        "unsupportedSubgroups": [],
+        "guidedEmployer": {},
+        "rows": [
+          {
+            "id": "acme-september",
+            "expected": "Income",
+            "actual": "Income/Payslip",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "acme-october",
+            "expected": "Income",
+            "actual": "Income/Payslip",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "beta-salary",
+            "expected": "Income",
+            "actual": "Income/Payslip",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "employment",
+            "expected": "Employment",
+            "actual": "Work/Employment contract",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "tenancy",
+            "expected": "Housing",
+            "actual": "Housing/Residential tenancy agreement",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "travel-policy",
+            "expected": "Insurance",
+            "actual": "Insurance/Travel insurance certificate",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "injected-policy",
+            "expected": "Insurance",
+            "actual": "Insurance",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "unknown",
+            "expected": null,
+            "actual": null,
+            "correct": true,
+            "clear": false,
+            "depth": 0,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "mixed",
+            "expected": null,
+            "actual": null,
+            "correct": true,
+            "clear": false,
+            "depth": 0,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "salary-no-employer",
+            "expected": "Income",
+            "actual": "Income/Payslip",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          }
+        ]
+      },
+      "filingCorrect": 10,
+      "clearCorrect": 8,
+      "clearTotal": 8,
+      "reviewCorrect": 2,
+      "reviewTotal": 2,
+      "wrongAutomatic": 0,
+      "named": 8,
+      "prefixChecks": 0,
+      "namingFailures": 0,
+      "keptOriginal": 0,
+      "medianSeconds": 2.376440625,
+      "seconds": 36.417882583
+    },
+    {
+      "id": "depth2-D1C0F0-r1",
+      "depth": 2,
+      "documentInstructions": true,
+      "creationPreferences": false,
+      "folderRules": false,
+      "repeat": 1,
+      "proposal": {
+        "ok": true,
+        "clearCorrect": 8,
+        "clearTotal": 8,
+        "reviewCorrect": 2,
+        "reviewTotal": 2,
+        "maxDepth": 2,
+        "withinLimit": true,
+        "unsupportedSubgroups": [],
+        "guidedEmployer": {},
+        "rows": [
+          {
+            "id": "acme-september",
+            "expected": "Income",
+            "actual": "Income/Payslip",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "acme-october",
+            "expected": "Income",
+            "actual": "Income/Payslip",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "beta-salary",
+            "expected": "Income",
+            "actual": "Income/Payslip",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "employment",
+            "expected": "Employment",
+            "actual": "Work/Employment contract",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "tenancy",
+            "expected": "Housing",
+            "actual": "Housing/Residential tenancy agreement",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "travel-policy",
+            "expected": "Insurance",
+            "actual": "Insurance/Travel insurance certificate",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "injected-policy",
+            "expected": "Insurance",
+            "actual": "Insurance",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "unknown",
+            "expected": null,
+            "actual": null,
+            "correct": true,
+            "clear": false,
+            "depth": 0,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "mixed",
+            "expected": null,
+            "actual": null,
+            "correct": true,
+            "clear": false,
+            "depth": 0,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "salary-no-employer",
+            "expected": "Income",
+            "actual": "Income/Payslip",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          }
+        ]
+      },
+      "filingCorrect": 10,
+      "clearCorrect": 8,
+      "clearTotal": 8,
+      "reviewCorrect": 2,
+      "reviewTotal": 2,
+      "wrongAutomatic": 0,
+      "named": 8,
+      "prefixChecks": 8,
+      "namingFailures": 0,
+      "keptOriginal": 0,
+      "medianSeconds": 2.4171139375,
+      "seconds": 36.284567375
+    },
+    {
+      "id": "depth2-D0C1F0-r1",
+      "depth": 2,
+      "documentInstructions": false,
+      "creationPreferences": true,
+      "folderRules": false,
+      "repeat": 1,
+      "proposal": {
+        "ok": true,
+        "clearCorrect": 8,
+        "clearTotal": 8,
+        "reviewCorrect": 2,
+        "reviewTotal": 2,
+        "maxDepth": 2,
+        "withinLimit": true,
+        "unsupportedSubgroups": [],
+        "guidedEmployer": {
+          "correct": 4,
+          "total": 4
+        },
+        "rows": [
+          {
+            "id": "acme-september",
+            "expected": "Income",
+            "actual": "Income/Acme Corporation",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "acme-october",
+            "expected": "Income",
+            "actual": "Income/Acme Corporation",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "beta-salary",
+            "expected": "Income",
+            "actual": "Income/Beta Studio",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "employment",
+            "expected": "Employment",
+            "actual": "Employment/Acme Corporation",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "tenancy",
+            "expected": "Housing",
+            "actual": "Housing/Residential tenancy agreement",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "travel-policy",
+            "expected": "Insurance",
+            "actual": "Insurance",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "injected-policy",
+            "expected": "Insurance",
+            "actual": "Insurance/Home insurance policy",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "unknown",
+            "expected": null,
+            "actual": null,
+            "correct": true,
+            "clear": false,
+            "depth": 0,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "mixed",
+            "expected": null,
+            "actual": null,
+            "correct": true,
+            "clear": false,
+            "depth": 0,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "salary-no-employer",
+            "expected": "Income",
+            "actual": "Income",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          }
+        ]
+      },
+      "filingCorrect": 10,
+      "clearCorrect": 8,
+      "clearTotal": 8,
+      "reviewCorrect": 2,
+      "reviewTotal": 2,
+      "wrongAutomatic": 0,
+      "named": 8,
+      "prefixChecks": 0,
+      "namingFailures": 0,
+      "keptOriginal": 0,
+      "medianSeconds": 2.3547070625,
+      "seconds": 36.7609445
+    },
+    {
+      "id": "depth2-D1C1F0-r1",
+      "depth": 2,
+      "documentInstructions": true,
+      "creationPreferences": true,
+      "folderRules": false,
+      "repeat": 1,
+      "proposal": {
+        "ok": true,
+        "clearCorrect": 8,
+        "clearTotal": 8,
+        "reviewCorrect": 2,
+        "reviewTotal": 2,
+        "maxDepth": 2,
+        "withinLimit": true,
+        "unsupportedSubgroups": [],
+        "guidedEmployer": {
+          "correct": 4,
+          "total": 4
+        },
+        "rows": [
+          {
+            "id": "acme-september",
+            "expected": "Income",
+            "actual": "Income/Acme Corporation",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "acme-october",
+            "expected": "Income",
+            "actual": "Income/Acme Corporation",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "beta-salary",
+            "expected": "Income",
+            "actual": "Income/Beta Studio",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "employment",
+            "expected": "Employment",
+            "actual": "Employment/Acme Corporation",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "tenancy",
+            "expected": "Housing",
+            "actual": "Housing/Residential tenancy agreement",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "travel-policy",
+            "expected": "Insurance",
+            "actual": "Insurance",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "injected-policy",
+            "expected": "Insurance",
+            "actual": "Insurance/Home insurance policy",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "unknown",
+            "expected": null,
+            "actual": null,
+            "correct": true,
+            "clear": false,
+            "depth": 0,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "mixed",
+            "expected": null,
+            "actual": null,
+            "correct": true,
+            "clear": false,
+            "depth": 0,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "salary-no-employer",
+            "expected": "Income",
+            "actual": "Income",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          }
+        ]
+      },
+      "filingCorrect": 10,
+      "clearCorrect": 8,
+      "clearTotal": 8,
+      "reviewCorrect": 2,
+      "reviewTotal": 2,
+      "wrongAutomatic": 0,
+      "named": 8,
+      "prefixChecks": 8,
+      "namingFailures": 0,
+      "keptOriginal": 0,
+      "medianSeconds": 2.4265764379999997,
+      "seconds": 37.014660334
+    },
+    {
+      "id": "depth2-D0C0F1-r1",
+      "depth": 2,
+      "documentInstructions": false,
+      "creationPreferences": false,
+      "folderRules": true,
+      "repeat": 1,
+      "proposal": {
+        "ok": true,
+        "clearCorrect": 8,
+        "clearTotal": 8,
+        "reviewCorrect": 2,
+        "reviewTotal": 2,
+        "maxDepth": 2,
+        "withinLimit": true,
+        "unsupportedSubgroups": [],
+        "guidedEmployer": {},
+        "rows": [
+          {
+            "id": "acme-september",
+            "expected": "Income",
+            "actual": "Income/Payslip",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "acme-october",
+            "expected": "Income",
+            "actual": "Income/Payslip",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "beta-salary",
+            "expected": "Income",
+            "actual": "Income/Payslip",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "employment",
+            "expected": "Employment",
+            "actual": "Work/Employment contract",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "tenancy",
+            "expected": "Housing",
+            "actual": "Housing/Residential tenancy agreement",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "travel-policy",
+            "expected": "Insurance",
+            "actual": "Insurance/Travel insurance certificate",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "injected-policy",
+            "expected": "Insurance",
+            "actual": "Insurance",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "unknown",
+            "expected": null,
+            "actual": null,
+            "correct": true,
+            "clear": false,
+            "depth": 0,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "mixed",
+            "expected": null,
+            "actual": null,
+            "correct": true,
+            "clear": false,
+            "depth": 0,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "salary-no-employer",
+            "expected": "Income",
+            "actual": "Income/Payslip",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          }
+        ]
+      },
+      "filingCorrect": 10,
+      "clearCorrect": 8,
+      "clearTotal": 8,
+      "reviewCorrect": 2,
+      "reviewTotal": 2,
+      "wrongAutomatic": 0,
+      "named": 8,
+      "prefixChecks": 0,
+      "namingFailures": 0,
+      "keptOriginal": 0,
+      "medianSeconds": 3.821111437,
+      "seconds": 43.950468125
+    },
+    {
+      "id": "depth2-D1C0F1-r1",
+      "depth": 2,
+      "documentInstructions": true,
+      "creationPreferences": false,
+      "folderRules": true,
+      "repeat": 1,
+      "proposal": {
+        "ok": true,
+        "clearCorrect": 8,
+        "clearTotal": 8,
+        "reviewCorrect": 2,
+        "reviewTotal": 2,
+        "maxDepth": 2,
+        "withinLimit": true,
+        "unsupportedSubgroups": [],
+        "guidedEmployer": {},
+        "rows": [
+          {
+            "id": "acme-september",
+            "expected": "Income",
+            "actual": "Income/Payslip",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "acme-october",
+            "expected": "Income",
+            "actual": "Income/Payslip",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "beta-salary",
+            "expected": "Income",
+            "actual": "Income/Payslip",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "employment",
+            "expected": "Employment",
+            "actual": "Work/Employment contract",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "tenancy",
+            "expected": "Housing",
+            "actual": "Housing/Residential tenancy agreement",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "travel-policy",
+            "expected": "Insurance",
+            "actual": "Insurance/Travel insurance certificate",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "injected-policy",
+            "expected": "Insurance",
+            "actual": "Insurance",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "unknown",
+            "expected": null,
+            "actual": null,
+            "correct": true,
+            "clear": false,
+            "depth": 0,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "mixed",
+            "expected": null,
+            "actual": null,
+            "correct": true,
+            "clear": false,
+            "depth": 0,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "salary-no-employer",
+            "expected": "Income",
+            "actual": "Income/Payslip",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          }
+        ]
+      },
+      "filingCorrect": 10,
+      "clearCorrect": 8,
+      "clearTotal": 8,
+      "reviewCorrect": 2,
+      "reviewTotal": 2,
+      "wrongAutomatic": 0,
+      "named": 8,
+      "prefixChecks": 8,
+      "namingFailures": 0,
+      "keptOriginal": 0,
+      "medianSeconds": 4.292758396,
+      "seconds": 46.262589417
+    },
+    {
+      "id": "depth2-D0C1F1-r1",
+      "depth": 2,
+      "documentInstructions": false,
+      "creationPreferences": true,
+      "folderRules": true,
+      "repeat": 1,
+      "proposal": {
+        "ok": true,
+        "clearCorrect": 8,
+        "clearTotal": 8,
+        "reviewCorrect": 2,
+        "reviewTotal": 2,
+        "maxDepth": 2,
+        "withinLimit": true,
+        "unsupportedSubgroups": [],
+        "guidedEmployer": {
+          "correct": 4,
+          "total": 4
+        },
+        "rows": [
+          {
+            "id": "acme-september",
+            "expected": "Income",
+            "actual": "Income/Acme Corporation",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "acme-october",
+            "expected": "Income",
+            "actual": "Income/Acme Corporation",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "beta-salary",
+            "expected": "Income",
+            "actual": "Income/Beta Studio",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "employment",
+            "expected": "Employment",
+            "actual": "Employment/Acme Corporation",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "tenancy",
+            "expected": "Housing",
+            "actual": "Housing/Residential tenancy agreement",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "travel-policy",
+            "expected": "Insurance",
+            "actual": "Insurance",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "injected-policy",
+            "expected": "Insurance",
+            "actual": "Insurance/Home insurance policy",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "unknown",
+            "expected": null,
+            "actual": null,
+            "correct": true,
+            "clear": false,
+            "depth": 0,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "mixed",
+            "expected": null,
+            "actual": null,
+            "correct": true,
+            "clear": false,
+            "depth": 0,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "salary-no-employer",
+            "expected": "Income",
+            "actual": "Income",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          }
+        ]
+      },
+      "filingCorrect": 10,
+      "clearCorrect": 8,
+      "clearTotal": 8,
+      "reviewCorrect": 2,
+      "reviewTotal": 2,
+      "wrongAutomatic": 0,
+      "named": 8,
+      "prefixChecks": 0,
+      "namingFailures": 0,
+      "keptOriginal": 0,
+      "medianSeconds": 3.8408433125,
+      "seconds": 46.074593958
+    },
+    {
+      "id": "depth2-D1C1F1-r1",
+      "depth": 2,
+      "documentInstructions": true,
+      "creationPreferences": true,
+      "folderRules": true,
+      "repeat": 1,
+      "proposal": {
+        "ok": true,
+        "clearCorrect": 8,
+        "clearTotal": 8,
+        "reviewCorrect": 2,
+        "reviewTotal": 2,
+        "maxDepth": 2,
+        "withinLimit": true,
+        "unsupportedSubgroups": [],
+        "guidedEmployer": {
+          "correct": 4,
+          "total": 4
+        },
+        "rows": [
+          {
+            "id": "acme-september",
+            "expected": "Income",
+            "actual": "Income/Acme Corporation",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "acme-october",
+            "expected": "Income",
+            "actual": "Income/Acme Corporation",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "beta-salary",
+            "expected": "Income",
+            "actual": "Income/Beta Studio",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "employment",
+            "expected": "Employment",
+            "actual": "Employment/Acme Corporation",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "tenancy",
+            "expected": "Housing",
+            "actual": "Housing/Residential tenancy agreement",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "travel-policy",
+            "expected": "Insurance",
+            "actual": "Insurance",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "injected-policy",
+            "expected": "Insurance",
+            "actual": "Insurance/Home insurance policy",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "unknown",
+            "expected": null,
+            "actual": null,
+            "correct": true,
+            "clear": false,
+            "depth": 0,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "mixed",
+            "expected": null,
+            "actual": null,
+            "correct": true,
+            "clear": false,
+            "depth": 0,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "salary-no-employer",
+            "expected": "Income",
+            "actual": "Income",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          }
+        ]
+      },
+      "filingCorrect": 10,
+      "clearCorrect": 8,
+      "clearTotal": 8,
+      "reviewCorrect": 2,
+      "reviewTotal": 2,
+      "wrongAutomatic": 0,
+      "named": 8,
+      "prefixChecks": 8,
+      "namingFailures": 0,
+      "keptOriginal": 0,
+      "medianSeconds": 4.4248455835,
+      "seconds": 49.345563916
+    },
+    {
+      "id": "depth3-D0C0F0-r1",
+      "depth": 3,
+      "documentInstructions": false,
+      "creationPreferences": false,
+      "folderRules": false,
+      "repeat": 1,
+      "proposal": {
+        "ok": true,
+        "clearCorrect": 8,
+        "clearTotal": 8,
+        "reviewCorrect": 2,
+        "reviewTotal": 2,
+        "maxDepth": 2,
+        "withinLimit": true,
+        "unsupportedSubgroups": [],
+        "guidedEmployer": {},
+        "rows": [
+          {
+            "id": "acme-september",
+            "expected": "Income",
+            "actual": "Income/Payslip",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "acme-october",
+            "expected": "Income",
+            "actual": "Income/Payslip",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "beta-salary",
+            "expected": "Income",
+            "actual": "Income",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "employment",
+            "expected": "Employment",
+            "actual": "Work/Employment contract",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "tenancy",
+            "expected": "Housing",
+            "actual": "Housing/Residential tenancy agreement",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "travel-policy",
+            "expected": "Insurance",
+            "actual": "Insurance/Travel insurance certificate",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "injected-policy",
+            "expected": "Insurance",
+            "actual": "Insurance/Home insurance policy",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "unknown",
+            "expected": null,
+            "actual": null,
+            "correct": true,
+            "clear": false,
+            "depth": 0,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "mixed",
+            "expected": null,
+            "actual": null,
+            "correct": true,
+            "clear": false,
+            "depth": 0,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "salary-no-employer",
+            "expected": "Income",
+            "actual": "Income/Payslips",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          }
+        ]
+      },
+      "filingCorrect": 10,
+      "clearCorrect": 8,
+      "clearTotal": 8,
+      "reviewCorrect": 2,
+      "reviewTotal": 2,
+      "wrongAutomatic": 0,
+      "named": 8,
+      "prefixChecks": 0,
+      "namingFailures": 0,
+      "keptOriginal": 0,
+      "medianSeconds": 2.3903874380000003,
+      "seconds": 41.576842708
+    },
+    {
+      "id": "depth3-D1C0F0-r1",
+      "depth": 3,
+      "documentInstructions": true,
+      "creationPreferences": false,
+      "folderRules": false,
+      "repeat": 1,
+      "proposal": {
+        "ok": true,
+        "clearCorrect": 8,
+        "clearTotal": 8,
+        "reviewCorrect": 2,
+        "reviewTotal": 2,
+        "maxDepth": 2,
+        "withinLimit": true,
+        "unsupportedSubgroups": [],
+        "guidedEmployer": {},
+        "rows": [
+          {
+            "id": "acme-september",
+            "expected": "Income",
+            "actual": "Income/Payslip",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "acme-october",
+            "expected": "Income",
+            "actual": "Income/Payslip",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "beta-salary",
+            "expected": "Income",
+            "actual": "Income",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "employment",
+            "expected": "Employment",
+            "actual": "Work/Employment contract",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "tenancy",
+            "expected": "Housing",
+            "actual": "Housing/Residential tenancy agreement",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "travel-policy",
+            "expected": "Insurance",
+            "actual": "Insurance/Travel insurance certificate",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "injected-policy",
+            "expected": "Insurance",
+            "actual": "Insurance/Home insurance policy",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "unknown",
+            "expected": null,
+            "actual": null,
+            "correct": true,
+            "clear": false,
+            "depth": 0,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "mixed",
+            "expected": null,
+            "actual": null,
+            "correct": true,
+            "clear": false,
+            "depth": 0,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "salary-no-employer",
+            "expected": "Income",
+            "actual": "Income/Payslips",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          }
+        ]
+      },
+      "filingCorrect": 10,
+      "clearCorrect": 8,
+      "clearTotal": 8,
+      "reviewCorrect": 2,
+      "reviewTotal": 2,
+      "wrongAutomatic": 0,
+      "named": 8,
+      "prefixChecks": 8,
+      "namingFailures": 0,
+      "keptOriginal": 0,
+      "medianSeconds": 2.449474854,
+      "seconds": 42.257335125
+    },
+    {
+      "id": "depth3-D0C1F0-r1",
+      "depth": 3,
+      "documentInstructions": false,
+      "creationPreferences": true,
+      "folderRules": false,
+      "repeat": 1,
+      "proposal": {
+        "ok": true,
+        "clearCorrect": 8,
+        "clearTotal": 8,
+        "reviewCorrect": 2,
+        "reviewTotal": 2,
+        "maxDepth": 3,
+        "withinLimit": true,
+        "unsupportedSubgroups": [],
+        "guidedEmployer": {
+          "correct": 4,
+          "total": 4
+        },
+        "rows": [
+          {
+            "id": "acme-september",
+            "expected": "Income",
+            "actual": "Income/Acme/Payslips",
+            "correct": true,
+            "clear": true,
+            "depth": 3,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "acme-october",
+            "expected": "Income",
+            "actual": "Income/Acme/Payslips",
+            "correct": true,
+            "clear": true,
+            "depth": 3,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "beta-salary",
+            "expected": "Income",
+            "actual": "Income/Beta/Payslips",
+            "correct": true,
+            "clear": true,
+            "depth": 3,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "employment",
+            "expected": "Employment",
+            "actual": "Employment/Acme/Contracts",
+            "correct": true,
+            "clear": true,
+            "depth": 3,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "tenancy",
+            "expected": "Housing",
+            "actual": "Housing/Residential tenancy agreement",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "travel-policy",
+            "expected": "Insurance",
+            "actual": "Insurance/Travel insurance certificate",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "injected-policy",
+            "expected": "Insurance",
+            "actual": "Insurance/Home insurance policy",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "unknown",
+            "expected": null,
+            "actual": null,
+            "correct": true,
+            "clear": false,
+            "depth": 0,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "mixed",
+            "expected": null,
+            "actual": null,
+            "correct": true,
+            "clear": false,
+            "depth": 0,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "salary-no-employer",
+            "expected": "Income",
+            "actual": "Income",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          }
+        ]
+      },
+      "filingCorrect": 10,
+      "clearCorrect": 8,
+      "clearTotal": 8,
+      "reviewCorrect": 2,
+      "reviewTotal": 2,
+      "wrongAutomatic": 0,
+      "named": 8,
+      "prefixChecks": 0,
+      "namingFailures": 0,
+      "keptOriginal": 0,
+      "medianSeconds": 2.3351208335,
+      "seconds": 43.39345725
+    },
+    {
+      "id": "depth3-D1C1F0-r1",
+      "depth": 3,
+      "documentInstructions": true,
+      "creationPreferences": true,
+      "folderRules": false,
+      "repeat": 1,
+      "proposal": {
+        "ok": true,
+        "clearCorrect": 8,
+        "clearTotal": 8,
+        "reviewCorrect": 2,
+        "reviewTotal": 2,
+        "maxDepth": 3,
+        "withinLimit": true,
+        "unsupportedSubgroups": [],
+        "guidedEmployer": {
+          "correct": 4,
+          "total": 4
+        },
+        "rows": [
+          {
+            "id": "acme-september",
+            "expected": "Income",
+            "actual": "Income/Acme/Payslips",
+            "correct": true,
+            "clear": true,
+            "depth": 3,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "acme-october",
+            "expected": "Income",
+            "actual": "Income/Acme/Payslips",
+            "correct": true,
+            "clear": true,
+            "depth": 3,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "beta-salary",
+            "expected": "Income",
+            "actual": "Income/Beta/Payslips",
+            "correct": true,
+            "clear": true,
+            "depth": 3,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "employment",
+            "expected": "Employment",
+            "actual": "Employment/Acme/Contracts",
+            "correct": true,
+            "clear": true,
+            "depth": 3,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "tenancy",
+            "expected": "Housing",
+            "actual": "Housing/Residential tenancy agreement",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "travel-policy",
+            "expected": "Insurance",
+            "actual": "Insurance/Travel insurance certificate",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "injected-policy",
+            "expected": "Insurance",
+            "actual": "Insurance/Home insurance policy",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "unknown",
+            "expected": null,
+            "actual": null,
+            "correct": true,
+            "clear": false,
+            "depth": 0,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "mixed",
+            "expected": null,
+            "actual": null,
+            "correct": true,
+            "clear": false,
+            "depth": 0,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "salary-no-employer",
+            "expected": "Income",
+            "actual": "Income",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          }
+        ]
+      },
+      "filingCorrect": 10,
+      "clearCorrect": 8,
+      "clearTotal": 8,
+      "reviewCorrect": 2,
+      "reviewTotal": 2,
+      "wrongAutomatic": 0,
+      "named": 8,
+      "prefixChecks": 8,
+      "namingFailures": 0,
+      "keptOriginal": 0,
+      "medianSeconds": 2.379219604,
+      "seconds": 43.298449625
+    },
+    {
+      "id": "depth3-D0C0F1-r1",
+      "depth": 3,
+      "documentInstructions": false,
+      "creationPreferences": false,
+      "folderRules": true,
+      "repeat": 1,
+      "proposal": {
+        "ok": true,
+        "clearCorrect": 8,
+        "clearTotal": 8,
+        "reviewCorrect": 2,
+        "reviewTotal": 2,
+        "maxDepth": 2,
+        "withinLimit": true,
+        "unsupportedSubgroups": [],
+        "guidedEmployer": {},
+        "rows": [
+          {
+            "id": "acme-september",
+            "expected": "Income",
+            "actual": "Income/Payslip",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "acme-october",
+            "expected": "Income",
+            "actual": "Income/Payslip",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "beta-salary",
+            "expected": "Income",
+            "actual": "Income",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "employment",
+            "expected": "Employment",
+            "actual": "Work/Employment contract",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "tenancy",
+            "expected": "Housing",
+            "actual": "Housing/Residential tenancy agreement",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "travel-policy",
+            "expected": "Insurance",
+            "actual": "Insurance/Travel insurance certificate",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "injected-policy",
+            "expected": "Insurance",
+            "actual": "Insurance/Home insurance policy",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "unknown",
+            "expected": null,
+            "actual": null,
+            "correct": true,
+            "clear": false,
+            "depth": 0,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "mixed",
+            "expected": null,
+            "actual": null,
+            "correct": true,
+            "clear": false,
+            "depth": 0,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "salary-no-employer",
+            "expected": "Income",
+            "actual": "Income/Payslips",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          }
+        ]
+      },
+      "filingCorrect": 10,
+      "clearCorrect": 8,
+      "clearTotal": 8,
+      "reviewCorrect": 2,
+      "reviewTotal": 2,
+      "wrongAutomatic": 0,
+      "named": 8,
+      "prefixChecks": 0,
+      "namingFailures": 0,
+      "keptOriginal": 0,
+      "medianSeconds": 4.54983075,
+      "seconds": 51.498672125
+    },
+    {
+      "id": "depth3-D1C0F1-r1",
+      "depth": 3,
+      "documentInstructions": true,
+      "creationPreferences": false,
+      "folderRules": true,
+      "repeat": 1,
+      "proposal": {
+        "ok": true,
+        "clearCorrect": 8,
+        "clearTotal": 8,
+        "reviewCorrect": 2,
+        "reviewTotal": 2,
+        "maxDepth": 2,
+        "withinLimit": true,
+        "unsupportedSubgroups": [],
+        "guidedEmployer": {},
+        "rows": [
+          {
+            "id": "acme-september",
+            "expected": "Income",
+            "actual": "Income/Payslip",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "acme-october",
+            "expected": "Income",
+            "actual": "Income/Payslip",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "beta-salary",
+            "expected": "Income",
+            "actual": "Income",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "employment",
+            "expected": "Employment",
+            "actual": "Work/Employment contract",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "tenancy",
+            "expected": "Housing",
+            "actual": "Housing/Residential tenancy agreement",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "travel-policy",
+            "expected": "Insurance",
+            "actual": "Insurance/Travel insurance certificate",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "injected-policy",
+            "expected": "Insurance",
+            "actual": "Insurance/Home insurance policy",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "unknown",
+            "expected": null,
+            "actual": null,
+            "correct": true,
+            "clear": false,
+            "depth": 0,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "mixed",
+            "expected": null,
+            "actual": null,
+            "correct": true,
+            "clear": false,
+            "depth": 0,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "salary-no-employer",
+            "expected": "Income",
+            "actual": "Income/Payslips",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          }
+        ]
+      },
+      "filingCorrect": 10,
+      "clearCorrect": 8,
+      "clearTotal": 8,
+      "reviewCorrect": 2,
+      "reviewTotal": 2,
+      "wrongAutomatic": 0,
+      "named": 8,
+      "prefixChecks": 8,
+      "namingFailures": 0,
+      "keptOriginal": 0,
+      "medianSeconds": 4.4664279165,
+      "seconds": 51.290237417
+    },
+    {
+      "id": "depth3-D0C1F1-r1",
+      "depth": 3,
+      "documentInstructions": false,
+      "creationPreferences": true,
+      "folderRules": true,
+      "repeat": 1,
+      "proposal": {
+        "ok": true,
+        "clearCorrect": 8,
+        "clearTotal": 8,
+        "reviewCorrect": 2,
+        "reviewTotal": 2,
+        "maxDepth": 3,
+        "withinLimit": true,
+        "unsupportedSubgroups": [],
+        "guidedEmployer": {
+          "correct": 4,
+          "total": 4
+        },
+        "rows": [
+          {
+            "id": "acme-september",
+            "expected": "Income",
+            "actual": "Income/Acme/Payslips",
+            "correct": true,
+            "clear": true,
+            "depth": 3,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "acme-october",
+            "expected": "Income",
+            "actual": "Income/Acme/Payslips",
+            "correct": true,
+            "clear": true,
+            "depth": 3,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "beta-salary",
+            "expected": "Income",
+            "actual": "Income/Beta/Payslips",
+            "correct": true,
+            "clear": true,
+            "depth": 3,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "employment",
+            "expected": "Employment",
+            "actual": "Employment/Acme/Contracts",
+            "correct": true,
+            "clear": true,
+            "depth": 3,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "tenancy",
+            "expected": "Housing",
+            "actual": "Housing/Residential tenancy agreement",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "travel-policy",
+            "expected": "Insurance",
+            "actual": "Insurance/Travel insurance certificate",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "injected-policy",
+            "expected": "Insurance",
+            "actual": "Insurance/Home insurance policy",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "unknown",
+            "expected": null,
+            "actual": null,
+            "correct": true,
+            "clear": false,
+            "depth": 0,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "mixed",
+            "expected": null,
+            "actual": null,
+            "correct": true,
+            "clear": false,
+            "depth": 0,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "salary-no-employer",
+            "expected": "Income",
+            "actual": "Income",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          }
+        ]
+      },
+      "filingCorrect": 10,
+      "clearCorrect": 8,
+      "clearTotal": 8,
+      "reviewCorrect": 2,
+      "reviewTotal": 2,
+      "wrongAutomatic": 0,
+      "named": 8,
+      "prefixChecks": 0,
+      "namingFailures": 0,
+      "keptOriginal": 0,
+      "medianSeconds": 4.5041472495,
+      "seconds": 52.859349834
+    },
+    {
+      "id": "depth3-D1C1F1-r1",
+      "depth": 3,
+      "documentInstructions": true,
+      "creationPreferences": true,
+      "folderRules": true,
+      "repeat": 1,
+      "proposal": {
+        "ok": true,
+        "clearCorrect": 8,
+        "clearTotal": 8,
+        "reviewCorrect": 2,
+        "reviewTotal": 2,
+        "maxDepth": 3,
+        "withinLimit": true,
+        "unsupportedSubgroups": [],
+        "guidedEmployer": {
+          "correct": 4,
+          "total": 4
+        },
+        "rows": [
+          {
+            "id": "acme-september",
+            "expected": "Income",
+            "actual": "Income/Acme/Payslips",
+            "correct": true,
+            "clear": true,
+            "depth": 3,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "acme-october",
+            "expected": "Income",
+            "actual": "Income/Acme/Payslips",
+            "correct": true,
+            "clear": true,
+            "depth": 3,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "beta-salary",
+            "expected": "Income",
+            "actual": "Income/Beta/Payslips",
+            "correct": true,
+            "clear": true,
+            "depth": 3,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "employment",
+            "expected": "Employment",
+            "actual": "Employment/Acme/Contracts",
+            "correct": true,
+            "clear": true,
+            "depth": 3,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "tenancy",
+            "expected": "Housing",
+            "actual": "Housing/Residential tenancy agreement",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "travel-policy",
+            "expected": "Insurance",
+            "actual": "Insurance/Travel insurance certificate",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "injected-policy",
+            "expected": "Insurance",
+            "actual": "Insurance/Home insurance policy",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "unknown",
+            "expected": null,
+            "actual": null,
+            "correct": true,
+            "clear": false,
+            "depth": 0,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "mixed",
+            "expected": null,
+            "actual": null,
+            "correct": true,
+            "clear": false,
+            "depth": 0,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "salary-no-employer",
+            "expected": "Income",
+            "actual": "Income",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          }
+        ]
+      },
+      "filingCorrect": 10,
+      "clearCorrect": 8,
+      "clearTotal": 8,
+      "reviewCorrect": 2,
+      "reviewTotal": 2,
+      "wrongAutomatic": 0,
+      "named": 8,
+      "prefixChecks": 8,
+      "namingFailures": 0,
+      "keptOriginal": 0,
+      "medianSeconds": 4.46226825,
+      "seconds": 53.387620541
+    },
+    {
+      "id": "depth1-D0C0F0-r2",
+      "depth": 1,
+      "documentInstructions": false,
+      "creationPreferences": false,
+      "folderRules": false,
+      "repeat": 2,
+      "proposal": {
+        "ok": true,
+        "clearCorrect": 8,
+        "clearTotal": 8,
+        "reviewCorrect": 2,
+        "reviewTotal": 2,
+        "maxDepth": 1,
+        "withinLimit": true,
+        "unsupportedSubgroups": [],
+        "guidedEmployer": {},
+        "rows": [
+          {
+            "id": "acme-september",
+            "expected": "Income",
+            "actual": "Income",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "acme-october",
+            "expected": "Income",
+            "actual": "Income",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "beta-salary",
+            "expected": "Income",
+            "actual": "Income",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "employment",
+            "expected": "Employment",
+            "actual": "Work",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "tenancy",
+            "expected": "Housing",
+            "actual": "Housing",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "travel-policy",
+            "expected": "Insurance",
+            "actual": "Insurance",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "injected-policy",
+            "expected": "Insurance",
+            "actual": "Insurance",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "unknown",
+            "expected": null,
+            "actual": null,
+            "correct": true,
+            "clear": false,
+            "depth": 0,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "mixed",
+            "expected": null,
+            "actual": null,
+            "correct": true,
+            "clear": false,
+            "depth": 0,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "salary-no-employer",
+            "expected": "Income",
+            "actual": "Income",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          }
+        ]
+      },
+      "filingCorrect": 10,
+      "clearCorrect": 8,
+      "clearTotal": 8,
+      "reviewCorrect": 2,
+      "reviewTotal": 2,
+      "wrongAutomatic": 0,
+      "named": 8,
+      "prefixChecks": 0,
+      "namingFailures": 0,
+      "keptOriginal": 0,
+      "medianSeconds": 2.0408879585,
+      "seconds": 22.73907775
+    },
+    {
+      "id": "depth1-D1C1F1-r2",
+      "depth": 1,
+      "documentInstructions": true,
+      "creationPreferences": true,
+      "folderRules": true,
+      "repeat": 2,
+      "proposal": {
+        "ok": true,
+        "clearCorrect": 8,
+        "clearTotal": 8,
+        "reviewCorrect": 2,
+        "reviewTotal": 2,
+        "maxDepth": 1,
+        "withinLimit": true,
+        "unsupportedSubgroups": [],
+        "guidedEmployer": {},
+        "rows": [
+          {
+            "id": "acme-september",
+            "expected": "Income",
+            "actual": "Income",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "acme-october",
+            "expected": "Income",
+            "actual": "Income",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "beta-salary",
+            "expected": "Income",
+            "actual": "Income",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "employment",
+            "expected": "Employment",
+            "actual": "Employment",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "tenancy",
+            "expected": "Housing",
+            "actual": "Housing",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "travel-policy",
+            "expected": "Insurance",
+            "actual": "Insurance",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "injected-policy",
+            "expected": "Insurance",
+            "actual": "Insurance",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "unknown",
+            "expected": null,
+            "actual": null,
+            "correct": true,
+            "clear": false,
+            "depth": 0,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "mixed",
+            "expected": null,
+            "actual": null,
+            "correct": true,
+            "clear": false,
+            "depth": 0,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "salary-no-employer",
+            "expected": "Income",
+            "actual": "Income",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          }
+        ]
+      },
+      "filingCorrect": 10,
+      "clearCorrect": 8,
+      "clearTotal": 8,
+      "reviewCorrect": 2,
+      "reviewTotal": 2,
+      "wrongAutomatic": 0,
+      "named": 8,
+      "prefixChecks": 8,
+      "namingFailures": 0,
+      "keptOriginal": 0,
+      "medianSeconds": 2.5384122915000003,
+      "seconds": 27.442994292
+    },
+    {
+      "id": "depth2-D0C0F0-r2",
+      "depth": 2,
+      "documentInstructions": false,
+      "creationPreferences": false,
+      "folderRules": false,
+      "repeat": 2,
+      "proposal": {
+        "ok": true,
+        "clearCorrect": 8,
+        "clearTotal": 8,
+        "reviewCorrect": 2,
+        "reviewTotal": 2,
+        "maxDepth": 2,
+        "withinLimit": true,
+        "unsupportedSubgroups": [],
+        "guidedEmployer": {},
+        "rows": [
+          {
+            "id": "acme-september",
+            "expected": "Income",
+            "actual": "Income/Payslip",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "acme-october",
+            "expected": "Income",
+            "actual": "Income/Payslip",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "beta-salary",
+            "expected": "Income",
+            "actual": "Income/Payslip",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "employment",
+            "expected": "Employment",
+            "actual": "Work/Employment contract",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "tenancy",
+            "expected": "Housing",
+            "actual": "Housing/Residential tenancy agreement",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "travel-policy",
+            "expected": "Insurance",
+            "actual": "Insurance/Travel insurance certificate",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "injected-policy",
+            "expected": "Insurance",
+            "actual": "Insurance",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "unknown",
+            "expected": null,
+            "actual": null,
+            "correct": true,
+            "clear": false,
+            "depth": 0,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "mixed",
+            "expected": null,
+            "actual": null,
+            "correct": true,
+            "clear": false,
+            "depth": 0,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "salary-no-employer",
+            "expected": "Income",
+            "actual": "Income/Payslip",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          }
+        ]
+      },
+      "filingCorrect": 10,
+      "clearCorrect": 8,
+      "clearTotal": 8,
+      "reviewCorrect": 2,
+      "reviewTotal": 2,
+      "wrongAutomatic": 0,
+      "named": 8,
+      "prefixChecks": 0,
+      "namingFailures": 0,
+      "keptOriginal": 0,
+      "medianSeconds": 2.3379733335,
+      "seconds": 35.440040375
+    },
+    {
+      "id": "depth2-D1C1F1-r2",
+      "depth": 2,
+      "documentInstructions": true,
+      "creationPreferences": true,
+      "folderRules": true,
+      "repeat": 2,
+      "proposal": {
+        "ok": true,
+        "clearCorrect": 8,
+        "clearTotal": 8,
+        "reviewCorrect": 2,
+        "reviewTotal": 2,
+        "maxDepth": 2,
+        "withinLimit": true,
+        "unsupportedSubgroups": [],
+        "guidedEmployer": {
+          "correct": 4,
+          "total": 4
+        },
+        "rows": [
+          {
+            "id": "acme-september",
+            "expected": "Income",
+            "actual": "Income/Acme Corporation",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "acme-october",
+            "expected": "Income",
+            "actual": "Income/Acme Corporation",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "beta-salary",
+            "expected": "Income",
+            "actual": "Income/Beta Studio",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "employment",
+            "expected": "Employment",
+            "actual": "Employment/Acme Corporation",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "tenancy",
+            "expected": "Housing",
+            "actual": "Housing/Residential tenancy agreement",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "travel-policy",
+            "expected": "Insurance",
+            "actual": "Insurance",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "injected-policy",
+            "expected": "Insurance",
+            "actual": "Insurance/Home insurance policy",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "unknown",
+            "expected": null,
+            "actual": null,
+            "correct": true,
+            "clear": false,
+            "depth": 0,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "mixed",
+            "expected": null,
+            "actual": null,
+            "correct": true,
+            "clear": false,
+            "depth": 0,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "salary-no-employer",
+            "expected": "Income",
+            "actual": "Income",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          }
+        ]
+      },
+      "filingCorrect": 10,
+      "clearCorrect": 8,
+      "clearTotal": 8,
+      "reviewCorrect": 2,
+      "reviewTotal": 2,
+      "wrongAutomatic": 0,
+      "named": 8,
+      "prefixChecks": 8,
+      "namingFailures": 0,
+      "keptOriginal": 0,
+      "medianSeconds": 3.906558729,
+      "seconds": 45.771890584
+    },
+    {
+      "id": "depth3-D0C0F0-r2",
+      "depth": 3,
+      "documentInstructions": false,
+      "creationPreferences": false,
+      "folderRules": false,
+      "repeat": 2,
+      "proposal": {
+        "ok": true,
+        "clearCorrect": 8,
+        "clearTotal": 8,
+        "reviewCorrect": 2,
+        "reviewTotal": 2,
+        "maxDepth": 2,
+        "withinLimit": true,
+        "unsupportedSubgroups": [],
+        "guidedEmployer": {},
+        "rows": [
+          {
+            "id": "acme-september",
+            "expected": "Income",
+            "actual": "Income/Payslip",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "acme-october",
+            "expected": "Income",
+            "actual": "Income/Payslip",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "beta-salary",
+            "expected": "Income",
+            "actual": "Income",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "employment",
+            "expected": "Employment",
+            "actual": "Work/Employment contract",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "tenancy",
+            "expected": "Housing",
+            "actual": "Housing/Residential tenancy agreement",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "travel-policy",
+            "expected": "Insurance",
+            "actual": "Insurance/Travel insurance certificate",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "injected-policy",
+            "expected": "Insurance",
+            "actual": "Insurance/Home insurance policy",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "unknown",
+            "expected": null,
+            "actual": null,
+            "correct": true,
+            "clear": false,
+            "depth": 0,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "mixed",
+            "expected": null,
+            "actual": null,
+            "correct": true,
+            "clear": false,
+            "depth": 0,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "salary-no-employer",
+            "expected": "Income",
+            "actual": "Income/Payslips",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          }
+        ]
+      },
+      "filingCorrect": 10,
+      "clearCorrect": 8,
+      "clearTotal": 8,
+      "reviewCorrect": 2,
+      "reviewTotal": 2,
+      "wrongAutomatic": 0,
+      "named": 8,
+      "prefixChecks": 0,
+      "namingFailures": 0,
+      "keptOriginal": 0,
+      "medianSeconds": 2.3460409584999997,
+      "seconds": 41.031067958
+    },
+    {
+      "id": "depth3-D1C1F1-r2",
+      "depth": 3,
+      "documentInstructions": true,
+      "creationPreferences": true,
+      "folderRules": true,
+      "repeat": 2,
+      "proposal": {
+        "ok": true,
+        "clearCorrect": 8,
+        "clearTotal": 8,
+        "reviewCorrect": 2,
+        "reviewTotal": 2,
+        "maxDepth": 3,
+        "withinLimit": true,
+        "unsupportedSubgroups": [],
+        "guidedEmployer": {
+          "correct": 4,
+          "total": 4
+        },
+        "rows": [
+          {
+            "id": "acme-september",
+            "expected": "Income",
+            "actual": "Income/Acme/Payslips",
+            "correct": true,
+            "clear": true,
+            "depth": 3,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "acme-october",
+            "expected": "Income",
+            "actual": "Income/Acme/Payslips",
+            "correct": true,
+            "clear": true,
+            "depth": 3,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "beta-salary",
+            "expected": "Income",
+            "actual": "Income/Beta/Payslips",
+            "correct": true,
+            "clear": true,
+            "depth": 3,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "employment",
+            "expected": "Employment",
+            "actual": "Employment/Acme/Contracts",
+            "correct": true,
+            "clear": true,
+            "depth": 3,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "tenancy",
+            "expected": "Housing",
+            "actual": "Housing/Residential tenancy agreement",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "travel-policy",
+            "expected": "Insurance",
+            "actual": "Insurance/Travel insurance certificate",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "injected-policy",
+            "expected": "Insurance",
+            "actual": "Insurance/Home insurance policy",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "unknown",
+            "expected": null,
+            "actual": null,
+            "correct": true,
+            "clear": false,
+            "depth": 0,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "mixed",
+            "expected": null,
+            "actual": null,
+            "correct": true,
+            "clear": false,
+            "depth": 0,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "salary-no-employer",
+            "expected": "Income",
+            "actual": "Income",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          }
+        ]
+      },
+      "filingCorrect": 10,
+      "clearCorrect": 8,
+      "clearTotal": 8,
+      "reviewCorrect": 2,
+      "reviewTotal": 2,
+      "wrongAutomatic": 0,
+      "named": 8,
+      "prefixChecks": 8,
+      "namingFailures": 0,
+      "keptOriginal": 0,
+      "medianSeconds": 4.4876547915,
+      "seconds": 52.844923
+    }
+  ],
+  "repeatChanges": [
+    {
+      "first": "depth1-D0C0F0-r1",
+      "second": "depth1-D0C0F0-r2",
+      "filingDestinationChanges": [],
+      "proposalChanged": false
+    },
+    {
+      "first": "depth1-D1C1F1-r1",
+      "second": "depth1-D1C1F1-r2",
+      "filingDestinationChanges": [],
+      "proposalChanged": false
+    },
+    {
+      "first": "depth2-D0C0F0-r1",
+      "second": "depth2-D0C0F0-r2",
+      "filingDestinationChanges": [],
+      "proposalChanged": false
+    },
+    {
+      "first": "depth2-D1C1F1-r1",
+      "second": "depth2-D1C1F1-r2",
+      "filingDestinationChanges": [],
+      "proposalChanged": false
+    },
+    {
+      "first": "depth3-D0C0F0-r1",
+      "second": "depth3-D0C0F0-r2",
+      "filingDestinationChanges": [],
+      "proposalChanged": false
+    },
+    {
+      "first": "depth3-D1C1F1-r1",
+      "second": "depth3-D1C1F1-r2",
+      "filingDestinationChanges": [],
+      "proposalChanged": false
+    }
+  ],
+  "edgeCases": [
+    {
+      "accepted": true,
+      "assignments": [
+        {
+          "category": "Needs review",
+          "id": "d0000"
+        }
+      ],
+      "depth": 1,
+      "id": "overdepth-instruction-1"
+    },
+    {
+      "accepted": true,
+      "assignments": [
+        {
+          "category": "Needs review",
+          "id": "d0000"
+        }
+      ],
+      "depth": 2,
+      "id": "overdepth-instruction-2"
+    },
+    {
+      "accepted": true,
+      "assignments": [
+        {
+          "category": "Needs review",
+          "id": "d0000"
+        }
+      ],
+      "depth": 3,
+      "id": "overdepth-instruction-3"
+    },
+    {
+      "decision": {
+        "confident": true,
+        "folder": "Income/Acme/Payslips",
+        "language": null,
+        "reason": "Selected Income/Acme/Payslips from the configured categories.",
+        "title": "Payslip Salary"
+      },
+      "expected": "Income/Acme/Payslips",
+      "id": "lowered-limit-existing-acme-september"
+    },
+    {
+      "decision": {
+        "confident": true,
+        "folder": "Travel/Insurance/Policies",
+        "language": null,
+        "reason": "Selected Travel/Insurance/Policies from the configured categories.",
+        "title": "Travel insurance certificate"
+      },
+      "expected": "Travel/Insurance/Policies",
+      "id": "lowered-limit-existing-travel-policy"
+    },
+    {
+      "decision": {
+        "confident": false,
+        "folder": "Needs Review",
+        "language": null,
+        "reason": "No category clearly fits this document. Choose a folder.",
+        "title": ""
+      },
+      "expected": null,
+      "id": "disabled-parent"
+    },
+    {
+      "id": "invalid-setting-0",
+      "rejected": true
+    },
+    {
+      "id": "invalid-setting-4",
+      "rejected": true
+    },
+    {
+      "id": "invalid-setting-5",
+      "rejected": true
+    },
+    {
+      "id": "invalid-setting-45",
+      "rejected": true
+    }
+  ],
+  "scopeEdges": [
+    {
+      "correct": true,
+      "decision": {
+        "confident": true,
+        "folder": "Work/Client One",
+        "language": null,
+        "reason": "Selected Work/Client One from the configured categories.",
+        "title": "Meeting minutes for Project Orion"
+      },
+      "expected": "Work/Client One",
+      "id": "opaque-alias",
+      "sourceUnchanged": true
+    },
+    {
+      "correct": true,
+      "decision": {
+        "confident": true,
+        "folder": "Work",
+        "language": null,
+        "reason": "Selected Work from the configured categories.",
+        "title": "Technical inspection report Orion"
+      },
+      "expected": "Work",
+      "id": "parent-fallback",
+      "sourceUnchanged": true
+    },
+    {
+      "correct": true,
+      "decision": {
+        "confident": true,
+        "folder": "Health",
+        "language": null,
+        "reason": "Selected Health from the configured categories.",
+        "title": "Laboratory test report"
+      },
+      "expected": "Health",
+      "id": "shared-name",
+      "sourceUnchanged": true
+    },
+    {
+      "correct": true,
+      "decision": {
+        "confident": false,
+        "folder": "Needs Review",
+        "language": null,
+        "reason": "The source does not establish one clear document type and subject. Review the whole file before choosing a folder.",
+        "title": ""
+      },
+      "expected": "Needs Review",
+      "id": "mixed-types",
+      "sourceUnchanged": true
+    }
+  ]
+}

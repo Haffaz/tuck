@@ -1,0 +1,54 @@
+[WebServer] (node:98656) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 37 tests using 5 workers
+
+(node:98669) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:98673) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:98672) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:98670) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:98671) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   3 tests/app.spec.ts:343:1 › editing clears bulk selection but can be filed directly (2.0s)
+  ✓   5 tests/app.spec.ts:360:3 › filing stops when changeRootOnUpdate (2.1s)
+  ✓   4 tests/app.spec.ts:260:1 › fallback suggestions can still be organized individually (2.1s)
+  ✓   2 tests/app.spec.ts:360:3 › filing stops when failUpdate (2.1s)
+  ✓   1 tests/app.spec.ts:296:1 › an uncertain file is validated and filed with one action (2.1s)
+  ✓  10 tests/app.spec.ts:498:1 › introduction explains automatic filing and session lifetime (712ms)
+  ✓   6 tests/app.spec.ts:385:1 › category picker closes with Escape and outside clicks (857ms)
+  ✓   7 tests/app.spec.ts:407:1 › skip and clear never invoke organize and unlock destination picker (1.1s)
+  ✓   9 tests/app.spec.ts:468:1 › disk preferences refresh without replacing unsaved edits (1.4s)
+  ✓  12 tests/app.spec.ts:538:1 › review UI screenshot (883ms)
+  ✓   8 tests/app.spec.ts:436:1 › folder prompts and switches remain editable (1.8s)
+  ✓  13 tests/app.spec.ts:564:1 › privacy is visible and stale language suggestions are hidden (778ms)
+  ✓  11 tests/app.spec.ts:515:1 › content scrolls while the sidebar and header stay fixed (1.6s)
+  ✓  15 tests/app.spec.ts:667:1 › discarding suggested categories leaves configuration untouched (686ms)
+  ✓  16 tests/app.spec.ts:685:1 › folder selection maps first and waits for Start Tuck with optional watching (766ms)
+  ✓  14 tests/app.spec.ts:615:1 › category suggestions are editable and create folders only on approval (1.3s)
+  ✓  17 tests/app.spec.ts:730:1 › AI folder descriptions remain editable drafts until Save rules (1.4s)
+  ✓  19 tests/app.spec.ts:818:1 › canceling an example and dismissing a rule check do not save (1.4s)
+  ✓  18 tests/app.spec.ts:767:1 › remembered examples are editable rule drafts and saving is explicit (1.9s)
+  ✓  22 tests/app.spec.ts:913:1 › Overview starts with one clear folder action (1.2s)
+  ✓  20 tests/app.spec.ts:844:1 › rule checks add editable clarifications and invalidate stale suggestions (2.1s)
+  ✓  21 tests/app.spec.ts:884:1 › rule editing waits for an active check and later edits invalidate its result (2.8s)
+  ✓  23 tests/app.spec.ts:932:1 › a saved folder starts with one click and maps before filing (2.6s)
+  ✓  25 tests/app.spec.ts:990:1 › a failed startup read never starts automatic filing (2.1s)
+  ✓  24 tests/app.spec.ts:959:1 › successful documents stay in activity while exceptions stay actionable (2.4s)
+  ✓  26 tests/app.spec.ts:1010:1 › category edits wait for startup reading (2.5s)
+  ✓  27 tests/app.spec.ts:1050:1 › Overview tree edits nested rules without changing precedence or filing (2.3s)
+  ✓  28 tests/app.spec.ts:1109:1 › tree shows inherited disabled state and can discard rule changes (1.8s)
+  ✓  30 tests/app.spec.ts:1190:1 › running Overview exposes the same folder tree on demand (1.6s)
+  ✓  31 tests/app.spec.ts:1212:1 › document name opens native preview without filing (1.3s)
+  ✓  29 tests/app.spec.ts:1146:1 › root rules and new categories are editable directly in Overview (2.2s)
+  ✓  32 tests/app.spec.ts:1227:1 › custom connection uses any model ID and keeps its API key out of preferences (2.0s)
+  ✓  34 tests/app.spec.ts:1300:1 › settings own nesting and visible instructions, with no naming toggle (1.6s)
+  ✓  33 tests/app.spec.ts:1277:1 › unavailable custom provider stays selected without changing saved settings (1.8s)
+  ✓  35 tests/app.spec.ts:1341:1 › nesting is an explicit draft and lowering it preserves existing folder rules (1.7s)
+  ✓  36 tests/app.spec.ts:1379:1 › macOS layout is clear at standard and minimum sizes and respects reduced motion (1.4s)
+  ✓  37 tests/app.spec.ts:1445:1 › partial suggestions show coverage and file reasons before approval (895ms)
+
+  37 passed (15.1s)

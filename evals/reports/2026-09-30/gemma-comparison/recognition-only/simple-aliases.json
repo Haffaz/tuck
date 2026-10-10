@@ -1,0 +1,76 @@
+{
+  "s1/D1": [
+    "Residence Permit",
+    "Residence Permit Decision",
+    "Decision on Residence Permit",
+    "Immigration Decision",
+    "Residence Permit Approval",
+    "Residence Permit Approval Decision"
+  ],
+  "s2/D1": [
+    "Employment Certificate",
+    "Certificate of Employment",
+    "Employment Verification",
+    "Employment Verification Letter"
+  ],
+  "s3/D1": [
+    "Home Insurance Policy",
+    "Home Insurance Certificate",
+    "Home Insurance Policy Document",
+    "Home Insurance Policy Certificate"
+  ],
+  "s4/D1": [
+    "Bank Statement",
+    "Bank Account Statement",
+    "Account Statement"
+  ],
+  "s5/D1": [
+    "Rental Agreement",
+    "Residential Rental Agreement",
+    "Residential Lease Agreement",
+    "Residential Tenancy Agreement",
+    "Tenancy Agreement",
+    "Lease Agreement",
+    "Residential Lease",
+    "Apartment Rental Agreement"
+  ],
+  "s6/D1": [
+    "Unknown",
+    "Unidentified",
+    "Undetermined"
+  ],
+  "r1/D1": [
+    "Immigration Decision",
+    "Immigration Decision Letter",
+    "Residence Permit Decision",
+    "Decision on Residence Permit",
+    "Residence Permit Approval Decision"
+  ],
+  "r2/D1": [
+    "Hotel Booking",
+    "Hotel Booking Confirmation",
+    "Hotel Reservation",
+    "Hotel Reservation Confirmation",
+    "Booking Confirmation",
+    "Reservation Confirmation",
+    "Accommodation Booking Confirmation"
+  ],
+  "r2/D2": [
+    "Membership Confirmation",
+    "Gym Membership Confirmation",
+    "Order Confirmation",
+    "Receipt",
+    "Membership Order Confirmation",
+    "Gym Membership Order Confirmation",
+    "Membership Purchase Confirmation"
+  ],
+  "r2/D3": [
+    "Hotel Booking",
+    "Hotel Booking Confirmation",
+    "Hotel Reservation",
+    "Hotel Reservation Confirmation",
+    "Booking Confirmation",
+    "Reservation Confirmation",
+    "Accommodation Booking Confirmation"
+  ]
+}

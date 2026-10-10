@@ -1,622 +1,1836 @@
 use crate::{
-    classifier, files,
-    model::{Activity, Preferences, Snapshot, Store},
+    classifier, config, files, instructions,
+    model::{Approval, Preferences, ReviewItem, Snapshot},
 };
 use std::{
-    collections::HashMap,
+    collections::BTreeMap,
     fs,
-    io::Write,
     path::{Path, PathBuf},
     sync::{Arc, Mutex},
-    time::{SystemTime, UNIX_EPOCH},
+    time::{Duration, Instant},
 };
 
-pub struct Runtime {
-    pub store: Store,
-    pub settling: HashMap<String, String>,
-    pub processing: Option<String>,
-    pub error: Option<String>,
-    pub revision: u64,
+struct Runtime {
+    preferences: Preferences,
+    items: Vec<ReviewItem>,
+    processing: Option<String>,
+    error: Option<String>,
+    notice: Option<String>,
+    generation: u64,
+    collection: Option<crate::collection::Collection>,
+    running: bool,
+    watching: bool,
+    run_revision: String,
+    seen: BTreeMap<String, String>,
+    pending: BTreeMap<String, (String, Instant)>,
 }
 pub struct Engine {
-    pub state: Mutex<Runtime>,
-    pub storage: PathBuf,
-    pub reader: PathBuf,
+    state: Mutex<Runtime>,
+    directory: PathBuf,
+    reader: PathBuf,
+    #[cfg(test)]
+    test_decision: Mutex<Option<classifier::Decision>>,
 }
 impl Engine {
-    pub fn new(storage: PathBuf, reader: PathBuf) -> Result<Self, String> {
-        fs::create_dir_all(storage.parent().ok_or("Missing app data folder")?)
-            .map_err(|e| e.to_string())?;
-        let mut store: Store = if storage.exists() {
-            serde_json::from_slice(&fs::read(&storage).map_err(|e| e.to_string())?).map_err(
-                |e| format!("Could not read Tuck's saved state. Original state preserved: {e}"),
-            )?
+    pub fn new(directory: PathBuf, reader: PathBuf) -> Result<Self, String> {
+        fs::create_dir_all(&directory).map_err(|e| e.to_string())?;
+        let mut preferences = Preferences::default();
+        // Legacy state is read only for preferences. Never resume old watcher work or replay history.
+        let pointer = config::read_json(&directory.join("preferences.json"))?;
+        if let Some(value) = pointer.as_ref() {
+            preferences.root = value["root"]
+                .as_str()
+                .ok_or("Invalid saved destination")?
+                .into();
         } else {
-            Store::default()
-        };
-        let mut recovered = false;
-        for record in &mut store.activity {
-            if record.status == "undo_pending" {
-                if !Path::new(&record.destination).exists()
-                    && files::digest(Path::new(&record.original)).ok().as_deref()
-                        == Some(&record.hash)
-                {
-                    record.status = "undone".into();
-                    if let Ok(sig) = files::signature(Path::new(&record.original)) {
-                        store.seen.insert(record.original.clone(), sig);
-                    }
-                } else if files::digest(Path::new(&record.destination))
-                    .ok()
-                    .as_deref()
-                    == Some(&record.hash)
-                {
-                    record.status = if record.folder == "Needs Review" {
-                        "review"
-                    } else {
-                        "sorted"
-                    }
-                    .into();
-                } else {
-                    record.status = "failed".into();
-                    record.reason = "Undo was interrupted. All remaining copies were kept; please inspect their locations.".into();
-                }
-                store.watching = false;
-                recovered = true;
-            }
-            if record.status == "pending" {
-                let destination = Path::new(&record.destination);
-                if files::digest(destination).ok().as_deref() == Some(&record.hash)
-                    && (record.copied || !Path::new(&record.original).exists())
-                {
-                    record.status = if record.folder == "Needs Review" {
-                        "review"
-                    } else {
-                        "sorted"
-                    }
-                    .into();
-                    if let Ok(sig) = files::signature(destination) {
-                        store.seen.insert(record.destination.clone(), sig);
-                    }
-                } else {
-                    record.status = "failed".into();
-                    record.reason = "An operation was interrupted. Any remaining originals and copies have been kept; inspect them before retrying.".into();
-                    store.watching = false;
-                }
-                recovered = true;
+            let registry = config::read_json(&directory.join("folders.json"))?;
+            let selected = registry
+                .as_ref()
+                .and_then(|r| r["selected"].as_str())
+                .unwrap_or("primary");
+            let legacy = if selected == "primary" || selected.is_empty() {
+                directory.join("state.json")
+            } else {
+                uuid::Uuid::parse_str(selected).map_err(|_| "Invalid legacy folder ID")?;
+                directory.join("folders").join(format!("{selected}.json"))
+            };
+            if let Some(value) = config::read_json(&legacy)? {
+                preferences = serde_json::from_value(value["preferences"].clone())
+                    .map_err(|e| format!("Invalid legacy preferences: {e}"))?;
             }
         }
-        let engine = Self {
+        let mut error = None;
+        if !preferences.root.is_empty() {
+            match crate::native::folder_access(&preferences.root, &directory, true) {
+                Ok(path) => preferences.root = path.to_string_lossy().into_owned(),
+                Err(e) => error = Some(e),
+            }
+        }
+        if !preferences.root.is_empty() && error.is_none() {
+            let result = if pointer.is_some() {
+                instructions::recover(Path::new(&preferences.root))
+                    .and_then(|_| config::load(&mut preferences))
+            } else {
+                config::initialize(&mut preferences)
+            };
+            if let Err(e) = result {
+                error = Some(e);
+            } else {
+                crate::native::folder_access(&preferences.root, &directory, false)?;
+                config::atomic_json(
+                    &directory.join("preferences.json"),
+                    &serde_json::json!({"root":preferences.root}),
+                )?;
+            }
+        }
+        Ok(Self {
             state: Mutex::new(Runtime {
-                store,
-                settling: HashMap::new(),
+                preferences,
+                items: vec![],
                 processing: None,
-                error: None,
-                revision: 0,
+                error,
+                notice: None,
+                generation: 0,
+                collection: None,
+                running: false,
+                watching: false,
+                run_revision: String::new(),
+                seen: BTreeMap::new(),
+                pending: BTreeMap::new(),
             }),
-            storage,
+            directory,
             reader,
-        };
-        if recovered {
-            engine.persist(&engine.state.lock().unwrap().store)?;
-        }
-        Ok(engine)
+            #[cfg(test)]
+            test_decision: Mutex::new(None),
+        })
     }
-    pub fn persist(&self, store: &Store) -> Result<(), String> {
-        let data = serde_json::to_vec_pretty(store).map_err(|e| e.to_string())?;
-        let mut file = tempfile::NamedTempFile::new_in(self.storage.parent().unwrap())
-            .map_err(|e| e.to_string())?;
-        file.write_all(&data).map_err(|e| e.to_string())?;
-        file.as_file().sync_all().map_err(|e| e.to_string())?;
-        file.persist(&self.storage)
-            .map_err(|e| format!("Could not save Tuck's state: {e}"))?;
-        Ok(())
+    fn refresh(state: &mut Runtime) -> Result<(), String> {
+        if state.preferences.root.is_empty() {
+            return Err("Choose a destination folder first".into());
+        }
+        let mut p = state.preferences.clone();
+        match config::load(&mut p) {
+            Ok(()) => {
+                if state.running && state.run_revision != config::revision(&p) {
+                    state.running = false;
+                    state.watching = false;
+                    state.notice = Some("Folder settings changed. Tuck stopped; clear the session and map again to restart.".into());
+                }
+                state.preferences = p;
+                state.error = None;
+                Ok(())
+            }
+            Err(e) => {
+                state.error = Some(e.clone());
+                state.running = false;
+                state.watching = false;
+                Err(e)
+            }
+        }
     }
     pub fn snapshot(&self) -> Snapshot {
-        let state = self.state.lock().unwrap();
+        let mut state = self.state.lock().unwrap();
+        if !state.preferences.root.is_empty() {
+            let _ = Self::refresh(&mut state);
+        }
         Snapshot {
-            preferences: state.store.preferences.clone(),
-            watching: state.store.watching,
-            activity: state
-                .store
-                .activity
-                .iter()
-                .rev()
-                .take(500)
-                .cloned()
-                .collect(),
-            pending: state.store.queue.len(),
+            collection: state.collection.as_ref().map(|m| m.view()),
+            running: state.running,
+            watching: state.watching,
+            preferences: state.preferences.clone(),
+            items: state.items.clone(),
             processing: state.processing.clone(),
-            error: state.error.clone(),
+            error: state.error.clone().or_else(|| state.notice.clone()),
         }
     }
-    pub fn save_preferences(&self, mut preferences: Preferences) -> Result<(), String> {
-        files::validate(&preferences)?;
-        if !preferences.root.is_empty() {
-            let path = Path::new(&preferences.root)
-                .canonicalize()
-                .map_err(|_| "Choose an existing folder")?;
-            if !path.is_dir() || path.parent().is_none() {
-                return Err("Choose a document folder".into());
-            }
-            preferences.root = path.to_string_lossy().into_owned();
+    pub fn preview_path(&self, id: &str) -> Result<PathBuf, String> {
+        let state = self.state.lock().unwrap();
+        let item = state
+            .items
+            .iter()
+            .find(|item| item.id == id)
+            .ok_or("Document is no longer in this session")?;
+        let path = PathBuf::from(if item.status == "organized" {
+            &item.destination
+        } else {
+            &item.original
+        });
+        let metadata =
+            fs::symlink_metadata(&path).map_err(|_| "This document is no longer available")?;
+        if !metadata.is_file() || metadata.file_type().is_symlink() {
+            return Err("Choose a regular document to preview".into());
+        }
+        Ok(path)
+    }
+    pub fn choose_folder(&self, root: &str) -> Result<(), String> {
+        let root = Path::new(root)
+            .canonicalize()
+            .map_err(|_| "Choose an existing folder")?;
+        if !root.is_dir() || root.parent().is_none() {
+            return Err("Choose a document folder".into());
         }
         let mut state = self.state.lock().unwrap();
-        if state.processing.is_some() {
-            return Err("Wait for the current document to finish before saving preferences".into());
+        if !state.items.is_empty() || state.processing.is_some() {
+            return Err("Clear the current batch before changing the destination".into());
         }
-        let mut next = state.store.clone();
-        if next.preferences.root != preferences.root
-            || next.preferences.recursive != preferences.recursive
+        let mut p = Preferences {
+            root: root.to_string_lossy().into_owned(),
+            rules: vec![],
+            ..Preferences::default()
+        };
+        config::initialize(&mut p)?;
+        crate::native::folder_access(&p.root, &self.directory, false)?;
+        config::atomic_json(
+            &self.directory.join("preferences.json"),
+            &serde_json::json!({"root":p.root}),
+        )?;
+        state.preferences = p;
+        state.collection = None;
+        state.notice = None;
+        state.running = false;
+        state.watching = false;
+        state.seen.clear();
+        state.pending.clear();
+        state.error = None;
+        Ok(())
+    }
+    pub fn save_preferences(&self, p: Preferences) -> Result<(), String> {
+        self.save_preferences_with_key(p, None)
+    }
+    pub fn save_preferences_with_key(
+        &self,
+        mut p: Preferences,
+        api_key: Option<String>,
+    ) -> Result<(), String> {
+        files::validate(&p)?;
+        let mut state = self.state.lock().unwrap();
+        Self::refresh(&mut state)?;
+        if p.root != state.preferences.root {
+            return Err("Choose the destination using the folder picker".into());
+        }
+        if p.settings_revision != state.preferences.settings_revision {
+            return Err("Settings changed on disk. Reload preferences before saving.".into());
+        }
+        if let Some(key) = api_key.filter(|k| !k.is_empty()) {
+            crate::files::validate_connection(&p.connection)?;
+            crate::apple::invoke(
+                &self.reader.with_file_name("tuck-apple"),
+                Some(
+                    serde_json::json!({"model":"custom","operation":"save_key","connection":p.connection,"apiKey":key}),
+                ),
+                std::time::Duration::from_secs(30),
+            )?;
+        }
+        instructions::save(&p, &p.instructions_revision)?.apply(&mut p);
+        config::save(&p)?;
+        config::load(&mut p)?;
+        if let Some(map) = state.collection.take() {
+            state.collection = Some(crate::collection::build(map.documents, &p));
+        }
+        state.preferences = p;
+        state.running = false;
+        state.watching = false;
+        Ok(())
+    }
+    pub fn suggest_rule(&self, folder: &str, preferences: &Preferences) -> Result<String, String> {
+        if !files::valid_folder(folder, preferences.max_depth) || folder.chars().count() > 120 {
+            return Err("Enter a short folder name first.".into());
+        }
+        let context = preferences.destination_instructions(folder);
+        if context.chars().count() > 4000 {
+            return Err("Shorten the shared rules before asking for a description.".into());
+        }
+        let (original, selected_model) = {
+            let mut state = self.state.lock().unwrap();
+            Self::refresh(&mut state)?;
+            if preferences.root != state.preferences.root || !state.preferences.use_ai {
+                return Err("Choose a folder and enable local AI first.".into());
+            }
+            if state.processing.is_some() {
+                return Err("Wait for the current document to finish.".into());
+            }
+            state.processing = Some("Suggesting a folder description".into());
+            (
+                crate::config::revision(&state.preferences),
+                state.preferences.clone(),
+            )
+        };
+        let result = {
+            use crate::provider::ModelProvider;
+            let _serial = crate::coordinator::serial();
+            crate::provider::configured(&self.reader, &selected_model)
+                .suggest_rule(folder, &context)
+        };
+        let mut state = self.state.lock().unwrap();
+        state.processing = None;
+        Self::refresh(&mut state)?;
+        if crate::config::revision(&state.preferences) != original {
+            return Err("Folder settings changed. Ask for a description again.".into());
+        }
+        result
+    }
+    pub fn check_rules(
+        &self,
+        preferences: &Preferences,
+    ) -> Result<Vec<crate::rule_check::RuleIssue>, String> {
+        files::validate(preferences)?;
+        let mut state = self.state.lock().unwrap();
+        Self::refresh(&mut state)?;
+        if preferences.root != state.preferences.root {
+            return Err("The destination changed. Reload your rules.".into());
+        }
+        if preferences.instructions_revision != state.preferences.instructions_revision
+            || preferences.settings_revision != state.preferences.settings_revision
         {
-            next.watching = false;
-            next.seen.clear();
-            // Existing files are a baseline. Initial cleanup is a separate explicit action.
-            if !preferences.root.is_empty() {
-                for path in files::scan(&preferences)? {
-                    if let Ok(sig) = files::signature(&path) {
-                        next.seen.insert(path.to_string_lossy().into_owned(), sig);
-                    }
-                }
+            return Err("Rules changed on disk. Reload before checking them.".into());
+        }
+        if state.processing.is_some() {
+            return Err("Wait for the current task to finish.".into());
+        }
+        Ok(crate::rule_check::check(preferences))
+    }
+    pub fn suggest_categories(&self) -> Result<crate::categories::Proposal, String> {
+        let needs_map = {
+            let state = self.state.lock().unwrap();
+            let paths = files::existing_documents(Path::new(&state.preferences.root), true)?;
+            state.collection.as_ref().is_none_or(|map| {
+                paths.len() != map.documents.len()
+                    || paths.iter().zip(&map.documents).any(|(p, d)| {
+                        p != Path::new(&d.path)
+                            || files::signature(p).ok().as_ref() != Some(&d.signature)
+                    })
+            })
+        };
+        if needs_map {
+            self.map_folder()?;
+        }
+        let p = {
+            let mut state = self.state.lock().unwrap();
+            Self::refresh(&mut state)?;
+            if !state.preferences.use_ai {
+                return Err("Enable local AI in Preferences to suggest categories.".into());
             }
-            next.queue.clear();
-            state.settling.clear();
-        }
-        next.preferences = preferences;
-        self.persist(&next)?;
-        state.store = next;
-        state.revision += 1;
-        state.error = None;
-        Ok(())
-    }
-    pub fn watch(&self, enabled: bool) -> Result<(), String> {
+            if state.processing.is_some() {
+                return Err("Wait for the current document to finish.".into());
+            }
+            state.processing = Some("Suggesting categories".into());
+            state.preferences.clone()
+        };
+        let collection = self.state.lock().unwrap().collection.clone();
+        let result = match collection {
+            Some(map) => {
+                let generation = self.state.lock().unwrap().generation;
+                crate::categories::suggest_map(&p, &self.reader, &map, |message| {
+                    let mut state = self.state.lock().unwrap();
+                    if state.generation != generation {
+                        return Err("Suggestions cancelled.".into());
+                    }
+                    state.processing = Some(message);
+                    Ok(())
+                })
+            }
+            None => Err("Map the folder before asking for suggestions.".into()),
+        };
         let mut state = self.state.lock().unwrap();
-        if enabled && state.store.preferences.root.is_empty() {
-            return Err("Choose a folder first".into());
+        state.processing = None;
+        Self::refresh(&mut state)?;
+        if config::revision(&p) != config::revision(&state.preferences) {
+            return Err(
+                "Folder settings changed during analysis. Suggest categories again.".into(),
+            );
         }
-        let mut next = state.store.clone();
-        next.watching = enabled;
-        self.persist(&next)?;
-        state.store = next;
-        state.revision += 1;
-        state.error = None;
+        result
+    }
+    pub fn map_folder(&self) -> Result<(), String> {
+        let (p, generation) = {
+            let mut state = self.state.lock().unwrap();
+            Self::refresh(&mut state)?;
+            if state.processing.is_some() || !state.items.is_empty() || state.running {
+                return Err("Stop Tuck and clear the session before mapping again.".into());
+            }
+            state.collection = None;
+            state.notice = None;
+            state.processing = Some("Mapping documents".into());
+            (state.preferences.clone(), state.generation)
+        };
+        let result: Result<crate::collection::Collection, String> = (|| {
+            let paths = files::existing_documents(Path::new(&p.root), true)?;
+            let total = paths.len();
+            let mut documents = Vec::new();
+            for (index, path) in paths.iter().enumerate() {
+                {
+                    let mut state = self.state.lock().unwrap();
+                    if state.generation != generation {
+                        return Err("Mapping cancelled.".into());
+                    }
+                    state.processing = Some(format!("Mapping document {} of {total}", index + 1));
+                }
+                documents.push(crate::collection::read(
+                    path,
+                    Path::new(&p.root),
+                    &self.reader,
+                ));
+            }
+            Ok(crate::collection::build(documents, &p))
+        })();
+        let mut state = self.state.lock().unwrap();
+        state.processing = None;
+        if state.generation != generation {
+            return Err("Mapping cancelled.".into());
+        }
+        Self::refresh(&mut state)?;
+        if config::revision(&state.preferences) != config::revision(&p) {
+            return Err("Rules changed during mapping. Map the folder again.".into());
+        }
+        state.collection = Some(result?);
         Ok(())
     }
+    pub fn start_tuck(&self, watch: bool) -> Result<usize, String> {
+        let mut state = self.state.lock().unwrap();
+        Self::refresh(&mut state)?;
+        if state.processing.is_some() || !state.items.is_empty() {
+            return Err("Finish or clear the current session first.".into());
+        }
+        if !state
+            .preferences
+            .rules
+            .iter()
+            .any(|r| state.preferences.rule_enabled(r))
+        {
+            return Err("Choose a folder structure first.".into());
+        }
+        let map = state
+            .collection
+            .clone()
+            .ok_or("Map the folder before starting Tuck.")?;
+        let paths = files::existing_documents(Path::new(&state.preferences.root), true)?;
+        if paths.len() != map.documents.len()
+            || paths.iter().zip(&map.documents).any(|(p, d)| {
+                p != Path::new(&d.path) || files::signature(p).ok().as_ref() != Some(&d.signature)
+            })
+        {
+            state.collection = None;
+            return Err(
+                "Documents changed since mapping. Map the folder again before starting.".into(),
+            );
+        }
+        let eligible: Vec<_> = paths
+            .into_iter()
+            .filter(|p| fs::metadata(p).is_ok_and(|m| m.len() <= 100 * 1024 * 1024))
+            .collect();
+        let count = Self::enqueue_into(&mut state, eligible)?;
+        state.seen = map
+            .documents
+            .iter()
+            .map(|d| (d.path.clone(), d.signature.clone()))
+            .collect();
+        state.pending.clear();
+        state.run_revision = config::revision(&state.preferences);
+        state.notice = None;
+        state.running = true;
+        state.watching = watch;
+        Ok(count)
+    }
+    pub fn stop_tuck(&self) {
+        let mut state = self.state.lock().unwrap();
+        if state
+            .processing
+            .as_ref()
+            .is_some_and(|p| p.starts_with("Mapping"))
+        {
+            state.generation += 1;
+        }
+        for item in state.items.iter_mut().filter(|i| i.status == "queued") {
+            item.status = "skipped".into();
+            item.reason = "Tuck stopped before reading this document.".into();
+        }
+        state.running = false;
+        state.watching = false;
+    }
+    pub fn import(&self, paths: Vec<PathBuf>) -> Result<usize, String> {
+        let mut state = self.state.lock().unwrap();
+        Self::refresh(&mut state)?;
+        if !state.running {
+            return Err("Choose your structure and click Start Tuck before adding files.".into());
+        }
+        Self::enqueue_into(&mut state, paths)
+    }
+    fn watch_tick(&self) -> Result<(), String> {
+        let mut state = self.state.lock().unwrap();
+        if !state.running || !state.watching || state.processing.is_some() {
+            return Ok(());
+        }
+        Self::refresh(&mut state)?;
+        if !state.running {
+            return Ok(());
+        }
+        let paths = files::existing_documents(Path::new(&state.preferences.root), true)?;
+        let current: BTreeMap<_, _> = paths
+            .iter()
+            .map(|p| Ok((p.to_string_lossy().into_owned(), files::signature(p)?)))
+            .collect::<Result<_, String>>()?;
+        state.seen.retain(|p, _| current.contains_key(p));
+        state.pending.retain(|p, _| current.contains_key(p));
+        for (path, signature) in current {
+            if state.seen.get(&path) == Some(&signature) {
+                continue;
+            }
+            let stable = match state.pending.get(&path) {
+                Some((previous, since)) if previous == &signature => {
+                    since.elapsed() >= Duration::from_secs(6)
+                }
+                _ => {
+                    state
+                        .pending
+                        .insert(path.clone(), (signature.clone(), Instant::now()));
+                    false
+                }
+            };
+            if !stable
+                || state.items.iter().any(|i| {
+                    i.original == path && matches!(i.status.as_str(), "queued" | "reading")
+                })
+            {
+                continue;
+            }
+            if fs::metadata(&path).map_err(|e| e.to_string())?.len() > 100 * 1024 * 1024 {
+                state.seen.insert(path.clone(), signature);
+                state.pending.remove(&path);
+                continue;
+            }
+            // A changed document must be read again; old decisions cannot be reused.
+            state.items.retain(|i| i.original != path);
+            if let Some(map) = state.collection.as_mut() {
+                map.documents.retain(|d| d.path != path);
+            }
+            Self::enqueue_into(&mut state, vec![PathBuf::from(&path)])?;
+            state.seen.insert(path.clone(), signature);
+            state.pending.remove(&path);
+        }
+        Ok(())
+    }
+    pub fn review_existing(&self, root: &str, recursive: bool) -> Result<usize, String> {
+        let mut state = self.state.lock().unwrap();
+        Self::refresh(&mut state)?;
+        if state.preferences.root != root {
+            return Err("The selected folder changed. Start review again.".into());
+        }
+        if !state.items.is_empty() || state.processing.is_some() {
+            return Err("Finish or clear the current batch before reviewing this folder.".into());
+        }
+        let paths = files::existing_documents(Path::new(root), recursive)?;
+        Self::enqueue_into(&mut state, paths)
+    }
+    #[cfg(test)]
     pub fn enqueue(&self, paths: Vec<PathBuf>) -> Result<usize, String> {
+        let mut state = self.state.lock().unwrap();
+        Self::refresh(&mut state)?;
+        Self::enqueue_into(&mut state, paths)
+    }
+    fn enqueue_into(state: &mut Runtime, paths: Vec<PathBuf>) -> Result<usize, String> {
         let mut valid = Vec::new();
         for path in paths {
             files::signature(&path)?;
             if !files::supported(&path) {
                 return Err("Choose PDF, PNG, JPG, HEIC, TIFF, TXT or Markdown files".into());
             }
-            valid.push(path.canonicalize().map_err(|e| e.to_string())?);
+            let path = path.canonicalize().map_err(|e| e.to_string())?;
+            if !files::supported(&path) {
+                return Err("Tuck settings are not documents".into());
+            }
+            if fs::metadata(&path).map_err(|e| e.to_string())?.len() > 100 * 1024 * 1024 {
+                return Err("Choose documents smaller than 100 MB".into());
+            }
+            if !valid.contains(&path) {
+                valid.push(path);
+            }
         }
-        let mut state = self.state.lock().unwrap();
-        if state.store.preferences.root.is_empty() {
-            return Err("Choose a destination folder first".into());
+        valid.retain(|path| !state.items.iter().any(|i| Path::new(&i.original) == path));
+        if state.items.len() + valid.len() > 2000 {
+            return Err(
+                "A session supports up to 2,000 documents. Stop and clear the session before adding more.".into(),
+            );
         }
-        let mut count = 0;
+        let count = valid.len();
         for path in valid {
-            if !state.store.queue.contains(&path) && state.processing.as_deref() != path.to_str() {
-                state.store.queue.push_back(path);
-                count += 1;
-            }
-        }
-        let mut next = state.store.clone();
-        next.watching = true;
-        self.persist(&next)?;
-        state.store = next;
-        state.error = None;
-        Ok(count)
-    }
-    pub fn organize_existing(&self) -> Result<usize, String> {
-        let preferences = self.state.lock().unwrap().store.preferences.clone();
-        self.enqueue(files::scan(&preferences)?)
-    }
-    pub fn discover(&self) -> Result<(), String> {
-        let mut state = self.state.lock().unwrap();
-        if !state.store.watching || state.store.preferences.root.is_empty() {
-            return Ok(());
-        }
-        let paths = files::scan(&state.store.preferences)?;
-        let mut current = HashMap::new();
-        for path in paths {
-            let Ok(sig) = files::signature(&path) else {
-                continue;
-            };
-            let key = path.to_string_lossy().into_owned();
-            if state.store.seen.get(&key) != Some(&sig) {
-                if state.settling.get(&key) == Some(&sig)
-                    && !state.store.queue.contains(&path)
-                    && state.processing.as_deref() != Some(&key)
-                {
-                    state.store.queue.push_back(path);
-                }
-                current.insert(key, sig);
-            }
-        }
-        state.settling = current;
-        Ok(())
-    }
-    pub fn process_next(&self) -> Result<bool, String> {
-        let (path, preferences, revision) = {
-            let mut state = self.state.lock().unwrap();
-            if !state.store.watching {
-                return Ok(false);
-            }
-            let Some(path) = state.store.queue.pop_front() else {
-                return Ok(false);
-            };
-            state.processing = Some(path.to_string_lossy().into_owned());
-            (path, state.store.preferences.clone(), state.revision)
-        };
-        let result = self.process(&path, &preferences, revision);
-        let mut state = self.state.lock().unwrap();
-        state.processing = None;
-        if let Err(error) = result {
-            state.store.activity.push(Activity {
+            let copied = !path.starts_with(&state.preferences.root);
+            state.items.push(ReviewItem {
+                language: None,
                 id: uuid::Uuid::new_v4().to_string(),
-                timestamp: now(),
                 original: path.to_string_lossy().into_owned(),
                 destination: String::new(),
                 folder: String::new(),
-                reason: error,
-                status: "failed".into(),
+                title: path
+                    .file_stem()
+                    .unwrap_or_default()
+                    .to_string_lossy()
+                    .into_owned(),
+                reason: String::new(),
+                status: "queued".into(),
+                copied,
+                confident: false,
                 hash: String::new(),
-                copied: false,
-                duplicate: false,
+                revision: String::new(),
             });
-            if let Ok(sig) = files::signature(&path) {
-                state
-                    .store
-                    .seen
-                    .insert(path.to_string_lossy().into_owned(), sig);
+        }
+        Ok(count)
+    }
+    pub fn clear(&self) {
+        let mut state = self.state.lock().unwrap();
+        state.items.clear();
+        state.notice = None;
+        state.running = false;
+        state.watching = false;
+        state.collection = None;
+        state.seen.clear();
+        state.pending.clear();
+        // An in-flight analysis is allowed to finish, but its result cannot enter the new batch.
+        state.generation += 1;
+    }
+    pub fn skip(&self, id: &str) -> Result<(), String> {
+        let mut state = self.state.lock().unwrap();
+        let item = state
+            .items
+            .iter_mut()
+            .find(|i| i.id == id)
+            .ok_or("Document not found")?;
+        if item.status == "organized" {
+            return Err("This document is already organized".into());
+        }
+        item.status = "skipped".into();
+        Ok(())
+    }
+    pub fn retry(&self, id: &str) -> Result<(), String> {
+        let mut state = self.state.lock().unwrap();
+        Self::refresh(&mut state)?;
+        let item = state
+            .items
+            .iter_mut()
+            .find(|i| i.id == id)
+            .ok_or("Document not found")?;
+        if !matches!(item.status.as_str(), "review" | "failed" | "skipped") {
+            return Err("Wait for this document to finish reading".into());
+        }
+        item.status = "queued".into();
+        item.destination.clear();
+        item.reason.clear();
+        item.language = None;
+        item.folder.clear();
+        item.confident = false;
+        item.title = Path::new(&item.original)
+            .file_stem()
+            .unwrap_or_default()
+            .to_string_lossy()
+            .into_owned();
+        Ok(())
+    }
+    pub fn process_next(&self) -> Result<bool, String> {
+        let (item, p, generation) = {
+            let mut state = self.state.lock().unwrap();
+            if state.processing.is_some() || !state.items.iter().any(|i| i.status == "queued") {
+                return Ok(false);
             }
-            self.persist(&state.store)?;
+            Self::refresh(&mut state)?;
+            let item = state
+                .items
+                .iter_mut()
+                .find(|i| i.status == "queued")
+                .unwrap();
+            item.status = "reading".into();
+            let item = item.clone();
+            state.processing = Some(item.original.clone());
+            (item, state.preferences.clone(), state.generation)
+        };
+        let result = self.analyze(&item, &p);
+        let mut state = self.state.lock().unwrap();
+        state.processing = None;
+        if generation != state.generation {
+            return Ok(true);
+        }
+        let refreshed = Self::refresh(&mut state);
+        let revision = config::revision(&state.preferences);
+        if let Some(current) = state
+            .items
+            .iter_mut()
+            .find(|i| i.id == item.id && i.status == "reading")
+        {
+            match result {
+                Ok(proposal) if refreshed.is_ok() && revision == config::revision(&p) => {
+                    *current = proposal
+                }
+                Ok(_) => {
+                    current.status = "failed".into();
+                    current.reason =
+                        "Preferences changed while reading. Analyze this document again.".into();
+                }
+                Err(e) => {
+                    current.status = "failed".into();
+                    current.reason = e;
+                }
+            }
+        }
+        if state.running && state.run_revision == revision {
+            let approval = state
+                .items
+                .iter()
+                .find(|i| {
+                    i.id == item.id
+                        && i.status == "review"
+                        && i.confident
+                        && !i.destination.is_empty()
+                })
+                .map(|i| Approval {
+                    id: i.id.clone(),
+                    destination: i.destination.clone(),
+                });
+            if let Some(approval) = approval {
+                if let Err(error) = Self::organize_locked(&mut state, vec![approval]) {
+                    if let Some(current) = state.items.iter_mut().find(|i| i.id == item.id) {
+                        current.confident = false;
+                        current.reason = error;
+                    }
+                }
+            }
         }
         Ok(true)
     }
-    fn process(&self, source: &Path, p: &Preferences, revision: u64) -> Result<(), String> {
+    fn analyze(&self, item: &ReviewItem, p: &Preferences) -> Result<ReviewItem, String> {
+        let source = Path::new(&item.original);
         let before = files::signature(source)?;
         if fs::metadata(source).map_err(|e| e.to_string())?.len() > 100 * 1024 * 1024 {
-            return Err("Files larger than 100 MB need manual review; original kept".into());
+            return Err("Document is now larger than 100 MB; original kept".into());
         }
         let hash = files::digest(source)?;
-        let filename = source.file_name().unwrap_or_default().to_string_lossy();
-        let text = classifier::read_document(source, &self.reader);
-        let decision = match text {
-            Ok(text) => classifier::classify(&filename, &text, p),
-            Err(error) => {
-                classifier::rule_match(&filename, "", p).unwrap_or(classifier::Decision {
-                    folder: "Needs Review".into(),
-                    title: String::new(),
-                    reason: error,
-                    confident: false,
-                })
-            }
+        let name = source.file_name().unwrap_or_default().to_string_lossy();
+        let mapped = self
+            .state
+            .lock()
+            .unwrap()
+            .collection
+            .as_ref()
+            .and_then(|m| m.documents.iter().find(|d| d.path == item.original))
+            .cloned();
+        let already_filed = self
+            .state
+            .lock()
+            .unwrap()
+            .items
+            .iter()
+            .any(|i| i.id != item.id && i.status == "organized" && i.hash == hash);
+        let duplicate = already_filed || mapped.as_ref().is_some_and(|d| d.duplicate_of.is_some());
+        let text = match mapped {
+            Some(doc) if doc.hash == hash => match doc.error {
+                Some(error) => Err(error),
+                None => Ok(doc.text),
+            },
+            _ => classifier::read_document(source, &self.reader),
         };
-        let mut state = self.state.lock().unwrap();
-        if !state.store.watching || state.revision != revision {
-            state.store.queue.push_front(source.to_path_buf());
-            self.persist(&state.store)?;
-            return Ok(());
+        let decision = match text {
+            Ok(text) => {
+                classifier::classify_with_tools(&name, &text, p, &[], Some((source, &self.reader)))
+            }
+            Err(e) => classifier::Decision {
+                language: None,
+                folder: "Needs Review".into(),
+                title: String::new(),
+                reason: e,
+                confident: false,
+            },
+        };
+        #[cfg(test)]
+        let decision = self
+            .test_decision
+            .lock()
+            .unwrap()
+            .clone()
+            .map(|d| classifier::finalize(Ok(d), p))
+            .unwrap_or(decision);
+        if files::signature(source)? != before || files::digest(source)? != hash {
+            return Err("Document changed during reading. Analyze it again.".into());
         }
-        if files::signature(source)? != before {
+        let mut result = item.clone();
+        result.status = "review".into();
+        result.hash = hash;
+        result.revision = config::revision(p);
+        result.reason = decision.reason;
+        result.language = decision.language;
+        result.confident = decision.confident;
+        result.folder = if decision.confident {
+            decision.folder
+        } else {
+            String::new()
+        };
+        if p.rename && decision.confident && !decision.title.is_empty() {
+            let title = Path::new(&decision.title);
+            result.title = if title.extension().is_some_and(|e| {
+                source
+                    .extension()
+                    .is_some_and(|ext| e.eq_ignore_ascii_case(ext))
+            }) {
+                title
+                    .file_stem()
+                    .unwrap_or_default()
+                    .to_string_lossy()
+                    .into_owned()
+            } else {
+                decision.title
+            };
+        }
+        if !result.folder.is_empty() {
+            match Self::destination(p, &result) {
+                Ok(path) => result.destination = path,
+                Err(e) => {
+                    result.reason = format!("{} {e}", result.reason);
+                    result.confident = false;
+                }
+            }
+        }
+        if duplicate {
+            result.confident = false;
+            result.reason = format!("Identical content exists elsewhere in this folder. Choose whether to keep this copy. {}", result.reason);
+        }
+        Ok(result)
+    }
+    fn destination(p: &Preferences, item: &ReviewItem) -> Result<String, String> {
+        if !p
+            .rules
+            .iter()
+            .any(|r| r.folder == item.folder && p.rule_enabled(r))
+            || !files::valid_folder(&item.folder, p.max_depth)
+        {
+            return Err("Choose an enabled destination folder".into());
+        }
+        if item.title.is_empty() || files::safe_stem(&item.title) != item.title {
             return Err(
-                "File changed during reading; original kept. Retry after it finishes saving."
+                "Use a filename without extension, special characters, or more than 100 characters"
                     .into(),
             );
         }
-        let root = Path::new(&p.root);
-        if root.canonicalize().map_err(|e| e.to_string())? != root {
-            return Err("Selected folder changed location; please choose it again".into());
-        }
-        let directory = files::target_directory(root, &decision.folder)?;
-        let extension = source.extension().unwrap_or_default().to_string_lossy();
-        let old_stem = source.file_stem().unwrap_or_default().to_string_lossy();
-        let stem: &str = if p.rename && !decision.title.is_empty() && decision.confident {
-            &decision.title
-        } else {
-            &old_stem
-        };
-        let destination = files::unique_destination(&directory, stem, &extension, source);
-        let copied = !source.starts_with(root);
-        let duplicate = state.store.activity.iter().any(|r| {
-            r.hash == hash
-                && r.destination != source.to_string_lossy()
-                && matches!(r.status.as_str(), "sorted" | "review")
-                && Path::new(&r.destination).exists()
-        });
-        if destination == source {
-            state
-                .store
-                .seen
-                .insert(source.to_string_lossy().into_owned(), before);
-            self.persist(&state.store)?;
-            return Ok(());
-        }
-        let record = Activity {
-            id: uuid::Uuid::new_v4().to_string(),
-            timestamp: now(),
-            original: source.to_string_lossy().into_owned(),
-            destination: destination.to_string_lossy().into_owned(),
-            folder: decision.folder.clone(),
-            reason: decision.reason,
-            status: "pending".into(),
-            hash: hash.clone(),
-            copied,
-            duplicate,
-        };
-        state.store.activity.push(record);
-        // Write the undo information before touching the document.
-        self.persist(&state.store)?;
-        let result = files::transfer(source, &destination, copied, &hash);
-        let record = state.store.activity.last_mut().unwrap();
-        match result {
-            Ok(()) => {
-                record.status = if decision.folder == "Needs Review" {
-                    "review"
-                } else {
-                    "sorted"
-                }
-                .into()
-            }
-            Err(error) => {
-                record.status = "failed".into();
-                record.reason = error;
-            }
-        }
-        if let Ok(sig) = files::signature(&destination) {
-            state
-                .store
-                .seen
-                .insert(destination.to_string_lossy().into_owned(), sig);
-        }
-        if let Ok(sig) = files::signature(source) {
-            state
-                .store
-                .seen
-                .insert(source.to_string_lossy().into_owned(), sig);
-        }
-        self.persist(&state.store)?;
-        Ok(())
+        let source = Path::new(&item.original);
+        let directory = Path::new(&p.root).join(&item.folder);
+        Ok(files::unique_destination(
+            &directory,
+            &item.title,
+            &source.extension().unwrap_or_default().to_string_lossy(),
+            source,
+        )
+        .to_string_lossy()
+        .into_owned())
     }
-    pub fn undo(&self, id: &str) -> Result<(), String> {
+    pub fn update_review(&self, id: &str, folder: &str, title: &str) -> Result<(), String> {
         let mut state = self.state.lock().unwrap();
-        if state.processing.is_some() {
-            return Err("Wait for the current document to finish before undoing".into());
+        Self::refresh(&mut state)?;
+        let p = state.preferences.clone();
+        let item = state
+            .items
+            .iter_mut()
+            .find(|i| i.id == id)
+            .ok_or("Document not found")?;
+        if item.status != "review" {
+            return Err("Only documents awaiting review can be edited".into());
         }
-        let index = state
-            .store
-            .activity
-            .iter()
-            .position(|r| r.id == id)
-            .ok_or("Activity not found")?;
-        let record = state.store.activity[index].clone();
-        if !matches!(record.status.as_str(), "sorted" | "review") {
-            return Err("This action cannot be undone".into());
-        }
-        let destination = Path::new(&record.destination);
-        files::signature(destination)?;
-        if files::digest(destination)? != record.hash {
-            return Err("This document has been edited since sorting. Undo stopped to preserve your changes.".into());
-        }
-        let original = Path::new(&record.original);
-        if record.copied && files::digest(original).ok().as_deref() != Some(&record.hash) {
+        if item.revision != config::revision(&p) {
             return Err(
-                "The original copy is missing or changed. Keeping the organized copy.".into(),
+                "Preferences changed. Analyze this document again before organizing.".into(),
             );
         }
-        if !record.copied && !original.parent().is_some_and(Path::is_dir) {
-            return Err("Original folder is missing. Restore it before undoing.".into());
+        let mut next = item.clone();
+        next.folder = folder.into();
+        next.title = title.trim().into();
+        next.destination = Self::destination(&p, &next)?;
+        *item = next;
+        Ok(())
+    }
+    pub fn organize(&self, approvals: Vec<Approval>) -> Result<(), String> {
+        let mut state = self.state.lock().unwrap();
+        Self::refresh(&mut state)?;
+        Self::organize_locked(&mut state, approvals)
+    }
+    fn organize_locked(state: &mut Runtime, approvals: Vec<Approval>) -> Result<(), String> {
+        let p = state.preferences.clone();
+        for approval in approvals {
+            let item = state
+                .items
+                .iter_mut()
+                .find(|i| i.id == approval.id)
+                .ok_or("Document not found")?;
+            if item.status != "review" || item.destination.is_empty() {
+                return Err("Review the destination before organizing".into());
+            }
+            if item.destination != approval.destination {
+                return Err("The preview changed. Review it before organizing.".into());
+            }
+            if item.revision != config::revision(&p) {
+                return Err(
+                    "Preferences changed. Analyze this document again before organizing.".into(),
+                );
+            }
+            let fresh = Self::destination(&p, item)?;
+            if fresh != item.destination {
+                item.destination = fresh;
+                return Err("A destination is now occupied. The preview has been updated; review it and organize again.".into());
+            }
+            let result = (|| {
+                let source = Path::new(&item.original);
+                files::signature(source)?;
+                if source.canonicalize().map_err(|e| e.to_string())? != source
+                    || files::digest(source)? != item.hash
+                {
+                    return Err("Source changed or moved. Analyze it again; original kept.".into());
+                }
+                let root = Path::new(&p.root);
+                if root.canonicalize().map_err(|e| e.to_string())? != root {
+                    return Err("Destination folder changed location. Choose it again.".into());
+                }
+                files::target_directory(root, &item.folder)?;
+                if source != Path::new(&item.destination) {
+                    files::transfer(
+                        source,
+                        Path::new(&item.destination),
+                        item.copied,
+                        &item.hash,
+                    )?;
+                }
+                Ok::<(), String>(())
+            })();
+            match result {
+                Ok(()) => {
+                    item.status = "organized".into();
+                    state.seen.remove(&item.original);
+                    state.pending.remove(&item.original);
+                    if let Ok(signature) = files::signature(Path::new(&item.destination)) {
+                        state.seen.insert(item.destination.clone(), signature);
+                        state.pending.remove(&item.destination);
+                    }
+                }
+                Err(e) => {
+                    item.status = "failed".into();
+                    item.reason = e.clone();
+                    return Err(e);
+                }
+            }
         }
-        state.store.activity[index].status = "undo_pending".into();
-        self.persist(&state.store)?;
-        let result = if record.copied {
-            fs::remove_file(destination).map_err(|e| e.to_string())
-        } else {
-            files::transfer(destination, original, false, &record.hash)
-        };
-        if let Err(error) = result {
-            state.store.activity[index].status = record.status;
-            self.persist(&state.store)?;
-            return Err(error);
-        }
-        if let Ok(sig) = files::signature(original) {
-            state.store.seen.insert(record.original.clone(), sig);
-        }
-        state.store.activity[index].status = "undone".into();
-        state
-            .store
-            .queue
-            .retain(|p| p != destination && p != original);
-        self.persist(&state.store)?;
         Ok(())
     }
     pub fn start(engine: Arc<Self>) {
-        std::thread::spawn(move || loop {
-            let result = engine
-                .discover()
-                .and_then(|_| engine.process_next().map(|_| ()));
-            if let Err(error) = result {
-                let mut state = engine.state.lock().unwrap();
-                state.error = Some(error);
-                state.store.watching = false;
-                let _ = engine.persist(&state.store);
+        std::thread::spawn(move || {
+            let mut watcher = crate::watching::FolderWatch::new();
+            loop {
+                let (root, pending) = {
+                    let state = engine.state.lock().unwrap();
+                    let root = if state.running && state.watching {
+                        state.preferences.root.clone()
+                    } else {
+                        String::new()
+                    };
+                    (root, !state.pending.is_empty())
+                };
+                if watcher.due(&root, pending) {
+                    if let Err(e) = engine.watch_tick() {
+                        let mut state = engine.state.lock().unwrap();
+                        state.running = false;
+                        state.watching = false;
+                        state.notice = Some(e);
+                    }
+                }
+                if let Err(e) = engine.process_next() {
+                    let mut state = engine.state.lock().unwrap();
+                    state.running = false;
+                    state.watching = false;
+                    state.notice = Some(e);
+                }
+                std::thread::sleep(Duration::from_millis(250));
             }
-            std::thread::sleep(std::time::Duration::from_secs(2));
         });
     }
-}
-fn now() -> u64 {
-    SystemTime::now()
-        .duration_since(UNIX_EPOCH)
-        .unwrap_or_default()
-        .as_secs()
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
-    fn setup() -> (tempfile::TempDir, Engine) {
-        let dir = tempfile::tempdir_in("/private/tmp").unwrap();
-        let root = dir.path().join("documents");
-        fs::create_dir(&root).unwrap();
-        let engine = Engine::new(dir.path().join("state.json"), PathBuf::new()).unwrap();
-        let p = Preferences {
-            root: root.to_string_lossy().into_owned(),
-            use_ai: false,
-            ..Preferences::default()
-        };
-        engine.save_preferences(p).unwrap();
-        (dir, engine)
-    }
     #[test]
-    fn watch_waits_for_stable_file_and_does_not_loop_after_move_or_undo() {
-        let (_dir, engine) = setup();
-        engine.watch(true).unwrap();
-        let root = PathBuf::from(engine.snapshot().preferences.root);
-        let source = root.join("scan.txt");
-        fs::write(&source, "AGENCY residence permit").unwrap();
-        engine.discover().unwrap();
-        assert_eq!(engine.snapshot().pending, 0);
-        engine.discover().unwrap();
-        assert_eq!(engine.snapshot().pending, 1);
-        engine.process_next().unwrap();
-        let record = engine.snapshot().activity[0].clone();
-        assert_eq!(record.folder, "Migration/AGENCY");
-        assert!(!source.exists());
-        assert!(Path::new(&record.destination).exists());
-        engine.discover().unwrap();
-        engine.discover().unwrap();
-        assert_eq!(engine.snapshot().pending, 0);
-        engine.undo(&record.id).unwrap();
-        assert!(source.exists());
-        engine.discover().unwrap();
-        engine.discover().unwrap();
-        assert_eq!(engine.snapshot().pending, 0);
-    }
-    #[test]
-    fn existing_documents_wait_for_explicit_cleanup() {
-        let (dir, engine) = setup();
-        let other = dir.path().join("other");
-        fs::create_dir(&other).unwrap();
-        fs::write(other.join("old.txt"), "tax return").unwrap();
+    #[ignore = "Requires Apple Intelligence; synthetic automatic start and fallback"]
+    fn live_apple_automatic_flow() {
+        let (_temp, engine, root) = setup();
+        *engine.test_decision.lock().unwrap() = None;
         let mut p = engine.snapshot().preferences;
-        p.root = other.to_string_lossy().into_owned();
+        p.use_ai = true;
+        p.instructions = "Organize documents by their contents. Keep filenames unchanged.".into();
+        p.rename = false;
+        p.rules
+            .retain(|r| matches!(r.folder.as_str(), "Banking & Taxes" | "Employment & Pay"));
+
         engine.save_preferences(p).unwrap();
-        engine.watch(true).unwrap();
-        engine.discover().unwrap();
-        engine.discover().unwrap();
-        assert_eq!(engine.snapshot().pending, 0);
-        assert_eq!(engine.organize_existing().unwrap(), 1);
+        let engine = Engine::new(
+            engine.directory.clone(),
+            PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("resources/tuck-reader"),
+        )
+        .unwrap();
+        let source = root.join("statement.txt");
+        fs::write(&source, "BANK ACCOUNT STATEMENT\nExample Bank\nStatement period: January 2026\nOpening balance: SEK 1000\nDeposits: SEK 2500\nClosing balance: SEK 3500\nThis is a bank account statement showing account transactions. Synthetic test document.").unwrap();
+        fs::write(root.join("unreadable.txt"), "").unwrap();
+        let hash = files::digest(&source).unwrap();
+        engine.map_folder().unwrap();
+        assert!(source.exists());
+        assert_eq!(engine.snapshot().collection.unwrap().unreadable, 1);
+        engine.start_tuck(true).unwrap();
         engine.process_next().unwrap();
-        assert!(other.join("Finances/old.txt").exists());
-    }
-    #[test]
-    fn undo_refuses_edited_files_and_occupied_original_paths() {
-        let (_dir, engine) = setup();
-        let root = PathBuf::from(engine.snapshot().preferences.root);
-        let source = root.join("tax.txt");
-        fs::write(&source, "tax return").unwrap();
-        engine.enqueue(vec![source.clone()]).unwrap();
         engine.process_next().unwrap();
-        let record = engine.snapshot().activity[0].clone();
-        fs::write(&source, "another document").unwrap();
-        assert!(engine.undo(&record.id).is_err());
-        assert_eq!(fs::read_to_string(&source).unwrap(), "another document");
-        fs::remove_file(&source).unwrap();
-        fs::write(&record.destination, "edited").unwrap();
-        assert!(engine.undo(&record.id).is_err());
+        let state = engine.snapshot();
+        let filed = &state.items[0];
+        assert_eq!(filed.status, "organized", "Apple: {}", filed.reason);
+        assert_eq!(filed.folder, "Banking & Taxes");
+        assert_eq!(files::digest(Path::new(&filed.destination)).unwrap(), hash);
         assert!(!source.exists());
+        assert_eq!(state.items[1].status, "review");
+        assert!(root.join("unreadable.txt").exists());
+        engine.watch_tick().unwrap();
+        assert!(engine.state.lock().unwrap().pending.is_empty());
+        println!("Synthetic automatic flow: 1 bank statement organized with matching hash; 1 unreadable file retained; own output ignored by watcher.");
     }
     #[test]
-    fn external_import_preserves_original_and_undo_removes_only_copy() {
-        let (dir, engine) = setup();
-        let original = dir.path().join("external.txt");
-        fs::write(&original, "unknown content").unwrap();
-        engine.enqueue(vec![original.clone()]).unwrap();
-        engine.process_next().unwrap();
-        let record = engine.snapshot().activity[0].clone();
-        assert!(record.copied);
-        assert_eq!(record.status, "review");
-        assert!(original.exists());
-        engine.undo(&record.id).unwrap();
-        assert!(original.exists());
-        assert!(!Path::new(&record.destination).exists());
+    fn mapping_reads_every_document_without_moving_and_start_enables_automatic_filing() {
+        let (_temp, engine, root) = setup();
+        for n in 0..15 {
+            fs::write(
+                root.join(format!("source-{n:02}.txt")),
+                format!("Synthetic bank statement {n}"),
+            )
+            .unwrap();
+        }
+        engine.map_folder().unwrap();
+        let state = engine.snapshot();
+        let map = state.collection.unwrap();
+        assert_eq!(map.documents.len(), 15);
+        assert!(engine
+            .state
+            .lock()
+            .unwrap()
+            .collection
+            .as_ref()
+            .unwrap()
+            .documents
+            .iter()
+            .all(|d| !d.text.is_empty()));
+        assert!(state.items.is_empty());
+        assert!(!state.running);
+        assert!(!engine.process_next().unwrap());
+        assert_eq!(engine.start_tuck(false).unwrap(), 15);
+        assert!(engine.process_next().unwrap());
+        let item = engine.snapshot().items[0].clone();
+        assert_eq!(item.status, "organized");
+        assert!(!Path::new(&item.original).exists());
+        assert!(Path::new(&item.destination).exists());
+        assert!(root.join("source-01.txt").exists());
+        engine.stop_tuck();
+        assert!(!engine.process_next().unwrap());
+        assert_eq!(engine.snapshot().items[1].status, "skipped");
+        assert!(root.join("source-01.txt").exists());
     }
     #[test]
-    fn persistence_survives_restart_and_retains_duplicate_copies() {
-        let (dir, engine) = setup();
-        let original = dir.path().join("one.txt");
-        let other = dir.path().join("two.txt");
-        fs::write(&original, "insurance policy").unwrap();
-        fs::write(&other, "insurance policy").unwrap();
-        engine.enqueue(vec![original, other]).unwrap();
+    fn mapping_includes_empty_structure_and_duplicate_edges_and_falls_back() {
+        let (_temp, engine, root) = setup();
+        fs::write(root.join("a.txt"), "Same contents").unwrap();
+        fs::write(root.join("b.txt"), "Same contents").unwrap();
+        fs::create_dir(root.join("Education")).unwrap();
+        engine.map_folder().unwrap();
+        let map = engine.snapshot().collection.unwrap();
+        assert_eq!(map.duplicates, 1);
+        assert!(map.existing_rules.iter().any(|r| r.folder == "Education"));
+        assert!(map.documents[1].duplicate_of.is_some());
+        engine.start_tuck(false).unwrap();
         engine.process_next().unwrap();
         engine.process_next().unwrap();
-        let restarted = Engine::new(engine.storage.clone(), PathBuf::new()).unwrap();
-        assert_eq!(restarted.snapshot().activity.len(), 2);
-        assert!(restarted.snapshot().activity[0].duplicate);
+        assert_eq!(engine.snapshot().items[0].status, "organized");
+        assert_eq!(engine.snapshot().items[1].status, "review");
+        assert!(root.join("b.txt").exists());
+    }
+    #[test]
+    fn start_rejects_stale_map_and_rules_changes_stop_automatic_filing() {
+        let (_temp, engine, root) = setup();
+        let path = root.join("a.txt");
+        fs::write(&path, "original").unwrap();
+        engine.map_folder().unwrap();
+        fs::write(&path, "new changed contents").unwrap();
+        assert!(engine
+            .start_tuck(true)
+            .unwrap_err()
+            .contains("changed since mapping"));
+        assert!(!engine.snapshot().running);
+        engine.map_folder().unwrap();
+        engine.start_tuck(true).unwrap();
+        fs::write(root.join(".tuck/instructions.md"), "Changed rules").unwrap();
+        engine.process_next().unwrap();
+        assert!(!engine.snapshot().running);
+        assert!(!engine.snapshot().watching);
+        assert!(path.exists());
+        assert_eq!(engine.snapshot().items[0].status, "review");
+    }
+    #[test]
+    fn watcher_settles_changes_ignores_own_moves_and_never_restarts_itself() {
+        let (temp, engine, root) = setup();
+        engine.map_folder().unwrap();
+        engine.start_tuck(true).unwrap();
+        let path = root.join("new.txt");
+        fs::write(&path, "new bank statement").unwrap();
+        engine.watch_tick().unwrap();
+        assert!(engine.snapshot().items.is_empty());
+        let age = |engine: &Engine| {
+            for (_, since) in engine.state.lock().unwrap().pending.values_mut() {
+                *since = Instant::now() - Duration::from_secs(7);
+            }
+        };
+        age(&engine);
+        fs::write(&path, "still being copied: more bytes").unwrap();
+        engine.watch_tick().unwrap();
+        assert!(engine.snapshot().items.is_empty());
+        age(&engine);
+        engine.watch_tick().unwrap();
+        assert_eq!(engine.snapshot().items.len(), 1);
+        engine.process_next().unwrap();
+        let item = engine.snapshot().items[0].clone();
+        assert_eq!(item.status, "organized");
+        engine.watch_tick().unwrap();
+        age(&engine);
+        engine.watch_tick().unwrap();
+        assert_eq!(engine.snapshot().items.len(), 1);
+        fs::write(&item.destination, "Finder edited contents").unwrap();
+        engine.watch_tick().unwrap();
+        age(&engine);
+        engine.watch_tick().unwrap();
+        assert_eq!(
+            engine
+                .snapshot()
+                .items
+                .iter()
+                .filter(|i| i.status == "queued")
+                .count(),
+            1
+        );
+        let restarted = Engine::new(temp.path().join("app"), engine.reader.clone()).unwrap();
+        assert!(!restarted.snapshot().running);
+        assert!(!restarted.snapshot().watching);
+        assert!(restarted.snapshot().collection.is_none());
+    }
+    #[test]
+    fn automatic_uncertainty_and_changed_sources_stay_in_place() {
+        let (_temp, engine, root) = setup();
+        *engine.test_decision.lock().unwrap() = None;
+        fs::write(root.join("unknown.txt"), "Unclear").unwrap();
+        engine.map_folder().unwrap();
+        engine.start_tuck(false).unwrap();
+        engine.process_next().unwrap();
+        assert_eq!(engine.snapshot().items[0].status, "review");
+        assert!(root.join("unknown.txt").exists());
+        assert!(engine.snapshot().items[0].destination.is_empty());
+    }
+    #[test]
+    fn folder_selection_waits_for_explicit_start_and_subfolder_choice() {
+        let (_temp, engine, root) = category_setup(false);
+        fs::write(root.join("letter.txt"), "Synthetic source").unwrap();
+        fs::create_dir(root.join("nested")).unwrap();
+        fs::write(root.join("nested/letter.txt"), "Synthetic nested source").unwrap();
+        fs::write(root.join(".hidden.txt"), "Hidden").unwrap();
+        std::os::unix::fs::symlink(root.join("letter.txt"), root.join("link.txt")).unwrap();
+        engine.choose_folder(root.to_str().unwrap()).unwrap();
+        assert!(engine.snapshot().items.is_empty());
+        assert!(!engine.process_next().unwrap());
+        assert_eq!(
+            engine
+                .review_existing(root.to_str().unwrap(), false)
+                .unwrap(),
+            1
+        );
+        let item = engine.snapshot().items[0].clone();
+        assert_eq!(item.status, "queued");
+        assert!(!item.copied);
+        assert_eq!(
+            fs::read_to_string(root.join("letter.txt")).unwrap(),
+            "Synthetic source"
+        );
+        assert!(engine
+            .review_existing(root.to_str().unwrap(), true)
+            .is_err());
+        engine.clear();
+        assert_eq!(
+            engine
+                .review_existing(root.to_str().unwrap(), true)
+                .unwrap(),
+            2
+        );
+    }
+    #[test]
+    fn oversized_folder_and_stale_root_do_not_enqueue_anything() {
+        let (_temp, engine, root) = category_setup(false);
+        assert!(engine.review_existing("/different-root", true).is_err());
+        for n in 0..2001 {
+            fs::write(root.join(format!("{n}.txt")), "Synthetic").unwrap();
+        }
+        assert!(engine
+            .review_existing(root.to_str().unwrap(), true)
+            .unwrap_err()
+            .contains("2,000"));
+        assert!(engine.snapshot().items.is_empty());
+        assert!(engine.snapshot().processing.is_none());
+        assert_eq!(fs::read_to_string(root.join("0.txt")).unwrap(), "Synthetic");
+    }
+    fn category_setup(live: bool) -> (tempfile::TempDir, Engine, PathBuf) {
+        use std::os::unix::fs::PermissionsExt;
+        let temp = tempfile::tempdir_in("/private/tmp").unwrap();
+        let root = temp.path().join("documents");
+        fs::create_dir(&root).unwrap();
+        let reader = if live {
+            std::env::var_os("TUCK_EVAL_READER")
+                .map(PathBuf::from)
+                .unwrap_or_else(|| {
+                    PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("resources/tuck-reader")
+                })
+        } else {
+            let helper = temp.path().join("tuck-apple");
+            fs::write(&helper, r#"#!/usr/bin/python3
+import json, sys
+request = json.load(sys.stdin)
+from pathlib import Path
+with Path(__file__).with_name('requests.jsonl').open('a') as log:
+    log.write(json.dumps(request) + '\n')
+assert request.get('operation') != 'language', 'Language preflight was removed'
+if request.get('operation') == 'describe':
+    print(json.dumps({'description':'Document concerns: ' + request['text'][:300], 'quotes':request['quotes'][:1], 'uncertainty':'', 'action':'finish', 'page':0}))
+elif request.get('operation') == 'group_documents':
+    print(json.dumps({'assignments':[{'id':d['id'],'category':'Home' if 'rental' in d['description'] else 'Banking & Taxes'} for d in request['documents']]}))
+elif request.get('operation') == 'match':
+    assert request['input']['understanding']['description']
+    print(json.dumps({'action':'finish','selection':0,'reason':'Matched description','quote':request['input']['quotes'][0],'source_group':''}))
+elif request.get('operation') == 'verify_match':
+ print(json.dumps({'supported':True}))
+elif request.get('operation') == 'name':
+    print(json.dumps({'title':''}))
+elif 'understanding' in request:
+    assert request['understanding']['description']
+    print(json.dumps({'reply':{'action':'finish','page':0,'query':'','folder':'Banking & Taxes','title':'','reason':'Matched description','confident':True}}))
+elif request.get('operation') == 'rule':
+    print(json.dumps({'instruction':'Keep immigration applications and residence permits here.'}))
+else:
+    print(json.dumps({'rules':[{'folder':'Banking & Taxes','instruction':'Keep bank statements and financial records here.'}, {'folder':'Home','instruction':'Keep rental agreements and household documents here.'}]}))
+"#).unwrap();
+            fs::set_permissions(&helper, fs::Permissions::from_mode(0o700)).unwrap();
+            temp.path().join("tuck-reader")
+        };
+        let engine = Engine::new(temp.path().join("app"), reader).unwrap();
+        engine.choose_folder(root.to_str().unwrap()).unwrap();
+        (temp, engine, root)
+    }
+    fn category_documents(root: &Path) -> Vec<(PathBuf, String)> {
+        [
+            ("bank.txt", "Bank account statement. Monthly account transactions and closing balance. This is a synthetic financial document."),
+            ("rent.txt", "Residential rental agreement. The tenant rents an apartment from the landlord. This is a synthetic housing document."),
+            ("work.txt", "Employment contract. This agreement describes the job title, working hours and salary. This is a synthetic employment document."),
+        ].into_iter().map(|(name, text)| {
+            let path = root.join(name);
+            fs::write(&path, text).unwrap();
+            let hash = files::digest(&path).unwrap();
+            (path, hash)
+        }).collect()
+    }
+    #[test]
+    fn description_generation_is_a_draft_and_failure_releases_processing() {
+        let (_temp, engine, root) = category_setup(false);
+        let before = engine.snapshot().preferences;
+        let settings = fs::read(root.join(".tuck/settings.json")).unwrap();
+        let description = engine.suggest_rule("Migration", &before).unwrap();
+        assert!(description.contains("residence permits"));
+        assert!(!root.join("Migration").exists());
+        assert!(engine.snapshot().preferences.rules.is_empty());
+        assert_eq!(
+            fs::read(root.join(".tuck/settings.json")).unwrap(),
+            settings
+        );
+        assert!(engine.snapshot().processing.is_none());
+        fs::write(
+            engine.reader.with_file_name("tuck-apple"),
+            "#!/bin/sh\nprintf '%s' '{\"error\":\"Synthetic unavailable model\"}'\n",
+        )
+        .unwrap();
+        assert!(engine.suggest_rule("Migration", &before).is_err());
+        assert!(engine.snapshot().processing.is_none());
+        assert!(engine.suggest_rule("../escape", &before).is_err());
+        assert!(!root.join("Migration").exists());
+    }
+    #[test]
+    fn rule_check_is_read_only_and_rejects_stale_drafts() {
+        let (_temp, engine, root) = category_setup(false);
+        let original = fs::read(root.join(".tuck/instructions.md")).unwrap();
+        let mut draft = engine.snapshot().preferences;
+        draft.rules = Preferences::default().rules;
+        draft.rules[2].instruction = draft.rules[3].instruction.clone();
+        draft.use_ai = false;
+        assert_eq!(engine.check_rules(&draft).unwrap().len(), 1);
+        assert!(engine.snapshot().preferences.rules.is_empty());
+        assert_eq!(
+            fs::read(root.join(".tuck/instructions.md")).unwrap(),
+            original
+        );
+        assert!(!root.join("Migration").exists());
+        assert!(engine.snapshot().processing.is_none());
+        fs::write(root.join(".tuck/instructions.md"), "Manual edit").unwrap();
+        assert!(engine
+            .check_rules(&draft)
+            .unwrap_err()
+            .contains("changed on disk"));
+        assert!(engine.snapshot().processing.is_none());
+    }
+    #[test]
+    fn saved_example_survives_restart_and_requires_fresh_analysis() {
+        let (_temp, engine, root) = category_setup(false);
+        let mut p = engine.snapshot().preferences;
+        p.rules = Preferences::default().rules;
+        p.use_ai = false;
+        engine.save_preferences(p).unwrap();
+        let document = root.join("example.txt");
+        fs::write(&document, "Synthetic document").unwrap();
+        engine.enqueue(vec![document.clone()]).unwrap();
+        engine.process_next().unwrap();
+        let item = engine.snapshot().items[0].clone();
+        engine
+            .update_review(&item.id, "Banking & Taxes", "Bank Statement")
+            .unwrap();
+        let item = engine.snapshot().items[0].clone();
+        let mut p = engine.snapshot().preferences;
+        p.rules.iter_mut().find(|r| r.folder == "Banking & Taxes").unwrap().instruction.push_str("\n\n## Filing example\nBelongs here: An unrelated monthly bank statement.\nDoes not belong here: An attachment in a AGENCY application.");
+        engine.save_preferences(p).unwrap();
+        assert!(engine
+            .organize(vec![Approval {
+                id: item.id,
+                destination: item.destination
+            }])
+            .unwrap_err()
+            .contains("Preferences changed"));
+        assert!(document.exists());
+        let restarted = Engine::new(engine.directory.clone(), engine.reader.clone()).unwrap();
         assert!(restarted
             .snapshot()
-            .activity
-            .iter()
-            .all(|r| Path::new(&r.destination).exists()));
+            .preferences
+            .destination_instructions("Banking & Taxes")
+            .contains("Does not belong here"));
+        assert!(restarted.snapshot().items.is_empty());
     }
     #[test]
-    fn paused_queue_does_not_move_documents() {
-        let (dir, engine) = setup();
-        let original = dir.path().join("one.txt");
-        fs::write(&original, "tax return").unwrap();
-        engine.enqueue(vec![original.clone()]).unwrap();
-        engine.watch(false).unwrap();
-        assert!(!engine.process_next().unwrap());
-        assert!(original.exists());
-        assert_eq!(engine.snapshot().pending, 1);
+    fn category_suggestions_include_every_readable_mapped_document_across_batches() {
+        let (temp, engine, root) = category_setup(false);
+        for n in 0..33 {
+            fs::write(
+                root.join(format!("document-{n:02}.txt")),
+                format!(
+                    "Synthetic document {n} with enough English text for category suggestions."
+                ),
+            )
+            .unwrap();
+        }
+        fs::write(root.join("unreadable.txt"), "").unwrap();
+        engine.map_folder().unwrap();
+        let proposal = engine.suggest_categories().unwrap();
+        assert_eq!(proposal.sampled, 33);
+        assert_eq!(proposal.skipped, 1);
+        let requests = fs::read_to_string(temp.path().join("requests.jsonl")).unwrap();
+        let mut sent = std::collections::BTreeSet::new();
+        let mut calls = 0;
+        for line in requests.lines() {
+            let request: serde_json::Value = serde_json::from_str(line).unwrap();
+            if request["operation"] != "group_documents" {
+                continue;
+            }
+            calls += 1;
+            let established = request["establishedSubjects"].as_array().unwrap();
+            if calls == 1 {
+                assert!(established.is_empty());
+            } else {
+                assert!(established.iter().any(|v| v == "Banking & Taxes"));
+            }
+            let samples = request["documents"].as_array().unwrap();
+            assert!(samples.len() <= 4);
+            for sample in samples {
+                let description = sample["description"]
+                    .as_str()
+                    .expect("Planner gets grounded descriptions");
+                assert!(sample["quote"]
+                    .as_str()
+                    .unwrap()
+                    .contains("Synthetic document"));
+                sent.insert(description.to_owned());
+            }
+        }
+        assert_eq!(calls, 9);
+        for n in 0..33 {
+            assert!(sent
+                .iter()
+                .any(|s| s.contains(&format!("Synthetic document {n} with"))));
+        }
+
+        assert!(engine.snapshot().items.is_empty());
+        assert_eq!(files::existing_documents(&root, true).unwrap().len(), 34);
     }
     #[test]
-    fn queued_imports_survive_restart() {
-        let (dir, engine) = setup();
-        let original = dir.path().join("queued.txt");
-        fs::write(&original, "tax return").unwrap();
-        engine.enqueue(vec![original.clone()]).unwrap();
-        let restarted = Engine::new(engine.storage.clone(), PathBuf::new()).unwrap();
-        assert_eq!(restarted.snapshot().pending, 1);
-        restarted.process_next().unwrap();
-        assert_eq!(restarted.snapshot().activity[0].status, "sorted");
-        assert!(original.exists());
+    fn descriptions_are_reused_across_suggestions_rules_renames_and_filing() {
+        let (temp, engine, root) = category_setup(false);
+        let documents = category_documents(&root);
+        let count = || {
+            fs::read_to_string(temp.path().join("requests.jsonl"))
+                .unwrap()
+                .lines()
+                .filter(|line| {
+                    serde_json::from_str::<serde_json::Value>(line).unwrap()["operation"]
+                        == "describe"
+                })
+                .count()
+        };
+        let proposal = engine.suggest_categories().unwrap();
+        assert_eq!(count(), 3);
+        let mut p = proposal.preferences;
+        p.rules = proposal.rules;
+        engine.save_preferences(p).unwrap();
+        engine.suggest_categories().unwrap();
+        assert_eq!(count(), 3);
+        let renamed = root.join("renamed.txt");
+        fs::rename(&documents[0].0, &renamed).unwrap();
+        engine.suggest_categories().unwrap();
+        assert_eq!(count(), 3);
+        let text = fs::read_to_string(&renamed).unwrap();
+        let decision = classifier::classify_with_tools(
+            "renamed.txt",
+            &text,
+            &engine.snapshot().preferences,
+            &[],
+            Some((&renamed, &engine.reader)),
+        );
+        assert!(decision.confident, "{}", decision.reason);
+        assert_eq!(count(), 3);
+        fs::write(
+            &renamed,
+            "A different readable document about a bank account and its transactions.",
+        )
+        .unwrap();
+        engine.suggest_categories().unwrap();
+        assert_eq!(count(), 4);
+        assert!(renamed.exists()); // Suggestions and classification themselves do not move files.
     }
     #[test]
-    fn journal_recovers_completed_move_after_interruption() {
-        let (_dir, engine) = setup();
-        let root = PathBuf::from(engine.snapshot().preferences.root);
-        let original = root.join("bank.txt");
-        fs::write(&original, "bank statement").unwrap();
-        engine.enqueue(vec![original]).unwrap();
+    fn category_preview_requires_approval_and_preserves_existing_roots() {
+        let (_temp, engine, root) = category_setup(false);
+        assert!(engine.snapshot().preferences.rules.is_empty());
+        let documents = category_documents(&root);
+        let proposal = engine.suggest_categories().unwrap();
+        assert_eq!(proposal.sampled, 3);
+        assert!(!root.join("Banking & Taxes").exists());
+        assert!(!root.join("Home").exists());
+        assert!(engine.snapshot().processing.is_none());
+        let mut approved = proposal.preferences;
+        approved.rules = proposal.rules;
+        engine.save_preferences(approved).unwrap();
+        assert!(root.join("Banking & Taxes/.tuck/instructions.md").is_file());
+        assert!(root.join("Home/.tuck/instructions.md").is_file());
+        for (path, hash) in documents {
+            assert_eq!(files::digest(&path).unwrap(), hash);
+        }
+        engine.choose_folder(root.to_str().unwrap()).unwrap();
+        assert_eq!(engine.snapshot().preferences.rules.len(), 2);
+        assert!(engine.suggest_categories().is_ok());
+    }
+    #[test]
+    fn category_failures_clear_processing_and_stale_proposals_do_not_write() {
+        let (_temp, engine, root) = category_setup(false);
+        assert!(engine.suggest_categories().is_err());
+        assert!(engine.snapshot().processing.is_none());
+        category_documents(&root);
+        let proposal = engine.suggest_categories().unwrap();
+        fs::write(
+            root.join(".tuck/instructions.md"),
+            "Keep filenames unchanged.",
+        )
+        .unwrap();
+        let mut approved = proposal.preferences;
+        approved.rules = proposal.rules;
+        assert!(engine.save_preferences(approved).is_err());
+        assert!(!root.join("Banking & Taxes").exists());
+        assert_eq!(
+            fs::read_to_string(root.join(".tuck/instructions.md")).unwrap(),
+            "Keep filenames unchanged."
+        );
+    }
+    #[test]
+    #[ignore = "Requires Apple Intelligence; synthetic category discovery and folder creation"]
+    fn live_apple_category_suggestions() {
+        let (_temp, engine, root) = category_setup(true);
+        let documents = category_documents(&root);
+        let proposal = engine.suggest_categories().unwrap();
+        assert_eq!(proposal.sampled, 3);
+        assert!((1..=6).contains(&proposal.rules.len()));
+        println!(
+            "Suggested synthetic categories: {:?}",
+            proposal.rules.iter().map(|r| &r.folder).collect::<Vec<_>>()
+        );
+        for rule in &proposal.rules {
+            assert!(!root.join(&rule.folder).exists());
+        }
+        let mut approved = proposal.preferences;
+        approved.rules = proposal.rules;
+        engine.save_preferences(approved).unwrap();
+        for rule in engine.snapshot().preferences.rules {
+            assert!(root
+                .join(rule.folder)
+                .join(".tuck/instructions.md")
+                .is_file());
+        }
+        for (path, hash) in documents {
+            assert_eq!(files::digest(&path).unwrap(), hash);
+        }
+    }
+    fn setup() -> (tempfile::TempDir, Engine, PathBuf) {
+        let temp = tempfile::tempdir_in("/private/tmp").unwrap();
+        let root = temp.path().join("documents");
+        fs::create_dir(&root).unwrap();
+        let engine = Engine::new(temp.path().join("app"), PathBuf::new()).unwrap();
+        engine.choose_folder(root.to_str().unwrap()).unwrap();
+        let mut p = engine.snapshot().preferences;
+        p.use_ai = false;
+        p.rules = Preferences::default().rules;
+        engine.save_preferences(p).unwrap();
+        *engine.test_decision.lock().unwrap() = Some(classifier::Decision {
+            language: None,
+            folder: "Banking & Taxes".into(),
+            title: "Bank statement".into(),
+            confident: true,
+            reason: "Synthetic bank statement".into(),
+        });
+        (temp, engine, root)
+    }
+    fn analyze(engine: &Engine, path: &Path) -> ReviewItem {
+        engine.enqueue(vec![path.to_path_buf()]).unwrap();
         engine.process_next().unwrap();
+        engine.snapshot().items.last().unwrap().clone()
+    }
+    fn approval(item: &ReviewItem) -> Approval {
+        Approval {
+            id: item.id.clone(),
+            destination: item.destination.clone(),
+        }
+    }
+    #[test]
+    fn review_never_moves_and_approval_moves_only_selected() {
+        let (_temp, engine, root) = setup();
+        let a = root.join("a.txt");
+        let b = root.join("b.txt");
+        fs::write(&a, "bank statement a").unwrap();
+        fs::write(&b, "bank statement b").unwrap();
+        let first = analyze(&engine, &a);
+        let second = analyze(&engine, &b);
+        assert_eq!(first.status, "review");
+        assert!(a.exists() && b.exists());
+        assert!(!Path::new(&first.destination).exists());
+        engine.organize(vec![approval(&first)]).unwrap();
+        assert!(!a.exists());
+        assert!(b.exists());
+        assert!(Path::new(&first.destination).exists());
+        assert_eq!(engine.snapshot().items[1].status, "review");
+        // Both initially suggested the same name; the second now requires a new reviewed preview.
+        assert!(engine
+            .organize(vec![approval(&second)])
+            .unwrap_err()
+            .contains("occupied"));
+        let second = engine.snapshot().items[1].clone();
+        assert!(second.destination.contains("(1)"));
+        engine.organize(vec![approval(&second)]).unwrap();
+        assert_eq!(
+            fs::read_to_string(&first.destination).unwrap(),
+            "bank statement a"
+        );
+        assert_eq!(
+            fs::read_to_string(&second.destination).unwrap(),
+            "bank statement b"
+        );
+    }
+    #[test]
+    fn preview_uses_session_identity_and_follows_organized_destination() {
+        let (temp, engine, _root) = setup();
+        let path = temp.path().join("preview.txt");
+        fs::write(&path, "bank statement").unwrap();
+        let item = analyze(&engine, &path);
+        assert_eq!(engine.preview_path(&item.id).unwrap(), path);
+        assert!(engine.preview_path("unknown").is_err());
+        engine.organize(vec![approval(&item)]).unwrap();
+        assert_eq!(
+            engine.preview_path(&item.id).unwrap(),
+            PathBuf::from(&item.destination)
+        );
+        fs::remove_file(&item.destination).unwrap();
+        assert!(engine.preview_path(&item.id).is_err());
+    }
+    #[test]
+    fn external_files_are_copied_and_session_is_not_persisted() {
+        let (temp, engine, _root) = setup();
+        let path = temp.path().join("external.txt");
+        fs::write(&path, "statement").unwrap();
+        let item = analyze(&engine, &path);
+        assert!(item.copied);
+        engine.organize(vec![approval(&item)]).unwrap();
+        assert_eq!(
+            fs::read_to_string(&path).unwrap(),
+            fs::read_to_string(&item.destination).unwrap()
+        );
+        let mut app_files: Vec<_> = fs::read_dir(temp.path().join("app"))
+            .unwrap()
+            .map(|e| e.unwrap().file_name())
+            .collect();
+        app_files.sort();
+        let mut expected = vec![std::ffi::OsString::from("preferences.json")];
+        if cfg!(target_os = "macos") {
+            expected.insert(0, "folder-access.json".into());
+        }
+        assert_eq!(app_files, expected);
+        let restarted = Engine::new(temp.path().join("app"), PathBuf::new()).unwrap();
+        assert!(restarted.snapshot().items.is_empty());
+        assert!(restarted.snapshot().processing.is_none());
+    }
+    #[test]
+    fn uncertain_documents_stay_put_until_user_chooses_folder() {
+        let (_temp, engine, root) = setup();
+        *engine.test_decision.lock().unwrap() = None;
+        let path = root.join("scan.txt");
+        fs::write(&path, "unclear").unwrap();
+        let item = analyze(&engine, &path);
+        assert_eq!(item.status, "review");
+        assert!(item.destination.is_empty());
+        assert!(engine.organize(vec![approval(&item)]).is_err());
+        assert!(path.exists());
+        assert!(!root.join("Needs Review").exists());
+        engine
+            .update_review(&item.id, "Banking & Taxes", "My statement")
+            .unwrap();
+        let edited = engine.snapshot().items[0].clone();
+        engine.organize(vec![approval(&edited)]).unwrap();
+        assert!(root.join("Banking & Taxes/My statement.txt").exists());
+    }
+    #[test]
+    fn edits_and_disabled_destinations_are_checked_before_moving() {
+        let (_temp, engine, root) = setup();
+        let path = root.join("source.txt");
+        fs::write(&path, "original").unwrap();
+        let item = analyze(&engine, &path);
+        assert!(engine
+            .update_review(&item.id, "../outside", "name")
+            .is_err());
+        assert!(engine
+            .update_review(&item.id, "Banking & Taxes", "../name")
+            .is_err());
+        fs::write(&path, "user edits").unwrap();
+        assert!(engine
+            .organize(vec![approval(&item)])
+            .unwrap_err()
+            .contains("changed"));
+        assert_eq!(fs::read_to_string(&path).unwrap(), "user edits");
+        assert!(!Path::new(&item.destination).exists());
+        engine.retry(&item.id).unwrap();
+        engine.process_next().unwrap();
+        let item = engine.snapshot().items[0].clone();
+        let mut p = engine.snapshot().preferences;
+        p.rules
+            .iter_mut()
+            .find(|r| r.folder == "Banking & Taxes")
+            .unwrap()
+            .enabled = false;
+        engine.save_preferences(p).unwrap();
+        assert!(engine
+            .organize(vec![approval(&item)])
+            .unwrap_err()
+            .contains("Preferences changed"));
+        assert!(path.exists());
+    }
+    #[test]
+    fn switching_models_stops_filing_and_rejects_old_decisions() {
+        let (_temp, engine, root) = setup();
+        let path = root.join("source.txt");
+        fs::write(&path, "statement").unwrap();
+        let item = analyze(&engine, &path);
         {
             let mut state = engine.state.lock().unwrap();
-            state.store.activity[0].status = "pending".into();
-            engine.persist(&state.store).unwrap();
+            state.running = true;
+            state.watching = true;
         }
-        let restarted = Engine::new(engine.storage.clone(), PathBuf::new()).unwrap();
-        assert_eq!(restarted.snapshot().activity[0].status, "sorted");
-        restarted.discover().unwrap();
-        restarted.discover().unwrap();
-        assert_eq!(restarted.snapshot().pending, 0);
+        let mut p = engine.snapshot().preferences;
+        p.ai_model = crate::model::LocalModel::GemmaE4b;
+        engine.save_preferences(p).unwrap();
+        assert!(!engine.snapshot().running);
+        assert!(!engine.snapshot().watching);
+        assert!(engine
+            .organize(vec![approval(&item)])
+            .unwrap_err()
+            .contains("Preferences changed"));
+        assert!(path.exists());
+    }
+
+    #[test]
+    fn manual_settings_edits_reload_and_invalidate_review_and_stale_saves() {
+        let (_temp, engine, root) = setup();
+        let path = root.join("source.txt");
+        fs::write(&path, "statement").unwrap();
+        let item = analyze(&engine, &path);
+        let old = engine.snapshot().preferences;
+        let settings = root.join(".tuck/settings.json");
+        let mut data: serde_json::Value =
+            serde_json::from_slice(&fs::read(&settings).unwrap()).unwrap();
+        data["rename"] = false.into();
+        fs::write(&settings, serde_json::to_vec(&data).unwrap()).unwrap();
+        assert!(!engine.snapshot().preferences.rename);
+        assert!(engine
+            .organize(vec![approval(&item)])
+            .unwrap_err()
+            .contains("Preferences changed"));
+        assert!(engine
+            .save_preferences(old)
+            .unwrap_err()
+            .contains("Settings changed"));
+        fs::write(&settings, "bad json").unwrap();
+        assert!(engine.snapshot().error.is_some());
+        assert!(engine.organize(vec![approval(&item)]).is_err());
+        assert_eq!(fs::read_to_string(&settings).unwrap(), "bad json");
+        assert!(path.exists());
     }
     #[test]
-    fn changing_file_waits_for_another_matching_scan() {
-        let (_dir, engine) = setup();
-        engine.watch(true).unwrap();
-        let root = PathBuf::from(engine.snapshot().preferences.root);
-        let source = root.join("download.txt");
-        fs::write(&source, "part one").unwrap();
-        engine.discover().unwrap();
-        fs::write(&source, "part one and part two").unwrap();
-        engine.discover().unwrap();
-        assert_eq!(engine.snapshot().pending, 0);
-        engine.discover().unwrap();
-        assert_eq!(engine.snapshot().pending, 1);
+    fn manual_prompt_edits_require_new_analysis() {
+        let (_temp, engine, root) = setup();
+        let path = root.join("source.txt");
+        fs::write(&path, "statement").unwrap();
+        let item = analyze(&engine, &path);
+        fs::write(root.join(".tuck/instructions.md"), "Keep original names.").unwrap();
+        assert!(engine
+            .organize(vec![approval(&item)])
+            .unwrap_err()
+            .contains("Preferences changed"));
+        assert!(path.exists());
+    }
+    #[test]
+    fn skip_and_clear_leave_files_and_settings_intact() {
+        let (_temp, engine, root) = setup();
+        let path = root.join("source.txt");
+        fs::write(&path, "statement").unwrap();
+        engine.enqueue(vec![path.clone(), path.clone()]).unwrap();
+        assert_eq!(engine.snapshot().items.len(), 1);
+        let item = engine.snapshot().items[0].clone();
+        engine.skip(&item.id).unwrap();
+        assert!(!engine.process_next().unwrap());
+        let settings = fs::read(root.join(".tuck/settings.json")).unwrap();
+        engine.clear();
+        assert!(engine.snapshot().items.is_empty());
+        assert!(path.exists());
+        assert_eq!(
+            fs::read(root.join(".tuck/settings.json")).unwrap(),
+            settings
+        );
+        assert!(engine
+            .enqueue(vec![root.join(".tuck/instructions.md")])
+            .is_err());
+    }
+    #[test]
+    fn legacy_watch_queue_and_database_are_never_resumed_or_rewritten() {
+        let temp = tempfile::tempdir_in("/private/tmp").unwrap();
+        let root = temp.path().join("documents");
+        fs::create_dir(&root).unwrap();
+        let app = temp.path().join("app");
+        fs::create_dir(&app).unwrap();
+        let source = root.join("old.txt");
+        fs::write(&source, "original").unwrap();
+        let old = serde_json::to_vec(&serde_json::json!({"preferences": {"root": root, "rename": false}, "watching": true, "queue": [source], "activity": [{"status":"pending"}]})).unwrap();
+        fs::write(app.join("state.json"), &old).unwrap();
+        fs::write(app.join("tuck.db"), "existing database bytes").unwrap();
+        let engine = Engine::new(app.clone(), PathBuf::new()).unwrap();
+        assert!(engine.snapshot().items.is_empty());
+        assert!(!engine.snapshot().preferences.rename);
+        assert!(!engine.process_next().unwrap());
+        assert_eq!(fs::read(app.join("state.json")).unwrap(), old);
+        assert_eq!(
+            fs::read_to_string(app.join("tuck.db")).unwrap(),
+            "existing database bytes"
+        );
+        assert!(source.exists());
+    }
+    #[test]
+    fn symlink_destinations_and_settings_are_rejected() {
+        use std::os::unix::fs::symlink;
+        let (temp, engine, root) = setup();
+        let path = root.join("source.txt");
+        fs::write(&path, "statement").unwrap();
+        let item = analyze(&engine, &path);
+        // Replacement with a link invalidates instruction loading before any transfer.
+        fs::rename(
+            root.join("Banking & Taxes"),
+            root.join("OldBanking & Taxes"),
+        )
+        .unwrap();
+        symlink(temp.path(), root.join("Banking & Taxes")).unwrap();
+        assert!(engine.organize(vec![approval(&item)]).is_err());
+        assert!(path.exists());
+        fs::remove_file(root.join(".tuck/settings.json")).unwrap();
+        let outside = temp.path().join("outside.json");
+        fs::write(&outside, "{}").unwrap();
+        symlink(&outside, root.join(".tuck/settings.json")).unwrap();
+        assert!(engine.snapshot().error.is_some());
+        assert_eq!(fs::read_to_string(outside).unwrap(), "{}");
+    }
+    #[test]
+    fn restart_drops_unapproved_batch_and_preserves_settings() {
+        let (temp, engine, root) = setup();
+        let path = root.join("source.txt");
+        fs::write(&path, "statement").unwrap();
+        analyze(&engine, &path);
+        let restarted = Engine::new(temp.path().join("app"), PathBuf::new()).unwrap();
+        assert!(restarted.snapshot().items.is_empty());
+        assert!(!restarted.snapshot().preferences.use_ai);
+        assert!(path.exists());
+    }
+    #[test]
+    fn retry_clears_a_previous_generated_name_and_language() {
+        let (_temp, engine, root) = setup();
+        let path = root.join("original.txt");
+        fs::write(&path, "Bank statement").unwrap();
+        let item = analyze(&engine, &path);
+        engine.retry(&item.id).unwrap();
+        let retried = engine.snapshot().items.remove(0);
+        assert_eq!(retried.title, "original");
+        assert!(retried.folder.is_empty());
+        assert!(retried.destination.is_empty());
+        assert!(retried.language.is_none());
+        assert!(!retried.confident);
+        assert!(path.exists());
+    }
+    #[test]
+    #[ignore = "Requires Apple Intelligence; synthetic end-to-end review and approval"]
+    fn live_apple_review_flow() {
+        let (_temp, engine, root) = setup();
+        *engine.test_decision.lock().unwrap() = None;
+        let mut p = engine.snapshot().preferences;
+        p.use_ai = true;
+        engine.save_preferences(p).unwrap();
+        let engine = Engine::new(
+            engine.directory.clone(),
+            PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("resources/tuck-reader"),
+        )
+        .unwrap();
+        let source = root.join("statement.txt");
+        fs::write(&source, "BANK ACCOUNT STATEMENT\nExample Bank\nStatement period: January 2026\nOpening balance: SEK 1000\nDeposits: SEK 2500\nClosing balance: SEK 3500\nThis is a bank account statement showing account transactions. Synthetic test document.").unwrap();
+        let item = analyze(&engine, &source);
+        assert_eq!(item.status, "review");
+        assert!(source.exists());
+        assert_eq!(
+            item.folder, "Banking & Taxes",
+            "Apple result: {}",
+            item.reason
+        );
+        assert!(!Path::new(&item.destination).exists());
+        engine.organize(vec![approval(&item)]).unwrap();
+        assert!(!source.exists());
+        assert!(Path::new(&item.destination).is_file());
+        assert_eq!(
+            files::digest(Path::new(&item.destination)).unwrap(),
+            item.hash
+        );
     }
 }

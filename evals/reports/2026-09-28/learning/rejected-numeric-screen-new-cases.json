@@ -1,0 +1,63 @@
+[
+  {
+    "id": "new_overlap",
+    "input": [
+      {
+        "folder": "Car",
+        "rules": "Keep all documents about my car here."
+      },
+      {
+        "folder": "Insurance",
+        "rules": "Keep insurance policies here."
+      }
+    ],
+    "response": {
+      "hasOverlap": false,
+      "issues": []
+    },
+    "seconds": 0.926874916
+  },
+  {
+    "id": "new_distinct",
+    "input": [
+      {
+        "folder": "Education",
+        "rules": "Keep school diplomas and course certificates here."
+      },
+      {
+        "folder": "Utilities",
+        "rules": "Keep water and electricity bills here."
+      }
+    ],
+    "response": {
+      "hasOverlap": true,
+      "issues": [
+        {
+          "clarification": "",
+          "folderIndex": 0,
+          "issue": "A school diploma could be kept in both Education and Utilities, but neither folder explicitly accepts it as a utility document.",
+          "otherIndex": 1
+        }
+      ]
+    },
+    "seconds": 2.284628125
+  },
+  {
+    "id": "new_resolved",
+    "input": [
+      {
+        "folder": "Car",
+        "rules": "Keep car documents here. Insurance policies go in Insurance."
+      },
+      {
+        "folder": "Insurance",
+        "rules": "Keep all insurance policies here."
+      }
+    ],
+    "response": {
+      "hasOverlap": false,
+      "issues": []
+    },
+    "seconds": 0.5243182919999998
+  }
+]

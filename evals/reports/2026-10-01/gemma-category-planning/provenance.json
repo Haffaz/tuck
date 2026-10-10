@@ -1,0 +1,105 @@
+{
+  "scope": "Category planning only. Frozen Apple descriptions. Identical prompt and inputs; unconstrained JSON followed by the production Swift validator and one format retry. No raw PDF/image input or file operations.",
+  "models": [
+    {
+      "name": "gemma4:e4b-it-q4_K_M",
+      "model": "gemma4:e4b-it-q4_K_M",
+      "modified_at": "2026-09-30T21:37:59.067414757+02:00",
+      "size": 6583656505,
+      "digest": "dc35e8d9c6061baa6f0fa870975ab6932e2542b579b13ea0f199fa4bb7300c9c",
+      "details": {
+        "parent_model": "gemma4-validation-20260929:e4b-imatrix-attention-q6-q8-draft2",
+        "format": "gguf",
+        "family": "gemma4",
+        "families": [
+          "gemma4"
+        ],
+        "parameter_size": "7.5B",
+        "quantization_level": "Q4_K_M",
+        "context_length": 131072,
+        "embedding_length": 2560
+      },
+      "capabilities": [
+        "completion",
+        "vision",
+        "audio",
+        "tools",
+        "thinking"
+      ]
+    },
+    {
+      "name": "gemma4:e2b-it-q4_K_M",
+      "model": "gemma4:e2b-it-q4_K_M",
+      "modified_at": "2026-09-30T21:36:14.44514152+02:00",
+      "size": 4587156505,
+      "digest": "b37049369adfe3d2b653af0ab301a062ca5cbe96ace6aa0d3f2559ee9b563fc2",
+      "details": {
+        "parent_model": "gemma4-validation-20260929:e2b-imatrix-attention-q6-q8-draft2",
+        "format": "gguf",
+        "family": "gemma4",
+        "families": [
+          "gemma4"
+        ],
+        "parameter_size": "4.6B",
+        "quantization_level": "Q4_K_M",
+        "context_length": 131072,
+        "embedding_length": 1536
+      },
+      "capabilities": [
+        "completion",
+        "vision",
+        "audio",
+        "tools",
+        "thinking"
+      ]
+    }
+  ],
+  "ollama": {
+    "version": "0.34.4"
+  },
+  "settings": {
+    "temperature": 0,
+    "seed": 42,
+    "num_ctx": 8192,
+    "num_predict": 1000
+  },
+  "think": false,
+  "format": "none, same free-JSON approach as production Apple category planner",
+  "repetitions": 3,
+  "appleHelperHash": "f1cbafc8dc653447546a2725da7441c9e7e456574cb2ea64365d43eac911c6b3",
+  "validatorSourceHash": "19c64abe0b202dd4a28f6c3dfc13aa5e5996d2f9ba7ca2b0cd231eb1e33da917",
+  "cases": [
+    {
+      "id": "controlled",
+      "descriptions": 10,
+      "characters": 314,
+      "inputHash": "1b7c4caa9deb095898ad7f633b32eb7be7720723b7bc1675ae21c1b51ae282f6",
+      "input": [
+        "A passport identifying its holder.",
+        "A national identity card.",
+        "An airline booking for a holiday.",
+        "A hotel reservation for a trip.",
+        "An employment contract.",
+        "A salary statement showing pay and deductions.",
+        "A home insurance policy.",
+        "An insurance coverage certificate.",
+        "A university degree certificate.",
+        "A school examination transcript."
+      ]
+    },
+    {
+      "id": "personal",
+      "descriptions": 22,
+      "characters": 2139,
+      "inputHash": "3153db2da3ea488e9b4429306d145ac2544a450680864eb1350179e482c30bc0"
+    }
+  ],
+  "sourceHashVerifiedCacheEntries": 22,
+  "freshExtractionMatches": 22,
+  "freshQuotesPresent": 22,
+  "inputPolicy": "Reuse frozen descriptions previously validated by Tuck; source hashes and provider identity match. Fresh OCR can vary and is outside this category-only comparison.",
+  "sourceFiles": 25,
+  "hardware": "Apple M4",
+  "memoryBytes": 17179869184,
+  "os": "27.0"
+}

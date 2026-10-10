@@ -1,0 +1,736 @@
+{
+  "generated_at_unix": 1790603391,
+  "os": "27.0",
+  "pipeline": "single-decision-v3",
+  "results": [
+    {
+      "automated_title_check": false,
+      "decision": {
+        "confident": false,
+        "folder": "Needs Review",
+        "language": {
+          "code": "sv",
+          "message": "Recognized as Swedish · supported by this Mac's model",
+          "name": "Swedish",
+          "status": "supported"
+        },
+        "reason": "Apple Intelligence could not complete filing (refused). Choose the destination manually.",
+        "title": ""
+      },
+      "expected_folder": "Migration",
+      "extracted_characters": 142,
+      "folder_correct": false,
+      "forbidden_title_claim": false,
+      "id": "sv_residence_card",
+      "image_used": false,
+      "rendered_ocr": false,
+      "review": true,
+      "seconds": 1.3548255
+    },
+    {
+      "automated_title_check": true,
+      "decision": {
+        "confident": true,
+        "folder": "Finances",
+        "language": {
+          "code": "sv",
+          "message": "Recognized as Swedish · supported by this Mac's model",
+          "name": "Swedish",
+          "status": "supported"
+        },
+        "reason": "The document is a bank statement, which aligns with the Finances folder rule for banking and tax documents, including account statements and tax returns.. Direct classification",
+        "title": "Bank Statement"
+      },
+      "expected_folder": "Finances",
+      "extracted_characters": 130,
+      "folder_correct": true,
+      "forbidden_title_claim": false,
+      "id": "sv_bank_statement",
+      "image_used": false,
+      "rendered_ocr": false,
+      "review": false,
+      "seconds": 4.522399292
+    },
+    {
+      "automated_title_check": false,
+      "decision": {
+        "confident": false,
+        "folder": "Needs Review",
+        "language": {
+          "code": "sv",
+          "message": "Recognized as Swedish · supported by this Mac's model",
+          "name": "Swedish",
+          "status": "supported"
+        },
+        "reason": "Apple Intelligence could not complete filing (guardrail). Choose the destination manually.",
+        "title": ""
+      },
+      "expected_folder": "Work",
+      "extracted_characters": 144,
+      "folder_correct": false,
+      "forbidden_title_claim": false,
+      "id": "sv_payslip",
+      "image_used": false,
+      "rendered_ocr": false,
+      "review": true,
+      "seconds": 0.463563583
+    },
+    {
+      "automated_title_check": false,
+      "decision": {
+        "confident": false,
+        "folder": "Needs Review",
+        "language": {
+          "code": "sv",
+          "message": "Recognized as Swedish · supported by this Mac's model",
+          "name": "Swedish",
+          "status": "supported"
+        },
+        "reason": "Apple Intelligence could not complete filing (guardrail). Choose the destination manually.",
+        "title": ""
+      },
+      "expected_folder": "Home",
+      "extracted_characters": 145,
+      "folder_correct": false,
+      "forbidden_title_claim": false,
+      "id": "sv_tenancy",
+      "image_used": false,
+      "rendered_ocr": false,
+      "review": true,
+      "seconds": 0.450028833
+    },
+    {
+      "automated_title_check": false,
+      "decision": {
+        "confident": false,
+        "folder": "Needs Review",
+        "language": {
+          "code": "sv",
+          "message": "Recognized as Swedish · supported by this Mac's model",
+          "name": "Swedish",
+          "status": "supported"
+        },
+        "reason": "Apple Intelligence could not complete filing (guardrail). Choose the destination manually.",
+        "title": ""
+      },
+      "expected_folder": "Insurance",
+      "extracted_characters": 116,
+      "folder_correct": false,
+      "forbidden_title_claim": false,
+      "id": "sv_home_insurance",
+      "image_used": false,
+      "rendered_ocr": false,
+      "review": true,
+      "seconds": 0.454117834
+    },
+    {
+      "automated_title_check": false,
+      "decision": {
+        "confident": false,
+        "folder": "Needs Review",
+        "language": {
+          "code": "sv",
+          "message": "Recognized as Swedish · supported by this Mac's model",
+          "name": "Swedish",
+          "status": "supported"
+        },
+        "reason": "Apple Intelligence could not complete filing (guardrail). Choose the destination manually.",
+        "title": ""
+      },
+      "expected_folder": "Health",
+      "extracted_characters": 160,
+      "folder_correct": false,
+      "forbidden_title_claim": false,
+      "id": "sv_medical_certificate",
+      "image_used": false,
+      "rendered_ocr": false,
+      "review": true,
+      "seconds": 0.45825625
+    },
+    {
+      "automated_title_check": false,
+      "decision": {
+        "confident": false,
+        "folder": "Needs Review",
+        "language": {
+          "code": "en",
+          "message": "Recognized as English · supported by this Mac's model",
+          "name": "English",
+          "status": "supported"
+        },
+        "reason": "Apple Intelligence could not complete filing (refused). Choose the destination manually.",
+        "title": ""
+      },
+      "expected_folder": "Migration/AGENCY",
+      "extracted_characters": 207,
+      "folder_correct": false,
+      "forbidden_title_claim": false,
+      "id": "en_agency_attachment",
+      "image_used": false,
+      "rendered_ocr": false,
+      "review": true,
+      "seconds": 0.465943417
+    },
+    {
+      "automated_title_check": false,
+      "decision": {
+        "confident": false,
+        "folder": "Needs Review",
+        "language": {
+          "code": "en",
+          "message": "Recognized as English · supported by this Mac's model",
+          "name": "English",
+          "status": "supported"
+        },
+        "reason": "Apple Intelligence could not complete filing (refused). Choose the destination manually.",
+        "title": ""
+      },
+      "expected_folder": "Home",
+      "extracted_characters": 151,
+      "folder_correct": false,
+      "forbidden_title_claim": false,
+      "id": "en_electricity_bill",
+      "image_used": false,
+      "rendered_ocr": false,
+      "review": true,
+      "seconds": 0.446318375
+    },
+    {
+      "automated_title_check": false,
+      "decision": {
+        "confident": false,
+        "folder": "Needs Review",
+        "language": {
+          "code": "en",
+          "message": "Recognized as English · supported by this Mac's model",
+          "name": "English",
+          "status": "supported"
+        },
+        "reason": "Apple Intelligence could not complete filing (refused). Choose the destination manually.",
+        "title": ""
+      },
+      "expected_folder": "Insurance",
+      "extracted_characters": 194,
+      "folder_correct": false,
+      "forbidden_title_claim": false,
+      "id": "en_injected_insurance",
+      "image_used": false,
+      "rendered_ocr": false,
+      "review": true,
+      "seconds": 0.452722792
+    },
+    {
+      "automated_title_check": false,
+      "decision": {
+        "confident": false,
+        "folder": "Needs Review",
+        "language": {
+          "code": "en",
+          "message": "Recognized as English · supported by this Mac's model",
+          "name": "English",
+          "status": "supported"
+        },
+        "reason": "Apple Intelligence could not complete filing (refused). Choose the destination manually.",
+        "title": ""
+      },
+      "expected_folder": "Work",
+      "extracted_characters": 198,
+      "folder_correct": false,
+      "forbidden_title_claim": false,
+      "id": "en_employment_certificate",
+      "image_used": false,
+      "rendered_ocr": false,
+      "review": true,
+      "seconds": 0.436390792
+    },
+    {
+      "automated_title_check": true,
+      "decision": {
+        "confident": false,
+        "folder": "Needs Review",
+        "language": {
+          "code": "en",
+          "message": "Recognized as English · supported by this Mac's model",
+          "name": "English",
+          "status": "supported"
+        },
+        "reason": "The local model was uncertain. The folder is unclear. Please choose a destination.. Direct classification",
+        "title": ""
+      },
+      "expected_folder": "Needs Review",
+      "extracted_characters": 99,
+      "folder_correct": true,
+      "forbidden_title_claim": false,
+      "id": "ambiguous_fragment",
+      "image_used": false,
+      "rendered_ocr": false,
+      "review": true,
+      "seconds": 3.12895525
+    },
+    {
+      "automated_title_check": true,
+      "decision": {
+        "confident": false,
+        "folder": "Needs Review",
+        "language": {
+          "code": "und",
+          "message": "Language detection is uncertain; check the suggestion carefully.",
+          "name": "Uncertain or mixed language",
+          "status": "unknown"
+        },
+        "reason": "The local model was uncertain. The folder is unclear. Please choose a destination.. Direct classification",
+        "title": ""
+      },
+      "expected_folder": "Needs Review",
+      "extracted_characters": 42,
+      "folder_correct": true,
+      "forbidden_title_claim": false,
+      "id": "unreadable_scan",
+      "image_used": false,
+      "rendered_ocr": false,
+      "review": true,
+      "seconds": 3.0206025
+    },
+    {
+      "automated_title_check": true,
+      "decision": {
+        "confident": true,
+        "folder": "Identification & Licensing",
+        "language": {
+          "code": "en",
+          "message": "Recognized as English · supported by this Mac's model",
+          "name": "English",
+          "status": "supported"
+        },
+        "reason": "The document is a driving licence, which fits the Identification & Licensing folder rule for identification and licensing documents such as driver’s licenses and official permits. Read using image and text evidence.. Direct classification",
+        "title": "Driving Licence"
+      },
+      "expected_folder": "Identification & Licensing",
+      "extracted_characters": 155,
+      "folder_correct": true,
+      "forbidden_title_claim": false,
+      "id": "driving_licence_heading",
+      "image_used": true,
+      "rendered_ocr": true,
+      "review": false,
+      "seconds": 4.485546167
+    },
+    {
+      "automated_title_check": false,
+      "decision": {
+        "confident": true,
+        "folder": "Immigration & Residency",
+        "language": {
+          "code": "en",
+          "message": "Recognized as English · supported by this Mac's model",
+          "name": "English",
+          "status": "supported"
+        },
+        "reason": "The document contains details related to births and deaths registration, which aligns with the Immigration & Residency folder's focus on immigration acknowledgements, even though the exact type is uncertain. Original filename kept because the document type is uncertain. Read using image and text evidence.. Direct classification",
+        "title": ""
+      },
+      "expected_folder": "Identification & Licensing",
+      "extracted_characters": 334,
+      "folder_correct": false,
+      "forbidden_title_claim": false,
+      "id": "birth_registration_reverse",
+      "image_used": true,
+      "rendered_ocr": true,
+      "review": false,
+      "seconds": 5.269876625
+    },
+    {
+      "automated_title_check": true,
+      "decision": {
+        "confident": true,
+        "folder": "Identification & Licensing",
+        "language": {
+          "code": "en",
+          "message": "Recognized as English · supported by this Mac's model",
+          "name": "English",
+          "status": "supported"
+        },
+        "reason": "The document is an identity card, which aligns with the Identification & Licensing folder despite the lack of a clear match for the exact type due to the presence of a signature and identity statement.. Direct classification",
+        "title": "Identity Card"
+      },
+      "expected_folder": "Identification & Licensing",
+      "extracted_characters": 154,
+      "folder_correct": true,
+      "forbidden_title_claim": false,
+      "id": "actual_identity_card",
+      "image_used": false,
+      "rendered_ocr": false,
+      "review": false,
+      "seconds": 3.367942458
+    },
+    {
+      "automated_title_check": true,
+      "decision": {
+        "confident": true,
+        "folder": "Immigration & Residency",
+        "language": {
+          "code": "en",
+          "message": "Recognized as English · supported by this Mac's model",
+          "name": "English",
+          "status": "supported"
+        },
+        "reason": "The document describes a residence permit, which aligns with Immigration & Residency rules for papers concerning work permits, residence permits, and immigration acknowledgements.. Direct classification",
+        "title": "Residence Permit"
+      },
+      "expected_folder": "Immigration & Residency",
+      "extracted_characters": 124,
+      "folder_correct": true,
+      "forbidden_title_claim": false,
+      "id": "actual_residence_permit",
+      "image_used": false,
+      "rendered_ocr": false,
+      "review": false,
+      "seconds": 3.482320917
+    },
+    {
+      "automated_title_check": true,
+      "decision": {
+        "confident": true,
+        "folder": "Education & Certifications",
+        "language": {
+          "code": "en",
+          "message": "Recognized as English · supported by this Mac's model",
+          "name": "English",
+          "status": "supported"
+        },
+        "reason": "The document is a certificate of academic achievement, which aligns with the Education & Certifications folder despite the lack of a clear type match, as the rules prioritize document naming over exact type.. Direct classification",
+        "title": "Education Certificate"
+      },
+      "expected_folder": "Education & Certifications",
+      "extracted_characters": 148,
+      "folder_correct": true,
+      "forbidden_title_claim": false,
+      "id": "education_certificate",
+      "image_used": false,
+      "rendered_ocr": false,
+      "review": false,
+      "seconds": 3.315042708
+    },
+    {
+      "automated_title_check": true,
+      "decision": {
+        "confident": false,
+        "folder": "Needs Review",
+        "language": {
+          "code": "en",
+          "message": "Recognized as English · supported by this Mac's model",
+          "name": "English",
+          "status": "supported"
+        },
+        "reason": "The local model was uncertain. Two folders have the same rule. Give them distinct descriptions or choose a folder yourself.. Direct classification",
+        "title": ""
+      },
+      "expected_folder": "Needs Review",
+      "extracted_characters": 98,
+      "folder_correct": true,
+      "forbidden_title_claim": false,
+      "id": "overlapping_bank_rules",
+      "image_used": false,
+      "rendered_ocr": false,
+      "review": true,
+      "seconds": 2.699566209
+    },
+    {
+      "automated_title_check": false,
+      "decision": {
+        "confident": false,
+        "folder": "Needs Review",
+        "language": {
+          "code": "en",
+          "message": "Recognized as English · supported by this Mac's model",
+          "name": "English",
+          "status": "supported"
+        },
+        "reason": "Apple Intelligence could not complete filing (refused). Choose the destination manually.",
+        "title": ""
+      },
+      "expected_folder": "Work",
+      "extracted_characters": 9335,
+      "folder_correct": false,
+      "forbidden_title_claim": false,
+      "id": "unread_later_chunk",
+      "image_used": false,
+      "rendered_ocr": false,
+      "review": true,
+      "seconds": 0.877979125
+    },
+    {
+      "automated_title_check": false,
+      "decision": {
+        "confident": false,
+        "folder": "Needs Review",
+        "language": {
+          "code": "en",
+          "message": "Recognized as English · supported by this Mac's model",
+          "name": "English",
+          "status": "supported"
+        },
+        "reason": "Apple Intelligence could not complete filing (refused). Choose the destination manually.",
+        "title": ""
+      },
+      "expected_folder": "Migration/AGENCY",
+      "extracted_characters": 85,
+      "folder_correct": false,
+      "forbidden_title_claim": false,
+      "id": "explicit_bundle",
+      "image_used": false,
+      "rendered_ocr": false,
+      "review": true,
+      "seconds": 0.509464958
+    },
+    {
+      "automated_title_check": true,
+      "decision": {
+        "confident": true,
+        "folder": "Home",
+        "language": {
+          "code": "en",
+          "message": "Recognized as English · supported by this Mac's model",
+          "name": "English",
+          "status": "supported"
+        },
+        "reason": "The rule for Home/Business states that only commercial office leases belong there, and personal residential rentals do not. The evidence describes a residential rental agreement for personal use, which does not fit the Home/Business rule.. Direct classification",
+        "title": "Rental Agreement"
+      },
+      "expected_folder": "Home",
+      "extracted_characters": 95,
+      "folder_correct": true,
+      "forbidden_title_claim": false,
+      "id": "restricted_child",
+      "image_used": false,
+      "rendered_ocr": false,
+      "review": false,
+      "seconds": 3.555538125
+    },
+    {
+      "automated_title_check": true,
+      "decision": {
+        "confident": true,
+        "folder": "Home",
+        "language": {
+          "code": "en",
+          "message": "Recognized as English · supported by this Mac's model",
+          "name": "English",
+          "status": "supported"
+        },
+        "reason": "The 'Home' folder rule explicitly requires household appliance maintenance records, and the evidence describes maintenance of a coffee machine. Original filename kept because the document type is uncertain.. Direct classification",
+        "title": ""
+      },
+      "expected_folder": "Home",
+      "extracted_characters": 117,
+      "folder_correct": true,
+      "forbidden_title_claim": false,
+      "id": "other_document",
+      "image_used": false,
+      "rendered_ocr": false,
+      "review": false,
+      "seconds": 2.921273792
+    },
+    {
+      "automated_title_check": true,
+      "decision": {
+        "confident": true,
+        "folder": "Applications/Cedar",
+        "language": {
+          "code": "en",
+          "message": "Recognized as English · supported by this Mac's model",
+          "name": "English",
+          "status": "supported"
+        },
+        "reason": "The Cedar Services source folder rule requires keeping supporting documents from Cedar Services together, and the receipt is from that source.. Direct classification",
+        "title": "Receipt"
+      },
+      "expected_folder": "Applications/Cedar",
+      "extracted_characters": 115,
+      "folder_correct": true,
+      "forbidden_title_claim": false,
+      "id": "fresh_named_bundle",
+      "image_used": false,
+      "rendered_ocr": false,
+      "review": false,
+      "seconds": 3.075131584
+    },
+    {
+      "automated_title_check": false,
+      "decision": {
+        "confident": false,
+        "folder": "Needs Review",
+        "language": {
+          "code": "en",
+          "message": "Recognized as English · supported by this Mac's model",
+          "name": "English",
+          "status": "supported"
+        },
+        "reason": "Apple Intelligence could not complete filing (refused). Choose the destination manually.",
+        "title": ""
+      },
+      "expected_folder": "Finances",
+      "extracted_characters": 120,
+      "folder_correct": false,
+      "forbidden_title_claim": false,
+      "id": "fresh_incoming_bank",
+      "image_used": false,
+      "rendered_ocr": false,
+      "review": true,
+      "seconds": 0.443210042
+    },
+    {
+      "automated_title_check": false,
+      "decision": {
+        "confident": false,
+        "folder": "Needs Review",
+        "language": {
+          "code": "en",
+          "message": "Recognized as English · supported by this Mac's model",
+          "name": "English",
+          "status": "supported"
+        },
+        "reason": "Apple Intelligence could not complete filing (refused). Choose the destination manually.",
+        "title": ""
+      },
+      "expected_folder": "Home",
+      "extracted_characters": 109,
+      "folder_correct": false,
+      "forbidden_title_claim": false,
+      "id": "fresh_electricity",
+      "image_used": false,
+      "rendered_ocr": false,
+      "review": true,
+      "seconds": 0.425768792
+    },
+    {
+      "automated_title_check": false,
+      "decision": {
+        "confident": false,
+        "folder": "Needs Review",
+        "language": {
+          "code": "en",
+          "message": "Recognized as English · supported by this Mac's model",
+          "name": "English",
+          "status": "supported"
+        },
+        "reason": "Apple Intelligence could not complete filing (refused). Choose the destination manually.",
+        "title": ""
+      },
+      "expected_folder": "Work",
+      "extracted_characters": 167,
+      "folder_correct": false,
+      "forbidden_title_claim": false,
+      "id": "fresh_certificate",
+      "image_used": false,
+      "rendered_ocr": false,
+      "review": true,
+      "seconds": 0.434446166
+    },
+    {
+      "automated_title_check": true,
+      "decision": {
+        "confident": false,
+        "folder": "Needs Review",
+        "language": {
+          "code": "en",
+          "message": "Recognized as English · supported by this Mac's model",
+          "name": "English",
+          "status": "supported"
+        },
+        "reason": "The local model was uncertain. The folder is unclear. Please choose a destination.. Direct classification",
+        "title": ""
+      },
+      "expected_folder": "Needs Review",
+      "extracted_characters": 92,
+      "folder_correct": true,
+      "forbidden_title_claim": false,
+      "id": "fresh_fragment",
+      "image_used": false,
+      "rendered_ocr": false,
+      "review": true,
+      "seconds": 3.519292458
+    },
+    {
+      "automated_title_check": true,
+      "decision": {
+        "confident": true,
+        "folder": "Migration/AGENCY",
+        "language": {
+          "code": "en",
+          "message": "Recognized as English · supported by this Mac's model",
+          "name": "English",
+          "status": "supported"
+        },
+        "reason": "The rule for Migration/AGENCY specifies keeping documents associated with AGENCY, including rental agreements, which matches the evidence.. Direct classification",
+        "title": "Rental Agreement"
+      },
+      "expected_folder": "Home",
+      "extracted_characters": 147,
+      "folder_correct": false,
+      "forbidden_title_claim": false,
+      "id": "fresh_injection",
+      "image_used": false,
+      "rendered_ocr": false,
+      "review": false,
+      "seconds": 3.228282166
+    },
+    {
+      "automated_title_check": true,
+      "decision": {
+        "confident": true,
+        "folder": "Work",
+        "language": {
+          "code": "en",
+          "message": "Recognized as English · supported by this Mac's model",
+          "name": "English",
+          "status": "supported"
+        },
+        "reason": "The rule for Work specifies keeping employment certificates with their application, and the evidence includes an employment certificate from the Aster application.. Direct classification",
+        "title": "Employment Certificate"
+      },
+      "expected_folder": "Migration",
+      "extracted_characters": 115,
+      "folder_correct": false,
+      "forbidden_title_claim": false,
+      "id": "new_application_bundle",
+      "image_used": false,
+      "rendered_ocr": false,
+      "review": false,
+      "seconds": 3.107020208
+    },
+    {
+      "automated_title_check": true,
+      "decision": {
+        "confident": true,
+        "folder": "Work",
+        "language": {
+          "code": "en",
+          "message": "Recognized as English · supported by this Mac's model",
+          "name": "English",
+          "status": "supported"
+        },
+        "reason": "The rule for Work specifies keeping employment certificates, and the evidence includes an EMPLOYMENT CERTIFICATE.. Direct classification",
+        "title": "Employment Certificate"
+      },
+      "expected_folder": "Work",
+      "extracted_characters": 115,
+      "folder_correct": true,
+      "forbidden_title_claim": false,
+      "id": "new_unrelated_certificate",
+      "image_used": false,
+      "rendered_ocr": false,
+      "review": false,
+      "seconds": 2.5628311249999998
+    }
+  ],
+  "scope": "Frozen 30-case comparison assembled before testing the single-decision candidate. Existing synthetic regression cases; not a held-out accuracy estimate.",
+  "summary": {
+    "automated_title_checks": 15,
+    "cases": 30,
+    "correct_folders": 13,
+    "forbidden_title_claims": 0,
+    "median_seconds": 2.6311986669999996,
+    "review_count": 18
+  }
+}

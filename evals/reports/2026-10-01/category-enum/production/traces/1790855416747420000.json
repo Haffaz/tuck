@@ -1,0 +1,20 @@
+{
+  "case": "sv_payslip",
+  "started": 1790855416.732567,
+  "seconds": 0.014810800552368164,
+  "request": {
+    "operation": "language",
+    "text": "LÖNESPECIFIKATION\nBruttolön 30 000 kr. Preliminär skatt 6 000 kr. Nettolön att utbetala 24 000 kr. Arbetsgivarens lönebesked till arbetstagaren."
+  },
+  "response": {
+    "blocked": false,
+    "language": {
+      "code": "sv",
+      "message": "Recognized as Swedish · supported by this Mac's model",
+      "name": "Swedish",
+      "status": "supported"
+    },
+    "text": "LÖNESPECIFIKATION\nBruttolön 30 000 kr. Preliminär skatt 6 000 kr. Nettolön att utbetala 24 000 kr. Arbetsgivarens lönebesked till arbetstagaren."
+  },
+  "exit": 0
+}

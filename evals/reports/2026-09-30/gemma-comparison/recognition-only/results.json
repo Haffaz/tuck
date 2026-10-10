@@ -1,0 +1,1002 @@
+[
+  {
+    "result": {
+      "documentType": "Booking Confirmation"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 2162059500,
+      "load_duration": 2531083,
+      "prompt_eval_count": 1196,
+      "prompt_eval_duration": 1920777000,
+      "eval_count": 9,
+      "eval_duration": 213251000,
+      "done_reason": "stop"
+    },
+    "seconds": 2.164737042010529,
+    "model": "gemma4:e2b-it-q4_K_M",
+    "key": "r2-D1",
+    "case": "r2",
+    "sourceId": "D1",
+    "kind": "personal",
+    "pageCount": 2,
+    "mode": "text",
+    "requestHash": "75c9c6d36f323dd3ff7b9a465d6a4806250cc87b49ac023ba69825b18e8e3ea3",
+    "correct": true
+  },
+  {
+    "result": {
+      "documentType": "Administrative Record"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 1089152750,
+      "load_duration": 6844000,
+      "prompt_eval_count": 503,
+      "prompt_eval_duration": 796785000,
+      "eval_count": 9,
+      "eval_duration": 270533000,
+      "done_reason": "stop"
+    },
+    "seconds": 1.0906119580031373,
+    "model": "gemma4:e2b-it-q4_K_M",
+    "key": "s6-D1",
+    "case": "s6",
+    "sourceId": "D1",
+    "kind": "synthetic",
+    "pageCount": 4,
+    "mode": "text",
+    "requestHash": "985a078737ec58b1e8eef8c89d9afb26f4f5c091e2c0c06e7445496df5c2347f",
+    "correct": false
+  },
+  {
+    "result": {
+      "documentType": "Administrative Record"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 1033853792,
+      "load_duration": 3892375,
+      "prompt_eval_count": 533,
+      "prompt_eval_duration": 839384000,
+      "eval_count": 9,
+      "eval_duration": 187004000,
+      "done_reason": "stop"
+    },
+    "seconds": 1.0349822499847505,
+    "model": "gemma4:e2b-it-q4_K_M",
+    "key": "s1-D1",
+    "case": "s1",
+    "sourceId": "D1",
+    "kind": "synthetic",
+    "pageCount": 4,
+    "mode": "text",
+    "requestHash": "70da12061d2e0925cad4724b62e044df3a6c29883d3d241845fc4ca1d26126f7",
+    "correct": false
+  },
+  {
+    "result": {
+      "documentType": "Booking confirmation"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 6922895375,
+      "load_duration": 10983250,
+      "prompt_eval_count": 1045,
+      "prompt_eval_duration": 6431122000,
+      "eval_count": 9,
+      "eval_duration": 397571000,
+      "done_reason": "stop"
+    },
+    "seconds": 6.928851499978919,
+    "model": "gemma4:e4b-it-q4_K_M",
+    "key": "r2-D3",
+    "case": "r2",
+    "sourceId": "D3",
+    "kind": "personal",
+    "pageCount": 1,
+    "mode": "image",
+    "requestHash": "b3badedad15d866628015829d6a7f1fb18d468b663be61c14dd6b0117fcc0a24",
+    "correct": true
+  },
+  {
+    "result": {
+      "documentType": "Document packet"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 8830968166,
+      "load_duration": 28362125,
+      "prompt_eval_count": 1199,
+      "prompt_eval_duration": 8183719000,
+      "eval_count": 9,
+      "eval_duration": 413020000,
+      "done_reason": "stop"
+    },
+    "seconds": 8.885571457998594,
+    "model": "gemma4:e4b-it-q4_K_M",
+    "key": "s2-D1",
+    "case": "s2",
+    "sourceId": "D1",
+    "kind": "synthetic",
+    "pageCount": 4,
+    "mode": "image",
+    "requestHash": "22ac1946910c9fd9fa9891a18bee885219577ae60830ed6fea292855df48d74d",
+    "correct": false
+  },
+  {
+    "result": {
+      "documentType": "Booking Confirmation"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 4498119500,
+      "load_duration": 24467000,
+      "prompt_eval_count": 1196,
+      "prompt_eval_duration": 3943188000,
+      "eval_count": 9,
+      "eval_duration": 246841000,
+      "done_reason": "stop"
+    },
+    "seconds": 4.5078717499854974,
+    "model": "gemma4:e4b-it-q4_K_M",
+    "key": "r2-D1",
+    "case": "r2",
+    "sourceId": "D1",
+    "kind": "personal",
+    "pageCount": 2,
+    "mode": "text",
+    "requestHash": "75c9c6d36f323dd3ff7b9a465d6a4806250cc87b49ac023ba69825b18e8e3ea3",
+    "correct": true
+  },
+  {
+    "result": {
+      "documentType": "Document packet"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 8260411167,
+      "load_duration": 33001334,
+      "prompt_eval_count": 1199,
+      "prompt_eval_duration": 7734806000,
+      "eval_count": 9,
+      "eval_duration": 377960000,
+      "done_reason": "stop"
+    },
+    "seconds": 8.277470291010104,
+    "model": "gemma4:e4b-it-q4_K_M",
+    "key": "s6-D1",
+    "case": "s6",
+    "sourceId": "D1",
+    "kind": "synthetic",
+    "pageCount": 4,
+    "mode": "image",
+    "requestHash": "62f4f8119b2c2ae31deebc5a38fc36a4a850059e47cbf2df2325512144990242",
+    "correct": false
+  },
+  {
+    "result": {
+      "documentType": "Document"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 5786676042,
+      "load_duration": 4811458,
+      "prompt_eval_count": 1199,
+      "prompt_eval_duration": 5573269000,
+      "eval_count": 8,
+      "eval_duration": 137141000,
+      "done_reason": "stop"
+    },
+    "seconds": 5.788255708001088,
+    "model": "gemma4:e2b-it-q4_K_M",
+    "key": "s3-D1",
+    "case": "s3",
+    "sourceId": "D1",
+    "kind": "synthetic",
+    "pageCount": 4,
+    "mode": "image",
+    "requestHash": "4237f4c8b8f51175f74b0392d7a089ab35541bc4470af65d6c4ccc9b6f04d9b6",
+    "correct": false
+  },
+  {
+    "result": {
+      "documentType": "Decision"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 9845297083,
+      "load_duration": 292907833,
+      "prompt_eval_count": 1199,
+      "prompt_eval_duration": 8041221000,
+      "eval_count": 8,
+      "eval_duration": 405056000,
+      "done_reason": "stop"
+    },
+    "seconds": 9.959591124992585,
+    "model": "gemma4:e4b-it-q4_K_M",
+    "key": "r1-D1",
+    "case": "r1",
+    "sourceId": "D1",
+    "kind": "personal",
+    "pageCount": 4,
+    "mode": "image",
+    "requestHash": "ec7b276d4843e8c5050e1d26272e9f53772f33399d1c62bca280c81c38510eaf",
+    "correct": false
+  },
+  {
+    "result": {
+      "documentType": "Order Confirmation"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 5542108209,
+      "load_duration": 7462542,
+      "prompt_eval_count": 1045,
+      "prompt_eval_duration": 5187627000,
+      "eval_count": 9,
+      "eval_duration": 295799000,
+      "done_reason": "stop"
+    },
+    "seconds": 5.545162124995841,
+    "model": "gemma4:e2b-it-q4_K_M",
+    "key": "r2-D2",
+    "case": "r2",
+    "sourceId": "D2",
+    "kind": "personal",
+    "pageCount": 1,
+    "mode": "image",
+    "requestHash": "8529e7fc22d4ff48bfeba14257e1292fd1c1886f330b1baafe04952e26e7f8c6",
+    "correct": true
+  },
+  {
+    "result": {
+      "documentType": "Document packet"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 8780270083,
+      "load_duration": 28302208,
+      "prompt_eval_count": 1199,
+      "prompt_eval_duration": 8255329000,
+      "eval_count": 9,
+      "eval_duration": 371134000,
+      "done_reason": "stop"
+    },
+    "seconds": 8.80920241700369,
+    "model": "gemma4:e4b-it-q4_K_M",
+    "key": "s1-D1",
+    "case": "s1",
+    "sourceId": "D1",
+    "kind": "synthetic",
+    "pageCount": 4,
+    "mode": "image",
+    "requestHash": "177342be7ab79eec1171ad8e152bb042435c4ca409f1fa16accae1e11a3f1812",
+    "correct": false
+  },
+  {
+    "result": {
+      "documentType": "Document"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 5741378416,
+      "load_duration": 8025833,
+      "prompt_eval_count": 1199,
+      "prompt_eval_duration": 5536796000,
+      "eval_count": 8,
+      "eval_duration": 137795000,
+      "done_reason": "stop"
+    },
+    "seconds": 5.743592250015354,
+    "model": "gemma4:e2b-it-q4_K_M",
+    "key": "s4-D1",
+    "case": "s4",
+    "sourceId": "D1",
+    "kind": "synthetic",
+    "pageCount": 4,
+    "mode": "image",
+    "requestHash": "f4a5277d28d5c807b9cb8c0627e41c2dd4020d4e748e6c67acf9ca725ada2e2a",
+    "correct": false
+  },
+  {
+    "result": {
+      "documentType": "booking confirmation"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 8542517167,
+      "load_duration": 29755125,
+      "prompt_eval_count": 1199,
+      "prompt_eval_duration": 7955825000,
+      "eval_count": 9,
+      "eval_duration": 383677000,
+      "done_reason": "stop"
+    },
+    "seconds": 8.57299783398048,
+    "model": "gemma4:e4b-it-q4_K_M",
+    "key": "r2-D1",
+    "case": "r2",
+    "sourceId": "D1",
+    "kind": "personal",
+    "pageCount": 2,
+    "mode": "image",
+    "requestHash": "895f8c511e5b85c57c853152fde7baf30f71559a066dffebc5611b4d607024e3",
+    "correct": true
+  },
+  {
+    "result": {
+      "documentType": "Document packet"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 8277423042,
+      "load_duration": 8246875,
+      "prompt_eval_count": 1199,
+      "prompt_eval_duration": 7740506000,
+      "eval_count": 9,
+      "eval_duration": 400696000,
+      "done_reason": "stop"
+    },
+    "seconds": 8.29358354199212,
+    "model": "gemma4:e4b-it-q4_K_M",
+    "key": "s5-D1",
+    "case": "s5",
+    "sourceId": "D1",
+    "kind": "synthetic",
+    "pageCount": 4,
+    "mode": "image",
+    "requestHash": "c19d4c51ebc87329f75d5bb695a0f3f30e3bcbb5ac6fbcbb1e9ba14a3bc64fa7",
+    "correct": false
+  },
+  {
+    "result": {
+      "documentType": "administrative record"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 2037616666,
+      "load_duration": 3975916,
+      "prompt_eval_count": 503,
+      "prompt_eval_duration": 1614533000,
+      "eval_count": 9,
+      "eval_duration": 338807000,
+      "done_reason": "stop"
+    },
+    "seconds": 2.0466417080024257,
+    "model": "gemma4:e4b-it-q4_K_M",
+    "key": "s6-D1",
+    "case": "s6",
+    "sourceId": "D1",
+    "kind": "synthetic",
+    "pageCount": 4,
+    "mode": "text",
+    "requestHash": "985a078737ec58b1e8eef8c89d9afb26f4f5c091e2c0c06e7445496df5c2347f",
+    "correct": false
+  },
+  {
+    "result": {
+      "documentType": "Decision"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 2305733500,
+      "load_duration": 26054417,
+      "prompt_eval_count": 533,
+      "prompt_eval_duration": 1843453000,
+      "eval_count": 8,
+      "eval_duration": 402614000,
+      "done_reason": "stop"
+    },
+    "seconds": 2.3169220839918125,
+    "model": "gemma4:e4b-it-q4_K_M",
+    "key": "s1-D1",
+    "case": "s1",
+    "sourceId": "D1",
+    "kind": "synthetic",
+    "pageCount": 4,
+    "mode": "text",
+    "requestHash": "70da12061d2e0925cad4724b62e044df3a6c29883d3d241845fc4ca1d26126f7",
+    "correct": false
+  },
+  {
+    "result": {
+      "documentType": "Document"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 5765891375,
+      "load_duration": 9230917,
+      "prompt_eval_count": 1199,
+      "prompt_eval_duration": 5553423000,
+      "eval_count": 8,
+      "eval_duration": 137835000,
+      "done_reason": "stop"
+    },
+    "seconds": 5.767299083003309,
+    "model": "gemma4:e2b-it-q4_K_M",
+    "key": "s1-D1",
+    "case": "s1",
+    "sourceId": "D1",
+    "kind": "synthetic",
+    "pageCount": 4,
+    "mode": "image",
+    "requestHash": "177342be7ab79eec1171ad8e152bb042435c4ca409f1fa16accae1e11a3f1812",
+    "correct": false
+  },
+  {
+    "result": {
+      "documentType": "Order confirmation"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 7245234333,
+      "load_duration": 20322416,
+      "prompt_eval_count": 1045,
+      "prompt_eval_duration": 6604604000,
+      "eval_count": 9,
+      "eval_duration": 517283000,
+      "done_reason": "stop"
+    },
+    "seconds": 7.250743583979784,
+    "model": "gemma4:e4b-it-q4_K_M",
+    "key": "r2-D2",
+    "case": "r2",
+    "sourceId": "D2",
+    "kind": "personal",
+    "pageCount": 1,
+    "mode": "image",
+    "requestHash": "8529e7fc22d4ff48bfeba14257e1292fd1c1886f330b1baafe04952e26e7f8c6",
+    "correct": true
+  },
+  {
+    "result": {
+      "documentType": "Document packet"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 8383573458,
+      "load_duration": 31179625,
+      "prompt_eval_count": 1199,
+      "prompt_eval_duration": 7848440000,
+      "eval_count": 9,
+      "eval_duration": 397705000,
+      "done_reason": "stop"
+    },
+    "seconds": 8.433597249997547,
+    "model": "gemma4:e4b-it-q4_K_M",
+    "key": "s4-D1",
+    "case": "s4",
+    "sourceId": "D1",
+    "kind": "synthetic",
+    "pageCount": 4,
+    "mode": "image",
+    "requestHash": "f4a5277d28d5c807b9cb8c0627e41c2dd4020d4e748e6c67acf9ca725ada2e2a",
+    "correct": false
+  },
+  {
+    "result": {
+      "documentType": "Booking Confirmation"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 6305147834,
+      "load_duration": 5768667,
+      "prompt_eval_count": 1199,
+      "prompt_eval_duration": 5930917000,
+      "eval_count": 9,
+      "eval_duration": 289662000,
+      "done_reason": "stop"
+    },
+    "seconds": 6.307508166995831,
+    "model": "gemma4:e2b-it-q4_K_M",
+    "key": "r2-D1",
+    "case": "r2",
+    "sourceId": "D1",
+    "kind": "personal",
+    "pageCount": 2,
+    "mode": "image",
+    "requestHash": "895f8c511e5b85c57c853152fde7baf30f71559a066dffebc5611b4d607024e3",
+    "correct": true
+  },
+  {
+    "result": {
+      "documentType": "Booking Confirmation"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 1994607250,
+      "load_duration": 5025042,
+      "prompt_eval_count": 1042,
+      "prompt_eval_duration": 1811858000,
+      "eval_count": 9,
+      "eval_duration": 153252000,
+      "done_reason": "stop"
+    },
+    "seconds": 1.9979738749971148,
+    "model": "gemma4:e2b-it-q4_K_M",
+    "key": "r2-D3",
+    "case": "r2",
+    "sourceId": "D3",
+    "kind": "personal",
+    "pageCount": 1,
+    "mode": "text",
+    "requestHash": "bfac19f58de43f3c2d4d0a8554ab5f7bd1c864bcf4ec6cdf98b5f2317663e828",
+    "correct": true
+  },
+  {
+    "result": {
+      "documentType": "Document"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 6045437708,
+      "load_duration": 6567167,
+      "prompt_eval_count": 1199,
+      "prompt_eval_duration": 5823411000,
+      "eval_count": 8,
+      "eval_duration": 147211000,
+      "done_reason": "stop"
+    },
+    "seconds": 6.04919575000531,
+    "model": "gemma4:e2b-it-q4_K_M",
+    "key": "s5-D1",
+    "case": "s5",
+    "sourceId": "D1",
+    "kind": "synthetic",
+    "pageCount": 4,
+    "mode": "image",
+    "requestHash": "c19d4c51ebc87329f75d5bb695a0f3f30e3bcbb5ac6fbcbb1e9ba14a3bc64fa7",
+    "correct": false
+  },
+  {
+    "result": {
+      "documentType": "Decision"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 8012213500,
+      "load_duration": 12952083,
+      "prompt_eval_count": 2081,
+      "prompt_eval_duration": 7386221000,
+      "eval_count": 8,
+      "eval_duration": 272796000,
+      "done_reason": "stop"
+    },
+    "seconds": 8.132651541993255,
+    "model": "gemma4:e4b-it-q4_K_M",
+    "key": "r1-D1",
+    "case": "r1",
+    "sourceId": "D1",
+    "kind": "personal",
+    "pageCount": 4,
+    "mode": "text",
+    "requestHash": "bfd6f2bcb6fb7f039695168eaa7248cb33739981520ee4e3a29d8ba1391cea8d",
+    "correct": false
+  },
+  {
+    "result": {
+      "documentType": "Order Confirmation"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 2152515250,
+      "load_duration": 4266166,
+      "prompt_eval_count": 553,
+      "prompt_eval_duration": 1727634000,
+      "eval_count": 9,
+      "eval_duration": 370873000,
+      "done_reason": "stop"
+    },
+    "seconds": 2.1545119999791496,
+    "model": "gemma4:e4b-it-q4_K_M",
+    "key": "r2-D2",
+    "case": "r2",
+    "sourceId": "D2",
+    "kind": "personal",
+    "pageCount": 1,
+    "mode": "text",
+    "requestHash": "ae7f07a87966e60c4151ca925f7c8810298ebf6e445d0a86c5c12cace18c17ad",
+    "correct": true
+  },
+  {
+    "result": {
+      "documentType": "insurance policy"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 2372836500,
+      "load_duration": 8503000,
+      "prompt_eval_count": 532,
+      "prompt_eval_duration": 1955749000,
+      "eval_count": 9,
+      "eval_duration": 250000000,
+      "done_reason": "stop"
+    },
+    "seconds": 2.375538584019523,
+    "model": "gemma4:e4b-it-q4_K_M",
+    "key": "s3-D1",
+    "case": "s3",
+    "sourceId": "D1",
+    "kind": "synthetic",
+    "pageCount": 4,
+    "mode": "text",
+    "requestHash": "3badcc337df19c98593add334a77084076bc3bdcbe973cee2c6d3c87ad1ab2ed",
+    "correct": false
+  },
+  {
+    "result": {
+      "documentType": "Bank Account Statement"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 2215180958,
+      "load_duration": 45570750,
+      "prompt_eval_count": 522,
+      "prompt_eval_duration": 1673144000,
+      "eval_count": 10,
+      "eval_duration": 377014000,
+      "done_reason": "stop"
+    },
+    "seconds": 2.230596915993374,
+    "model": "gemma4:e4b-it-q4_K_M",
+    "key": "s4-D1",
+    "case": "s4",
+    "sourceId": "D1",
+    "kind": "synthetic",
+    "pageCount": 4,
+    "mode": "text",
+    "requestHash": "fc5039c7a0f6c7a73206ded2c20b61c89947171fd5d9900e96054ffaaef85888",
+    "correct": true
+  },
+  {
+    "result": {
+      "documentType": "Document"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 5711297250,
+      "load_duration": 9305000,
+      "prompt_eval_count": 1199,
+      "prompt_eval_duration": 5519604000,
+      "eval_count": 8,
+      "eval_duration": 126323000,
+      "done_reason": "stop"
+    },
+    "seconds": 5.714048374997219,
+    "model": "gemma4:e2b-it-q4_K_M",
+    "key": "s2-D1",
+    "case": "s2",
+    "sourceId": "D1",
+    "kind": "synthetic",
+    "pageCount": 4,
+    "mode": "image",
+    "requestHash": "22ac1946910c9fd9fa9891a18bee885219577ae60830ed6fea292855df48d74d",
+    "correct": false
+  },
+  {
+    "result": {
+      "documentType": "Lease agreement"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 2286257166,
+      "load_duration": 3035416,
+      "prompt_eval_count": 539,
+      "prompt_eval_duration": 1735450000,
+      "eval_count": 10,
+      "eval_duration": 493046000,
+      "done_reason": "stop"
+    },
+    "seconds": 2.2881719169963617,
+    "model": "gemma4:e4b-it-q4_K_M",
+    "key": "s5-D1",
+    "case": "s5",
+    "sourceId": "D1",
+    "kind": "synthetic",
+    "pageCount": 4,
+    "mode": "text",
+    "requestHash": "ce07b7e22e156716785b592693a6a924501273d5399f2913c953ac3c26f34e61",
+    "correct": true
+  },
+  {
+    "result": {
+      "documentType": "Certificate of Employment"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 2254462250,
+      "load_duration": 18038250,
+      "prompt_eval_count": 505,
+      "prompt_eval_duration": 1714839000,
+      "eval_count": 10,
+      "eval_duration": 417789000,
+      "done_reason": "stop"
+    },
+    "seconds": 2.266507708001882,
+    "model": "gemma4:e4b-it-q4_K_M",
+    "key": "s2-D1",
+    "case": "s2",
+    "sourceId": "D1",
+    "kind": "synthetic",
+    "pageCount": 4,
+    "mode": "text",
+    "requestHash": "cb23b9935bd061b5cccba6d0f7e1aedef02a6ba69c3d740d98dd8dbb3be915b1",
+    "correct": true
+  },
+  {
+    "result": {
+      "documentType": "Document"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 6107930625,
+      "load_duration": 8654875,
+      "prompt_eval_count": 1199,
+      "prompt_eval_duration": 5883272000,
+      "eval_count": 8,
+      "eval_duration": 144027000,
+      "done_reason": "stop"
+    },
+    "seconds": 6.112056500016479,
+    "model": "gemma4:e2b-it-q4_K_M",
+    "key": "s6-D1",
+    "case": "s6",
+    "sourceId": "D1",
+    "kind": "synthetic",
+    "pageCount": 4,
+    "mode": "image",
+    "requestHash": "62f4f8119b2c2ae31deebc5a38fc36a4a850059e47cbf2df2325512144990242",
+    "correct": false
+  },
+  {
+    "result": {
+      "documentType": "Document packet"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 8475320875,
+      "load_duration": 12056041,
+      "prompt_eval_count": 1199,
+      "prompt_eval_duration": 7989210000,
+      "eval_count": 9,
+      "eval_duration": 377689000,
+      "done_reason": "stop"
+    },
+    "seconds": 8.501213207986439,
+    "model": "gemma4:e4b-it-q4_K_M",
+    "key": "s3-D1",
+    "case": "s3",
+    "sourceId": "D1",
+    "kind": "synthetic",
+    "pageCount": 4,
+    "mode": "image",
+    "requestHash": "4237f4c8b8f51175f74b0392d7a089ab35541bc4470af65d6c4ccc9b6f04d9b6",
+    "correct": false
+  },
+  {
+    "result": {
+      "documentType": "Official Document"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 6772414667,
+      "load_duration": 99570750,
+      "prompt_eval_count": 1199,
+      "prompt_eval_duration": 6123229000,
+      "eval_count": 9,
+      "eval_duration": 202715000,
+      "done_reason": "stop"
+    },
+    "seconds": 6.794063957990147,
+    "model": "gemma4:e2b-it-q4_K_M",
+    "key": "r1-D1",
+    "case": "r1",
+    "sourceId": "D1",
+    "kind": "personal",
+    "pageCount": 4,
+    "mode": "image",
+    "requestHash": "ec7b276d4843e8c5050e1d26272e9f53772f33399d1c62bca280c81c38510eaf",
+    "correct": false
+  },
+  {
+    "result": {
+      "documentType": "Booking Confirmation"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 5728366125,
+      "load_duration": 5140000,
+      "prompt_eval_count": 1045,
+      "prompt_eval_duration": 5433546000,
+      "eval_count": 9,
+      "eval_duration": 225933000,
+      "done_reason": "stop"
+    },
+    "seconds": 5.732229125016602,
+    "model": "gemma4:e2b-it-q4_K_M",
+    "key": "r2-D3",
+    "case": "r2",
+    "sourceId": "D3",
+    "kind": "personal",
+    "pageCount": 1,
+    "mode": "image",
+    "requestHash": "b3badedad15d866628015829d6a7f1fb18d468b663be61c14dd6b0117fcc0a24",
+    "correct": true
+  },
+  {
+    "result": {
+      "documentType": "Insurance Document"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 1305561041,
+      "load_duration": 1880083,
+      "prompt_eval_count": 532,
+      "prompt_eval_duration": 1035007000,
+      "eval_count": 9,
+      "eval_duration": 263034000,
+      "done_reason": "stop"
+    },
+    "seconds": 1.306266792002134,
+    "model": "gemma4:e2b-it-q4_K_M",
+    "key": "s3-D1",
+    "case": "s3",
+    "sourceId": "D1",
+    "kind": "synthetic",
+    "pageCount": 4,
+    "mode": "text",
+    "requestHash": "3badcc337df19c98593add334a77084076bc3bdcbe973cee2c6d3c87ad1ab2ed",
+    "correct": false
+  },
+  {
+    "result": {
+      "documentType": "Synthetic Document"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 1097719625,
+      "load_duration": 3669000,
+      "prompt_eval_count": 522,
+      "prompt_eval_duration": 803324000,
+      "eval_count": 9,
+      "eval_duration": 275889000,
+      "done_reason": "stop"
+    },
+    "seconds": 1.0988232920062728,
+    "model": "gemma4:e2b-it-q4_K_M",
+    "key": "s4-D1",
+    "case": "s4",
+    "sourceId": "D1",
+    "kind": "synthetic",
+    "pageCount": 4,
+    "mode": "text",
+    "requestHash": "fc5039c7a0f6c7a73206ded2c20b61c89947171fd5d9900e96054ffaaef85888",
+    "correct": false
+  },
+  {
+    "result": {
+      "documentType": "Order Confirmation"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 1165474583,
+      "load_duration": 5459000,
+      "prompt_eval_count": 553,
+      "prompt_eval_duration": 932023000,
+      "eval_count": 9,
+      "eval_duration": 215616000,
+      "done_reason": "stop"
+    },
+    "seconds": 1.1679467909852974,
+    "model": "gemma4:e2b-it-q4_K_M",
+    "key": "r2-D2",
+    "case": "r2",
+    "sourceId": "D2",
+    "kind": "personal",
+    "pageCount": 1,
+    "mode": "text",
+    "requestHash": "ae7f07a87966e60c4151ca925f7c8810298ebf6e445d0a86c5c12cace18c17ad",
+    "correct": true
+  },
+  {
+    "result": {
+      "documentType": "Decision Letter"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 3713017292,
+      "load_duration": 1807958,
+      "prompt_eval_count": 2081,
+      "prompt_eval_duration": 3407810000,
+      "eval_count": 9,
+      "eval_duration": 281698000,
+      "done_reason": "stop"
+    },
+    "seconds": 3.7147498749836814,
+    "model": "gemma4:e2b-it-q4_K_M",
+    "key": "r1-D1",
+    "case": "r1",
+    "sourceId": "D1",
+    "kind": "personal",
+    "pageCount": 4,
+    "mode": "text",
+    "requestHash": "bfd6f2bcb6fb7f039695168eaa7248cb33739981520ee4e3a29d8ba1391cea8d",
+    "correct": false
+  },
+  {
+    "result": {
+      "documentType": "Booking confirmation"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 3737828375,
+      "load_duration": 5357875,
+      "prompt_eval_count": 1042,
+      "prompt_eval_duration": 3280515000,
+      "eval_count": 9,
+      "eval_duration": 383081000,
+      "done_reason": "stop"
+    },
+    "seconds": 3.745877500012284,
+    "model": "gemma4:e4b-it-q4_K_M",
+    "key": "r2-D3",
+    "case": "r2",
+    "sourceId": "D3",
+    "kind": "personal",
+    "pageCount": 1,
+    "mode": "text",
+    "requestHash": "bfac19f58de43f3c2d4d0a8554ab5f7bd1c864bcf4ec6cdf98b5f2317663e828",
+    "correct": true
+  },
+  {
+    "result": {
+      "documentType": "Synthetic Document"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 1204899333,
+      "load_duration": 4604583,
+      "prompt_eval_count": 539,
+      "prompt_eval_duration": 913800000,
+      "eval_count": 9,
+      "eval_duration": 270851000,
+      "done_reason": "stop"
+    },
+    "seconds": 1.2067352500162087,
+    "model": "gemma4:e2b-it-q4_K_M",
+    "key": "s5-D1",
+    "case": "s5",
+    "sourceId": "D1",
+    "kind": "synthetic",
+    "pageCount": 4,
+    "mode": "text",
+    "requestHash": "ce07b7e22e156716785b592693a6a924501273d5399f2913c953ac3c26f34e61",
+    "correct": false
+  },
+  {
+    "result": {
+      "documentType": "Synthetic Document"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 1042546000,
+      "load_duration": 2106125,
+      "prompt_eval_count": 505,
+      "prompt_eval_duration": 777519000,
+      "eval_count": 9,
+      "eval_duration": 252135000,
+      "done_reason": "stop"
+    },
+    "seconds": 1.043545874999836,
+    "model": "gemma4:e2b-it-q4_K_M",
+    "key": "s2-D1",
+    "case": "s2",
+    "sourceId": "D1",
+    "kind": "synthetic",
+    "pageCount": 4,
+    "mode": "text",
+    "requestHash": "cb23b9935bd061b5cccba6d0f7e1aedef02a6ba69c3d740d98dd8dbb3be915b1",
+    "correct": false
+  }
+]

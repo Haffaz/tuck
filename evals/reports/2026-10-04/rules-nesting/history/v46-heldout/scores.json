@@ -1,0 +1,871 @@
+{
+  "summary": {
+    "runs": 6,
+    "filingDecisions": 60,
+    "clearCorrect": 47,
+    "clearTotal": 48,
+    "reviewCorrect": 12,
+    "reviewTotal": 12,
+    "wrongAutomatic": 0,
+    "acceptedProposals": 6,
+    "rejectedProposals": 0,
+    "proposalClearCorrect": 42,
+    "proposalClearTotal": 48,
+    "acceptedProposalClearCorrect": 42,
+    "acceptedProposalClearTotal": 48,
+    "depthViolations": 0,
+    "unsupportedSubgroups": 0,
+    "prefixChecks": 23,
+    "namingFailures": 0,
+    "keptOriginal": 0,
+    "seconds": 526.095625583,
+    "completed": true,
+    "guidedEmployerCorrect": 8,
+    "guidedEmployerTotal": 8,
+    "wrongSubjectAutomatic": 0,
+    "wrongBroadAutomatic": 0,
+    "repeatedDetailLabels": 0
+  },
+  "acceptance": {
+    "depthLimits": true,
+    "filingRecall": true,
+    "noWrongAutomatic": true,
+    "reviewSafety": true,
+    "proposalQuality": false,
+    "sourceGroundedSubgroups": true,
+    "naming": true,
+    "guidedEmployerGrouping": true,
+    "noRepeatedDetailLabels": true
+  },
+  "runs": [
+    {
+      "id": "depth1-D0C0F0-r1",
+      "depth": 1,
+      "documentInstructions": false,
+      "creationPreferences": false,
+      "folderRules": false,
+      "repeat": 1,
+      "proposal": {
+        "ok": true,
+        "clearCorrect": 7,
+        "clearTotal": 8,
+        "reviewCorrect": 1,
+        "reviewTotal": 2,
+        "maxDepth": 1,
+        "withinLimit": true,
+        "unsupportedSubgroups": [],
+        "guidedEmployer": {},
+        "rows": [
+          {
+            "id": "cedar-may",
+            "expected": "Income",
+            "actual": "Income",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "cedar-june",
+            "expected": "Income",
+            "actual": "L\u00d6NESPECIFIKATION",
+            "correct": false,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "northstar-salary",
+            "expected": "Income",
+            "actual": "Income",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "cedar-agreement",
+            "expected": "Employment",
+            "actual": "Work",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "electricity",
+            "expected": "Housing",
+            "actual": "Housing",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "journey-cover",
+            "expected": "Insurance",
+            "actual": "Insurance",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "injected-cover",
+            "expected": "Insurance",
+            "actual": "Insurance",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "unexplained",
+            "expected": null,
+            "actual": null,
+            "correct": true,
+            "clear": false,
+            "depth": 0,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "unrelated-pages",
+            "expected": null,
+            "actual": "Receipts",
+            "correct": false,
+            "clear": false,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "missing-employer",
+            "expected": "Income",
+            "actual": "Income",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          }
+        ]
+      },
+      "filingCorrect": 10,
+      "clearCorrect": 8,
+      "clearTotal": 8,
+      "reviewCorrect": 2,
+      "reviewTotal": 2,
+      "wrongAutomatic": 0,
+      "named": 8,
+      "prefixChecks": 0,
+      "namingFailures": 0,
+      "keptOriginal": 0,
+      "medianSeconds": 11.323506374499999,
+      "seconds": 120.882291666
+    },
+    {
+      "id": "depth1-D1C1F1-r1",
+      "depth": 1,
+      "documentInstructions": true,
+      "creationPreferences": true,
+      "folderRules": true,
+      "repeat": 1,
+      "proposal": {
+        "ok": true,
+        "clearCorrect": 7,
+        "clearTotal": 8,
+        "reviewCorrect": 1,
+        "reviewTotal": 2,
+        "maxDepth": 1,
+        "withinLimit": true,
+        "unsupportedSubgroups": [],
+        "guidedEmployer": {},
+        "rows": [
+          {
+            "id": "cedar-may",
+            "expected": "Income",
+            "actual": "Income",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "cedar-june",
+            "expected": "Income",
+            "actual": "L\u00d6NESPECIFIKATION",
+            "correct": false,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "northstar-salary",
+            "expected": "Income",
+            "actual": "Income",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "cedar-agreement",
+            "expected": "Employment",
+            "actual": "Employment",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "electricity",
+            "expected": "Housing",
+            "actual": "Housing",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "journey-cover",
+            "expected": "Insurance",
+            "actual": "Insurance",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "injected-cover",
+            "expected": "Insurance",
+            "actual": "Insurance",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "unexplained",
+            "expected": null,
+            "actual": null,
+            "correct": true,
+            "clear": false,
+            "depth": 0,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "unrelated-pages",
+            "expected": null,
+            "actual": "Receipts",
+            "correct": false,
+            "clear": false,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "missing-employer",
+            "expected": "Income",
+            "actual": "Income",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          }
+        ]
+      },
+      "filingCorrect": 10,
+      "clearCorrect": 8,
+      "clearTotal": 8,
+      "reviewCorrect": 2,
+      "reviewTotal": 2,
+      "wrongAutomatic": 0,
+      "named": 8,
+      "prefixChecks": 8,
+      "namingFailures": 0,
+      "keptOriginal": 0,
+      "medianSeconds": 2.6528115210000003,
+      "seconds": 32.716542125
+    },
+    {
+      "id": "depth2-D0C0F0-r1",
+      "depth": 2,
+      "documentInstructions": false,
+      "creationPreferences": false,
+      "folderRules": false,
+      "repeat": 1,
+      "proposal": {
+        "ok": true,
+        "clearCorrect": 7,
+        "clearTotal": 8,
+        "reviewCorrect": 0,
+        "reviewTotal": 2,
+        "maxDepth": 2,
+        "withinLimit": true,
+        "unsupportedSubgroups": [],
+        "guidedEmployer": {},
+        "rows": [
+          {
+            "id": "cedar-may",
+            "expected": "Income",
+            "actual": "Income/Salary",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "cedar-june",
+            "expected": "Income",
+            "actual": "L\u00d6NESPECIFIKATION/Monthly pay statement",
+            "correct": false,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "northstar-salary",
+            "expected": "Income",
+            "actual": "Income/Salary payment statement",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "cedar-agreement",
+            "expected": "Employment",
+            "actual": "Work/Employment contract",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "electricity",
+            "expected": "Housing",
+            "actual": "Housing/Electricity bill",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "journey-cover",
+            "expected": "Insurance",
+            "actual": "Insurance/Travel insurance policy",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "injected-cover",
+            "expected": "Insurance",
+            "actual": "Insurance/Home contents insurance certificate",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "unexplained",
+            "expected": null,
+            "actual": "Income/QX-552",
+            "correct": false,
+            "clear": false,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "unrelated-pages",
+            "expected": null,
+            "actual": "Receipts/Retail purchase receipt",
+            "correct": false,
+            "clear": false,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "missing-employer",
+            "expected": "Income",
+            "actual": "Income/Salary",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          }
+        ]
+      },
+      "filingCorrect": 10,
+      "clearCorrect": 8,
+      "clearTotal": 8,
+      "reviewCorrect": 2,
+      "reviewTotal": 2,
+      "wrongAutomatic": 0,
+      "named": 8,
+      "prefixChecks": 0,
+      "namingFailures": 0,
+      "keptOriginal": 0,
+      "medianSeconds": 2.592695833,
+      "seconds": 63.1750935
+    },
+    {
+      "id": "depth2-D1C1F1-r1",
+      "depth": 2,
+      "documentInstructions": true,
+      "creationPreferences": true,
+      "folderRules": true,
+      "repeat": 1,
+      "proposal": {
+        "ok": true,
+        "clearCorrect": 7,
+        "clearTotal": 8,
+        "reviewCorrect": 0,
+        "reviewTotal": 2,
+        "maxDepth": 2,
+        "withinLimit": true,
+        "unsupportedSubgroups": [],
+        "guidedEmployer": {
+          "correct": 4,
+          "total": 4
+        },
+        "rows": [
+          {
+            "id": "cedar-may",
+            "expected": "Income",
+            "actual": "Income/Cedar Teknik AB",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "cedar-june",
+            "expected": "Income",
+            "actual": "Income/Cedar Teknik AB",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "northstar-salary",
+            "expected": "Income",
+            "actual": "Income/Northstar Labs",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "cedar-agreement",
+            "expected": "Employment",
+            "actual": "Employment/Cedar",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "electricity",
+            "expected": "Housing",
+            "actual": "Insurance/Electricity bill",
+            "correct": false,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "journey-cover",
+            "expected": "Insurance",
+            "actual": "Insurance",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "injected-cover",
+            "expected": "Insurance",
+            "actual": "Insurance/Home contents insurance certificate",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "unexplained",
+            "expected": null,
+            "actual": "Income",
+            "correct": false,
+            "clear": false,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "unrelated-pages",
+            "expected": null,
+            "actual": "Receipts",
+            "correct": false,
+            "clear": false,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "missing-employer",
+            "expected": "Income",
+            "actual": "Income",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          }
+        ]
+      },
+      "filingCorrect": 9,
+      "clearCorrect": 7,
+      "clearTotal": 8,
+      "reviewCorrect": 2,
+      "reviewTotal": 2,
+      "wrongAutomatic": 0,
+      "named": 7,
+      "prefixChecks": 7,
+      "namingFailures": 0,
+      "keptOriginal": 0,
+      "medianSeconds": 5.6999523125,
+      "seconds": 90.227192792
+    },
+    {
+      "id": "depth3-D0C0F0-r1",
+      "depth": 3,
+      "documentInstructions": false,
+      "creationPreferences": false,
+      "folderRules": false,
+      "repeat": 1,
+      "proposal": {
+        "ok": true,
+        "clearCorrect": 7,
+        "clearTotal": 8,
+        "reviewCorrect": 0,
+        "reviewTotal": 2,
+        "maxDepth": 2,
+        "withinLimit": true,
+        "unsupportedSubgroups": [],
+        "guidedEmployer": {},
+        "rows": [
+          {
+            "id": "cedar-may",
+            "expected": "Income",
+            "actual": "Income/Salary",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "cedar-june",
+            "expected": "Income",
+            "actual": "L\u00d6NESPECIFIKATION",
+            "correct": false,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "northstar-salary",
+            "expected": "Income",
+            "actual": "Income/Salary",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "cedar-agreement",
+            "expected": "Employment",
+            "actual": "Work/Employment contract",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "electricity",
+            "expected": "Housing",
+            "actual": "Housing/Electricity bill",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "journey-cover",
+            "expected": "Insurance",
+            "actual": "Insurance/Travel insurance policy",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "injected-cover",
+            "expected": "Insurance",
+            "actual": "Insurance/Home contents insurance certificate",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "unexplained",
+            "expected": null,
+            "actual": "Income/QX-552",
+            "correct": false,
+            "clear": false,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "unrelated-pages",
+            "expected": null,
+            "actual": "Receipts/Retail purchase receipt",
+            "correct": false,
+            "clear": false,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "missing-employer",
+            "expected": "Income",
+            "actual": "Income/Salary",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          }
+        ]
+      },
+      "filingCorrect": 10,
+      "clearCorrect": 8,
+      "clearTotal": 8,
+      "reviewCorrect": 2,
+      "reviewTotal": 2,
+      "wrongAutomatic": 0,
+      "named": 8,
+      "prefixChecks": 0,
+      "namingFailures": 0,
+      "keptOriginal": 0,
+      "medianSeconds": 2.37745075,
+      "seconds": 124.961295375
+    },
+    {
+      "id": "depth3-D1C1F1-r1",
+      "depth": 3,
+      "documentInstructions": true,
+      "creationPreferences": true,
+      "folderRules": true,
+      "repeat": 1,
+      "proposal": {
+        "ok": true,
+        "clearCorrect": 7,
+        "clearTotal": 8,
+        "reviewCorrect": 0,
+        "reviewTotal": 2,
+        "maxDepth": 3,
+        "withinLimit": true,
+        "unsupportedSubgroups": [],
+        "guidedEmployer": {
+          "correct": 4,
+          "total": 4
+        },
+        "rows": [
+          {
+            "id": "cedar-may",
+            "expected": "Income",
+            "actual": "Income/Cedar",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "cedar-june",
+            "expected": "Income",
+            "actual": "Income/Cedar",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "northstar-salary",
+            "expected": "Income",
+            "actual": "Income/Northstar",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "cedar-agreement",
+            "expected": "Employment",
+            "actual": "Employment/Cedar/Contracts",
+            "correct": true,
+            "clear": true,
+            "depth": 3,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "electricity",
+            "expected": "Housing",
+            "actual": "Insurance/Electricity bill",
+            "correct": false,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "journey-cover",
+            "expected": "Insurance",
+            "actual": "Insurance/Travel insurance policy",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "injected-cover",
+            "expected": "Insurance",
+            "actual": "Insurance/Home contents insurance certificate",
+            "correct": true,
+            "clear": true,
+            "depth": 2,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "unexplained",
+            "expected": null,
+            "actual": "Income",
+            "correct": false,
+            "clear": false,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "unrelated-pages",
+            "expected": null,
+            "actual": "Receipts",
+            "correct": false,
+            "clear": false,
+            "depth": 1,
+            "supportedSubgroup": true
+          },
+          {
+            "id": "missing-employer",
+            "expected": "Income",
+            "actual": "Income",
+            "correct": true,
+            "clear": true,
+            "depth": 1,
+            "supportedSubgroup": true
+          }
+        ]
+      },
+      "filingCorrect": 10,
+      "clearCorrect": 8,
+      "clearTotal": 8,
+      "reviewCorrect": 2,
+      "reviewTotal": 2,
+      "wrongAutomatic": 0,
+      "named": 8,
+      "prefixChecks": 8,
+      "namingFailures": 0,
+      "keptOriginal": 0,
+      "medianSeconds": 4.592162104,
+      "seconds": 58.405223833
+    }
+  ],
+  "repeatChanges": [],
+  "edgeCases": [
+    {
+      "accepted": true,
+      "assignments": [
+        {
+          "category": "Needs review",
+          "id": "d0000"
+        }
+      ],
+      "depth": 1,
+      "id": "overdepth-instruction-1"
+    },
+    {
+      "accepted": true,
+      "assignments": [
+        {
+          "category": "Needs review",
+          "id": "d0000"
+        }
+      ],
+      "depth": 2,
+      "id": "overdepth-instruction-2"
+    },
+    {
+      "accepted": true,
+      "assignments": [
+        {
+          "category": "Needs review",
+          "id": "d0000"
+        }
+      ],
+      "depth": 3,
+      "id": "overdepth-instruction-3"
+    },
+    {
+      "decision": {
+        "confident": true,
+        "folder": "Income/Cedar/Payslips",
+        "language": null,
+        "reason": "Selected Income/Cedar/Payslips from the configured categories.",
+        "title": "Salary specification for employee"
+      },
+      "expected": "Income/Cedar/Payslips",
+      "id": "lowered-limit-existing-cedar-may"
+    },
+    {
+      "decision": {
+        "confident": true,
+        "folder": "Travel/Insurance/Policies",
+        "language": null,
+        "reason": "Selected Travel/Insurance/Policies from the configured categories.",
+        "title": "Travel insurance policy"
+      },
+      "expected": "Travel/Insurance/Policies",
+      "id": "lowered-limit-existing-journey-cover"
+    },
+    {
+      "decision": {
+        "confident": true,
+        "folder": "Employment/Cedar/Contracts",
+        "language": null,
+        "reason": "Selected Employment/Cedar/Contracts from the configured categories.",
+        "title": "Salary specification for employee"
+      },
+      "expected": null,
+      "id": "disabled-parent"
+    },
+    {
+      "id": "invalid-setting-0",
+      "rejected": true
+    },
+    {
+      "id": "invalid-setting-4",
+      "rejected": true
+    },
+    {
+      "id": "invalid-setting-5",
+      "rejected": true
+    },
+    {
+      "id": "invalid-setting-45",
+      "rejected": true
+    }
+  ]
+}

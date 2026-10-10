@@ -1,0 +1,602 @@
+[
+  {
+    "model": "Apple",
+    "case": "controlled",
+    "repetition": 1,
+    "seconds": 1.942282875,
+    "folders": [
+      "Identification",
+      "Travel",
+      "Employment",
+      "Insurance",
+      "Education"
+    ],
+    "error": null,
+    "attemptMetrics": [],
+    "inputHash": "1b7c4caa9deb095898ad7f633b32eb7be7720723b7bc1675ae21c1b51ae282f6",
+    "rules": [
+      {
+        "folder": "Identification",
+        "instruction": "Passports and identity cards."
+      },
+      {
+        "folder": "Travel",
+        "instruction": "Airline bookings and hotel reservations."
+      },
+      {
+        "folder": "Employment",
+        "instruction": "Employment contracts and payslips."
+      },
+      {
+        "folder": "Insurance",
+        "instruction": "Home insurance policies and coverage certificates."
+      },
+      {
+        "folder": "Education",
+        "instruction": "University degree certificates and examination transcripts."
+      }
+    ]
+  },
+  {
+    "model": "Apple",
+    "case": "personal",
+    "repetition": 1,
+    "seconds": 2.4379447080000016,
+    "folders": [
+      "Education",
+      "Travel",
+      "Identification",
+      "Employment",
+      "Legal",
+      "Vehicle"
+    ],
+    "error": null,
+    "attemptMetrics": [],
+    "inputHash": "3153db2da3ea488e9b4429306d145ac2544a450680864eb1350179e482c30bc0"
+  },
+  {
+    "model": "Apple",
+    "case": "controlled",
+    "repetition": 2,
+    "seconds": 1.5618230840000003,
+    "folders": [
+      "Identification",
+      "Travel",
+      "Employment",
+      "Insurance",
+      "Education"
+    ],
+    "error": null,
+    "attemptMetrics": [],
+    "inputHash": "1b7c4caa9deb095898ad7f633b32eb7be7720723b7bc1675ae21c1b51ae282f6",
+    "rules": [
+      {
+        "folder": "Identification",
+        "instruction": "Passports and identity cards."
+      },
+      {
+        "folder": "Travel",
+        "instruction": "Airline bookings and hotel reservations."
+      },
+      {
+        "folder": "Employment",
+        "instruction": "Employment contracts and payslips."
+      },
+      {
+        "folder": "Insurance",
+        "instruction": "Home insurance policies and coverage certificates."
+      },
+      {
+        "folder": "Education",
+        "instruction": "University degree certificates and examination transcripts."
+      }
+    ]
+  },
+  {
+    "model": "Apple",
+    "case": "personal",
+    "repetition": 2,
+    "seconds": 2.2372278750000003,
+    "folders": [
+      "Education",
+      "Travel",
+      "Identification",
+      "Employment",
+      "Legal",
+      "Vehicle"
+    ],
+    "error": null,
+    "attemptMetrics": [],
+    "inputHash": "3153db2da3ea488e9b4429306d145ac2544a450680864eb1350179e482c30bc0"
+  },
+  {
+    "model": "Apple",
+    "case": "controlled",
+    "repetition": 3,
+    "seconds": 1.607397209000002,
+    "folders": [
+      "Identification",
+      "Travel",
+      "Employment",
+      "Insurance",
+      "Education"
+    ],
+    "error": null,
+    "attemptMetrics": [],
+    "inputHash": "1b7c4caa9deb095898ad7f633b32eb7be7720723b7bc1675ae21c1b51ae282f6",
+    "rules": [
+      {
+        "folder": "Identification",
+        "instruction": "Passports and identity cards."
+      },
+      {
+        "folder": "Travel",
+        "instruction": "Airline bookings and hotel reservations."
+      },
+      {
+        "folder": "Employment",
+        "instruction": "Employment contracts and payslips."
+      },
+      {
+        "folder": "Insurance",
+        "instruction": "Home insurance policies and coverage certificates."
+      },
+      {
+        "folder": "Education",
+        "instruction": "University degree certificates and examination transcripts."
+      }
+    ]
+  },
+  {
+    "model": "Apple",
+    "case": "personal",
+    "repetition": 3,
+    "seconds": 2.211773666999999,
+    "folders": [
+      "Education",
+      "Travel",
+      "Identification",
+      "Employment",
+      "Legal",
+      "Vehicle"
+    ],
+    "error": null,
+    "attemptMetrics": [],
+    "inputHash": "3153db2da3ea488e9b4429306d145ac2544a450680864eb1350179e482c30bc0"
+  },
+  {
+    "model": "gemma4:e2b-it-q4_K_M",
+    "case": "controlled",
+    "repetition": 1,
+    "seconds": 2.516203708999999,
+    "folders": [
+      "Identification",
+      "Travel",
+      "Employment",
+      "Insurance",
+      "Education"
+    ],
+    "error": null,
+    "attemptMetrics": [
+      {
+        "load_duration": 6157208,
+        "prompt_eval_count": 291,
+        "prompt_eval_duration": 456397000,
+        "eval_count": 89,
+        "eval_duration": 2013274000,
+        "done_reason": "stop"
+      }
+    ],
+    "inputHash": "1b7c4caa9deb095898ad7f633b32eb7be7720723b7bc1675ae21c1b51ae282f6",
+    "rules": [
+      {
+        "folder": "Identification",
+        "instruction": "This category includes documents used for personal identification."
+      },
+      {
+        "folder": "Travel",
+        "instruction": "This category contains documents related to bookings and travel arrangements."
+      },
+      {
+        "folder": "Employment",
+        "instruction": "This category holds documents pertaining to employment and salary."
+      },
+      {
+        "folder": "Insurance",
+        "instruction": "This category covers documents related to insurance policies and coverage."
+      },
+      {
+        "folder": "Education",
+        "instruction": "This category includes documents related to academic qualifications."
+      }
+    ]
+  },
+  {
+    "model": "gemma4:e2b-it-q4_K_M",
+    "case": "personal",
+    "repetition": 1,
+    "seconds": 3.5143782080000037,
+    "folders": [
+      "Education",
+      "Identification",
+      "Travel",
+      "Immigration",
+      "Employment"
+    ],
+    "error": null,
+    "attemptMetrics": [
+      {
+        "load_duration": 2359250,
+        "prompt_eval_count": 643,
+        "prompt_eval_duration": 999981000,
+        "eval_count": 98,
+        "eval_duration": 2481353000,
+        "done_reason": "stop"
+      }
+    ],
+    "inputHash": "3153db2da3ea488e9b4429306d145ac2544a450680864eb1350179e482c30bc0"
+  },
+  {
+    "model": "gemma4:e2b-it-q4_K_M",
+    "case": "controlled",
+    "repetition": 2,
+    "seconds": 2.3331937499999995,
+    "folders": [
+      "Identification",
+      "Travel",
+      "Employment",
+      "Insurance",
+      "Education"
+    ],
+    "error": null,
+    "attemptMetrics": [
+      {
+        "load_duration": 1967542,
+        "prompt_eval_count": 291,
+        "prompt_eval_duration": 274674000,
+        "eval_count": 89,
+        "eval_duration": 2031705000,
+        "done_reason": "stop"
+      }
+    ],
+    "inputHash": "1b7c4caa9deb095898ad7f633b32eb7be7720723b7bc1675ae21c1b51ae282f6",
+    "rules": [
+      {
+        "folder": "Identification",
+        "instruction": "This category includes documents used for personal identification."
+      },
+      {
+        "folder": "Travel",
+        "instruction": "This category contains documents related to bookings and travel arrangements."
+      },
+      {
+        "folder": "Employment",
+        "instruction": "This category holds documents pertaining to employment and salary."
+      },
+      {
+        "folder": "Insurance",
+        "instruction": "This category covers documents related to insurance policies and coverage."
+      },
+      {
+        "folder": "Education",
+        "instruction": "This category includes documents related to academic qualifications."
+      }
+    ]
+  },
+  {
+    "model": "gemma4:e2b-it-q4_K_M",
+    "case": "personal",
+    "repetition": 2,
+    "seconds": 3.221356125,
+    "folders": [
+      "Education",
+      "Identification",
+      "Travel",
+      "Employment",
+      "Vehicles"
+    ],
+    "error": null,
+    "attemptMetrics": [
+      {
+        "load_duration": 2225083,
+        "prompt_eval_count": 643,
+        "prompt_eval_duration": 790340000,
+        "eval_count": 95,
+        "eval_duration": 2403352000,
+        "done_reason": "stop"
+      }
+    ],
+    "inputHash": "3153db2da3ea488e9b4429306d145ac2544a450680864eb1350179e482c30bc0"
+  },
+  {
+    "model": "gemma4:e2b-it-q4_K_M",
+    "case": "controlled",
+    "repetition": 3,
+    "seconds": 2.335199582999998,
+    "folders": [
+      "Identification",
+      "Travel",
+      "Employment",
+      "Insurance",
+      "Education"
+    ],
+    "error": null,
+    "attemptMetrics": [
+      {
+        "load_duration": 1776291,
+        "prompt_eval_count": 291,
+        "prompt_eval_duration": 281071000,
+        "eval_count": 89,
+        "eval_duration": 2028179000,
+        "done_reason": "stop"
+      }
+    ],
+    "inputHash": "1b7c4caa9deb095898ad7f633b32eb7be7720723b7bc1675ae21c1b51ae282f6",
+    "rules": [
+      {
+        "folder": "Identification",
+        "instruction": "This category includes documents used for personal identification."
+      },
+      {
+        "folder": "Travel",
+        "instruction": "This category contains documents related to bookings and travel arrangements."
+      },
+      {
+        "folder": "Employment",
+        "instruction": "This category holds documents pertaining to employment and salary."
+      },
+      {
+        "folder": "Insurance",
+        "instruction": "This category covers documents related to insurance policies and coverage."
+      },
+      {
+        "folder": "Education",
+        "instruction": "This category includes documents related to academic qualifications."
+      }
+    ]
+  },
+  {
+    "model": "gemma4:e2b-it-q4_K_M",
+    "case": "personal",
+    "repetition": 3,
+    "seconds": 3.2465658750000017,
+    "folders": [
+      "Education",
+      "Identification",
+      "Travel",
+      "Employment",
+      "Vehicles"
+    ],
+    "error": null,
+    "attemptMetrics": [
+      {
+        "load_duration": 1583625,
+        "prompt_eval_count": 643,
+        "prompt_eval_duration": 788950000,
+        "eval_count": 95,
+        "eval_duration": 2428222000,
+        "done_reason": "stop"
+      }
+    ],
+    "inputHash": "3153db2da3ea488e9b4429306d145ac2544a450680864eb1350179e482c30bc0"
+  },
+  {
+    "model": "gemma4:e4b-it-q4_K_M",
+    "case": "controlled",
+    "repetition": 1,
+    "seconds": 5.037150582999999,
+    "folders": [
+      "Identification",
+      "Travel",
+      "Employment",
+      "Education",
+      "Insurance"
+    ],
+    "error": null,
+    "attemptMetrics": [
+      {
+        "load_duration": 5803083,
+        "prompt_eval_count": 291,
+        "prompt_eval_duration": 927170000,
+        "eval_count": 86,
+        "eval_duration": 4051161000,
+        "done_reason": "stop"
+      }
+    ],
+    "inputHash": "1b7c4caa9deb095898ad7f633b32eb7be7720723b7bc1675ae21c1b51ae282f6",
+    "rules": [
+      {
+        "folder": "Identification",
+        "instruction": "Documents proving personal identity such as passports and national ID cards."
+      },
+      {
+        "folder": "Travel",
+        "instruction": "Reservations for travel arrangements like flights and hotels."
+      },
+      {
+        "folder": "Employment",
+        "instruction": "Agreements and statements related to employment and salary."
+      },
+      {
+        "folder": "Education",
+        "instruction": "Certificates and transcripts from educational institutions."
+      },
+      {
+        "folder": "Insurance",
+        "instruction": "Policies and certificates detailing insurance coverage."
+      }
+    ]
+  },
+  {
+    "model": "gemma4:e4b-it-q4_K_M",
+    "case": "personal",
+    "repetition": 1,
+    "seconds": 7.962177541000003,
+    "folders": [
+      "Education",
+      "Travel",
+      "Identification",
+      "Immigration",
+      "Employment",
+      "Account Access"
+    ],
+    "error": null,
+    "attemptMetrics": [
+      {
+        "load_duration": 2449625,
+        "prompt_eval_count": 643,
+        "prompt_eval_duration": 1993107000,
+        "eval_count": 119,
+        "eval_duration": 5932461000,
+        "done_reason": "stop"
+      }
+    ],
+    "inputHash": "3153db2da3ea488e9b4429306d145ac2544a450680864eb1350179e482c30bc0"
+  },
+  {
+    "model": "gemma4:e4b-it-q4_K_M",
+    "case": "controlled",
+    "repetition": 2,
+    "seconds": 4.623422374999997,
+    "folders": [
+      "Identification",
+      "Travel",
+      "Employment",
+      "Education",
+      "Insurance"
+    ],
+    "error": null,
+    "attemptMetrics": [
+      {
+        "load_duration": 2291417,
+        "prompt_eval_count": 291,
+        "prompt_eval_duration": 555870000,
+        "eval_count": 86,
+        "eval_duration": 4038466000,
+        "done_reason": "stop"
+      }
+    ],
+    "inputHash": "1b7c4caa9deb095898ad7f633b32eb7be7720723b7bc1675ae21c1b51ae282f6",
+    "rules": [
+      {
+        "folder": "Identification",
+        "instruction": "Documents proving personal identity such as passports and national ID cards."
+      },
+      {
+        "folder": "Travel",
+        "instruction": "Reservations for travel arrangements like flights and hotels."
+      },
+      {
+        "folder": "Employment",
+        "instruction": "Agreements and statements related to employment and salary."
+      },
+      {
+        "folder": "Education",
+        "instruction": "Certificates and transcripts from educational institutions."
+      },
+      {
+        "folder": "Insurance",
+        "instruction": "Policies and certificates detailing insurance coverage."
+      }
+    ]
+  },
+  {
+    "model": "gemma4:e4b-it-q4_K_M",
+    "case": "personal",
+    "repetition": 2,
+    "seconds": 7.589464249999992,
+    "folders": [
+      "Education",
+      "Travel",
+      "Identification",
+      "Immigration",
+      "Employment",
+      "Account Access"
+    ],
+    "error": null,
+    "attemptMetrics": [
+      {
+        "load_duration": 1837708,
+        "prompt_eval_count": 643,
+        "prompt_eval_duration": 1610033000,
+        "eval_count": 119,
+        "eval_duration": 5938179000,
+        "done_reason": "stop"
+      }
+    ],
+    "inputHash": "3153db2da3ea488e9b4429306d145ac2544a450680864eb1350179e482c30bc0"
+  },
+  {
+    "model": "gemma4:e4b-it-q4_K_M",
+    "case": "controlled",
+    "repetition": 3,
+    "seconds": 4.618828625000006,
+    "folders": [
+      "Identification",
+      "Travel",
+      "Employment",
+      "Education",
+      "Insurance"
+    ],
+    "error": null,
+    "attemptMetrics": [
+      {
+        "load_duration": 2190084,
+        "prompt_eval_count": 291,
+        "prompt_eval_duration": 550660000,
+        "eval_count": 86,
+        "eval_duration": 4037192000,
+        "done_reason": "stop"
+      }
+    ],
+    "inputHash": "1b7c4caa9deb095898ad7f633b32eb7be7720723b7bc1675ae21c1b51ae282f6",
+    "rules": [
+      {
+        "folder": "Identification",
+        "instruction": "Documents proving personal identity such as passports and national ID cards."
+      },
+      {
+        "folder": "Travel",
+        "instruction": "Reservations for travel arrangements like flights and hotels."
+      },
+      {
+        "folder": "Employment",
+        "instruction": "Agreements and statements related to employment and salary."
+      },
+      {
+        "folder": "Education",
+        "instruction": "Certificates and transcripts from educational institutions."
+      },
+      {
+        "folder": "Insurance",
+        "instruction": "Policies and certificates detailing insurance coverage."
+      }
+    ]
+  },
+  {
+    "model": "gemma4:e4b-it-q4_K_M",
+    "case": "personal",
+    "repetition": 3,
+    "seconds": 7.7802079169999985,
+    "folders": [
+      "Education",
+      "Travel",
+      "Identification",
+      "Immigration",
+      "Employment",
+      "Account Access"
+    ],
+    "error": null,
+    "attemptMetrics": [
+      {
+        "load_duration": 3217459,
+        "prompt_eval_count": 643,
+        "prompt_eval_duration": 1596291000,
+        "eval_count": 119,
+        "eval_duration": 6151683000,
+        "done_reason": "stop"
+      }
+    ],
+    "inputHash": "3153db2da3ea488e9b4429306d145ac2544a450680864eb1350179e482c30bc0"
+  }
+]

@@ -1,0 +1,41 @@
+{
+  "generated_at_unix": 1790811305,
+  "os": "27.0",
+  "pipeline": "serial-roles-v2",
+  "results": [
+    {
+      "automated_title_check": true,
+      "decision": {
+        "confident": true,
+        "folder": "Equipment",
+        "language": {
+          "code": "en",
+          "message": "Recognized as English · supported by this Mac's model",
+          "name": "English",
+          "status": "supported"
+        },
+        "reason": "The document is an equipment maintenance report, and the Equipment folder matches the filing rule.",
+        "title": "Ventilation fan maintenance report"
+      },
+      "expected_folder": "Equipment",
+      "extracted_characters": 14000,
+      "folder_correct": true,
+      "folder_image_used": false,
+      "forbidden_title_claim": false,
+      "id": "en_later_page_maintenance",
+      "image_used": false,
+      "rendered_ocr": false,
+      "review": false,
+      "seconds": 7.095132167
+    }
+  ],
+  "scope": "16 controlled synthetic cases; 12 existing regression texts, two rendered images, one scanned PDF and one later-chunk document. Semantic manual grading; not a held-out accuracy estimate.",
+  "summary": {
+    "automated_title_checks": 1,
+    "cases": 1,
+    "correct_folders": 1,
+    "forbidden_title_claims": 0,
+    "median_seconds": 7.095132167,
+    "review_count": 0
+  }
+}

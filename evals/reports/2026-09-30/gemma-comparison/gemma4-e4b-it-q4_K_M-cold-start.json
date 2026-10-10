@@ -1,0 +1,37 @@
+{
+  "seconds": 10.087575458019273,
+  "error": null,
+  "metrics": {
+    "total_duration": 10071515666,
+    "load_duration": 6699984958,
+    "prompt_eval_count": 569,
+    "prompt_eval_duration": 2286669000,
+    "eval_count": 30,
+    "eval_duration": 1055730000,
+    "done_reason": "stop"
+  },
+  "state": {
+    "models": [
+      {
+        "name": "gemma4:e4b-it-q4_K_M",
+        "model": "gemma4:e4b-it-q4_K_M",
+        "size": 339581336,
+        "digest": "dc35e8d9c6061baa6f0fa870975ab6932e2542b579b13ea0f199fa4bb7300c9c",
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "gemma4",
+          "families": [
+            "gemma4"
+          ],
+          "parameter_size": "7.5B",
+          "quantization_level": "Q4_K_M"
+        },
+        "expires_at": "2026-09-30T21:58:46.199423+02:00",
+        "size_vram": 339581336,
+        "context_length": 16384
+      }
+    ],
+    "swap": "vm.swapusage: total = 9216.00M  used = 8283.69M  free = 932.31M  (encrypted)"
+  }
+}

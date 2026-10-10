@@ -1,0 +1,20 @@
+{
+  "case": "ambiguous_fragment",
+  "started": 1790855440.087308,
+  "seconds": 0.015697956085205078,
+  "request": {
+    "operation": "language",
+    "text": "Page 2\nReference 47. The requested information is enclosed. Please keep this page for your records."
+  },
+  "response": {
+    "blocked": false,
+    "language": {
+      "code": "en",
+      "message": "Recognized as English · supported by this Mac's model",
+      "name": "English",
+      "status": "supported"
+    },
+    "text": "Page 2\nReference 47. The requested information is enclosed. Please keep this page for your records."
+  },
+  "exit": 0
+}

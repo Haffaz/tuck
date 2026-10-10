@@ -1,0 +1,26 @@
+{
+  "case": "sv_residence_card",
+  "started": 1790860515.4746711,
+  "seconds": 3.1005189418792725,
+  "request": {
+    "actions": [
+      "finish"
+    ],
+    "completed": [],
+    "operation": "describe",
+    "quotes": [
+      "UPPEHÅLLSTILLSTÅNDSKORT",
+      "Migrationsverket. Tillståndstyp: permanent uppehållstillstånd. Kortet visar att innehavaren har rätt att bo i Sverige."
+    ],
+    "text": "UPPEHÅLLSTILLSTÅNDSKORT\nMigrationsverket. Tillståndstyp: permanent uppehållstillstånd. Kortet visar att innehavaren har rätt att bo i Sverige."
+  },
+  "response": {
+    "action": "finish",
+    "description": "A residence permit card from the Migrationverket indicating the holder has the right to live in Sweden.",
+    "quotes": [
+      "Migrationsverket. Tillståndstyp: permanent uppehållstillstånd. Kortet visar att innehavaren har rätt att bo i Sverige."
+    ],
+    "uncertainty": ""
+  },
+  "exit": 0
+}

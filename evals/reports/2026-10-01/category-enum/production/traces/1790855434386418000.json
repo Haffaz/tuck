@@ -1,0 +1,30 @@
+{
+  "case": "en_electricity_bill",
+  "started": 1790855434.0206149,
+  "seconds": 0.36576318740844727,
+  "request": {
+    "input": {
+      "evidence": "ELECTRICITY INVOICE\nResidential electricity supply. Charges include electricity consumption, network service and energy tax. Total amount due: 480 SEK.",
+      "rules": "Use clear English document names. Describe the document accurately without inventing names or dates.\n\nHousing & Utilities: Rental agreements and household utility bills, including electricity bills.",
+      "understanding": {
+        "description": "Residential electricity invoice detailing charges for consumption, network service, and tax, with a total amount due of 480 SEK.",
+        "evidence": [
+          {
+            "page": null,
+            "quote": "ELECTRICITY INVOICE"
+          },
+          {
+            "page": null,
+            "quote": "Residential electricity supply. Charges include electricity consumption, network service and energy tax. Total amount due: 480 SEK."
+          }
+        ],
+        "uncertainty": ""
+      }
+    },
+    "operation": "name"
+  },
+  "response": {
+    "title": "Residential electricity bill"
+  },
+  "exit": 0
+}

@@ -1,0 +1,173 @@
+{
+  "summary": {
+    "runs": 6,
+    "acceptedProposals": 6,
+    "proposalSubjectCorrect": 40,
+    "proposalSubjectTotal": 42,
+    "proposedFolderMatched": 32,
+    "filingTotal": 42,
+    "wrongAutomatic": 10,
+    "wrongEmployerAutomatic": 6
+  },
+  "runs": [
+    {
+      "depth": 1,
+      "guided": false,
+      "proposalAccepted": true,
+      "proposalSubjectCorrect": 6,
+      "proposalSubjectTotal": 7,
+      "proposalFolderMatched": 6,
+      "filingTotal": 7,
+      "wrongAutomatic": 1,
+      "wrongEmployerAutomatic": 0,
+      "employerFailures": []
+    },
+    {
+      "depth": 1,
+      "guided": true,
+      "proposalAccepted": true,
+      "proposalSubjectCorrect": 7,
+      "proposalSubjectTotal": 7,
+      "proposalFolderMatched": 7,
+      "filingTotal": 7,
+      "wrongAutomatic": 0,
+      "wrongEmployerAutomatic": 0,
+      "employerFailures": []
+    },
+    {
+      "depth": 2,
+      "guided": false,
+      "proposalAccepted": true,
+      "proposalSubjectCorrect": 6,
+      "proposalSubjectTotal": 7,
+      "proposalFolderMatched": 4,
+      "filingTotal": 7,
+      "wrongAutomatic": 3,
+      "wrongEmployerAutomatic": 0,
+      "employerFailures": []
+    },
+    {
+      "depth": 2,
+      "guided": true,
+      "proposalAccepted": true,
+      "proposalSubjectCorrect": 7,
+      "proposalSubjectTotal": 7,
+      "proposalFolderMatched": 5,
+      "filingTotal": 7,
+      "wrongAutomatic": 2,
+      "wrongEmployerAutomatic": 2,
+      "employerFailures": [
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Income/Acme",
+            "language": null,
+            "reason": "Selected Income/Acme from the configured categories.",
+            "title": "Payslip - Monthly salary"
+          },
+          "employer": "Beta",
+          "id": "beta-salary",
+          "proposedFolder": "Income/Beta",
+          "sourceUnchanged": true,
+          "subject": "Income"
+        },
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Income/Acme",
+            "language": null,
+            "reason": "Selected Income/Acme from the configured categories.",
+            "title": "Payslip - Monthly salary"
+          },
+          "employer": null,
+          "id": "salary-no-employer",
+          "proposedFolder": "Income",
+          "sourceUnchanged": true,
+          "subject": "Income"
+        }
+      ]
+    },
+    {
+      "depth": 3,
+      "guided": false,
+      "proposalAccepted": true,
+      "proposalSubjectCorrect": 7,
+      "proposalSubjectTotal": 7,
+      "proposalFolderMatched": 5,
+      "filingTotal": 7,
+      "wrongAutomatic": 2,
+      "wrongEmployerAutomatic": 2,
+      "employerFailures": [
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Income/Acme/Payslips",
+            "language": null,
+            "reason": "Selected Income/Acme/Payslips from the configured categories.",
+            "title": "Payslip - Monthly salary"
+          },
+          "employer": "Beta",
+          "id": "beta-salary",
+          "proposedFolder": "Income/Beta/Payslips",
+          "sourceUnchanged": true,
+          "subject": "Income"
+        },
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Income/Acme/Payslips",
+            "language": null,
+            "reason": "Selected Income/Acme/Payslips from the configured categories.",
+            "title": "Payslip - Monthly salary"
+          },
+          "employer": null,
+          "id": "salary-no-employer",
+          "proposedFolder": "Income/Unspecified/Payslips",
+          "sourceUnchanged": true,
+          "subject": "Income"
+        }
+      ]
+    },
+    {
+      "depth": 3,
+      "guided": true,
+      "proposalAccepted": true,
+      "proposalSubjectCorrect": 7,
+      "proposalSubjectTotal": 7,
+      "proposalFolderMatched": 5,
+      "filingTotal": 7,
+      "wrongAutomatic": 2,
+      "wrongEmployerAutomatic": 2,
+      "employerFailures": [
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Income/Acme/Payslips",
+            "language": null,
+            "reason": "Selected Income/Acme/Payslips from the configured categories.",
+            "title": "Payslip - Monthly salary"
+          },
+          "employer": "Beta",
+          "id": "beta-salary",
+          "proposedFolder": "Income/Beta/Payslips",
+          "sourceUnchanged": true,
+          "subject": "Income"
+        },
+        {
+          "decision": {
+            "confident": true,
+            "folder": "Income/Acme/Payslips",
+            "language": null,
+            "reason": "Selected Income/Acme/Payslips from the configured categories.",
+            "title": "Payslip - Monthly salary"
+          },
+          "employer": null,
+          "id": "salary-no-employer",
+          "proposedFolder": "Income",
+          "sourceUnchanged": true,
+          "subject": "Income"
+        }
+      ]
+    }
+  ]
+}

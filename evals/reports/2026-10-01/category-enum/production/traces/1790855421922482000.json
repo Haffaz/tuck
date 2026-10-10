@@ -1,0 +1,27 @@
+{
+  "case": "sv_tenancy",
+  "started": 1790855420.053227,
+  "seconds": 1.8691771030426025,
+  "request": {
+    "actions": [
+      "finish"
+    ],
+    "completed": [],
+    "operation": "describe",
+    "quotes": [
+      "HYRESAVTAL FÖR BOSTADSLÄGENHET",
+      "Hyresvärden upplåter lägenheten till hyresgästen för boende. Hyran betalas månadsvis. Avtalet gäller tills vidare."
+    ],
+    "text": "HYRESAVTAL FÖR BOSTADSLÄGENHET\nHyresvärden upplåter lägenheten till hyresgästen för boende. Hyran betalas månadsvis. Avtalet gäller tills vidare."
+  },
+  "response": {
+    "action": "finish",
+    "description": "A residential lease agreement for an apartment is outlined, specifying that the landlord transfers the property for the tenant's use and that rent is paid monthly until further notice.",
+    "quotes": [
+      "HYRESAVTAL FÖR BOSTADSLÄGENHET",
+      "Hyresvärden upplåter lägenheten till hyresgästen för boende. Hyran betalas månadsvis. Avtalet gäller tills vidare."
+    ],
+    "uncertainty": ""
+  },
+  "exit": 0
+}

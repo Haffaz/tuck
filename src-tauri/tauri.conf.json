@@ -37,7 +37,8 @@
       "icons/icon.ico"
     ],
     "resources": [
-      "resources/tuck-reader"
+      "resources/tuck-reader",
+      "resources/tuck-apple"
     ],
     "shortDescription": "A little home for every document."
   }

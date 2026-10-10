@@ -1,0 +1,12 @@
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.31s
+     Running unittests src/lib.rs (work/rules-nesting-eval/harness/target/debug/deps/tuck_core_d9e551b7_eval-959a2d3afc16a1fe)
+
+running 1 test
+test edges::live_rule_scope_edges ... Scope edge opaque-alias: true
+Scope edge parent-fallback: true
+Scope edge shared-name: true
+Scope edge mixed-types: true
+ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 70 filtered out; finished in 11.59s
+

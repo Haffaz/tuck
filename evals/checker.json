@@ -1,0 +1,80 @@
+{
+  "description": "Synthetic conditional-checker and additional-evidence regression cases; not an accuracy estimate.",
+  "cases": [
+    {
+      "id": "overlapping_bank_rules",
+      "text": "BANK ACCOUNT STATEMENT\nThis document lists the transactions and closing balance of a bank account.",
+      "folder": "Needs Review",
+      "concepts": [],
+      "forbidden": [],
+      "rules": [
+        {
+          "folder": "Finances",
+          "instruction": "Keep bank account statements here."
+        },
+        {
+          "folder": "Banking",
+          "instruction": "Keep bank account statements here."
+        }
+      ]
+    },
+    {
+      "id": "unread_later_chunk",
+      "text": "This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. This cover contains only administrative notes. No document type is provided. \nEMPLOYMENT CONTRACT\nThis agreement describes working hours, salary and duties for an employee.",
+      "folder": "Work",
+      "concepts": [
+        [
+          "employment contract"
+        ]
+      ],
+      "forbidden": []
+    },
+    {
+      "id": "explicit_bundle",
+      "text": "BANK ACCOUNT STATEMENT\nThis document lists account transactions and closing balances.",
+      "source_folder": "AGENCY",
+      "folder": "Migration/AGENCY",
+      "concepts": [
+        [
+          "bank statement"
+        ]
+      ],
+      "forbidden": []
+    },
+    {
+      "id": "restricted_child",
+      "text": "RESIDENTIAL RENTAL AGREEMENT\nThe tenant rents a private apartment for personal residential use.",
+      "folder": "Home",
+      "concepts": [
+        [
+          "rental agreement"
+        ]
+      ],
+      "forbidden": [],
+      "rules": [
+        {
+          "folder": "Home/Business",
+          "instruction": "Only commercial office leases belong here. Personal residential rentals do not belong here."
+        },
+        {
+          "folder": "Home",
+          "instruction": "Keep personal residential rental agreements here."
+        }
+      ]
+    },
+    {
+      "id": "other_document",
+      "text": "EQUIPMENT MAINTENANCE LOG\nRoutine inspection of the coffee machine. The filter was cleaned and the water tank rinsed.",
+      "folder": "Home",
+      "keep_name": true,
+      "concepts": [],
+      "forbidden": [],
+      "rules": [
+        {
+          "folder": "Home",
+          "instruction": "Keep household appliance maintenance records here."
+        }
+      ]
+    }
+  ]
+}

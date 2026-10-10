@@ -1,0 +1,62 @@
+{
+  "generated_at_unix": 1790592601,
+  "os": "27.0",
+  "pipeline": "filing-v3-transfer-examples",
+  "results": [
+    {
+      "automated_title_check": false,
+      "decision": {
+        "confident": true,
+        "folder": "Migration",
+        "language": {
+          "code": "en",
+          "message": "Recognized as English · supported by this Mac's model",
+          "name": "English",
+          "status": "supported"
+        },
+        "reason": "Folder checked. Original filename kept because the suggested name could not be verified.. Direct classification",
+        "title": ""
+      },
+      "expected_folder": "Migration",
+      "extracted_characters": 115,
+      "folder_correct": true,
+      "forbidden_title_claim": false,
+      "id": "new_application_bundle",
+      "rendered_ocr": false,
+      "review": false,
+      "seconds": 2.948017834
+    },
+    {
+      "automated_title_check": true,
+      "decision": {
+        "confident": true,
+        "folder": "Work",
+        "language": {
+          "code": "en",
+          "message": "Recognized as English · supported by this Mac's model",
+          "name": "English",
+          "status": "supported"
+        },
+        "reason": "The document is an employment certificate, and the instruction for the Work folder specifies keeping employment certificates and employment contracts there.. Direct classification",
+        "title": "Employment Certificate"
+      },
+      "expected_folder": "Work",
+      "extracted_characters": 115,
+      "folder_correct": true,
+      "forbidden_title_claim": false,
+      "id": "new_unrelated_certificate",
+      "rendered_ocr": false,
+      "review": false,
+      "seconds": 3.04276325
+    }
+  ],
+  "scope": "New synthetic preference-transfer cases, authored after the prompt was selected and before their first live run. The example adds a user filing preference absent from the baseline.",
+  "summary": {
+    "automated_title_checks": 1,
+    "cases": 2,
+    "correct_folders": 2,
+    "forbidden_title_claims": 0,
+    "median_seconds": 2.995390542,
+    "review_count": 0
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "case": "en_agency_attachment",
+  "started": 1790855429.389972,
+  "seconds": 1.1855008602142334,
+  "request": {
+    "actions": [
+      "finish"
+    ],
+    "completed": [],
+    "operation": "describe",
+    "quotes": [
+      "AGENCY immigration application bundle. Attachment: EMPLOYMENT CONTRACT. The employee is employed on a permanent basis. This contract is submitted as supporting evidence for the residence permit application."
+    ],
+    "text": "AGENCY immigration application bundle. Attachment: EMPLOYMENT CONTRACT. The employee is employed on a permanent basis. This contract is submitted as supporting evidence for the residence permit application."
+  },
+  "response": {
+    "action": "finish",
+    "description": "AGENCY immigration application bundle containing an employment contract for permanent employment as supporting evidence for a residence permit application.",
+    "quotes": [
+      "AGENCY immigration application bundle. Attachment: EMPLOYMENT CONTRACT. The employee is employed on a permanent basis. This contract is submitted as supporting evidence for the residence permit application."
+    ],
+    "uncertainty": ""
+  },
+  "exit": 0
+}

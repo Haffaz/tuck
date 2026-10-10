@@ -1,0 +1,15 @@
+{
+  "case": "en_electricity_bill",
+  "started": 1790860536.733556,
+  "seconds": 0.027019977569580078,
+  "request": {
+    "operation": "check"
+  },
+  "response": {
+    "contextTokens": 8192,
+    "imageInput": true,
+    "pipeline": "serial-roles-v5-simple",
+    "status": "Apple Intelligence is ready — on-device"
+  },
+  "exit": 0
+}

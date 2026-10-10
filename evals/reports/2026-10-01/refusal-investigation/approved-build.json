@@ -1,0 +1,5 @@
+{
+  "pipeline": "serial-roles-v3",
+  "helper_sha256": "1edb2ac7ea2adf60c063f93d2773276c0a3a675c19ffd582d648327067f986cb",
+  "note": "Applied scoped mode after explicit user approval. Synthetic cases only."
+}

@@ -1,0 +1,54 @@
+[
+  {
+    "correct": true,
+    "decision": {
+      "confident": true,
+      "folder": "Work/Client One",
+      "language": null,
+      "reason": "Selected Work/Client One from the configured categories.",
+      "title": "Meeting minutes for Project Orion"
+    },
+    "expected": "Work/Client One",
+    "id": "opaque-alias",
+    "sourceUnchanged": true
+  },
+  {
+    "correct": false,
+    "decision": {
+      "confident": false,
+      "folder": "Needs Review",
+      "language": null,
+      "reason": "The folder check could not confirm this match. Choose a folder for this document.",
+      "title": ""
+    },
+    "expected": "Work",
+    "id": "parent-fallback",
+    "sourceUnchanged": true
+  },
+  {
+    "correct": false,
+    "decision": {
+      "confident": false,
+      "folder": "Needs Review",
+      "language": null,
+      "reason": "No category clearly fits this document. Choose a folder.",
+      "title": ""
+    },
+    "expected": "Health",
+    "id": "shared-name",
+    "sourceUnchanged": true
+  },
+  {
+    "correct": true,
+    "decision": {
+      "confident": false,
+      "folder": "Needs Review",
+      "language": null,
+      "reason": "The source does not establish one clear document type and subject. Review the whole file before choosing a folder.",
+      "title": ""
+    },
+    "expected": "Needs Review",
+    "id": "mixed-types",
+    "sourceUnchanged": true
+  }
+]

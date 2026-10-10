@@ -1,83 +1,74 @@
 # Tuck
 
-A little home for every document. A local document organizer for macOS, built with Tauri 2, React, TypeScript, Rust, and Apple Vision.
+A little home for every document. A local macOS document organizer built with Tauri 2, React, TypeScript, Rust, PDFKit, Apple Vision, and Apple Intelligence.
 
-## Run
+## Organize, Folders and Settings
+
+1. Choose one document folder. Tuck maps all supported documents in it and its subfolders before any file moves. Hidden files and symbolic links are excluded.
+2. Keep the configured categories or **Suggest categories**. **Folders** provides one folder tree: select a folder to edit its rule, select the root for rules that apply everywhere, or **Add folder**. **Save rules** applies your edits. **Use existing folders** is offered when the discovered structure differs from the saved rules. Existing folder names become editable topic descriptions; placement is not treated as proof that a document belongs there. Saved rules are preserved when adopting a structure. Suggested categories replace the configured rules only after **Use these categories**; old folders and documents are not deleted.
+3. Optionally select **Keep watching this folder**, then **Start Tuck**. Clear, validated matches are filed automatically. You can also drop files or use **Choose files** while Tuck is on.
+4. **Needs attention** shows only uncertain decisions and failures. Completed, skipped and pending documents appear in the compact **Activity** view. Uncertain decisions, duplicates and validation failures stay in place for your input. Choose a category and **File document**, or **Leave for now**. **More options** contains renaming, retrying, rule examples and details. Filing validates the edited destination automatically; there is no separate preview step.
+5. **Stop Tuck** stops automatic moves and watching. The current read may finish as a suggestion. Clear the session and map again to start fresh. Restarting the app never resumes automatic filing.
+
+Files inside the root are moved; external files are copied with originals preserved. Source hashes, rule revisions, enabled destinations and exclusive output paths are checked before each operation. Existing documents are never overwritten. The model can still make a wrong but plausible decision; automatic filing does not imply calibrated certainty.
+
+The session supports up to 2,000 PDF, PNG, JPEG, HEIC, TIFF, TXT or Markdown documents, each at most 100 MB. A folder exceeding the scan limits is rejected rather than partially organized. Unreadable and oversized documents are shown in the map. Reading uses bounded excerpts and optional page tools, not guaranteed exhaustive page comprehension. Analysis remains serial to avoid competing local model sessions.
+
+The lightweight map connects documents to source folders and identical content. It is a setup snapshot, not a semantic knowledge graph or persistent search index. It stays in memory. Watching checks new/changed files every three seconds while the worker is available, waits at least six seconds of unchanged size/time, then reads them again. Own moves are recorded so they do not cause a filing loop. Rules edited on disk stop automatic filing.
+
+Organize shows the selected folder, a compact destination summary and documents needing attention. Folders contains the folder tree and proposed structures. Settings contains the AI connection, folder nesting and visible document/folder creation instructions. Descriptive naming is the default; there is no naming-quality toggle. A saved folder can start directly; Tuck reads it first if needed. Paths, scan counts and explanations stay under Details. Success messages dismiss automatically. The unified Mac-style toolbar stays fixed while content scrolls. The interface follows system light/dark appearance and Reduce Motion. Use Command-comma for Settings, Command-1 for Organize and Command-2 for Folders. There is one root, no database, built-in cloud sync, saved operation history or durable undo. Reusable document descriptions and short evidence quotes live in `.tuck/cache/`; category matching uses those descriptions with your current rules. See [architecture diagrams](docs/architecture.md), [product experience](docs/product-experience.md), [category suggestions](docs/category-suggestions.md) and [automatic organization](docs/automatic-organization.md).
+
+## Simple local storage
+
+```text
+Documents/
+├── .tuck/
+│   ├── settings.json           # small preferences
+│   └── instructions.md         # root prompt
+└── Migration/
+    ├── .tuck/instructions.md   # migration prompt
+    └── AGENCY/
+        └── .tuck/instructions.md
+```
+
+The app only remembers the destination root in `~/Library/Application Support/app.tuck.desktop/preferences.json`. The document map, session and analysis results are held in memory and disappear when Tuck closes. Organized files remain in place. Clearing a session does not undo completed operations.
+
+SQLite is not used. Existing database files, JSON state, and backups from previous builds are left untouched. On first use, the MVP can read the previous selected root and preferences from legacy JSON; it does not import queues, history, or saved corrections. Existing folder instruction files take precedence. It does not read settings changed exclusively inside an old SQLite database; review Preferences when switching from that build.
+
+See [storage and recovery](docs/storage.md) and [folder rules](docs/folder-instructions.md).
+
+## AI connections
+
+**Settings → AI connection** defaults to Apple Intelligence on this Mac. Choose **Connect another model** to enter an Ollama, OpenAI-compatible or Anthropic endpoint and any supported text model ID. **Find models** can populate IDs from the service. API keys are optional where the service permits and are saved in macOS Keychain, separately from folder settings.
+
+**Test connection** checks the draft with a short greeting. **Save settings** applies it explicitly. Custom services receive document text and filing instructions; the UI identifies the selected endpoint. There is no silent fallback. Legacy Gemma settings remain readable. See [model connections](docs/model-switching.md) for protocols, privacy and limits.
+
+**Settings → Folder nesting** sets a maximum of one or two folder levels. Fewer levels are always allowed. Optional **Folder creation preferences** beside it describe how new folders should be grouped; saved folder rules describe what belongs in each folder. Technical limits are managed automatically. Review proposals before changing the structure.
+
+Apple uses verified source lines and staged subject/subfolder suggestions for any identifiable document type. Short, complete documents receive proposals; long, incomplete or unclear documents require review. Suggested folders remain editable drafts. See [the current Apple workflow](docs/apple-evidence-workflow.md) for limits and validation. The [rules and nesting evaluation](evals/rules-nesting/README.md) exercises all three rule scopes across projects, invoices, health, education, warranties and travel. See the [measured results and limitations](evals/reports/2026-10-04/rules-nesting/README.md).
+
+PDFKit and Vision extract document text for every model. The same serial workflow describes each document, suggests categories or chooses a folder, independently verifies the match, and optionally suggests an English filename. Production roles currently receive extracted text, not PDF/image attachments. Rust validates evidence, paths, source contents and preference revisions before file operations. Unclear results need input; naming failure preserves the original name.
+
+Automatic language detection, translation preflight and download suggestions are disabled. See [architecture diagrams](docs/architecture.md), [model switching](docs/model-switching.md), and [accuracy evidence](docs/ai-accuracy.md). The header distinguishes on-device AI from a configured model connection.
+
+## Development
 
 Requires Node.js 22.12+ and Xcode Command Line Tools. Rust 1.90 is selected by `rust-toolchain.toml`.
 
 ```sh
 npm install
 npm run tauri dev
-```
-
-Create the Mac application:
-
-```sh
+npm run check
+npm run lint:rust
 npm run tauri build -- --bundles app
 ```
 
-The output is `src-tauri/target/release/bundle/macos/Tuck.app`. It is a local development build, not a signed/notarized distribution.
+The app bundle is `src-tauri/target/release/bundle/macos/Tuck.app`. This is a local development build, not a notarized distribution. The normal tests use synthetic documents and mock model outputs; Apple-dependent evaluations are opt-in ignored tests. UI tests mock the Tauri bridge.
 
-## First use
+## Limits and later work
 
-1. Choose a document folder. Tuck starts paused and records the current files as a baseline.
-2. Edit **Folder rules**. Comma-separated keywords match document text or filenames; the first matching rule wins. Use at most two folder levels.
-3. Optionally connect a local Ollama model. Keyword rules work without it.
-4. Click **Start watching**. New or changed documents are checked every two seconds; Tuck waits for two matching scans before sorting.
-5. Use **Sort existing** for an initial cleanup. Drag files into the window or use **Add documents** to import them.
+No Google Drive integration or file synchronization yet. Back up the documents and hidden `.tuck` files together. Preferences and instruction text are plaintext; local storage is not additional encryption.
 
-Tuck watches while the app is running. Closing or quitting the app stops the watcher. Saved watching state resumes when reopened. This version has no login startup or menu bar service.
+There is no persistent file-operation journal or automatic crash reconciliation. Copies are written through a synced temporary file and exclusive destination creation. Within-root moves use an exclusive hard link followed by removal of the source. Interruption between those steps can leave two copies; Tuck keeps them and does not silently clean them up or replay work on restart. While watching, Finder edits and moves are detected as changed/new paths and read again. There is no durable identity tracking across app restarts.
 
-## Local AI
-
-Install Ollama separately, then:
-
-```sh
-ollama pull qwen3:4b
-```
-
-Start Ollama, choose the installed model in **Preferences**, and click **Check connection**. Tuck calls only `http://127.0.0.1:11434`, bypasses HTTP proxies, and never sends document contents to a cloud provider. Tuck does not download models itself.
-
-Rules determine the destination when they match. Local AI can suggest an English filename and classify documents unmatched by keywords. AI output is restricted to your saved folders. Uncertain documents go to **Needs Review** with the original name. If Ollama is unavailable, matching rules still work and filenames stay unchanged.
-
-## Supported documents
-
-- PDF, PNG, JPG/JPEG, HEIC, TIFF, TXT, Markdown.
-- Apple PDFKit extracts PDF text; Apple Vision reads scans locally in English and Swedish.
-- To bound runtime, the reader examines at most 12 PDF pages and 14 KB of extracted text. Files above 100 MB are left in place with an activity error.
-- Hidden paths and symbolic links are excluded from folder scans. Unsupported formats are left alone.
-- DOCX, cloud providers, Google Drive sync, and learning rules from manual moves are future work.
-
-## File behavior
-
-- Files inside the selected root are moved; files imported from elsewhere are copied and their originals are kept.
-- Destination files are created exclusively. A name collision gets a numeric suffix; existing files are never overwritten.
-- Exact matching contents are flagged against previously organized documents. Matching copies are always kept, including application bundles.
-- Tuck records its own output signatures to prevent sorting loops. Undo records the restored file as already handled.
-- Undo checks the content hash and refuses to remove or replace edited documents. Undoing a copy also requires the unchanged original to still exist.
-- Moves across volumes fail safely with the original kept. Choose a root on one volume.
-- Preferences and the operation journal live in `~/Library/Application Support/app.tuck.desktop/state.json`. The journal stores paths, hashes, and explanations; extracted document text is not persisted.
-- Pending moves are recorded before touching files and reconciled on startup. Interrupted or ambiguous operations preserve files and pause the watcher.
-- macOS may ask for access to Documents or other protected folders. Tuck needs that access to watch the selected location.
-
-## Verify
-
-```sh
-npm run build
-npm run test:rust
-npx playwright install chromium
-npm run test:ui
-```
-
-Rust tests use temporary synthetic documents to check stability, initial cleanup, collisions, duplicate preservation, pause, persistence, and undo. Browser tests exercise the interface through a mocked Tauri bridge; they do not claim native file-picker or AI inference coverage.
-
-## Structure
-
-- `src/`: interface, preferences, activity, and native bridge calls.
-- `src-tauri/src/engine.rs`: watched-folder polling, queue, journal, and undo.
-- `src-tauri/src/files.rs`: path validation, signatures, hashes, and file operations.
-- `src-tauri/src/classifier.rs`: rules, bounded local extraction, and Ollama JSON output.
-- `src-tauri/swift/TuckReader.swift`: bundled PDF and OCR reader compiled during the Rust build.
-
-The UI can be previewed with `npm run dev`. Browser preview disables native filesystem actions.
+Reconsider SQLite if resumable jobs, durable undo or a persistent document index become necessary. Session-only watching does not require a database.

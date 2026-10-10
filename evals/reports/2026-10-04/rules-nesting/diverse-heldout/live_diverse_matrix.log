@@ -1,0 +1,16 @@
+     Locking 76 packages to latest compatible versions
+   Compiling tuck-diverse-heldout-9e29c36f-eval v0.0.0 (/Users/mohomedhaffaz/Documents/Codex/2026-10-02/tuck-category-accuracy/outputs/rules-nesting-fixes/candidate-59-diverse-heldout/harness)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 2.94s
+     Running unittests src/lib.rs (/Users/mohomedhaffaz/Documents/Codex/2026-10-02/tuck-category-accuracy/work/rules-nesting-eval/harness/target/debug/deps/tuck_diverse_heldout_9e29c36f_eval-f3f0d26769ac3563)
+
+running 1 test
+test matrix::live_diverse_matrix ... Diverse depth1 customizedfalse: 14/14
+Diverse depth1 customizedtrue: 14/14
+Diverse depth2 customizedfalse: 14/14
+Diverse depth2 customizedtrue: 14/14
+Diverse depth3 customizedfalse: 14/14
+Diverse depth3 customizedtrue: 14/14
+ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 67 filtered out; finished in 402.51s
+

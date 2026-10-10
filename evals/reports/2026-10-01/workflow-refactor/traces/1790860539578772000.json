@@ -1,0 +1,15 @@
+{
+  "case": "en_injected_insurance",
+  "started": 1790860539.552491,
+  "seconds": 0.0261991024017334,
+  "request": {
+    "operation": "check"
+  },
+  "response": {
+    "contextTokens": 8192,
+    "imageInput": true,
+    "pipeline": "serial-roles-v5-simple",
+    "status": "Apple Intelligence is ready — on-device"
+  },
+  "exit": 0
+}

@@ -1,0 +1,24 @@
+{
+  "case": "sv_bank_statement",
+  "started": 1790860520.0833101,
+  "seconds": 0.9525158405303955,
+  "request": {
+    "actions": [
+      "finish"
+    ],
+    "completed": [],
+    "operation": "describe",
+    "quotes": [
+      "KONTOUTDRAG",
+      "Ingående saldo 5 000 kr. Insättningar 2 000 kr. Uttag 800 kr. Utgående saldo 6 200 kr. Kontohändelser redovisas nedan."
+    ],
+    "text": "KONTOUTDRAG\nIngående saldo 5 000 kr. Insättningar 2 000 kr. Uttag 800 kr. Utgående saldo 6 200 kr. Kontohändelser redovisas nedan."
+  },
+  "response": {
+    "action": "finish",
+    "description": "A bank statement showing account balance changes over time.",
+    "quotes": [],
+    "uncertainty": ""
+  },
+  "exit": 0
+}

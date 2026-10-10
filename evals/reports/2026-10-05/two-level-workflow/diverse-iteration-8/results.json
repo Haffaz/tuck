@@ -1,0 +1,1359 @@
+{
+  "completed": true,
+  "runs": [
+    {
+      "customized": false,
+      "decisions": [
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Work",
+            "language": null,
+            "reason": "Selected Work from the configured categories.",
+            "title": "Technical inspection report - Project Atlas"
+          },
+          "expected": "Work",
+          "id": "atlas-report",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Work",
+            "language": null,
+            "reason": "Selected Work from the configured categories.",
+            "title": "Project meeting minutes - Juniper"
+          },
+          "expected": "Work",
+          "id": "juniper-minutes",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Invoices",
+            "language": null,
+            "reason": "Selected Invoices from the configured categories.",
+            "title": "Supplier invoice for office materials"
+          },
+          "expected": "Invoices",
+          "id": "alder-bill",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Invoices",
+            "language": null,
+            "reason": "Selected Invoices from the configured categories.",
+            "title": "Commercial invoice for design services"
+          },
+          "expected": "Invoices",
+          "id": "echo-bill",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Health",
+            "language": null,
+            "reason": "Selected Health from the configured categories.",
+            "title": "Pathology report Maple Hospital"
+          },
+          "expected": "Health",
+          "id": "maple-clinical",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Health",
+            "language": null,
+            "reason": "Selected Health from the configured categories.",
+            "title": "Medical prescription Birch Health Centre"
+          },
+          "expected": "Health",
+          "id": "birch-medical",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Education",
+            "language": null,
+            "reason": "Selected Education from the configured categories.",
+            "title": "University diploma Lake University"
+          },
+          "expected": "Education",
+          "id": "lake-diploma",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Education",
+            "language": null,
+            "reason": "Selected Education from the configured categories.",
+            "title": "Course completion certificate"
+          },
+          "expected": "Education",
+          "id": "brook-certificate",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Warranties",
+            "language": null,
+            "reason": "Selected Warranties from the configured categories.",
+            "title": "Product warranty certificate for Printer"
+          },
+          "expected": "Warranties",
+          "id": "printer-cover",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Warranties",
+            "language": null,
+            "reason": "Selected Warranties from the configured categories.",
+            "title": "Product warranty certificate - Kitchen mixer"
+          },
+          "expected": "Warranties",
+          "id": "mixer-cover",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Travel",
+            "language": null,
+            "reason": "Selected Travel from the configured categories.",
+            "title": "Flight booking confirmation Porto"
+          },
+          "expected": "Travel",
+          "id": "porto-ticket",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": false,
+          "decision": {
+            "confident": true,
+            "folder": "Health",
+            "language": null,
+            "reason": "Selected Health from the configured categories.",
+            "title": "Hotel reservation confirmation Bergen"
+          },
+          "expected": "Travel",
+          "id": "bergen-stay",
+          "sourceUnchanged": true,
+          "wrongAutomatic": true
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": false,
+            "folder": "Needs Review",
+            "language": null,
+            "reason": "The document needs more information. Choose a folder.",
+            "title": ""
+          },
+          "expected": null,
+          "id": "unidentified",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": false,
+            "folder": "Needs Review",
+            "language": null,
+            "reason": "The source does not establish one clear document type and subject. Review the whole file before choosing a folder.",
+            "title": ""
+          },
+          "expected": null,
+          "id": "combined-records",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        }
+      ],
+      "depth": 1,
+      "proposal": {
+        "assignments": [
+          {
+            "category": "Work",
+            "id": "d0000",
+            "preserveDepth": 0
+          },
+          {
+            "category": "Work",
+            "id": "d0001",
+            "preserveDepth": 0
+          },
+          {
+            "category": "Work",
+            "id": "d0002",
+            "preserveDepth": 0
+          },
+          {
+            "category": "Invoices",
+            "id": "d0003",
+            "preserveDepth": 0
+          },
+          {
+            "category": "Health",
+            "id": "d0004",
+            "preserveDepth": 0
+          },
+          {
+            "category": "Health",
+            "id": "d0005",
+            "preserveDepth": 0
+          },
+          {
+            "category": "Education",
+            "id": "d0006",
+            "preserveDepth": 0
+          },
+          {
+            "category": "Education",
+            "id": "d0007",
+            "preserveDepth": 0
+          },
+          {
+            "category": "Warranty",
+            "id": "d0008",
+            "preserveDepth": 0
+          },
+          {
+            "category": "Warranty",
+            "id": "d0009",
+            "preserveDepth": 0
+          },
+          {
+            "category": "Travel",
+            "id": "d0010",
+            "preserveDepth": 0
+          },
+          {
+            "category": "Travel",
+            "id": "d0011",
+            "preserveDepth": 0
+          },
+          {
+            "category": "Needs review",
+            "id": "d0013",
+            "preserveDepth": 0
+          }
+        ],
+        "ok": true,
+        "rules": [
+          {
+            "documentTypes": [
+              "Course completion certificate",
+              "University diploma from Lake University"
+            ],
+            "enabled": true,
+            "folder": "Education",
+            "instruction": "File documents about Education here. Match the saved document types, including equivalent names. Use a supported more specific child folder when available; otherwise use this broad subject."
+          },
+          {
+            "documentTypes": [
+              "Medical prescription for medication at Birch Health Centre",
+              "Pathology report from Maple Hospital"
+            ],
+            "enabled": true,
+            "folder": "Health",
+            "instruction": "File documents about Health here. Match the saved document types, including equivalent names. Use a supported more specific child folder when available; otherwise use this broad subject."
+          },
+          {
+            "documentTypes": [
+              "Commercial invoice for design services"
+            ],
+            "enabled": true,
+            "folder": "Invoices",
+            "instruction": "File documents about Invoices here. Match the saved document types, including equivalent names. Use a supported more specific child folder when available; otherwise use this broad subject."
+          },
+          {
+            "documentTypes": [
+              "Flight booking confirmation",
+              "Hotel reservation confirmation"
+            ],
+            "enabled": true,
+            "folder": "Travel",
+            "instruction": "File documents about Travel here. Match the saved document types, including equivalent names. Use a supported more specific child folder when available; otherwise use this broad subject."
+          },
+          {
+            "documentTypes": [
+              "Product warranty certificate for Printer",
+              "Product warranty certificate for a kitchen mixer"
+            ],
+            "enabled": true,
+            "folder": "Warranty",
+            "instruction": "File documents about Warranty here. Match the saved document types, including equivalent names. Use a supported more specific child folder when available; otherwise use this broad subject."
+          },
+          {
+            "documentTypes": [
+              "Project meeting minutes for Juniper",
+              "Supplier invoice for office materials",
+              "Technical inspection report for Project Atlas"
+            ],
+            "enabled": true,
+            "folder": "Work",
+            "instruction": "File documents about Work here. Match the saved document types, including equivalent names. Use a supported more specific child folder when available; otherwise use this broad subject."
+          }
+        ]
+      }
+    },
+    {
+      "customized": true,
+      "decisions": [
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Work",
+            "language": null,
+            "reason": "Selected Work from the configured categories.",
+            "title": "Record Technical inspection report Project Atlas"
+          },
+          "expected": "Work",
+          "id": "atlas-report",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Work",
+            "language": null,
+            "reason": "Selected Work from the configured categories.",
+            "title": "Record Project meeting minutes Juniper"
+          },
+          "expected": "Work",
+          "id": "juniper-minutes",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Invoices",
+            "language": null,
+            "reason": "Selected Invoices from the configured categories.",
+            "title": "Record Supplier invoice"
+          },
+          "expected": "Invoices",
+          "id": "alder-bill",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Invoices",
+            "language": null,
+            "reason": "Selected Invoices from the configured categories.",
+            "title": "Record Commercial invoice for design services"
+          },
+          "expected": "Invoices",
+          "id": "echo-bill",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Health",
+            "language": null,
+            "reason": "Selected Health from the configured categories.",
+            "title": "Record Pathology report from Maple Hospital"
+          },
+          "expected": "Health",
+          "id": "maple-clinical",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Health",
+            "language": null,
+            "reason": "Selected Health from the configured categories.",
+            "title": "Record Medical prescription Birch Health Centre"
+          },
+          "expected": "Health",
+          "id": "birch-medical",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Education",
+            "language": null,
+            "reason": "Selected Education from the configured categories.",
+            "title": "Record Diploma Lake University"
+          },
+          "expected": "Education",
+          "id": "lake-diploma",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Education",
+            "language": null,
+            "reason": "Selected Education from the configured categories.",
+            "title": "Record Course completion certificate"
+          },
+          "expected": "Education",
+          "id": "brook-certificate",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Warranties",
+            "language": null,
+            "reason": "Selected Warranties from the configured categories.",
+            "title": "Record warranty certificate Printer"
+          },
+          "expected": "Warranties",
+          "id": "printer-cover",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Warranties",
+            "language": null,
+            "reason": "Selected Warranties from the configured categories.",
+            "title": "Record warranty certificate kitchen mixer"
+          },
+          "expected": "Warranties",
+          "id": "mixer-cover",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Travel",
+            "language": null,
+            "reason": "Selected Travel from the configured categories.",
+            "title": "Record Flight booking confirmation Porto"
+          },
+          "expected": "Travel",
+          "id": "porto-ticket",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": false,
+          "decision": {
+            "confident": false,
+            "folder": "Needs Review",
+            "language": null,
+            "reason": "The folder check could not confirm this match. Choose a folder for this document.",
+            "title": ""
+          },
+          "expected": "Travel",
+          "id": "bergen-stay",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": false,
+            "folder": "Needs Review",
+            "language": null,
+            "reason": "The document needs more information. Choose a folder.",
+            "title": ""
+          },
+          "expected": null,
+          "id": "unidentified",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": false,
+            "folder": "Needs Review",
+            "language": null,
+            "reason": "The source does not establish one clear document type and subject. Review the whole file before choosing a folder.",
+            "title": ""
+          },
+          "expected": null,
+          "id": "combined-records",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        }
+      ],
+      "depth": 1,
+      "proposal": {
+        "assignments": [
+          {
+            "category": "Work",
+            "id": "d0000",
+            "preserveDepth": 0
+          },
+          {
+            "category": "Work",
+            "id": "d0001",
+            "preserveDepth": 0
+          },
+          {
+            "category": "Invoices",
+            "id": "d0002",
+            "preserveDepth": 0
+          },
+          {
+            "category": "Invoices",
+            "id": "d0003",
+            "preserveDepth": 0
+          },
+          {
+            "category": "Health",
+            "id": "d0004",
+            "preserveDepth": 0
+          },
+          {
+            "category": "Health",
+            "id": "d0005",
+            "preserveDepth": 0
+          },
+          {
+            "category": "Education",
+            "id": "d0006",
+            "preserveDepth": 0
+          },
+          {
+            "category": "Education",
+            "id": "d0007",
+            "preserveDepth": 0
+          },
+          {
+            "category": "Warranty",
+            "id": "d0008",
+            "preserveDepth": 0
+          },
+          {
+            "category": "Warranty",
+            "id": "d0009",
+            "preserveDepth": 0
+          },
+          {
+            "category": "Travel",
+            "id": "d0010",
+            "preserveDepth": 0
+          },
+          {
+            "category": "Travel",
+            "id": "d0011",
+            "preserveDepth": 0
+          },
+          {
+            "category": "Needs review",
+            "id": "d0013",
+            "preserveDepth": 0
+          }
+        ],
+        "ok": true,
+        "rules": [
+          {
+            "documentTypes": [
+              "Course completion certificate",
+              "University diploma from Lake University"
+            ],
+            "enabled": true,
+            "folder": "Education",
+            "instruction": "File documents about Education here. Match the saved document types, including equivalent names. Use a supported more specific child folder when available; otherwise use this broad subject."
+          },
+          {
+            "documentTypes": [
+              "Medical prescription for medication at Birch Health Centre",
+              "Pathology report from Maple Hospital"
+            ],
+            "enabled": true,
+            "folder": "Health",
+            "instruction": "File documents about Health here. Match the saved document types, including equivalent names. Use a supported more specific child folder when available; otherwise use this broad subject."
+          },
+          {
+            "documentTypes": [
+              "Commercial invoice for design services",
+              "Supplier invoice for office materials"
+            ],
+            "enabled": true,
+            "folder": "Invoices",
+            "instruction": "File documents about Invoices here. Match the saved document types, including equivalent names. Use a supported more specific child folder when available; otherwise use this broad subject."
+          },
+          {
+            "documentTypes": [
+              "Flight booking confirmation",
+              "Hotel reservation confirmation"
+            ],
+            "enabled": true,
+            "folder": "Travel",
+            "instruction": "File documents about Travel here. Match the saved document types, including equivalent names. Use a supported more specific child folder when available; otherwise use this broad subject."
+          },
+          {
+            "documentTypes": [
+              "Product warranty certificate for Printer",
+              "Product warranty certificate for a kitchen mixer"
+            ],
+            "enabled": true,
+            "folder": "Warranty",
+            "instruction": "File documents about Warranty here. Match the saved document types, including equivalent names. Use a supported more specific child folder when available; otherwise use this broad subject."
+          },
+          {
+            "documentTypes": [
+              "Project meeting minutes for Juniper",
+              "Technical inspection report for Project Atlas"
+            ],
+            "enabled": true,
+            "folder": "Work",
+            "instruction": "File documents about Work here. Match the saved document types, including equivalent names. Use a supported more specific child folder when available; otherwise use this broad subject."
+          }
+        ]
+      }
+    },
+    {
+      "customized": false,
+      "decisions": [
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Work/Atlas",
+            "language": null,
+            "reason": "Selected Work/Atlas from the configured categories.",
+            "title": "Technical inspection report for Project Atlas"
+          },
+          "expected": "Work/Atlas",
+          "id": "atlas-report",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Work/Juniper",
+            "language": null,
+            "reason": "Selected Work/Juniper from the configured categories.",
+            "title": "Project meeting minutes Juniper"
+          },
+          "expected": "Work/Juniper",
+          "id": "juniper-minutes",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Invoices/Alder Supplies",
+            "language": null,
+            "reason": "Selected Invoices/Alder Supplies from the configured categories.",
+            "title": "Supplier invoice - Alder Supplies"
+          },
+          "expected": "Invoices/Alder Supplies",
+          "id": "alder-bill",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Invoices/Echo Design",
+            "language": null,
+            "reason": "Selected Invoices/Echo Design from the configured categories.",
+            "title": "Commercial invoice for design services"
+          },
+          "expected": "Invoices/Echo Design",
+          "id": "echo-bill",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Health/Maple Hospital",
+            "language": null,
+            "reason": "Selected Health/Maple Hospital from the configured categories.",
+            "title": "Pathology report from Maple Hospital"
+          },
+          "expected": "Health/Maple Hospital",
+          "id": "maple-clinical",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Health/Birch Health Centre",
+            "language": null,
+            "reason": "Selected Health/Birch Health Centre from the configured categories.",
+            "title": "Medical prescription at Birch Health Centre"
+          },
+          "expected": "Health/Birch Health Centre",
+          "id": "birch-medical",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Education/Lake University",
+            "language": null,
+            "reason": "Selected Education/Lake University from the configured categories.",
+            "title": "University diploma Lake University"
+          },
+          "expected": "Education/Lake University",
+          "id": "lake-diploma",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Education/Brook College",
+            "language": null,
+            "reason": "Selected Education/Brook College from the configured categories.",
+            "title": "Course completion certificate Brook College"
+          },
+          "expected": "Education/Brook College",
+          "id": "brook-certificate",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Warranties/Printer",
+            "language": null,
+            "reason": "Selected Warranties/Printer from the configured categories.",
+            "title": "Product warranty certificate Printer"
+          },
+          "expected": "Warranties/Printer",
+          "id": "printer-cover",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Warranties/Mixer",
+            "language": null,
+            "reason": "Selected Warranties/Mixer from the configured categories.",
+            "title": "Product warranty certificate - Mixer"
+          },
+          "expected": "Warranties/Mixer",
+          "id": "mixer-cover",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Travel/Porto",
+            "language": null,
+            "reason": "Selected Travel/Porto from the configured categories.",
+            "title": "Flight booking confirmation Porto"
+          },
+          "expected": "Travel/Porto",
+          "id": "porto-ticket",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Travel/Bergen",
+            "language": null,
+            "reason": "Selected Travel/Bergen from the configured categories.",
+            "title": "Hotel reservation confirmation Bergen"
+          },
+          "expected": "Travel/Bergen",
+          "id": "bergen-stay",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": false,
+            "folder": "Needs Review",
+            "language": null,
+            "reason": "The document needs more information. Choose a folder.",
+            "title": ""
+          },
+          "expected": null,
+          "id": "unidentified",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": false,
+            "folder": "Needs Review",
+            "language": null,
+            "reason": "The source does not establish one clear document type and subject. Review the whole file before choosing a folder.",
+            "title": ""
+          },
+          "expected": null,
+          "id": "combined-records",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        }
+      ],
+      "depth": 2,
+      "proposal": {
+        "assignments": [
+          {
+            "category": "Work",
+            "id": "d0000",
+            "preserveDepth": 0
+          },
+          {
+            "category": "Work",
+            "id": "d0001",
+            "preserveDepth": 0
+          },
+          {
+            "category": "Work",
+            "id": "d0002",
+            "preserveDepth": 0
+          },
+          {
+            "category": "Invoices",
+            "id": "d0003",
+            "preserveDepth": 0
+          },
+          {
+            "category": "Health",
+            "id": "d0004",
+            "preserveDepth": 0
+          },
+          {
+            "category": "Health",
+            "id": "d0005",
+            "preserveDepth": 0
+          },
+          {
+            "category": "Education",
+            "id": "d0006",
+            "preserveDepth": 0
+          },
+          {
+            "category": "Education",
+            "id": "d0007",
+            "preserveDepth": 0
+          },
+          {
+            "category": "Warranty",
+            "id": "d0008",
+            "preserveDepth": 0
+          },
+          {
+            "category": "Warranty",
+            "id": "d0009",
+            "preserveDepth": 0
+          },
+          {
+            "category": "Travel",
+            "id": "d0010",
+            "preserveDepth": 0
+          },
+          {
+            "category": "Travel",
+            "id": "d0011",
+            "preserveDepth": 0
+          },
+          {
+            "category": "Needs review",
+            "id": "d0013",
+            "preserveDepth": 0
+          }
+        ],
+        "ok": true,
+        "rules": [
+          {
+            "documentTypes": [
+              "Course completion certificate",
+              "University diploma from Lake University"
+            ],
+            "enabled": true,
+            "folder": "Education",
+            "instruction": "File documents about Education here. Match the saved document types, including equivalent names. Use a supported more specific child folder when available; otherwise use this broad subject."
+          },
+          {
+            "documentTypes": [
+              "Medical prescription for medication at Birch Health Centre",
+              "Pathology report from Maple Hospital"
+            ],
+            "enabled": true,
+            "folder": "Health",
+            "instruction": "File documents about Health here. Match the saved document types, including equivalent names. Use a supported more specific child folder when available; otherwise use this broad subject."
+          },
+          {
+            "documentTypes": [
+              "Commercial invoice for design services"
+            ],
+            "enabled": true,
+            "folder": "Invoices",
+            "instruction": "File documents about Invoices here. Match the saved document types, including equivalent names. Use a supported more specific child folder when available; otherwise use this broad subject."
+          },
+          {
+            "documentTypes": [
+              "Flight booking confirmation",
+              "Hotel reservation confirmation"
+            ],
+            "enabled": true,
+            "folder": "Travel",
+            "instruction": "File documents about Travel here. Match the saved document types, including equivalent names. Use a supported more specific child folder when available; otherwise use this broad subject."
+          },
+          {
+            "documentTypes": [
+              "Product warranty certificate for Printer",
+              "Product warranty certificate for a kitchen mixer"
+            ],
+            "enabled": true,
+            "folder": "Warranty",
+            "instruction": "File documents about Warranty here. Match the saved document types, including equivalent names. Use a supported more specific child folder when available; otherwise use this broad subject."
+          },
+          {
+            "documentTypes": [
+              "Project meeting minutes for Juniper",
+              "Supplier invoice for office materials",
+              "Technical inspection report for Project Atlas"
+            ],
+            "enabled": true,
+            "folder": "Work",
+            "instruction": "File documents about Work here. Match the saved document types, including equivalent names. Use a supported more specific child folder when available; otherwise use this broad subject."
+          }
+        ]
+      }
+    },
+    {
+      "customized": true,
+      "decisions": [
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Work/Atlas",
+            "language": null,
+            "reason": "Selected Work/Atlas from the configured categories.",
+            "title": "Record Technical inspection report Project Atlas"
+          },
+          "expected": "Work/Atlas",
+          "id": "atlas-report",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Work/Juniper",
+            "language": null,
+            "reason": "Selected Work/Juniper from the configured categories.",
+            "title": "Record Project meeting minutes Juniper"
+          },
+          "expected": "Work/Juniper",
+          "id": "juniper-minutes",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Invoices/Alder Supplies",
+            "language": null,
+            "reason": "Selected Invoices/Alder Supplies from the configured categories.",
+            "title": "Record Supplier invoice Alder Supplies"
+          },
+          "expected": "Invoices/Alder Supplies",
+          "id": "alder-bill",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Invoices/Echo Design",
+            "language": null,
+            "reason": "Selected Invoices/Echo Design from the configured categories.",
+            "title": "Record Commercial invoice Echo Design"
+          },
+          "expected": "Invoices/Echo Design",
+          "id": "echo-bill",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Health/Maple Hospital",
+            "language": null,
+            "reason": "Selected Health/Maple Hospital from the configured categories.",
+            "title": "Record Pathology report Maple Hospital"
+          },
+          "expected": "Health/Maple Hospital",
+          "id": "maple-clinical",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Health/Birch Health Centre",
+            "language": null,
+            "reason": "Selected Health/Birch Health Centre from the configured categories.",
+            "title": "Record Medical prescription Birch Health Centre"
+          },
+          "expected": "Health/Birch Health Centre",
+          "id": "birch-medical",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Education/Lake University",
+            "language": null,
+            "reason": "Selected Education/Lake University from the configured categories.",
+            "title": "Record University diploma Lake University"
+          },
+          "expected": "Education/Lake University",
+          "id": "lake-diploma",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Education/Brook College",
+            "language": null,
+            "reason": "Selected Education/Brook College from the configured categories.",
+            "title": "Record Course completion certificate Brook College"
+          },
+          "expected": "Education/Brook College",
+          "id": "brook-certificate",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Warranties/Printer",
+            "language": null,
+            "reason": "Selected Warranties/Printer from the configured categories.",
+            "title": "Record Product warranty certificate Printer"
+          },
+          "expected": "Warranties/Printer",
+          "id": "printer-cover",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Warranties/Mixer",
+            "language": null,
+            "reason": "Selected Warranties/Mixer from the configured categories.",
+            "title": "Record Product warranty certificate Mixer"
+          },
+          "expected": "Warranties/Mixer",
+          "id": "mixer-cover",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Travel/Porto",
+            "language": null,
+            "reason": "Selected Travel/Porto from the configured categories.",
+            "title": "Record Flight booking confirmation Porto"
+          },
+          "expected": "Travel/Porto",
+          "id": "porto-ticket",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Travel/Bergen",
+            "language": null,
+            "reason": "Selected Travel/Bergen from the configured categories.",
+            "title": "Record Hotel reservation confirmation Bergen"
+          },
+          "expected": "Travel/Bergen",
+          "id": "bergen-stay",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": false,
+            "folder": "Needs Review",
+            "language": null,
+            "reason": "The document needs more information. Choose a folder.",
+            "title": ""
+          },
+          "expected": null,
+          "id": "unidentified",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": false,
+            "folder": "Needs Review",
+            "language": null,
+            "reason": "The source does not establish one clear document type and subject. Review the whole file before choosing a folder.",
+            "title": ""
+          },
+          "expected": null,
+          "id": "combined-records",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        }
+      ],
+      "depth": 2,
+      "proposal": {
+        "assignments": [
+          {
+            "category": "Work/Atlas",
+            "id": "d0000",
+            "preserveDepth": 2
+          },
+          {
+            "category": "Work/Juniper",
+            "id": "d0001",
+            "preserveDepth": 2
+          },
+          {
+            "category": "Invoices/Alder Supplies",
+            "id": "d0002",
+            "preserveDepth": 2
+          },
+          {
+            "category": "Invoices/Echo Design",
+            "id": "d0003",
+            "preserveDepth": 2
+          },
+          {
+            "category": "Health/Maple Hospital",
+            "id": "d0004",
+            "preserveDepth": 2
+          },
+          {
+            "category": "Health/Birch Health Centre",
+            "id": "d0005",
+            "preserveDepth": 2
+          },
+          {
+            "category": "Education/Lake University",
+            "id": "d0006",
+            "preserveDepth": 2
+          },
+          {
+            "category": "Education/Brook College",
+            "id": "d0007",
+            "preserveDepth": 2
+          },
+          {
+            "category": "Warranties/Printer",
+            "id": "d0008",
+            "preserveDepth": 2
+          },
+          {
+            "category": "Warranty/Mixer",
+            "id": "d0009",
+            "preserveDepth": 2
+          },
+          {
+            "category": "Travel/Porto",
+            "id": "d0010",
+            "preserveDepth": 2
+          },
+          {
+            "category": "Travel/Bergen",
+            "id": "d0011",
+            "preserveDepth": 2
+          },
+          {
+            "category": "Needs review",
+            "id": "d0013",
+            "preserveDepth": 0
+          }
+        ],
+        "ok": true,
+        "rules": [
+          {
+            "documentTypes": [
+              "Course completion certificate"
+            ],
+            "enabled": true,
+            "folder": "Education/Brook College",
+            "instruction": "File documents about Education/Brook College here. Match the saved document types, including equivalent names. Required source details: (Institution: Brook College). Each subgroup must match a distinguishing source fact, such as a named subject, organization, project, product, location or document type. Names require source evidence; document type synonyms are allowed."
+          },
+          {
+            "documentTypes": [
+              "University diploma from Lake University"
+            ],
+            "enabled": true,
+            "folder": "Education/Lake University",
+            "instruction": "File documents about Education/Lake University here. Match the saved document types, including equivalent names. Required source details: (Institution: Lake University). Each subgroup must match a distinguishing source fact, such as a named subject, organization, project, product, location or document type. Names require source evidence; document type synonyms are allowed."
+          },
+          {
+            "documentTypes": [
+              "Medical prescription for medication at Birch Health Centre"
+            ],
+            "enabled": true,
+            "folder": "Health/Birch Health Centre",
+            "instruction": "File documents about Health/Birch Health Centre here. Match the saved document types, including equivalent names. Required source details: (Clinic: Birch Health Centre). Each subgroup must match a distinguishing source fact, such as a named subject, organization, project, product, location or document type. Names require source evidence; document type synonyms are allowed."
+          },
+          {
+            "documentTypes": [
+              "Pathology report from Maple Hospital"
+            ],
+            "enabled": true,
+            "folder": "Health/Maple Hospital",
+            "instruction": "File documents about Health/Maple Hospital here. Match the saved document types, including equivalent names. Required source details: (Clinic: Maple Hospital). Each subgroup must match a distinguishing source fact, such as a named subject, organization, project, product, location or document type. Names require source evidence; document type synonyms are allowed."
+          },
+          {
+            "documentTypes": [
+              "Supplier invoice for office materials"
+            ],
+            "enabled": true,
+            "folder": "Invoices/Alder Supplies",
+            "instruction": "File documents about Invoices/Alder Supplies here. Match the saved document types, including equivalent names. Required source details: (Supplier: Alder Supplies). Each subgroup must match a distinguishing source fact, such as a named subject, organization, project, product, location or document type. Names require source evidence; document type synonyms are allowed."
+          },
+          {
+            "documentTypes": [
+              "Commercial invoice for design services"
+            ],
+            "enabled": true,
+            "folder": "Invoices/Echo Design",
+            "instruction": "File documents about Invoices/Echo Design here. Match the saved document types, including equivalent names. Required source details: (Supplier: Echo Design). Each subgroup must match a distinguishing source fact, such as a named subject, organization, project, product, location or document type. Names require source evidence; document type synonyms are allowed."
+          },
+          {
+            "documentTypes": [
+              "Hotel reservation confirmation"
+            ],
+            "enabled": true,
+            "folder": "Travel/Bergen",
+            "instruction": "File documents about Travel/Bergen here. Match the saved document types, including equivalent names. Required source details: (Destination: Bergen). Each subgroup must match a distinguishing source fact, such as a named subject, organization, project, product, location or document type. Names require source evidence; document type synonyms are allowed."
+          },
+          {
+            "documentTypes": [
+              "Flight booking confirmation"
+            ],
+            "enabled": true,
+            "folder": "Travel/Porto",
+            "instruction": "File documents about Travel/Porto here. Match the saved document types, including equivalent names. Required source details: (Destination: Porto). Each subgroup must match a distinguishing source fact, such as a named subject, organization, project, product, location or document type. Names require source evidence; document type synonyms are allowed."
+          },
+          {
+            "documentTypes": [
+              "Product warranty certificate for Printer"
+            ],
+            "enabled": true,
+            "folder": "Warranties/Printer",
+            "instruction": "File documents about Warranties/Printer here. Match the saved document types, including equivalent names. Required source details: (Product: Printer). Each subgroup must match a distinguishing source fact, such as a named subject, organization, project, product, location or document type. Names require source evidence; document type synonyms are allowed."
+          },
+          {
+            "documentTypes": [
+              "Product warranty certificate for a kitchen mixer"
+            ],
+            "enabled": true,
+            "folder": "Warranty/Mixer",
+            "instruction": "File documents about Warranty/Mixer here. Match the saved document types, including equivalent names. Required source details: (Product: Mixer). Each subgroup must match a distinguishing source fact, such as a named subject, organization, project, product, location or document type. Names require source evidence; document type synonyms are allowed."
+          },
+          {
+            "documentTypes": [
+              "Technical inspection report for Project Atlas"
+            ],
+            "enabled": true,
+            "folder": "Work/Atlas",
+            "instruction": "File documents about Work/Atlas here. Match the saved document types, including equivalent names. Required source details: (Project: Atlas). Each subgroup must match a distinguishing source fact, such as a named subject, organization, project, product, location or document type. Names require source evidence; document type synonyms are allowed."
+          },
+          {
+            "documentTypes": [
+              "Project meeting minutes for Juniper"
+            ],
+            "enabled": true,
+            "folder": "Work/Juniper",
+            "instruction": "File documents about Work/Juniper here. Match the saved document types, including equivalent names. Required source details: (Project: Juniper). Each subgroup must match a distinguishing source fact, such as a named subject, organization, project, product, location or document type. Names require source evidence; document type synonyms are allowed."
+          }
+        ]
+      }
+    }
+  ]
+}

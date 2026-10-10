@@ -1,0 +1,5 @@
+id,depth,documentInstructions,creationPreferences,folderRules,repeat,proposalAccepted,proposalClearCorrect,proposalClearTotal,proposalMaxDepth,filingCorrect,clearCorrect,clearTotal,reviewCorrect,reviewTotal,wrongAutomatic,namingFailures,medianSeconds
+depth1-D0C0F0-r1,1,False,False,False,1,True,8,8,1,10,8,8,2,2,0,0,2.76170375
+depth1-D1C1F1-r1,1,True,True,True,1,True,8,8,1,10,8,8,2,2,0,0,2.8589580625
+depth2-D0C0F0-r1,2,False,False,False,1,True,8,8,1,10,8,8,2,2,0,0,2.976463667
+depth2-D1C1F1-r1,2,True,True,True,1,True,8,8,2,10,8,8,2,2,0,0,2.741497833

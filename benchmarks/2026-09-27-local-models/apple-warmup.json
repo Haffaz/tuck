@@ -1,0 +1,10 @@
+{
+  "output": {
+    "confident": true,
+    "folder": "Insurance",
+    "reason": "Insurance document",
+    "title": "Home Insurance"
+  },
+  "model_seconds": 2.577213292,
+  "seconds": 2.5775198328774422
+}

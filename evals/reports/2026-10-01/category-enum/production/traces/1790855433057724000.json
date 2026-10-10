@@ -1,0 +1,27 @@
+{
+  "case": "en_electricity_bill",
+  "started": 1790855431.770394,
+  "seconds": 1.2872719764709473,
+  "request": {
+    "actions": [
+      "finish"
+    ],
+    "completed": [],
+    "operation": "describe",
+    "quotes": [
+      "ELECTRICITY INVOICE",
+      "Residential electricity supply. Charges include electricity consumption, network service and energy tax. Total amount due: 480 SEK."
+    ],
+    "text": "ELECTRICITY INVOICE\nResidential electricity supply. Charges include electricity consumption, network service and energy tax. Total amount due: 480 SEK."
+  },
+  "response": {
+    "action": "finish",
+    "description": "Residential electricity invoice detailing charges for consumption, network service, and tax, with a total amount due of 480 SEK.",
+    "quotes": [
+      "ELECTRICITY INVOICE",
+      "Residential electricity supply. Charges include electricity consumption, network service and energy tax. Total amount due: 480 SEK."
+    ],
+    "uncertainty": ""
+  },
+  "exit": 0
+}

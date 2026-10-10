@@ -1,0 +1,405 @@
+{
+  "scope": "Full native pipeline with generic starter categories: 14 clear and 2 unclear synthetic documents; OCR, language preparation, fresh descriptions, guided category match, verification and optional naming. No personal files or file moves.",
+  "results": [
+    {
+      "automated_title_check": true,
+      "decision": {
+        "confident": true,
+        "folder": "Identity & Immigration",
+        "language": {
+          "code": "sv",
+          "message": "Recognized as Swedish · supported by this Mac's model",
+          "name": "Swedish",
+          "status": "supported"
+        },
+        "reason": "Selected Identity & Immigration from the configured categories.",
+        "title": "Residence permit card"
+      },
+      "expected_folder": "Identity & Immigration",
+      "extracted_characters": 142,
+      "folder_correct": true,
+      "folder_image_used": false,
+      "forbidden_title_claim": false,
+      "id": "sv_residence_card",
+      "image_used": false,
+      "rendered_ocr": false,
+      "review": false,
+      "seconds": 3.918711166
+    },
+    {
+      "automated_title_check": true,
+      "decision": {
+        "confident": true,
+        "folder": "Banking & Taxes",
+        "language": {
+          "code": "sv",
+          "message": "Recognized as Swedish · supported by this Mac's model",
+          "name": "Swedish",
+          "status": "supported"
+        },
+        "reason": "Selected Banking & Taxes from the configured categories.",
+        "title": "Bank statement with transaction details"
+      },
+      "expected_folder": "Banking & Taxes",
+      "extracted_characters": 130,
+      "folder_correct": true,
+      "folder_image_used": false,
+      "forbidden_title_claim": false,
+      "id": "sv_bank_statement",
+      "image_used": false,
+      "rendered_ocr": false,
+      "review": false,
+      "seconds": 2.766423917
+    },
+    {
+      "automated_title_check": false,
+      "decision": {
+        "confident": true,
+        "folder": "Employment & Pay",
+        "language": {
+          "code": "sv",
+          "message": "Recognized as Swedish · supported by this Mac's model",
+          "name": "Swedish",
+          "status": "supported"
+        },
+        "reason": "Selected Employment & Pay from the configured categories.",
+        "title": "Salary Specification"
+      },
+      "expected_folder": "Employment & Pay",
+      "extracted_characters": 144,
+      "folder_correct": true,
+      "folder_image_used": false,
+      "forbidden_title_claim": false,
+      "id": "sv_payslip",
+      "image_used": false,
+      "rendered_ocr": false,
+      "review": false,
+      "seconds": 3.179942083
+    },
+    {
+      "automated_title_check": true,
+      "decision": {
+        "confident": true,
+        "folder": "Housing & Utilities",
+        "language": {
+          "code": "sv",
+          "message": "Recognized as Swedish · supported by this Mac's model",
+          "name": "Swedish",
+          "status": "supported"
+        },
+        "reason": "Selected Housing & Utilities from the configured categories.",
+        "title": "Residential Lease Agreement for Apartment"
+      },
+      "expected_folder": "Housing & Utilities",
+      "extracted_characters": 145,
+      "folder_correct": true,
+      "folder_image_used": false,
+      "forbidden_title_claim": false,
+      "id": "sv_tenancy",
+      "image_used": false,
+      "rendered_ocr": false,
+      "review": false,
+      "seconds": 3.384740584
+    },
+    {
+      "automated_title_check": true,
+      "decision": {
+        "confident": true,
+        "folder": "Insurance",
+        "language": {
+          "code": "sv",
+          "message": "Recognized as Swedish · supported by this Mac's model",
+          "name": "Swedish",
+          "status": "supported"
+        },
+        "reason": "Selected Insurance from the configured categories.",
+        "title": "Home insurance policy"
+      },
+      "expected_folder": "Insurance",
+      "extracted_characters": 116,
+      "folder_correct": true,
+      "folder_image_used": false,
+      "forbidden_title_claim": false,
+      "id": "sv_home_insurance",
+      "image_used": false,
+      "rendered_ocr": false,
+      "review": false,
+      "seconds": 2.657259417
+    },
+    {
+      "automated_title_check": true,
+      "decision": {
+        "confident": true,
+        "folder": "Medical Records",
+        "language": {
+          "code": "sv",
+          "message": "Recognized as Swedish · supported by this Mac's model",
+          "name": "Swedish",
+          "status": "supported"
+        },
+        "reason": "Selected Medical Records from the configured categories.",
+        "title": "Medical certificate for work incapacity"
+      },
+      "expected_folder": "Medical Records",
+      "extracted_characters": 160,
+      "folder_correct": true,
+      "folder_image_used": false,
+      "forbidden_title_claim": false,
+      "id": "sv_medical_certificate",
+      "image_used": false,
+      "rendered_ocr": false,
+      "review": false,
+      "seconds": 3.061391167
+    },
+    {
+      "automated_title_check": false,
+      "decision": {
+        "confident": false,
+        "folder": "Needs Review",
+        "language": {
+          "code": "en",
+          "message": "Recognized as English · supported by this Mac's model",
+          "name": "English",
+          "status": "supported"
+        },
+        "reason": "The folder check could not confirm this match. Choose a folder for this document.",
+        "title": ""
+      },
+      "expected_folder": "Employment & Pay",
+      "extracted_characters": 207,
+      "folder_correct": false,
+      "folder_image_used": false,
+      "forbidden_title_claim": false,
+      "id": "en_agency_attachment",
+      "image_used": false,
+      "rendered_ocr": false,
+      "review": true,
+      "seconds": 2.281741084
+    },
+    {
+      "automated_title_check": true,
+      "decision": {
+        "confident": true,
+        "folder": "Housing & Utilities",
+        "language": {
+          "code": "en",
+          "message": "Recognized as English · supported by this Mac's model",
+          "name": "English",
+          "status": "supported"
+        },
+        "reason": "Selected Housing & Utilities from the configured categories.",
+        "title": "Residential electricity bill"
+      },
+      "expected_folder": "Housing & Utilities",
+      "extracted_characters": 151,
+      "folder_correct": true,
+      "folder_image_used": false,
+      "forbidden_title_claim": false,
+      "id": "en_electricity_bill",
+      "image_used": false,
+      "rendered_ocr": false,
+      "review": false,
+      "seconds": 2.702321417
+    },
+    {
+      "automated_title_check": true,
+      "decision": {
+        "confident": true,
+        "folder": "Insurance",
+        "language": {
+          "code": "en",
+          "message": "Recognized as English · supported by this Mac's model",
+          "name": "English",
+          "status": "supported"
+        },
+        "reason": "Selected Insurance from the configured categories.",
+        "title": "Travel insurance policy details"
+      },
+      "expected_folder": "Insurance",
+      "extracted_characters": 194,
+      "folder_correct": true,
+      "folder_image_used": false,
+      "forbidden_title_claim": false,
+      "id": "en_injected_insurance",
+      "image_used": false,
+      "rendered_ocr": false,
+      "review": false,
+      "seconds": 2.485571291
+    },
+    {
+      "automated_title_check": true,
+      "decision": {
+        "confident": true,
+        "folder": "Employment & Pay",
+        "language": {
+          "code": "en",
+          "message": "Recognized as English · supported by this Mac's model",
+          "name": "English",
+          "status": "supported"
+        },
+        "reason": "Selected Employment & Pay from the configured categories.",
+        "title": "Certificate of Employment"
+      },
+      "expected_folder": "Employment & Pay",
+      "extracted_characters": 198,
+      "folder_correct": true,
+      "folder_image_used": false,
+      "forbidden_title_claim": false,
+      "id": "en_employment_certificate",
+      "image_used": false,
+      "rendered_ocr": false,
+      "review": false,
+      "seconds": 2.95718325
+    },
+    {
+      "automated_title_check": true,
+      "decision": {
+        "confident": false,
+        "folder": "Needs Review",
+        "language": {
+          "code": "en",
+          "message": "Recognized as English · supported by this Mac's model",
+          "name": "English",
+          "status": "supported"
+        },
+        "reason": "No category clearly fits this document. Choose a folder.",
+        "title": ""
+      },
+      "expected_folder": "Needs Review",
+      "extracted_characters": 99,
+      "folder_correct": true,
+      "folder_image_used": false,
+      "forbidden_title_claim": false,
+      "id": "ambiguous_fragment",
+      "image_used": false,
+      "rendered_ocr": false,
+      "review": true,
+      "seconds": 1.9216185829999999
+    },
+    {
+      "automated_title_check": true,
+      "decision": {
+        "confident": false,
+        "folder": "Needs Review",
+        "language": {
+          "code": "und",
+          "message": "Language detection is uncertain; check the suggestion carefully.",
+          "name": "Uncertain or mixed language",
+          "status": "unknown"
+        },
+        "reason": "No category clearly fits this document. Choose a folder.",
+        "title": ""
+      },
+      "expected_folder": "Needs Review",
+      "extracted_characters": 42,
+      "folder_correct": true,
+      "folder_image_used": false,
+      "forbidden_title_claim": false,
+      "id": "unreadable_scan",
+      "image_used": false,
+      "rendered_ocr": false,
+      "review": true,
+      "seconds": 2.536848875
+    },
+    {
+      "automated_title_check": true,
+      "decision": {
+        "confident": true,
+        "folder": "Identity & Immigration",
+        "language": {
+          "code": "sv",
+          "message": "Recognized as Swedish · supported by this Mac's model",
+          "name": "Swedish",
+          "status": "supported"
+        },
+        "reason": "Selected Identity & Immigration from the configured categories.",
+        "title": "Residence permit card"
+      },
+      "expected_folder": "Identity & Immigration",
+      "extracted_characters": 143,
+      "folder_correct": true,
+      "folder_image_used": false,
+      "forbidden_title_claim": false,
+      "id": "sv_residence_card_image",
+      "image_used": false,
+      "rendered_ocr": true,
+      "review": false,
+      "seconds": 3.5325845
+    },
+    {
+      "automated_title_check": false,
+      "decision": {
+        "confident": false,
+        "folder": "Needs Review",
+        "language": {
+          "code": "sv",
+          "message": "Recognized as Swedish · supported by this Mac's model",
+          "name": "Swedish",
+          "status": "supported"
+        },
+        "reason": "The folder check could not confirm this match. Choose a folder for this document.",
+        "title": ""
+      },
+      "expected_folder": "Insurance",
+      "extracted_characters": 117,
+      "folder_correct": false,
+      "folder_image_used": false,
+      "forbidden_title_claim": false,
+      "id": "sv_home_insurance_image",
+      "image_used": false,
+      "rendered_ocr": true,
+      "review": true,
+      "seconds": 2.8959924580000003
+    },
+    {
+      "automated_title_check": false,
+      "decision": {
+        "confident": false,
+        "folder": "Needs Review",
+        "language": {
+          "code": "en",
+          "message": "Recognized as English · supported by this Mac's model",
+          "name": "English",
+          "status": "supported"
+        },
+        "reason": "The folder check could not confirm this match. Choose a folder for this document.",
+        "title": ""
+      },
+      "expected_folder": "Employment & Pay",
+      "extracted_characters": 231,
+      "folder_correct": false,
+      "folder_image_used": false,
+      "forbidden_title_claim": false,
+      "id": "en_employment_certificate_pdf",
+      "image_used": false,
+      "rendered_ocr": true,
+      "review": true,
+      "seconds": 2.7630990410000003
+    },
+    {
+      "automated_title_check": true,
+      "decision": {
+        "confident": true,
+        "folder": "Maintenance & Repairs",
+        "language": {
+          "code": "en",
+          "message": "Recognized as English · supported by this Mac's model",
+          "name": "English",
+          "status": "supported"
+        },
+        "reason": "Selected Maintenance & Repairs from the configured categories.",
+        "title": "Ventilation fan maintenance report"
+      },
+      "expected_folder": "Maintenance & Repairs",
+      "extracted_characters": 14000,
+      "folder_correct": true,
+      "folder_image_used": false,
+      "forbidden_title_claim": false,
+      "id": "en_later_page_maintenance",
+      "image_used": false,
+      "rendered_ocr": false,
+      "review": false,
+      "seconds": 4.217644792
+    }
+  ]
+}

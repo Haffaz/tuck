@@ -1,0 +1,80 @@
+[
+  {
+    "model": "Apple Intelligence",
+    "mode": "text",
+    "variant": "baseline",
+    "count": 13,
+    "correct": 11,
+    "developmentCorrect": 9,
+    "developmentCount": 10,
+    "freshCorrect": 2,
+    "freshCount": 3,
+    "errors": 2,
+    "medianSeconds": 0.74
+  },
+  {
+    "model": "Apple Intelligence",
+    "mode": "text",
+    "variant": "structured",
+    "count": 13,
+    "correct": 12,
+    "developmentCorrect": 9,
+    "developmentCount": 10,
+    "freshCorrect": 3,
+    "freshCount": 3,
+    "errors": 0,
+    "medianSeconds": 0.76
+  },
+  {
+    "model": "gemma4:e2b-it-q4_K_M",
+    "mode": "text",
+    "variant": "baseline",
+    "count": 13,
+    "correct": 13,
+    "developmentCorrect": 10,
+    "developmentCount": 10,
+    "freshCorrect": 3,
+    "freshCount": 3,
+    "errors": 0,
+    "medianSeconds": 1.35
+  },
+  {
+    "model": "gemma4:e2b-it-q4_K_M",
+    "mode": "text",
+    "variant": "structured",
+    "count": 13,
+    "correct": 12,
+    "developmentCorrect": 9,
+    "developmentCount": 10,
+    "freshCorrect": 3,
+    "freshCount": 3,
+    "errors": 0,
+    "medianSeconds": 1.49
+  },
+  {
+    "model": "gemma4:e4b-it-q4_K_M",
+    "mode": "text",
+    "variant": "baseline",
+    "count": 13,
+    "correct": 12,
+    "developmentCorrect": 9,
+    "developmentCount": 10,
+    "freshCorrect": 3,
+    "freshCount": 3,
+    "errors": 0,
+    "medianSeconds": 2.8
+  },
+  {
+    "model": "gemma4:e4b-it-q4_K_M",
+    "mode": "text",
+    "variant": "structured",
+    "count": 13,
+    "correct": 12,
+    "developmentCorrect": 9,
+    "developmentCount": 10,
+    "freshCorrect": 3,
+    "freshCount": 3,
+    "errors": 0,
+    "medianSeconds": 3.02
+  }
+]

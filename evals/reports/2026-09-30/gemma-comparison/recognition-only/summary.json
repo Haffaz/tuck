@@ -1,0 +1,34 @@
+[
+  {
+    "model": "gemma4:e2b-it-q4_K_M",
+    "mode": "text",
+    "specificMatches": 3,
+    "syntheticMatches": 0,
+    "realMatches": 3,
+    "medianSeconds": 1.19
+  },
+  {
+    "model": "gemma4:e2b-it-q4_K_M",
+    "mode": "image",
+    "specificMatches": 3,
+    "syntheticMatches": 0,
+    "realMatches": 3,
+    "medianSeconds": 5.78
+  },
+  {
+    "model": "gemma4:e4b-it-q4_K_M",
+    "mode": "text",
+    "specificMatches": 6,
+    "syntheticMatches": 3,
+    "realMatches": 3,
+    "medianSeconds": 2.3
+  },
+  {
+    "model": "gemma4:e4b-it-q4_K_M",
+    "mode": "image",
+    "specificMatches": 3,
+    "syntheticMatches": 0,
+    "realMatches": 3,
+    "medianSeconds": 8.47
+  }
+]

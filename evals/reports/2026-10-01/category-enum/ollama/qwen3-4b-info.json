@@ -1,0 +1,53 @@
+{
+  "details": {
+    "parent_model": "",
+    "format": "gguf",
+    "family": "qwen3",
+    "families": [
+      "qwen3"
+    ],
+    "parameter_size": "4.0B",
+    "quantization_level": "Q4_K_M"
+  },
+  "capabilities": [
+    "completion",
+    "tools",
+    "thinking"
+  ],
+  "parameters": "temperature                    0.6\ntop_k                          20\ntop_p                          0.95\nrepeat_penalty                 1\nstop                           \"<|im_start|>\"\nstop                           \"<|im_end|>\"",
+  "model_info": {
+    "general.architecture": "qwen3",
+    "general.basename": "Qwen3",
+    "general.file_type": 15,
+    "general.finetune": "Thinking",
+    "general.license": "apache-2.0",
+    "general.license.link": "https://huggingface.co/Qwen/Qwen3-4B-Thinking-2507/blob/main/LICENSE",
+    "general.parameter_count": 4022468096,
+    "general.quantization_version": 2,
+    "general.size_label": "4B",
+    "general.tags": [
+      "text-generation"
+    ],
+    "general.type": "model",
+    "general.version": "2507",
+    "qwen3.attention.head_count": 32,
+    "qwen3.attention.head_count_kv": 8,
+    "qwen3.attention.key_length": 128,
+    "qwen3.attention.layer_norm_rms_epsilon": 1e-06,
+    "qwen3.attention.value_length": 128,
+    "qwen3.block_count": 36,
+    "qwen3.context_length": 262144,
+    "qwen3.embedding_length": 2560,
+    "qwen3.feed_forward_length": 9728,
+    "qwen3.rope.freq_base": 5000000,
+    "tokenizer.ggml.add_bos_token": false,
+    "tokenizer.ggml.bos_token_id": 151643,
+    "tokenizer.ggml.eos_token_id": 151645,
+    "tokenizer.ggml.merges": [],
+    "tokenizer.ggml.model": "gpt2",
+    "tokenizer.ggml.padding_token_id": 151643,
+    "tokenizer.ggml.pre": "qwen2",
+    "tokenizer.ggml.token_type": [],
+    "tokenizer.ggml.tokens": []
+  }
+}

@@ -1,0 +1,1889 @@
+{
+  "completed": true,
+  "edgeCases": [
+    {
+      "accepted": true,
+      "assignments": [
+        {
+          "category": "Income",
+          "id": "d0000",
+          "preserveDepth": 0
+        }
+      ],
+      "depth": 1,
+      "id": "overdepth-instruction-1"
+    },
+    {
+      "accepted": true,
+      "assignments": [
+        {
+          "category": "Income",
+          "id": "d0000",
+          "preserveDepth": 0
+        }
+      ],
+      "depth": 2,
+      "id": "overdepth-instruction-2"
+    },
+    {
+      "accepted": true,
+      "assignments": [
+        {
+          "category": "Income",
+          "id": "d0000",
+          "preserveDepth": 0
+        }
+      ],
+      "depth": 3,
+      "id": "overdepth-instruction-3"
+    },
+    {
+      "decision": {
+        "confident": true,
+        "folder": "Income/Acme/Payslips",
+        "language": null,
+        "reason": "Selected Income/Acme/Payslips from the configured categories.",
+        "title": "Monthly salary payslip"
+      },
+      "expected": "Income/Acme/Payslips",
+      "id": "lowered-limit-existing-acme-september"
+    },
+    {
+      "decision": {
+        "confident": true,
+        "folder": "Travel/Insurance/Policies",
+        "language": null,
+        "reason": "Selected Travel/Insurance/Policies from the configured categories.",
+        "title": "Travel insurance certificate"
+      },
+      "expected": "Travel/Insurance/Policies",
+      "id": "lowered-limit-existing-travel-policy"
+    },
+    {
+      "decision": {
+        "confident": false,
+        "folder": "Needs Review",
+        "language": null,
+        "reason": "No category clearly fits this document. Choose a folder.",
+        "title": ""
+      },
+      "expected": null,
+      "id": "disabled-parent"
+    },
+    {
+      "id": "invalid-setting-0",
+      "rejected": true
+    },
+    {
+      "id": "invalid-setting-4",
+      "rejected": true
+    },
+    {
+      "id": "invalid-setting-5",
+      "rejected": true
+    },
+    {
+      "id": "invalid-setting-45",
+      "rejected": true
+    }
+  ],
+  "fixtures": 10,
+  "runs": [
+    {
+      "creationPreferences": false,
+      "decisions": [
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Income",
+            "language": null,
+            "reason": "Selected Income from the configured categories.",
+            "title": "Monthly salary payslip for September"
+          },
+          "expected": "Income",
+          "id": "acme-september",
+          "seconds": 3.193264416,
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Income",
+            "language": null,
+            "reason": "Selected Income from the configured categories.",
+            "title": "Monthly salary payslip for October"
+          },
+          "expected": "Income",
+          "id": "acme-october",
+          "seconds": 2.872619416,
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Income",
+            "language": null,
+            "reason": "Selected Income from the configured categories.",
+            "title": "Monthly salary payslip for September"
+          },
+          "expected": "Income",
+          "id": "beta-salary",
+          "seconds": 3.180263792,
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Employment",
+            "language": null,
+            "reason": "Selected Employment from the configured categories.",
+            "title": "Employment contract permanent design position"
+          },
+          "expected": "Employment",
+          "id": "employment",
+          "seconds": 3.624985083,
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Housing",
+            "language": null,
+            "reason": "Selected Housing from the configured categories.",
+            "title": "Residential tenancy agreement"
+          },
+          "expected": "Housing",
+          "id": "tenancy",
+          "seconds": 5.06779625,
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Insurance",
+            "language": null,
+            "reason": "Selected Insurance from the configured categories.",
+            "title": "Travel insurance certificate"
+          },
+          "expected": "Insurance",
+          "id": "travel-policy",
+          "seconds": 3.043046792,
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Insurance",
+            "language": null,
+            "reason": "Selected Insurance from the configured categories.",
+            "title": "Home insurance policy"
+          },
+          "expected": "Insurance",
+          "id": "injected-policy",
+          "seconds": 3.241979583,
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": false,
+            "folder": "Needs Review",
+            "language": null,
+            "reason": "The source does not establish one clear document type and subject. Review the whole file before choosing a folder.",
+            "title": ""
+          },
+          "expected": null,
+          "id": "unknown",
+          "seconds": 0.49418775,
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": false,
+            "folder": "Needs Review",
+            "language": null,
+            "reason": "The source does not establish one clear document type and subject. Review the whole file before choosing a folder.",
+            "title": ""
+          },
+          "expected": null,
+          "id": "mixed",
+          "seconds": 0.452426584,
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Income",
+            "language": null,
+            "reason": "Selected Income from the configured categories.",
+            "title": "Monthly salary payslip for September"
+          },
+          "expected": "Income",
+          "id": "salary-no-employer",
+          "seconds": 2.804974917,
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        }
+      ],
+      "depth": 1,
+      "documentInstructions": false,
+      "folderRules": false,
+      "id": "depth1-D0C0F0-r1",
+      "preferences": {
+        "aiModel": "apple",
+        "categoryInstructions": "",
+        "connection": {
+          "baseUrl": "http://127.0.0.1:11434",
+          "kind": "ollama",
+          "model": ""
+        },
+        "folderNesting": 1,
+        "instructions": "Use clear English document names without inventing facts.",
+        "instructionsRevision": "",
+        "maxDepth": 3,
+        "recursive": true,
+        "rename": true,
+        "root": "/private/tmp/.tmpMVOoqc",
+        "rules": [
+          {
+            "enabled": true,
+            "folder": "Housing",
+            "instruction": "Tenancy agreements and household utility bills."
+          },
+          {
+            "enabled": true,
+            "folder": "Insurance",
+            "instruction": "All insurance policies, including home, motor and travel insurance. Travel tickets and bookings belong in Travel."
+          },
+          {
+            "enabled": true,
+            "folder": "Income",
+            "instruction": "All salary payslips and salary payment statements. Employment contracts belong in Employment."
+          },
+          {
+            "enabled": true,
+            "folder": "Employment",
+            "instruction": "Employment contracts and employment certificates."
+          },
+          {
+            "enabled": true,
+            "folder": "Travel",
+            "instruction": "Travel tickets, reservations and bookings only. Insurance policies belong in Insurance."
+          }
+        ],
+        "settingsRevision": "",
+        "useAgent": true,
+        "useAi": true,
+        "useMemory": true
+      },
+      "proposal": {
+        "assignments": [
+          {
+            "category": "Income",
+            "id": "d0000",
+            "preserveDepth": 0
+          },
+          {
+            "category": "Income",
+            "id": "d0001",
+            "preserveDepth": 0
+          },
+          {
+            "category": "Income",
+            "id": "d0002",
+            "preserveDepth": 0
+          },
+          {
+            "category": "Work",
+            "id": "d0003",
+            "preserveDepth": 0
+          },
+          {
+            "category": "Housing",
+            "id": "d0004",
+            "preserveDepth": 0
+          },
+          {
+            "category": "Insurance",
+            "id": "d0005",
+            "preserveDepth": 0
+          },
+          {
+            "category": "Insurance",
+            "id": "d0006",
+            "preserveDepth": 0
+          },
+          {
+            "category": "Needs review",
+            "id": "d0007",
+            "preserveDepth": 0
+          },
+          {
+            "category": "Needs review",
+            "id": "d0008",
+            "preserveDepth": 0
+          },
+          {
+            "category": "Income",
+            "id": "d0009",
+            "preserveDepth": 0
+          }
+        ],
+        "limited": false,
+        "ok": true,
+        "rules": [
+          {
+            "enabled": true,
+            "folder": "Housing",
+            "instruction": "File documents about Housing here. Required document scope: Residential tenancy agreement concerning renting an apartment. Match these document types, including equivalent names. Use a supported more specific child folder when available; otherwise use this broad subject."
+          },
+          {
+            "enabled": true,
+            "folder": "Income",
+            "instruction": "File documents about Income here. Required document scope: Monthly salary payslip for October 2026; Monthly salary payslip for September 2026. Match these document types, including equivalent names. Use a supported more specific child folder when available; otherwise use this broad subject."
+          },
+          {
+            "enabled": true,
+            "folder": "Insurance",
+            "instruction": "File documents about Insurance here. Required document scope: Home insurance policy; Travel insurance certificate. Match these document types, including equivalent names. Use a supported more specific child folder when available; otherwise use this broad subject."
+          },
+          {
+            "enabled": true,
+            "folder": "Work",
+            "instruction": "File documents about Work here. Required document scope: Employment contract: permanent design position from September 2026. Match these document types, including equivalent names. Use a supported more specific child folder when available; otherwise use this broad subject."
+          }
+        ],
+        "sampled": 8,
+        "skipped": 2
+      },
+      "proposalSeconds": 34.263688375,
+      "repeat": 1,
+      "seconds": 62.244438833
+    },
+    {
+      "creationPreferences": true,
+      "decisions": [
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Income",
+            "language": null,
+            "reason": "Selected Income from the configured categories.",
+            "title": "Record payslip"
+          },
+          "expected": "Income",
+          "id": "acme-september",
+          "seconds": 4.258121083,
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Income",
+            "language": null,
+            "reason": "Selected Income from the configured categories.",
+            "title": "Record payslip"
+          },
+          "expected": "Income",
+          "id": "acme-october",
+          "seconds": 4.078891792,
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Income",
+            "language": null,
+            "reason": "Selected Income from the configured categories.",
+            "title": "Record payslip"
+          },
+          "expected": "Income",
+          "id": "beta-salary",
+          "seconds": 4.122898458,
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Employment",
+            "language": null,
+            "reason": "Selected Employment from the configured categories.",
+            "title": "Record employment contract"
+          },
+          "expected": "Employment",
+          "id": "employment",
+          "seconds": 5.002581709,
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Housing",
+            "language": null,
+            "reason": "Selected Housing from the configured categories.",
+            "title": "Record tenancy agreement"
+          },
+          "expected": "Housing",
+          "id": "tenancy",
+          "seconds": 5.691084791,
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Travel",
+            "language": null,
+            "reason": "Selected Travel from the configured categories.",
+            "title": "Record travel insurance certificate"
+          },
+          "expected": "Travel",
+          "id": "travel-policy",
+          "seconds": 4.684521833,
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Insurance",
+            "language": null,
+            "reason": "Selected Insurance from the configured categories.",
+            "title": "Record home insurance policy"
+          },
+          "expected": "Insurance",
+          "id": "injected-policy",
+          "seconds": 4.416816667,
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": false,
+            "folder": "Needs Review",
+            "language": null,
+            "reason": "The source does not establish one clear document type and subject. Review the whole file before choosing a folder.",
+            "title": ""
+          },
+          "expected": null,
+          "id": "unknown",
+          "seconds": 0.629302,
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": false,
+            "folder": "Needs Review",
+            "language": null,
+            "reason": "The source does not establish one clear document type and subject. Review the whole file before choosing a folder.",
+            "title": ""
+          },
+          "expected": null,
+          "id": "mixed",
+          "seconds": 0.55382975,
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Income",
+            "language": null,
+            "reason": "Selected Income from the configured categories.",
+            "title": "Record payslip"
+          },
+          "expected": "Income",
+          "id": "salary-no-employer",
+          "seconds": 4.016792375,
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        }
+      ],
+      "depth": 1,
+      "documentInstructions": true,
+      "folderRules": true,
+      "id": "depth1-D1C1F1-r1",
+      "preferences": {
+        "aiModel": "apple",
+        "categoryInstructions": "Keep salary payslips in Income and employment contracts in Employment. Use broad root-level folders. Keep tenancy agreements in Housing and all insurance policies, including travel insurance, in Insurance. Do not create employer or date subfolders for Housing or Insurance. Never invent an employer or create a folder for an amount or date.",
+        "connection": {
+          "baseUrl": "http://127.0.0.1:11434",
+          "kind": "ollama",
+          "model": ""
+        },
+        "folderNesting": 1,
+        "instructions": "Use clear English document names. Every new filename must start with Record. Omit all dates and amounts. Never call an insurance policy a bonus.",
+        "instructionsRevision": "",
+        "maxDepth": 3,
+        "recursive": true,
+        "rename": true,
+        "root": "/private/tmp/.tmpMVOoqc",
+        "rules": [
+          {
+            "enabled": true,
+            "folder": "Housing",
+            "instruction": "Tenancy agreements and household utility bills."
+          },
+          {
+            "enabled": true,
+            "folder": "Insurance",
+            "instruction": "Home insurance and motor insurance policies. Exclude travel insurance, which belongs in Travel."
+          },
+          {
+            "enabled": true,
+            "folder": "Income",
+            "instruction": "All salary payslips and salary payment statements. Employment contracts belong in Employment."
+          },
+          {
+            "enabled": true,
+            "folder": "Employment",
+            "instruction": "Employment contracts and employment certificates."
+          },
+          {
+            "enabled": true,
+            "folder": "Travel",
+            "instruction": "Travel insurance certificates and policies. For this user's collection, keep travel insurance here. Home insurance belongs in Insurance."
+          }
+        ],
+        "settingsRevision": "",
+        "useAgent": true,
+        "useAi": true,
+        "useMemory": true
+      },
+      "proposal": {
+        "assignments": [
+          {
+            "category": "Income",
+            "id": "d0000",
+            "preserveDepth": 0
+          },
+          {
+            "category": "Income",
+            "id": "d0001",
+            "preserveDepth": 0
+          },
+          {
+            "category": "Income",
+            "id": "d0002",
+            "preserveDepth": 0
+          },
+          {
+            "category": "Employment",
+            "id": "d0003",
+            "preserveDepth": 0
+          },
+          {
+            "category": "Housing",
+            "id": "d0004",
+            "preserveDepth": 0
+          },
+          {
+            "category": "Insurance",
+            "id": "d0005",
+            "preserveDepth": 0
+          },
+          {
+            "category": "Insurance",
+            "id": "d0006",
+            "preserveDepth": 0
+          },
+          {
+            "category": "Needs review",
+            "id": "d0007",
+            "preserveDepth": 0
+          },
+          {
+            "category": "Needs review",
+            "id": "d0008",
+            "preserveDepth": 0
+          },
+          {
+            "category": "Income",
+            "id": "d0009",
+            "preserveDepth": 0
+          }
+        ],
+        "limited": false,
+        "ok": true,
+        "rules": [
+          {
+            "enabled": true,
+            "folder": "Employment",
+            "instruction": "File documents about Employment here. Required document scope: Employment contract: permanent design position from September 2026. Match these document types, including equivalent names. Use a supported more specific child folder when available; otherwise use this broad subject."
+          },
+          {
+            "enabled": true,
+            "folder": "Housing",
+            "instruction": "File documents about Housing here. Required document scope: Residential tenancy agreement concerning renting an apartment. Match these document types, including equivalent names. Use a supported more specific child folder when available; otherwise use this broad subject."
+          },
+          {
+            "enabled": true,
+            "folder": "Income",
+            "instruction": "File documents about Income here. Required document scope: Monthly salary payslip for October 2026; Monthly salary payslip for September 2026. Match these document types, including equivalent names. Use a supported more specific child folder when available; otherwise use this broad subject."
+          },
+          {
+            "enabled": true,
+            "folder": "Insurance",
+            "instruction": "File documents about Insurance here. Required document scope: Home insurance policy; Travel insurance certificate. Match these document types, including equivalent names. Use a supported more specific child folder when available; otherwise use this broad subject."
+          }
+        ],
+        "sampled": 8,
+        "skipped": 2
+      },
+      "proposalSeconds": 15.209113125,
+      "repeat": 1,
+      "seconds": 52.678448584
+    },
+    {
+      "creationPreferences": false,
+      "decisions": [
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Income/Acme",
+            "language": null,
+            "reason": "Selected Income/Acme from the configured categories.",
+            "title": "Monthly salary payslip"
+          },
+          "expected": "Income/Acme",
+          "id": "acme-september",
+          "seconds": 7.262917875,
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Income/Acme",
+            "language": null,
+            "reason": "Selected Income/Acme from the configured categories.",
+            "title": "Monthly salary payslip"
+          },
+          "expected": "Income/Acme",
+          "id": "acme-october",
+          "seconds": 6.507507875,
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Income/Beta",
+            "language": null,
+            "reason": "Selected Income/Beta from the configured categories.",
+            "title": "Monthly salary payslip"
+          },
+          "expected": "Income/Beta",
+          "id": "beta-salary",
+          "seconds": 6.205648,
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Employment/Acme",
+            "language": null,
+            "reason": "Selected Employment/Acme from the configured categories.",
+            "title": "Employment contract permanent design position"
+          },
+          "expected": "Employment/Acme",
+          "id": "employment",
+          "seconds": 6.231865209,
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Housing",
+            "language": null,
+            "reason": "Selected Housing from the configured categories.",
+            "title": "Residential tenancy agreement"
+          },
+          "expected": "Housing",
+          "id": "tenancy",
+          "seconds": 2.581230333,
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Insurance",
+            "language": null,
+            "reason": "Selected Insurance from the configured categories.",
+            "title": "Travel insurance certificate"
+          },
+          "expected": "Insurance",
+          "id": "travel-policy",
+          "seconds": 2.333904542,
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Insurance",
+            "language": null,
+            "reason": "Selected Insurance from the configured categories.",
+            "title": "Home insurance policy"
+          },
+          "expected": "Insurance",
+          "id": "injected-policy",
+          "seconds": 2.324864417,
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": false,
+            "folder": "Needs Review",
+            "language": null,
+            "reason": "The source does not establish one clear document type and subject. Review the whole file before choosing a folder.",
+            "title": ""
+          },
+          "expected": null,
+          "id": "unknown",
+          "seconds": 0.364310584,
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": false,
+            "folder": "Needs Review",
+            "language": null,
+            "reason": "The source does not establish one clear document type and subject. Review the whole file before choosing a folder.",
+            "title": ""
+          },
+          "expected": null,
+          "id": "mixed",
+          "seconds": 0.359472417,
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Income",
+            "language": null,
+            "reason": "Selected Income from the configured categories.",
+            "title": "Monthly salary payslip"
+          },
+          "expected": "Income",
+          "id": "salary-no-employer",
+          "seconds": 2.168339167,
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        }
+      ],
+      "depth": 2,
+      "documentInstructions": false,
+      "folderRules": false,
+      "id": "depth2-D0C0F0-r1",
+      "preferences": {
+        "aiModel": "apple",
+        "categoryInstructions": "",
+        "connection": {
+          "baseUrl": "http://127.0.0.1:11434",
+          "kind": "ollama",
+          "model": ""
+        },
+        "folderNesting": 2,
+        "instructions": "Use clear English document names without inventing facts.",
+        "instructionsRevision": "",
+        "maxDepth": 3,
+        "recursive": true,
+        "rename": true,
+        "root": "/private/tmp/.tmpMVOoqc",
+        "rules": [
+          {
+            "enabled": true,
+            "folder": "Housing",
+            "instruction": "Tenancy agreements and household utility bills."
+          },
+          {
+            "enabled": true,
+            "folder": "Insurance",
+            "instruction": "All insurance policies, including home, motor and travel insurance. Travel tickets and bookings belong in Travel."
+          },
+          {
+            "enabled": true,
+            "folder": "Income/Acme",
+            "instruction": "File documents about Income/Acme here. Examples: Monthly salary payslip from Acme Corporation."
+          },
+          {
+            "enabled": true,
+            "folder": "Income/Beta",
+            "instruction": "File documents about Income/Beta here. Examples: Monthly salary payslip from Beta Studio."
+          },
+          {
+            "enabled": true,
+            "folder": "Income",
+            "instruction": "Salary payslips where the employer name is absent. Named employers have their own subfolders."
+          },
+          {
+            "enabled": true,
+            "folder": "Employment/Acme",
+            "instruction": "Employment contracts issued by Acme Corporation. Salary payslips belong under Income."
+          },
+          {
+            "enabled": true,
+            "folder": "Travel",
+            "instruction": "Travel tickets, reservations and bookings only. Insurance policies belong in Insurance."
+          }
+        ],
+        "settingsRevision": "",
+        "useAgent": true,
+        "useAi": true,
+        "useMemory": true
+      },
+      "proposal": {
+        "assignments": [
+          {
+            "category": "Income",
+            "id": "d0000",
+            "preserveDepth": 0
+          },
+          {
+            "category": "Income",
+            "id": "d0001",
+            "preserveDepth": 0
+          },
+          {
+            "category": "Income",
+            "id": "d0002",
+            "preserveDepth": 0
+          },
+          {
+            "category": "Work",
+            "id": "d0003",
+            "preserveDepth": 0
+          },
+          {
+            "category": "Housing",
+            "id": "d0004",
+            "preserveDepth": 0
+          },
+          {
+            "category": "Insurance",
+            "id": "d0005",
+            "preserveDepth": 0
+          },
+          {
+            "category": "Insurance",
+            "id": "d0006",
+            "preserveDepth": 0
+          },
+          {
+            "category": "Needs review",
+            "id": "d0007",
+            "preserveDepth": 0
+          },
+          {
+            "category": "Needs review",
+            "id": "d0008",
+            "preserveDepth": 0
+          },
+          {
+            "category": "Income",
+            "id": "d0009",
+            "preserveDepth": 0
+          }
+        ],
+        "limited": false,
+        "ok": true,
+        "rules": [
+          {
+            "enabled": true,
+            "folder": "Housing",
+            "instruction": "File documents about Housing here. Required document scope: Residential tenancy agreement concerning renting an apartment. Match these document types, including equivalent names. Use a supported more specific child folder when available; otherwise use this broad subject."
+          },
+          {
+            "enabled": true,
+            "folder": "Income",
+            "instruction": "File documents about Income here. Required document scope: Monthly salary payslip for October 2026; Monthly salary payslip for September 2026. Match these document types, including equivalent names. Use a supported more specific child folder when available; otherwise use this broad subject."
+          },
+          {
+            "enabled": true,
+            "folder": "Insurance",
+            "instruction": "File documents about Insurance here. Required document scope: Home insurance policy; Travel insurance certificate. Match these document types, including equivalent names. Use a supported more specific child folder when available; otherwise use this broad subject."
+          },
+          {
+            "enabled": true,
+            "folder": "Work",
+            "instruction": "File documents about Work here. Required document scope: Employment contract: permanent design position from September 2026. Match these document types, including equivalent names. Use a supported more specific child folder when available; otherwise use this broad subject."
+          }
+        ],
+        "sampled": 8,
+        "skipped": 2
+      },
+      "proposalSeconds": 27.356852209,
+      "repeat": 1,
+      "seconds": 63.707884709
+    },
+    {
+      "creationPreferences": true,
+      "decisions": [
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Income/Acme",
+            "language": null,
+            "reason": "Selected Income/Acme from the configured categories.",
+            "title": "Record payslip"
+          },
+          "expected": "Income/Acme",
+          "id": "acme-september",
+          "seconds": 5.375293625,
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Income/Acme",
+            "language": null,
+            "reason": "Selected Income/Acme from the configured categories.",
+            "title": "Record payslip"
+          },
+          "expected": "Income/Acme",
+          "id": "acme-october",
+          "seconds": 5.421597042,
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Income/Beta",
+            "language": null,
+            "reason": "Selected Income/Beta from the configured categories.",
+            "title": "Record payslip"
+          },
+          "expected": "Income/Beta",
+          "id": "beta-salary",
+          "seconds": 5.230578708,
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Employment/Acme",
+            "language": null,
+            "reason": "Selected Employment/Acme from the configured categories.",
+            "title": "Record employment contract design"
+          },
+          "expected": "Employment/Acme",
+          "id": "employment",
+          "seconds": 6.215166125,
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Housing",
+            "language": null,
+            "reason": "Selected Housing from the configured categories.",
+            "title": "Record tenancy agreement"
+          },
+          "expected": "Housing",
+          "id": "tenancy",
+          "seconds": 3.486949708,
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Travel/Insurance",
+            "language": null,
+            "reason": "Selected Travel/Insurance from the configured categories.",
+            "title": "Record Travel Insurance Certificate"
+          },
+          "expected": "Travel/Insurance",
+          "id": "travel-policy",
+          "seconds": 5.037047542,
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Insurance",
+            "language": null,
+            "reason": "Selected Insurance from the configured categories.",
+            "title": "Record home insurance policy"
+          },
+          "expected": "Insurance",
+          "id": "injected-policy",
+          "seconds": 3.190038375,
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": false,
+            "folder": "Needs Review",
+            "language": null,
+            "reason": "The source does not establish one clear document type and subject. Review the whole file before choosing a folder.",
+            "title": ""
+          },
+          "expected": null,
+          "id": "unknown",
+          "seconds": 0.404253875,
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": false,
+            "folder": "Needs Review",
+            "language": null,
+            "reason": "The source does not establish one clear document type and subject. Review the whole file before choosing a folder.",
+            "title": ""
+          },
+          "expected": null,
+          "id": "mixed",
+          "seconds": 0.453923916,
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Income",
+            "language": null,
+            "reason": "Selected Income from the configured categories.",
+            "title": "Record payslip"
+          },
+          "expected": "Income",
+          "id": "salary-no-employer",
+          "seconds": 3.368273625,
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        }
+      ],
+      "depth": 2,
+      "documentInstructions": true,
+      "folderRules": true,
+      "id": "depth2-D1C1F1-r1",
+      "preferences": {
+        "aiModel": "apple",
+        "categoryInstructions": "Keep salary payslips under Income, grouped by the explicitly named employer: Income/Acme for Acme Corporation and Income/Beta for Beta Studio. Employment contracts belong under Employment/Acme. Put missing employer names in broad Income. Keep tenancy agreements in Housing and all insurance policies, including travel insurance, in Insurance. Do not create employer or date subfolders for Housing or Insurance. Never invent an employer or create a folder for an amount or date.",
+        "connection": {
+          "baseUrl": "http://127.0.0.1:11434",
+          "kind": "ollama",
+          "model": ""
+        },
+        "folderNesting": 2,
+        "instructions": "Use clear English document names. Every new filename must start with Record. Omit all dates and amounts. Never call an insurance policy a bonus.",
+        "instructionsRevision": "",
+        "maxDepth": 3,
+        "recursive": true,
+        "rename": true,
+        "root": "/private/tmp/.tmpMVOoqc",
+        "rules": [
+          {
+            "enabled": true,
+            "folder": "Housing",
+            "instruction": "Tenancy agreements and household utility bills."
+          },
+          {
+            "enabled": true,
+            "folder": "Insurance",
+            "instruction": "Home insurance and motor insurance policies. Exclude travel insurance, which belongs in Travel."
+          },
+          {
+            "enabled": true,
+            "folder": "Income/Acme",
+            "instruction": "Salary payslips issued by employer Acme Corporation only. Do not use this folder when the employer is missing or different."
+          },
+          {
+            "enabled": true,
+            "folder": "Income/Beta",
+            "instruction": "Salary payslips issued by employer Beta Studio only. Do not use this folder when the employer is missing or different."
+          },
+          {
+            "enabled": true,
+            "folder": "Income",
+            "instruction": "Salary payslips where the employer name is absent. Named employers have their own subfolders."
+          },
+          {
+            "enabled": true,
+            "folder": "Employment/Acme",
+            "instruction": "Employment contracts issued by Acme Corporation. Salary payslips belong under Income."
+          },
+          {
+            "enabled": true,
+            "folder": "Travel/Insurance",
+            "instruction": "Travel insurance certificates and policies. For this user's collection, keep travel insurance here. Home insurance belongs in Insurance."
+          }
+        ],
+        "settingsRevision": "",
+        "useAgent": true,
+        "useAi": true,
+        "useMemory": true
+      },
+      "proposal": {
+        "assignments": [
+          {
+            "category": "Income/Acme Corporation",
+            "id": "d0000",
+            "preserveDepth": 2
+          },
+          {
+            "category": "Income/Acme Corporation",
+            "id": "d0001",
+            "preserveDepth": 2
+          },
+          {
+            "category": "Income/Beta Studio",
+            "id": "d0002",
+            "preserveDepth": 2
+          },
+          {
+            "category": "Employment/Acme Corporation",
+            "id": "d0003",
+            "preserveDepth": 2
+          },
+          {
+            "category": "Housing",
+            "id": "d0004",
+            "preserveDepth": 0
+          },
+          {
+            "category": "Insurance",
+            "id": "d0005",
+            "preserveDepth": 0
+          },
+          {
+            "category": "Insurance",
+            "id": "d0006",
+            "preserveDepth": 0
+          },
+          {
+            "category": "Needs review",
+            "id": "d0007",
+            "preserveDepth": 0
+          },
+          {
+            "category": "Needs review",
+            "id": "d0008",
+            "preserveDepth": 0
+          },
+          {
+            "category": "Income",
+            "id": "d0009",
+            "preserveDepth": 0
+          }
+        ],
+        "limited": false,
+        "ok": true,
+        "rules": [
+          {
+            "enabled": true,
+            "folder": "Employment/Acme Corporation",
+            "instruction": "File documents about Employment/Acme Corporation here. Required document scope: Employment contract: permanent design position from September 2026. Match these document types, including equivalent names. Required source details: (Employer: Acme Corporation). Each subgroup must match a distinguishing source fact, such as a named subject, organization, project, product, location or document type. Names require source evidence; document type synonyms are allowed."
+          },
+          {
+            "enabled": true,
+            "folder": "Housing",
+            "instruction": "File documents about Housing here. Required document scope: Residential tenancy agreement concerning renting an apartment. Match these document types, including equivalent names. Use a supported more specific child folder when available; otherwise use this broad subject."
+          },
+          {
+            "enabled": true,
+            "folder": "Income",
+            "instruction": "File documents about Income here. Required document scope: Monthly salary payslip for September 2026. Match these document types, including equivalent names. Use a supported more specific child folder when available; otherwise use this broad subject."
+          },
+          {
+            "enabled": true,
+            "folder": "Income/Acme Corporation",
+            "instruction": "File documents about Income/Acme Corporation here. Required document scope: Monthly salary payslip for October 2026; Monthly salary payslip for September 2026. Match these document types, including equivalent names. Required source details: (Employer: Acme Corporation). Each subgroup must match a distinguishing source fact, such as a named subject, organization, project, product, location or document type. Names require source evidence; document type synonyms are allowed."
+          },
+          {
+            "enabled": true,
+            "folder": "Income/Beta Studio",
+            "instruction": "File documents about Income/Beta Studio here. Required document scope: Monthly salary payslip for September 2026. Match these document types, including equivalent names. Required source details: (Employer: Beta Studio). Each subgroup must match a distinguishing source fact, such as a named subject, organization, project, product, location or document type. Names require source evidence; document type synonyms are allowed."
+          },
+          {
+            "enabled": true,
+            "folder": "Insurance",
+            "instruction": "File documents about Insurance here. Required document scope: Home insurance policy; Travel insurance certificate. Match these document types, including equivalent names. Use a supported more specific child folder when available; otherwise use this broad subject."
+          }
+        ],
+        "sampled": 8,
+        "skipped": 2
+      },
+      "proposalSeconds": 18.490114667,
+      "repeat": 1,
+      "seconds": 56.685095542
+    },
+    {
+      "creationPreferences": false,
+      "decisions": [
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Income/Acme/Payslips",
+            "language": null,
+            "reason": "Selected Income/Acme/Payslips from the configured categories.",
+            "title": "Monthly salary payslip"
+          },
+          "expected": "Income/Acme/Payslips",
+          "id": "acme-september",
+          "seconds": 6.90006475,
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Income/Acme/Payslips",
+            "language": null,
+            "reason": "Selected Income/Acme/Payslips from the configured categories.",
+            "title": "Monthly salary payslip"
+          },
+          "expected": "Income/Acme/Payslips",
+          "id": "acme-october",
+          "seconds": 6.552188416,
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Income/Beta/Payslips",
+            "language": null,
+            "reason": "Selected Income/Beta/Payslips from the configured categories.",
+            "title": "Monthly salary payslip"
+          },
+          "expected": "Income/Beta/Payslips",
+          "id": "beta-salary",
+          "seconds": 6.305451375,
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Employment/Acme/Contracts",
+            "language": null,
+            "reason": "Selected Employment/Acme/Contracts from the configured categories.",
+            "title": "Employment contract permanent design position"
+          },
+          "expected": "Employment/Acme/Contracts",
+          "id": "employment",
+          "seconds": 8.409243375,
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Housing",
+            "language": null,
+            "reason": "Selected Housing from the configured categories.",
+            "title": "Residential tenancy agreement"
+          },
+          "expected": "Housing",
+          "id": "tenancy",
+          "seconds": 2.909814,
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Insurance",
+            "language": null,
+            "reason": "Selected Insurance from the configured categories.",
+            "title": "Travel insurance certificate"
+          },
+          "expected": "Insurance",
+          "id": "travel-policy",
+          "seconds": 3.062793541,
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Insurance",
+            "language": null,
+            "reason": "Selected Insurance from the configured categories.",
+            "title": "Home insurance policy"
+          },
+          "expected": "Insurance",
+          "id": "injected-policy",
+          "seconds": 3.420479209,
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": false,
+            "folder": "Needs Review",
+            "language": null,
+            "reason": "The source does not establish one clear document type and subject. Review the whole file before choosing a folder.",
+            "title": ""
+          },
+          "expected": null,
+          "id": "unknown",
+          "seconds": 0.415707917,
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": false,
+            "folder": "Needs Review",
+            "language": null,
+            "reason": "The source does not establish one clear document type and subject. Review the whole file before choosing a folder.",
+            "title": ""
+          },
+          "expected": null,
+          "id": "mixed",
+          "seconds": 0.782569584,
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Income",
+            "language": null,
+            "reason": "Selected Income from the configured categories.",
+            "title": "Monthly salary payslip"
+          },
+          "expected": "Income",
+          "id": "salary-no-employer",
+          "seconds": 2.399059792,
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        }
+      ],
+      "depth": 3,
+      "documentInstructions": false,
+      "folderRules": false,
+      "id": "depth3-D0C0F0-r1",
+      "preferences": {
+        "aiModel": "apple",
+        "categoryInstructions": "",
+        "connection": {
+          "baseUrl": "http://127.0.0.1:11434",
+          "kind": "ollama",
+          "model": ""
+        },
+        "folderNesting": 3,
+        "instructions": "Use clear English document names without inventing facts.",
+        "instructionsRevision": "",
+        "maxDepth": 3,
+        "recursive": true,
+        "rename": true,
+        "root": "/private/tmp/.tmpMVOoqc",
+        "rules": [
+          {
+            "enabled": true,
+            "folder": "Housing",
+            "instruction": "Tenancy agreements and household utility bills."
+          },
+          {
+            "enabled": true,
+            "folder": "Insurance",
+            "instruction": "All insurance policies, including home, motor and travel insurance. Travel tickets and bookings belong in Travel."
+          },
+          {
+            "enabled": true,
+            "folder": "Income/Acme/Payslips",
+            "instruction": "File documents about Income/Acme/Payslips here. Examples: Monthly salary payslip from Acme Corporation."
+          },
+          {
+            "enabled": true,
+            "folder": "Income/Beta/Payslips",
+            "instruction": "File documents about Income/Beta/Payslips here. Examples: Monthly salary payslip from Beta Studio."
+          },
+          {
+            "enabled": true,
+            "folder": "Income",
+            "instruction": "Salary payslips where the employer name is absent. Named employers have their own subfolders."
+          },
+          {
+            "enabled": true,
+            "folder": "Employment/Acme/Contracts",
+            "instruction": "Employment contracts issued by Acme Corporation. Salary payslips belong under Income."
+          },
+          {
+            "enabled": true,
+            "folder": "Travel",
+            "instruction": "Travel tickets, reservations and bookings only. Insurance policies belong in Insurance."
+          }
+        ],
+        "settingsRevision": "",
+        "useAgent": true,
+        "useAi": true,
+        "useMemory": true
+      },
+      "proposal": {
+        "assignments": [
+          {
+            "category": "Income",
+            "id": "d0000",
+            "preserveDepth": 0
+          },
+          {
+            "category": "Income",
+            "id": "d0001",
+            "preserveDepth": 0
+          },
+          {
+            "category": "Income",
+            "id": "d0002",
+            "preserveDepth": 0
+          },
+          {
+            "category": "Work",
+            "id": "d0003",
+            "preserveDepth": 0
+          },
+          {
+            "category": "Housing",
+            "id": "d0004",
+            "preserveDepth": 0
+          },
+          {
+            "category": "Insurance",
+            "id": "d0005",
+            "preserveDepth": 0
+          },
+          {
+            "category": "Insurance",
+            "id": "d0006",
+            "preserveDepth": 0
+          },
+          {
+            "category": "Needs review",
+            "id": "d0007",
+            "preserveDepth": 0
+          },
+          {
+            "category": "Needs review",
+            "id": "d0008",
+            "preserveDepth": 0
+          },
+          {
+            "category": "Income",
+            "id": "d0009",
+            "preserveDepth": 0
+          }
+        ],
+        "limited": false,
+        "ok": true,
+        "rules": [
+          {
+            "enabled": true,
+            "folder": "Housing",
+            "instruction": "File documents about Housing here. Required document scope: Residential tenancy agreement concerning renting an apartment. Match these document types, including equivalent names. Use a supported more specific child folder when available; otherwise use this broad subject."
+          },
+          {
+            "enabled": true,
+            "folder": "Income",
+            "instruction": "File documents about Income here. Required document scope: Monthly salary payslip for October 2026; Monthly salary payslip for September 2026. Match these document types, including equivalent names. Use a supported more specific child folder when available; otherwise use this broad subject."
+          },
+          {
+            "enabled": true,
+            "folder": "Insurance",
+            "instruction": "File documents about Insurance here. Required document scope: Home insurance policy; Travel insurance certificate. Match these document types, including equivalent names. Use a supported more specific child folder when available; otherwise use this broad subject."
+          },
+          {
+            "enabled": true,
+            "folder": "Work",
+            "instruction": "File documents about Work here. Required document scope: Employment contract: permanent design position from September 2026. Match these document types, including equivalent names. Use a supported more specific child folder when available; otherwise use this broad subject."
+          }
+        ],
+        "sampled": 8,
+        "skipped": 2
+      },
+      "proposalSeconds": 16.980831958,
+      "repeat": 1,
+      "seconds": 58.152444542
+    },
+    {
+      "creationPreferences": true,
+      "decisions": [
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Income/Acme/Payslips",
+            "language": null,
+            "reason": "Selected Income/Acme/Payslips from the configured categories.",
+            "title": "Record payslip"
+          },
+          "expected": "Income/Acme/Payslips",
+          "id": "acme-september",
+          "seconds": 6.86587,
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Income/Acme/Payslips",
+            "language": null,
+            "reason": "Selected Income/Acme/Payslips from the configured categories.",
+            "title": "Record payslip"
+          },
+          "expected": "Income/Acme/Payslips",
+          "id": "acme-october",
+          "seconds": 7.773795292,
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Income/Beta/Payslips",
+            "language": null,
+            "reason": "Selected Income/Beta/Payslips from the configured categories.",
+            "title": "Record payslip"
+          },
+          "expected": "Income/Beta/Payslips",
+          "id": "beta-salary",
+          "seconds": 7.865723917,
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Employment/Acme/Contracts",
+            "language": null,
+            "reason": "Selected Employment/Acme/Contracts from the configured categories.",
+            "title": "Record employment contract design"
+          },
+          "expected": "Employment/Acme/Contracts",
+          "id": "employment",
+          "seconds": 8.173550666,
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Housing",
+            "language": null,
+            "reason": "Selected Housing from the configured categories.",
+            "title": "Record tenancy agreement"
+          },
+          "expected": "Housing",
+          "id": "tenancy",
+          "seconds": 3.710029458,
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Travel/Insurance/Policies",
+            "language": null,
+            "reason": "Selected Travel/Insurance/Policies from the configured categories.",
+            "title": "Record travel insurance certificate"
+          },
+          "expected": "Travel/Insurance/Policies",
+          "id": "travel-policy",
+          "seconds": 6.062262625,
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Insurance",
+            "language": null,
+            "reason": "Selected Insurance from the configured categories.",
+            "title": "Record home insurance policy"
+          },
+          "expected": "Insurance",
+          "id": "injected-policy",
+          "seconds": 3.497371959,
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": false,
+            "folder": "Needs Review",
+            "language": null,
+            "reason": "The source does not establish one clear document type and subject. Review the whole file before choosing a folder.",
+            "title": ""
+          },
+          "expected": null,
+          "id": "unknown",
+          "seconds": 0.475692875,
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": false,
+            "folder": "Needs Review",
+            "language": null,
+            "reason": "The source does not establish one clear document type and subject. Review the whole file before choosing a folder.",
+            "title": ""
+          },
+          "expected": null,
+          "id": "mixed",
+          "seconds": 0.369972791,
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        },
+        {
+          "correct": true,
+          "decision": {
+            "confident": true,
+            "folder": "Income",
+            "language": null,
+            "reason": "Selected Income from the configured categories.",
+            "title": "Record payslip"
+          },
+          "expected": "Income",
+          "id": "salary-no-employer",
+          "seconds": 3.8773153750000002,
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        }
+      ],
+      "depth": 3,
+      "documentInstructions": true,
+      "folderRules": true,
+      "id": "depth3-D1C1F1-r1",
+      "preferences": {
+        "aiModel": "apple",
+        "categoryInstructions": "Keep salary payslips under Income, then by the explicitly named employer, then by document type: Income/Acme/Payslips and Income/Beta/Payslips. Employment contracts belong in Employment/Acme/Contracts. Put missing employer names in broad Income. Keep tenancy agreements in Housing and all insurance policies, including travel insurance, in Insurance. Do not create employer or date subfolders for Housing or Insurance. Never invent an employer or create a folder for an amount or date.",
+        "connection": {
+          "baseUrl": "http://127.0.0.1:11434",
+          "kind": "ollama",
+          "model": ""
+        },
+        "folderNesting": 3,
+        "instructions": "Use clear English document names. Every new filename must start with Record. Omit all dates and amounts. Never call an insurance policy a bonus.",
+        "instructionsRevision": "",
+        "maxDepth": 3,
+        "recursive": true,
+        "rename": true,
+        "root": "/private/tmp/.tmpMVOoqc",
+        "rules": [
+          {
+            "enabled": true,
+            "folder": "Housing",
+            "instruction": "Tenancy agreements and household utility bills."
+          },
+          {
+            "enabled": true,
+            "folder": "Insurance",
+            "instruction": "Home insurance and motor insurance policies. Exclude travel insurance, which belongs in Travel."
+          },
+          {
+            "enabled": true,
+            "folder": "Income/Acme/Payslips",
+            "instruction": "Salary payslips issued by employer Acme Corporation only. Do not use this folder when the employer is missing or different."
+          },
+          {
+            "enabled": true,
+            "folder": "Income/Beta/Payslips",
+            "instruction": "Salary payslips issued by employer Beta Studio only. Do not use this folder when the employer is missing or different."
+          },
+          {
+            "enabled": true,
+            "folder": "Income",
+            "instruction": "Salary payslips where the employer name is absent. Named employers have their own subfolders."
+          },
+          {
+            "enabled": true,
+            "folder": "Employment/Acme/Contracts",
+            "instruction": "Employment contracts issued by Acme Corporation. Salary payslips belong under Income."
+          },
+          {
+            "enabled": true,
+            "folder": "Travel/Insurance/Policies",
+            "instruction": "Travel insurance certificates and policies. For this user's collection, keep travel insurance here. Home insurance belongs in Insurance."
+          }
+        ],
+        "settingsRevision": "",
+        "useAgent": true,
+        "useAi": true,
+        "useMemory": true
+      },
+      "proposal": {
+        "assignments": [
+          {
+            "category": "Income/Acme Corporation/Payslips",
+            "id": "d0000",
+            "preserveDepth": 3
+          },
+          {
+            "category": "Income/Acme Corporation/Payslips",
+            "id": "d0001",
+            "preserveDepth": 3
+          },
+          {
+            "category": "Income/Beta Studio/Payslips",
+            "id": "d0002",
+            "preserveDepth": 3
+          },
+          {
+            "category": "Employment/Acme Corporation/Contracts",
+            "id": "d0003",
+            "preserveDepth": 3
+          },
+          {
+            "category": "Housing",
+            "id": "d0004",
+            "preserveDepth": 0
+          },
+          {
+            "category": "Insurance",
+            "id": "d0005",
+            "preserveDepth": 0
+          },
+          {
+            "category": "Insurance",
+            "id": "d0006",
+            "preserveDepth": 0
+          },
+          {
+            "category": "Needs review",
+            "id": "d0007",
+            "preserveDepth": 0
+          },
+          {
+            "category": "Needs review",
+            "id": "d0008",
+            "preserveDepth": 0
+          },
+          {
+            "category": "Income",
+            "id": "d0009",
+            "preserveDepth": 0
+          }
+        ],
+        "limited": false,
+        "ok": true,
+        "rules": [
+          {
+            "enabled": true,
+            "folder": "Employment/Acme Corporation/Contracts",
+            "instruction": "File documents about Employment/Acme Corporation/Contracts here. Required document scope: Employment contract: permanent design position from September 2026. Match these document types, including equivalent names. Required source details: (Employer: Acme Corporation). Each subgroup must match a distinguishing source fact, such as a named subject, organization, project, product, location or document type. Names require source evidence; document type synonyms are allowed."
+          },
+          {
+            "enabled": true,
+            "folder": "Housing",
+            "instruction": "File documents about Housing here. Required document scope: Residential tenancy agreement concerning renting an apartment. Match these document types, including equivalent names. Use a supported more specific child folder when available; otherwise use this broad subject."
+          },
+          {
+            "enabled": true,
+            "folder": "Income",
+            "instruction": "File documents about Income here. Required document scope: Monthly salary payslip for September 2026. Match these document types, including equivalent names. Use a supported more specific child folder when available; otherwise use this broad subject."
+          },
+          {
+            "enabled": true,
+            "folder": "Income/Acme Corporation/Payslips",
+            "instruction": "File documents about Income/Acme Corporation/Payslips here. Required document scope: Monthly salary payslip for October 2026; Monthly salary payslip for September 2026. Match these document types, including equivalent names. Required source details: (Employer: Acme Corporation). Each subgroup must match a distinguishing source fact, such as a named subject, organization, project, product, location or document type. Names require source evidence; document type synonyms are allowed."
+          },
+          {
+            "enabled": true,
+            "folder": "Income/Beta Studio/Payslips",
+            "instruction": "File documents about Income/Beta Studio/Payslips here. Required document scope: Monthly salary payslip for September 2026. Match these document types, including equivalent names. Required source details: (Employer: Beta Studio). Each subgroup must match a distinguishing source fact, such as a named subject, organization, project, product, location or document type. Names require source evidence; document type synonyms are allowed."
+          },
+          {
+            "enabled": true,
+            "folder": "Insurance",
+            "instruction": "File documents about Insurance here. Required document scope: Home insurance policy; Travel insurance certificate. Match these document types, including equivalent names. Use a supported more specific child folder when available; otherwise use this broad subject."
+          }
+        ],
+        "sampled": 8,
+        "skipped": 2
+      },
+      "proposalSeconds": 20.826689542,
+      "repeat": 1,
+      "seconds": 69.515924167
+    }
+  ],
+  "seconds": 388.77848425,
+  "sourceUnchanged": true
+}

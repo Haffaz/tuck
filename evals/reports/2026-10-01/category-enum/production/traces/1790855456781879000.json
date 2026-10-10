@@ -1,0 +1,20 @@
+{
+  "case": "en_later_page_maintenance",
+  "started": 1790855456.7660701,
+  "seconds": 0.0157778263092041,
+  "request": {
+    "operation": "language",
+    "text": "Equipment maintenance report. A technician inspected a ventilation fan, replaced its worn drive belt, cleaned the air filters and confirmed normal operation."
+  },
+  "response": {
+    "blocked": false,
+    "language": {
+      "code": "en",
+      "message": "Recognized as English · supported by this Mac's model",
+      "name": "English",
+      "status": "supported"
+    },
+    "text": "Equipment maintenance report. A technician inspected a ventilation fan, replaced its worn drive belt, cleaned the air filters and confirmed normal operation."
+  },
+  "exit": 0
+}

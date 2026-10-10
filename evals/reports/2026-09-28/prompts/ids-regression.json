@@ -1,0 +1,292 @@
+{
+  "generated_at_unix": 1790588868,
+  "os": "27.0",
+  "pipeline": "filing-v3",
+  "results": [
+    {
+      "automated_title_check": true,
+      "decision": {
+        "confident": true,
+        "folder": "Migration",
+        "language": {
+          "code": "sv",
+          "message": "Recognized as Swedish · supported by this Mac's model",
+          "name": "Swedish",
+          "status": "supported"
+        },
+        "reason": "The document is a Residence Permit Card, which belongs to the Migration folder as per the root preference and the explicit instruction to keep migration documents there.. Direct classification",
+        "title": "Residence Permit Card"
+      },
+      "expected_folder": "Migration",
+      "extracted_characters": 142,
+      "folder_correct": true,
+      "forbidden_title_claim": false,
+      "id": "sv_residence_card",
+      "rendered_ocr": false,
+      "review": false,
+      "seconds": 3.610708458
+    },
+    {
+      "automated_title_check": true,
+      "decision": {
+        "confident": true,
+        "folder": "Finances",
+        "language": {
+          "code": "sv",
+          "message": "Recognized as Swedish · supported by this Mac's model",
+          "name": "Swedish",
+          "status": "supported"
+        },
+        "reason": "The document is a bank statement, which belongs in the Finances folder as per the document's instruction.. Direct classification",
+        "title": "Bank Statement"
+      },
+      "expected_folder": "Finances",
+      "extracted_characters": 130,
+      "folder_correct": true,
+      "forbidden_title_claim": false,
+      "id": "sv_bank_statement",
+      "rendered_ocr": false,
+      "review": false,
+      "seconds": 2.591333667
+    },
+    {
+      "automated_title_check": true,
+      "decision": {
+        "confident": true,
+        "folder": "Work",
+        "language": {
+          "code": "sv",
+          "message": "Recognized as Swedish · supported by this Mac's model",
+          "name": "Swedish",
+          "status": "supported"
+        },
+        "reason": "The document is a payslip, which falls under employment documents. The instruction for the Work folder is to keep employment documents, including payslips and employment contracts.. Direct classification",
+        "title": "Payslip"
+      },
+      "expected_folder": "Work",
+      "extracted_characters": 144,
+      "folder_correct": true,
+      "forbidden_title_claim": false,
+      "id": "sv_payslip",
+      "rendered_ocr": false,
+      "review": false,
+      "seconds": 2.760481375
+    },
+    {
+      "automated_title_check": true,
+      "decision": {
+        "confident": true,
+        "folder": "Home",
+        "language": {
+          "code": "sv",
+          "message": "Recognized as Swedish · supported by this Mac's model",
+          "name": "Swedish",
+          "status": "supported"
+        },
+        "reason": "The document is a rental agreement, which belongs in the Home folder as per the instructions for housing documents.. Direct classification",
+        "title": "Rental Agreement"
+      },
+      "expected_folder": "Home",
+      "extracted_characters": 145,
+      "folder_correct": true,
+      "forbidden_title_claim": false,
+      "id": "sv_tenancy",
+      "rendered_ocr": false,
+      "review": false,
+      "seconds": 2.673435375
+    },
+    {
+      "automated_title_check": true,
+      "decision": {
+        "confident": true,
+        "folder": "Home",
+        "language": {
+          "code": "sv",
+          "message": "Recognized as Swedish · supported by this Mac's model",
+          "name": "Swedish",
+          "status": "supported"
+        },
+        "reason": "The document is a Home Insurance Policy, which belongs in the Home folder. The evidence does not explicitly mention the Home folder, so we rely on the folder instruction context.. Direct classification",
+        "title": "Home Insurance Policy"
+      },
+      "expected_folder": "Insurance",
+      "extracted_characters": 116,
+      "folder_correct": false,
+      "forbidden_title_claim": false,
+      "id": "sv_home_insurance",
+      "rendered_ocr": false,
+      "review": false,
+      "seconds": 3.005258375
+    },
+    {
+      "automated_title_check": false,
+      "decision": {
+        "confident": false,
+        "folder": "Needs Review",
+        "language": {
+          "code": "sv",
+          "message": "Recognized as Swedish · supported by this Mac's model",
+          "name": "Swedish",
+          "status": "supported"
+        },
+        "reason": "The local model was uncertain. The document evidence does not match any of the specified folder instructions. The document is an Employment Certificate, but the evidence includes a medical certificate and does not align with the Work folder's requirement for employment documents.. Direct classification",
+        "title": ""
+      },
+      "expected_folder": "Health",
+      "extracted_characters": 160,
+      "folder_correct": false,
+      "forbidden_title_claim": false,
+      "id": "sv_medical_certificate",
+      "rendered_ocr": false,
+      "review": true,
+      "seconds": 3.0128135
+    },
+    {
+      "automated_title_check": false,
+      "decision": {
+        "confident": false,
+        "folder": "Needs Review",
+        "language": {
+          "code": "en",
+          "message": "Recognized as English · supported by this Mac's model",
+          "name": "English",
+          "status": "supported"
+        },
+        "reason": "Apple Intelligence could not complete folder selection (refused). Try Analyze again or review manually.",
+        "title": ""
+      },
+      "expected_folder": "Migration/AGENCY",
+      "extracted_characters": 207,
+      "folder_correct": false,
+      "forbidden_title_claim": false,
+      "id": "en_agency_attachment",
+      "rendered_ocr": false,
+      "review": true,
+      "seconds": 2.967804125
+    },
+    {
+      "automated_title_check": true,
+      "decision": {
+        "confident": true,
+        "folder": "Home",
+        "language": {
+          "code": "en",
+          "message": "Recognized as English · supported by this Mac's model",
+          "name": "English",
+          "status": "supported"
+        },
+        "reason": "The document evidence includes a residential electricity bill, which falls under housing documents. The instruction specifies keeping housing documents in the Home folder.. Direct classification",
+        "title": "Electricity Bill"
+      },
+      "expected_folder": "Home",
+      "extracted_characters": 151,
+      "folder_correct": true,
+      "forbidden_title_claim": false,
+      "id": "en_electricity_bill",
+      "rendered_ocr": false,
+      "review": false,
+      "seconds": 2.903392292
+    },
+    {
+      "automated_title_check": true,
+      "decision": {
+        "confident": true,
+        "folder": "Insurance",
+        "language": {
+          "code": "en",
+          "message": "Recognized as English · supported by this Mac's model",
+          "name": "English",
+          "status": "supported"
+        },
+        "reason": "The document is a Travel Insurance Policy, which is an Insurance document. The instruction specifies keeping insurance documents in the Insurance folder.. Direct classification",
+        "title": "Travel Insurance Policy"
+      },
+      "expected_folder": "Insurance",
+      "extracted_characters": 194,
+      "folder_correct": true,
+      "forbidden_title_claim": false,
+      "id": "en_injected_insurance",
+      "rendered_ocr": false,
+      "review": false,
+      "seconds": 2.685281125
+    },
+    {
+      "automated_title_check": true,
+      "decision": {
+        "confident": true,
+        "folder": "Work",
+        "language": {
+          "code": "en",
+          "message": "Recognized as English · supported by this Mac's model",
+          "name": "English",
+          "status": "supported"
+        },
+        "reason": "The document is an employment certificate, which fits the Work folder instruction for employment documents.. Direct classification",
+        "title": "Employment Certificate"
+      },
+      "expected_folder": "Work",
+      "extracted_characters": 198,
+      "folder_correct": true,
+      "forbidden_title_claim": false,
+      "id": "en_employment_certificate",
+      "rendered_ocr": false,
+      "review": false,
+      "seconds": 2.865044416
+    },
+    {
+      "automated_title_check": true,
+      "decision": {
+        "confident": false,
+        "folder": "Needs Review",
+        "language": {
+          "code": "en",
+          "message": "Recognized as English · supported by this Mac's model",
+          "name": "English",
+          "status": "supported"
+        },
+        "reason": "The local model was uncertain. No verifiable document-type quote was found. Choose a folder manually.. Direct classification",
+        "title": ""
+      },
+      "expected_folder": "Needs Review",
+      "extracted_characters": 99,
+      "folder_correct": true,
+      "forbidden_title_claim": false,
+      "id": "ambiguous_fragment",
+      "rendered_ocr": false,
+      "review": true,
+      "seconds": 1.313031292
+    },
+    {
+      "automated_title_check": true,
+      "decision": {
+        "confident": false,
+        "folder": "Needs Review",
+        "language": {
+          "code": "und",
+          "message": "Language detection is uncertain; check the suggestion carefully.",
+          "name": "Uncertain or mixed language",
+          "status": "unknown"
+        },
+        "reason": "The local model was uncertain. No verifiable document-type quote was found. Choose a folder manually.. Direct classification",
+        "title": ""
+      },
+      "expected_folder": "Needs Review",
+      "extracted_characters": 42,
+      "folder_correct": true,
+      "forbidden_title_claim": false,
+      "id": "unreadable_scan",
+      "rendered_ocr": false,
+      "review": true,
+      "seconds": 1.042794042
+    }
+  ],
+  "scope": "Synthetic regression cases for the actual Tuck Apple pipeline. Known examples, not a held-out accuracy estimate.",
+  "summary": {
+    "automated_title_checks": 10,
+    "cases": 12,
+    "correct_folders": 9,
+    "forbidden_title_claims": 0,
+    "median_seconds": 2.8127628954999997,
+    "review_count": 4
+  }
+}

@@ -1,0 +1,154 @@
+{
+  "generated_at_unix": 1790585890,
+  "os": "27.0",
+  "pipeline": "checked-v2",
+  "results": [
+    {
+      "automated_title_check": true,
+      "decision": {
+        "confident": true,
+        "folder": "Finances",
+        "language": {
+          "code": "de",
+          "message": "Recognized as German · supported by this Mac's model",
+          "name": "German",
+          "status": "supported"
+        },
+        "reason": "The document is a bank statement, which belongs in the Finances folder according to the document instruction.. Direct classification",
+        "title": "Bank Statement"
+      },
+      "expected_folder": "Finances",
+      "extracted_characters": 147,
+      "folder_correct": true,
+      "forbidden_title_claim": false,
+      "id": "de_bank_rendered",
+      "rendered_ocr": true,
+      "review": false,
+      "seconds": 3.625378542
+    },
+    {
+      "automated_title_check": true,
+      "decision": {
+        "confident": true,
+        "folder": "Home",
+        "language": {
+          "code": "fr",
+          "message": "Recognized as French · supported by this Mac's model",
+          "name": "French",
+          "status": "supported"
+        },
+        "reason": "The document is a rental agreement, which belongs in the Home folder as per the instruction to keep housing documents there.. Direct classification",
+        "title": "Rental Agreement"
+      },
+      "expected_folder": "Home",
+      "extracted_characters": 200,
+      "folder_correct": true,
+      "forbidden_title_claim": false,
+      "id": "fr_rental_rendered",
+      "rendered_ocr": true,
+      "review": false,
+      "seconds": 2.785147083
+    },
+    {
+      "automated_title_check": true,
+      "decision": {
+        "confident": true,
+        "folder": "Health",
+        "language": {
+          "code": "es",
+          "message": "Recognized as Spanish · supported by this Mac's model",
+          "name": "Spanish",
+          "status": "supported"
+        },
+        "reason": "The document is a medical certificate, which fits the Health folder instruction to keep health documents, including medical reports and prescriptions.. Direct classification",
+        "title": "Medical Certificate"
+      },
+      "expected_folder": "Health",
+      "extracted_characters": 208,
+      "folder_correct": true,
+      "forbidden_title_claim": false,
+      "id": "es_medical_rendered",
+      "rendered_ocr": true,
+      "review": false,
+      "seconds": 2.739608084
+    },
+    {
+      "automated_title_check": true,
+      "decision": {
+        "confident": true,
+        "folder": "Work",
+        "language": {
+          "code": "ja",
+          "message": "Recognized as Japanese · supported by this Mac's model",
+          "name": "Japanese",
+          "status": "supported"
+        },
+        "reason": "The document is an employment certificate, which fits the instruction to keep employment documents in the Work folder.. Direct classification",
+        "title": "Employment Certificate"
+      },
+      "expected_folder": "Work",
+      "extracted_characters": 90,
+      "folder_correct": true,
+      "forbidden_title_claim": false,
+      "id": "ja_employment",
+      "rendered_ocr": false,
+      "review": false,
+      "seconds": 2.974467458
+    },
+    {
+      "automated_title_check": false,
+      "decision": {
+        "confident": false,
+        "folder": "Needs Review",
+        "language": {
+          "code": "pl",
+          "message": "Apple's model on this Mac doesn't support Polish directly. Download Polish and English in System Settings → General → Language & Region → Translation Languages, then choose Analyze again. Tuck can use the installed translation locally.",
+          "name": "Polish",
+          "status": "download"
+        },
+        "reason": "This document needs language support before Tuck can suggest a folder.",
+        "title": ""
+      },
+      "expected_folder": "Finances",
+      "extracted_characters": 194,
+      "folder_correct": false,
+      "forbidden_title_claim": false,
+      "id": "pl_bank",
+      "rendered_ocr": false,
+      "review": true,
+      "seconds": 0.10833175
+    },
+    {
+      "automated_title_check": false,
+      "decision": {
+        "confident": false,
+        "folder": "Needs Review",
+        "language": {
+          "code": "ta",
+          "message": "Apple's model and offline translation on this Mac don't support Tamil. Choose the folder and filename manually.",
+          "name": "Tamil",
+          "status": "unsupported"
+        },
+        "reason": "This document needs language support before Tuck can suggest a folder.",
+        "title": ""
+      },
+      "expected_folder": "Finances",
+      "extracted_characters": 211,
+      "folder_correct": false,
+      "forbidden_title_claim": false,
+      "id": "ta_language_help",
+      "rendered_ocr": false,
+      "review": true,
+      "seconds": 0.016069
+    }
+  ],
+  "scope": "First-run multilingual validation set authored before testing. Synthetic text; some cases pass through rendered PNG and Apple Vision OCR. Never tune against the reported held-out scores.",
+  "summary": {
+    "automated_title_checks": 4,
+    "cases": 6,
+    "correct_folders": 4,
+    "forbidden_title_claims": 0,
+    "median_seconds": 2.7623775835,
+    "review_count": 2
+  }
+}

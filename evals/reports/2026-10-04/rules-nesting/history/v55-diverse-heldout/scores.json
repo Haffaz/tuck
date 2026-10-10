@@ -1,0 +1,64 @@
+{
+  "summary": {
+    "clearCorrect": 72,
+    "clearTotal": 72,
+    "reviewCorrect": 12,
+    "reviewTotal": 12,
+    "wrongAutomatic": 0,
+    "proposalClearCorrect": 69,
+    "proposalClearTotal": 72,
+    "proposalReviewCorrect": 12,
+    "proposalReviewTotal": 12,
+    "depthViolations": 0,
+    "namingFailures": 0,
+    "guidedDetailCorrect": 22,
+    "guidedDetailTotal": 24,
+    "missingGroupingCorrect": 0,
+    "missingGroupingTotal": 0,
+    "repeatedDetailLabels": 0
+  },
+  "acceptance": {
+    "filingRecall": true,
+    "proposalRecall": true,
+    "noWrongAutomatic": true,
+    "reviewSafety": true,
+    "proposalReviewSafety": true,
+    "depthLimits": true,
+    "naming": true,
+    "guidedDetails": false,
+    "missingGroupingFallback": true,
+    "noRepeatedDetailLabels": true
+  },
+  "runs": [
+    {
+      "depth": 1,
+      "customized": false,
+      "failures": []
+    },
+    {
+      "depth": 1,
+      "customized": true,
+      "failures": []
+    },
+    {
+      "depth": 2,
+      "customized": false,
+      "failures": []
+    },
+    {
+      "depth": 2,
+      "customized": true,
+      "failures": []
+    },
+    {
+      "depth": 3,
+      "customized": false,
+      "failures": []
+    },
+    {
+      "depth": 3,
+      "customized": true,
+      "failures": []
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "case": "en_employment_certificate",
+  "started": 1790860542.179602,
+  "seconds": 0.03021526336669922,
+  "request": {
+    "operation": "check"
+  },
+  "response": {
+    "contextTokens": 8192,
+    "imageInput": true,
+    "pipeline": "serial-roles-v5-simple",
+    "status": "Apple Intelligence is ready — on-device"
+  },
+  "exit": 0
+}

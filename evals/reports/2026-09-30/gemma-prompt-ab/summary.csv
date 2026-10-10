@@ -1,0 +1,9 @@
+model,mode,variant,count,correct,developmentCorrect,developmentCount,freshCorrect,freshCount,errors,medianSeconds
+gemma4:e2b-it-q4_K_M,text,old,13,5,3,10,2,3,0,1.16
+gemma4:e2b-it-q4_K_M,text,new,13,11,8,10,3,3,0,1.35
+gemma4:e2b-it-q4_K_M,image,old,13,6,3,10,3,3,0,5.67
+gemma4:e2b-it-q4_K_M,image,new,13,5,3,10,2,3,0,5.82
+gemma4:e4b-it-q4_K_M,text,old,13,9,6,10,3,3,0,2.16
+gemma4:e4b-it-q4_K_M,text,new,13,11,8,10,3,3,0,2.8
+gemma4:e4b-it-q4_K_M,image,old,13,6,3,10,3,3,0,7.78
+gemma4:e4b-it-q4_K_M,image,new,13,9,6,10,3,3,0,7.91

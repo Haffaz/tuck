@@ -1,0 +1,98 @@
+{
+  "results": [
+    {
+      "model": "Apple",
+      "case": "controlled",
+      "valid": 3,
+      "runs": 3,
+      "medianSeconds": 1.607397209000002,
+      "distinctPlans": 1,
+      "folders": [
+        "Identification",
+        "Travel",
+        "Employment",
+        "Insurance",
+        "Education"
+      ]
+    },
+    {
+      "model": "Apple",
+      "case": "personal",
+      "valid": 3,
+      "runs": 3,
+      "medianSeconds": 2.2372278750000003,
+      "distinctPlans": 1,
+      "folders": [
+        "Education",
+        "Travel",
+        "Identification",
+        "Employment",
+        "Legal",
+        "Vehicle"
+      ]
+    },
+    {
+      "model": "gemma4:e2b-it-q4_K_M",
+      "case": "controlled",
+      "valid": 3,
+      "runs": 3,
+      "medianSeconds": 2.335199582999998,
+      "distinctPlans": 1,
+      "folders": [
+        "Identification",
+        "Travel",
+        "Employment",
+        "Insurance",
+        "Education"
+      ]
+    },
+    {
+      "model": "gemma4:e2b-it-q4_K_M",
+      "case": "personal",
+      "valid": 3,
+      "runs": 3,
+      "medianSeconds": 3.2465658750000017,
+      "distinctPlans": 2,
+      "folders": [
+        "Education",
+        "Identification",
+        "Travel",
+        "Immigration",
+        "Employment"
+      ]
+    },
+    {
+      "model": "gemma4:e4b-it-q4_K_M",
+      "case": "controlled",
+      "valid": 3,
+      "runs": 3,
+      "medianSeconds": 4.623422374999997,
+      "distinctPlans": 1,
+      "folders": [
+        "Identification",
+        "Travel",
+        "Employment",
+        "Education",
+        "Insurance"
+      ]
+    },
+    {
+      "model": "gemma4:e4b-it-q4_K_M",
+      "case": "personal",
+      "valid": 3,
+      "runs": 3,
+      "medianSeconds": 7.7802079169999985,
+      "distinctPlans": 1,
+      "folders": [
+        "Education",
+        "Travel",
+        "Identification",
+        "Immigration",
+        "Employment",
+        "Account Access"
+      ]
+    }
+  ],
+  "sourcesUnchanged": true,
+  "ollamaModelsAfter": []
+}

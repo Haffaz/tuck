@@ -1,0 +1,28 @@
+{
+  "case": "sv_home_insurance_image",
+  "started": 1790855449.531899,
+  "seconds": 1.4634861946105957,
+  "request": {
+    "actions": [
+      "finish",
+      "retry_ocr"
+    ],
+    "completed": [],
+    "operation": "describe",
+    "quotes": [
+      "FÖRSÄKRINGSBREV",
+      "Hemförsäkring. Försäkringen omfattar lösöre, ansvarsskydd och rättsskydd för den försäkrades bostad."
+    ],
+    "text": "FÖRSÄKRINGSBREV\n\nHemförsäkring. Försäkringen omfattar lösöre, ansvarsskydd och rättsskydd för den försäkrades bostad."
+  },
+  "response": {
+    "action": "finish",
+    "description": "A warranty letter for home insurance covering movable property, liability protection, and legal protection for the insured home.",
+    "quotes": [
+      "FÖRSÄKRINGSBREV",
+      "Hemförsäkring. Försäkringen omfattar lösöre, ansvarsskydd och rättsskydd för den försäkrades bostad."
+    ],
+    "uncertainty": ""
+  },
+  "exit": 0
+}

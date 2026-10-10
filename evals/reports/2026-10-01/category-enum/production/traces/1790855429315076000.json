@@ -1,0 +1,15 @@
+{
+  "case": "en_agency_attachment",
+  "started": 1790855429.287925,
+  "seconds": 0.027112960815429688,
+  "request": {
+    "operation": "check"
+  },
+  "response": {
+    "contextTokens": 8192,
+    "imageInput": true,
+    "pipeline": "serial-roles-v4-category-enum",
+    "status": "Apple Intelligence is ready — on-device"
+  },
+  "exit": 0
+}

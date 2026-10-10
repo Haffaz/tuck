@@ -1,0 +1,27 @@
+{
+  "case": "ambiguous_fragment",
+  "started": 1790855440.132977,
+  "seconds": 1.2044048309326172,
+  "request": {
+    "actions": [
+      "finish"
+    ],
+    "completed": [],
+    "operation": "describe",
+    "quotes": [
+      "Page 2",
+      "Reference 47. The requested information is enclosed. Please keep this page for your records."
+    ],
+    "text": "Page 2\nReference 47. The requested information is enclosed. Please keep this page for your records."
+  },
+  "response": {
+    "action": "finish",
+    "description": "A reference page indicating that requested information is enclosed and should be kept for records.",
+    "quotes": [
+      "Page 2",
+      "Reference 47. The requested information is enclosed. Please keep this page for your records."
+    ],
+    "uncertainty": ""
+  },
+  "exit": 0
+}

@@ -1,0 +1,27 @@
+{
+  "case": "sv_medical_certificate",
+  "started": 1790855426.255915,
+  "seconds": 1.5601081848144531,
+  "request": {
+    "actions": [
+      "finish"
+    ],
+    "completed": [],
+    "operation": "describe",
+    "quotes": [
+      "LÄKARINTYG",
+      "Intyget bekräftar att patienten har undersökts av läkare. Arbetsförmågan bedöms vara nedsatt på grund av sjukdom. Intyget utfärdas för arbetsgivaren."
+    ],
+    "text": "LÄKARINTYG\nIntyget bekräftar att patienten har undersökts av läkare. Arbetsförmågan bedöms vara nedsatt på grund av sjukdom. Intyget utfärdas för arbetsgivaren."
+  },
+  "response": {
+    "action": "finish",
+    "description": "A medical certificate confirming a patient's examination by a physician, stating impaired work capacity due to illness, issued to an employer.",
+    "quotes": [
+      "LÄKARINTYG",
+      "Intyget bekräftar att patienten har undersökts av läkare. Arbetsförmågan bedöms vara nedsatt på grund av sjukdom. Intyget utfärdas för arbetsgivaren."
+    ],
+    "uncertainty": ""
+  },
+  "exit": 0
+}

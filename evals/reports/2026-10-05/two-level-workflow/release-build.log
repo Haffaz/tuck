@@ -1,0 +1,27 @@
+
+> tuck@0.1.0 tauri
+> tauri build --bundles app
+
+        Info Looking up installed tauri packages to check mismatched versions...
+     Running beforeBuildCommand `npm run build`
+
+> tuck@0.1.0 build
+> tsc && vite build
+
+vite v8.3.1 building client environment for production...
+transforming...
+✓ 1900 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.48 kB │ gzip:  0.34 kB
+dist/assets/index-BxxRgVEr.css   59.75 kB │ gzip: 13.62 kB
+dist/assets/index-EBoS9u7Q.js   298.60 kB │ gzip: 90.23 kB
+
+✓ built in 228ms
+   Compiling tuck v0.1.0 (/Users/mohomedhaffaz/Projects/tuck/src-tauri)
+    Finished `release` profile [optimized] target(s) in 1m 37s
+       Built application at: /Users/mohomedhaffaz/Projects/tuck/src-tauri/target/release/tuck
+    Bundling Tuck.app (/Users/mohomedhaffaz/Projects/tuck/src-tauri/target/release/bundle/macos/Tuck.app)
+    Finished 1 bundle at:
+        /Users/mohomedhaffaz/Projects/tuck/src-tauri/target/release/bundle/macos/Tuck.app (6.70 MiB)
+

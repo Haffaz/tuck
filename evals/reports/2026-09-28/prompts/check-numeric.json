@@ -1,0 +1,39 @@
+{
+  "generated_at_unix": 1790589164,
+  "os": "27.0",
+  "pipeline": "filing-v3",
+  "results": [
+    {
+      "automated_title_check": false,
+      "decision": {
+        "confident": false,
+        "folder": "Needs Review",
+        "language": {
+          "code": "en",
+          "message": "Recognized as English · supported by this Mac's model",
+          "name": "English",
+          "status": "supported"
+        },
+        "reason": "Apple Intelligence could not complete suggestion check (refused). Try Analyze again or review manually.",
+        "title": ""
+      },
+      "expected_folder": "Migration/AGENCY",
+      "extracted_characters": 85,
+      "folder_correct": false,
+      "forbidden_title_claim": false,
+      "id": "explicit_bundle",
+      "rendered_ocr": false,
+      "review": true,
+      "seconds": 2.837798667
+    }
+  ],
+  "scope": "Synthetic conditional-checker and additional-evidence regression cases; not an accuracy estimate.",
+  "summary": {
+    "automated_title_checks": 0,
+    "cases": 1,
+    "correct_folders": 0,
+    "forbidden_title_claims": 0,
+    "median_seconds": 2.837798667,
+    "review_count": 1
+  }
+}

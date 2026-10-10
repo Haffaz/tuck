@@ -1,0 +1,94 @@
+{
+  "summary": {
+    "clearCorrect": 76,
+    "clearTotal": 78,
+    "reviewCorrect": 12,
+    "reviewTotal": 12,
+    "wrongAutomatic": 0,
+    "proposalClearCorrect": 75,
+    "proposalClearTotal": 78,
+    "proposalReviewCorrect": 12,
+    "proposalReviewTotal": 12,
+    "depthViolations": 0,
+    "namingFailures": 0,
+    "guidedDetailCorrect": 18,
+    "guidedDetailTotal": 24,
+    "missingGroupingCorrect": 1,
+    "missingGroupingTotal": 2,
+    "repeatedDetailLabels": 0
+  },
+  "acceptance": {
+    "filingRecall": true,
+    "proposalRecall": true,
+    "noWrongAutomatic": true,
+    "reviewSafety": true,
+    "proposalReviewSafety": true,
+    "depthLimits": true,
+    "naming": true,
+    "guidedDetails": false,
+    "missingGroupingFallback": false,
+    "noRepeatedDetailLabels": true
+  },
+  "runs": [
+    {
+      "depth": 1,
+      "customized": false,
+      "failures": []
+    },
+    {
+      "depth": 1,
+      "customized": true,
+      "failures": []
+    },
+    {
+      "depth": 2,
+      "customized": false,
+      "failures": [
+        {
+          "correct": false,
+          "decision": {
+            "confident": false,
+            "folder": "Needs Review",
+            "language": null,
+            "reason": "The folder check could not confirm this match. Choose a folder for this document.",
+            "title": ""
+          },
+          "expected": "Work",
+          "id": "no-project",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        }
+      ]
+    },
+    {
+      "depth": 2,
+      "customized": true,
+      "failures": []
+    },
+    {
+      "depth": 3,
+      "customized": false,
+      "failures": [
+        {
+          "correct": false,
+          "decision": {
+            "confident": false,
+            "folder": "Needs Review",
+            "language": null,
+            "reason": "The folder check could not confirm this match. Choose a folder for this document.",
+            "title": ""
+          },
+          "expected": "Work",
+          "id": "no-project",
+          "sourceUnchanged": true,
+          "wrongAutomatic": false
+        }
+      ]
+    },
+    {
+      "depth": 3,
+      "customized": true,
+      "failures": []
+    }
+  ]
+}

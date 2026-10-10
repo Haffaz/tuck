@@ -1,0 +1,1788 @@
+[
+  {
+    "imagesSent": 1,
+    "modelSeconds": 0.8369660377502441,
+    "result": {
+      "documentType": "Unknown"
+    },
+    "seconds": 0.8520757500082254,
+    "model": "Apple Intelligence",
+    "variant": "new",
+    "key": "s2-D1",
+    "split": "development",
+    "kind": "synthetic",
+    "mode": "image",
+    "evidenceHash": "c9328ba53a34604c312a888eb64f7c8b505cc799fe37f700f945f65653d8d251",
+    "label": "Unknown",
+    "correct": false
+  },
+  {
+    "imagesSent": 1,
+    "modelSeconds": 0.85533607006073,
+    "result": {
+      "documentType": "Unknown"
+    },
+    "seconds": 0.8707614169979934,
+    "model": "Apple Intelligence",
+    "variant": "new",
+    "key": "r1-D1",
+    "split": "development",
+    "kind": "personal",
+    "mode": "image",
+    "evidenceHash": "1752c8f323d86335b27e30c902f332bf77cdd3fe83a1b819d1402cf4a7ac6d4a",
+    "label": "Unknown",
+    "correct": false
+  },
+  {
+    "imagesSent": 1,
+    "modelSeconds": 0.7873311042785645,
+    "result": {
+      "documentType": "Unknown"
+    },
+    "seconds": 0.8036812499922235,
+    "model": "Apple Intelligence",
+    "variant": "new",
+    "key": "s6-D1",
+    "split": "development",
+    "kind": "synthetic",
+    "mode": "image",
+    "evidenceHash": "5e60765226814c7b1f1bcfe2a2918cfd55313e89011afd9258e275eda7986a3e",
+    "label": "Unknown",
+    "correct": true
+  },
+  {
+    "imagesSent": 1,
+    "modelSeconds": 1.1036659479141235,
+    "result": {
+      "documentType": "Unknown"
+    },
+    "seconds": 1.154892499995185,
+    "model": "Apple Intelligence",
+    "variant": "new",
+    "key": "s1-D1",
+    "split": "development",
+    "kind": "synthetic",
+    "mode": "image",
+    "evidenceHash": "72b55610813d12e63d1cfbac795829d81e7ea8bcb7cbef9d9c915a0f97f788d2",
+    "label": "Unknown",
+    "correct": false
+  },
+  {
+    "imagesSent": 1,
+    "modelSeconds": 0.8127009868621826,
+    "result": {
+      "documentType": "Unknown"
+    },
+    "seconds": 0.8295157080283388,
+    "model": "Apple Intelligence",
+    "variant": "new",
+    "key": "s5-D1",
+    "split": "development",
+    "kind": "synthetic",
+    "mode": "image",
+    "evidenceHash": "f5e776d8d2f24c1ce7d448033df3dbb83357212a2cde552138aee5bca2284158",
+    "label": "Unknown",
+    "correct": false
+  },
+  {
+    "imagesSent": 1,
+    "modelSeconds": 0.7831439971923828,
+    "result": {
+      "documentType": "Unknown"
+    },
+    "seconds": 0.7975397920235991,
+    "model": "Apple Intelligence",
+    "variant": "new",
+    "key": "r2-D1",
+    "split": "development",
+    "kind": "personal",
+    "mode": "image",
+    "evidenceHash": "960bcd52aacf435d4dee5847152e3d193874d98b7e1f8938774a1842a421ce61",
+    "label": "Unknown",
+    "correct": false
+  },
+  {
+    "imagesSent": 1,
+    "modelSeconds": 0.838379979133606,
+    "result": {
+      "documentType": "Power of Attorney"
+    },
+    "seconds": 0.8538264999806415,
+    "model": "Apple Intelligence",
+    "variant": "new",
+    "key": "h1",
+    "split": "fresh",
+    "kind": "personal",
+    "mode": "image",
+    "evidenceHash": "2b1e4785536308fa594e9e9204d9b3c71dd0902be6d0895e19149a6357b3ebf7",
+    "label": "Power of Attorney",
+    "correct": true
+  },
+  {
+    "imagesSent": 0,
+    "modelSeconds": 1.017970085144043,
+    "result": {
+      "documentType": "Booking Confirmation"
+    },
+    "seconds": 1.0317722920153756,
+    "model": "Apple Intelligence",
+    "variant": "new",
+    "key": "r2-D3",
+    "split": "development",
+    "kind": "personal",
+    "mode": "text",
+    "evidenceHash": "c3d4e3ab125fc38d76097daf09679dc4dcf35f1fdedaad0035d93e080a8c752b",
+    "label": "Booking Confirmation",
+    "correct": true
+  },
+  {
+    "imagesSent": 0,
+    "modelSeconds": 0.7081069946289062,
+    "result": {
+      "documentType": "Certificate of Employment"
+    },
+    "seconds": 0.7208731659920886,
+    "model": "Apple Intelligence",
+    "variant": "new",
+    "key": "s2-D1",
+    "split": "development",
+    "kind": "synthetic",
+    "mode": "text",
+    "evidenceHash": "c00ed750115b057d352e846bee6db64394d3a1f84582ed9d3f8ac7a5964ff49a",
+    "label": "Certificate of Employment",
+    "correct": true
+  },
+  {
+    "imagesSent": 0,
+    "modelSeconds": 0.6684730052947998,
+    "result": {
+      "documentType": "Hyresavtal"
+    },
+    "seconds": 0.6822466249868739,
+    "model": "Apple Intelligence",
+    "variant": "new",
+    "key": "s5-D1",
+    "split": "development",
+    "kind": "synthetic",
+    "mode": "text",
+    "evidenceHash": "e886a31cca635484a69d41eb02054eb96d4a92f081a10ed49e39f0d7780a0cbb",
+    "label": "Hyresavtal",
+    "correct": true
+  },
+  {
+    "imagesSent": 1,
+    "modelSeconds": 0.7782269716262817,
+    "result": {
+      "documentType": "Booking"
+    },
+    "seconds": 0.7920587499975227,
+    "model": "Apple Intelligence",
+    "variant": "new",
+    "key": "r2-D3",
+    "split": "development",
+    "kind": "personal",
+    "mode": "image",
+    "evidenceHash": "4a383fbc2e649cb9f47b05dfdf844e37902d010665ea06ac4ee9b1760df33a59",
+    "label": "Booking",
+    "correct": true
+  },
+  {
+    "imagesSent": 0,
+    "modelSeconds": 0.7753820419311523,
+    "result": {
+      "documentType": "Bank account statement"
+    },
+    "seconds": 0.7878651249920949,
+    "model": "Apple Intelligence",
+    "variant": "new",
+    "key": "s4-D1",
+    "split": "development",
+    "kind": "synthetic",
+    "mode": "text",
+    "evidenceHash": "72049d7bc3082ee5f97a605f13ee482a55d6e124d6e995cff01f41b3a26b3a99",
+    "label": "Bank account statement",
+    "correct": true
+  },
+  {
+    "error": "refused",
+    "seconds": 0.2527652079879772,
+    "model": "Apple Intelligence",
+    "variant": "new",
+    "key": "h1",
+    "split": "fresh",
+    "kind": "personal",
+    "mode": "text",
+    "evidenceHash": "03a609351d584b31f6beff5777bdd44786140c5acc4bd48e77da8db88edbba9c",
+    "label": "",
+    "correct": false
+  },
+  {
+    "imagesSent": 1,
+    "modelSeconds": 0.7791010141372681,
+    "result": {
+      "documentType": "Booking Details"
+    },
+    "seconds": 0.7945469169935677,
+    "model": "Apple Intelligence",
+    "variant": "new",
+    "key": "h3",
+    "split": "fresh",
+    "kind": "personal",
+    "mode": "image",
+    "evidenceHash": "f114741f950dd9de5fb8c4ddb473b9cb85f771076c26816d4d51f57270d0bdc7",
+    "label": "Booking Details",
+    "correct": true
+  },
+  {
+    "imagesSent": 0,
+    "modelSeconds": 0.7269710302352905,
+    "result": {
+      "documentType": "Insurance document"
+    },
+    "seconds": 0.7383299170178361,
+    "model": "Apple Intelligence",
+    "variant": "new",
+    "key": "s3-D1",
+    "split": "development",
+    "kind": "synthetic",
+    "mode": "text",
+    "evidenceHash": "9d2c827755222d3a87ae091831cc1cc4b2dc95fe33f7b1abf505e938838b5c03",
+    "label": "Insurance document",
+    "correct": true
+  },
+  {
+    "imagesSent": 0,
+    "modelSeconds": 1.9443860054016113,
+    "result": {
+      "documentType": "Decision"
+    },
+    "seconds": 1.9565133749856614,
+    "model": "Apple Intelligence",
+    "variant": "new",
+    "key": "r1-D1",
+    "split": "development",
+    "kind": "personal",
+    "mode": "text",
+    "evidenceHash": "88c1d2a1a0977596ce338edf636dc4387cf847b98553541ffc2d7281faf2f9d5",
+    "label": "Decision",
+    "correct": true
+  },
+  {
+    "imagesSent": 0,
+    "modelSeconds": 0.8240659236907959,
+    "result": {
+      "documentType": "Order Confirmation"
+    },
+    "seconds": 0.8377622909902129,
+    "model": "Apple Intelligence",
+    "variant": "new",
+    "key": "r2-D2",
+    "split": "development",
+    "kind": "personal",
+    "mode": "text",
+    "evidenceHash": "e6354bff413bc77774fc2be430a0f67a1cb8a0473d5fb1355e22a2b24e1e9648",
+    "label": "Order Confirmation",
+    "correct": true
+  },
+  {
+    "error": "refused",
+    "seconds": 0.32196379199740477,
+    "model": "Apple Intelligence",
+    "variant": "new",
+    "key": "s1-D1",
+    "split": "development",
+    "kind": "synthetic",
+    "mode": "text",
+    "evidenceHash": "bcc039daeabab473e0987fb531be2b630e0da946d14af398713359f147e21451",
+    "label": "",
+    "correct": false
+  },
+  {
+    "imagesSent": 0,
+    "modelSeconds": 0.6366809606552124,
+    "result": {
+      "documentType": "Unknown"
+    },
+    "seconds": 0.6485468329919968,
+    "model": "Apple Intelligence",
+    "variant": "new",
+    "key": "s6-D1",
+    "split": "development",
+    "kind": "synthetic",
+    "mode": "text",
+    "evidenceHash": "1d9e4be125296163a94a0cc3a0bca2cc31e78067bf1fea4707f0171c161d37d2",
+    "label": "Unknown",
+    "correct": true
+  },
+  {
+    "imagesSent": 0,
+    "modelSeconds": 1.10664701461792,
+    "result": {
+      "documentType": "Booking Confirmation"
+    },
+    "seconds": 1.1200827910215594,
+    "model": "Apple Intelligence",
+    "variant": "new",
+    "key": "r2-D1",
+    "split": "development",
+    "kind": "personal",
+    "mode": "text",
+    "evidenceHash": "d6e14193f632334046e99d4a3b2aec9f16aa627648607c33d65c0c290bb333e5",
+    "label": "Booking Confirmation",
+    "correct": true
+  },
+  {
+    "imagesSent": 0,
+    "modelSeconds": 0.6368670463562012,
+    "result": {
+      "documentType": "ETA Acknowledgement"
+    },
+    "seconds": 0.6492736250220332,
+    "model": "Apple Intelligence",
+    "variant": "new",
+    "key": "h2",
+    "split": "fresh",
+    "kind": "personal",
+    "mode": "text",
+    "evidenceHash": "d92461e0ea2fa181e8f7812a1e40a8883c24f6b196131582bf388e58c127d724",
+    "label": "ETA Acknowledgement",
+    "correct": true
+  },
+  {
+    "imagesSent": 1,
+    "modelSeconds": 0.8055570125579834,
+    "result": {
+      "documentType": "Unknown"
+    },
+    "seconds": 0.8229257919883821,
+    "model": "Apple Intelligence",
+    "variant": "new",
+    "key": "s4-D1",
+    "split": "development",
+    "kind": "synthetic",
+    "mode": "image",
+    "evidenceHash": "65ac9a75c85fe7142a77410f9786b1da54995eb11cdc4381ef434d15fe1e0ba9",
+    "label": "Unknown",
+    "correct": false
+  },
+  {
+    "imagesSent": 1,
+    "modelSeconds": 0.7139729261398315,
+    "result": {
+      "documentType": "Invoice"
+    },
+    "seconds": 0.7282190829864703,
+    "model": "Apple Intelligence",
+    "variant": "new",
+    "key": "r2-D2",
+    "split": "development",
+    "kind": "personal",
+    "mode": "image",
+    "evidenceHash": "0ba5d3d631d67deb4cc3576483d54bb1ca3ce7ee09adcce7c8b16c961e65cee2",
+    "label": "Invoice",
+    "correct": false
+  },
+  {
+    "imagesSent": 1,
+    "modelSeconds": 0.7378469705581665,
+    "result": {
+      "documentType": "Email"
+    },
+    "seconds": 0.7523399999772664,
+    "model": "Apple Intelligence",
+    "variant": "new",
+    "key": "h2",
+    "split": "fresh",
+    "kind": "personal",
+    "mode": "image",
+    "evidenceHash": "f49cc92494c44090337956beac9a158b8177f636f13622df1df411d8772b505a",
+    "label": "Email",
+    "correct": false
+  },
+  {
+    "imagesSent": 0,
+    "modelSeconds": 0.637516975402832,
+    "result": {
+      "documentType": "Booking"
+    },
+    "seconds": 0.6532595419848803,
+    "model": "Apple Intelligence",
+    "variant": "new",
+    "key": "h3",
+    "split": "fresh",
+    "kind": "personal",
+    "mode": "text",
+    "evidenceHash": "b41a5aea2bf448438f4069a55586cadd1e93e84e823842b4ef3f722556dac9c2",
+    "label": "Booking",
+    "correct": true
+  },
+  {
+    "imagesSent": 1,
+    "modelSeconds": 0.8508650064468384,
+    "result": {
+      "documentType": "Unknown"
+    },
+    "seconds": 0.8666750830016099,
+    "model": "Apple Intelligence",
+    "variant": "new",
+    "key": "s3-D1",
+    "split": "development",
+    "kind": "synthetic",
+    "mode": "image",
+    "evidenceHash": "cdf4c55bd596cc78da54cda264340dc5bb41d03068d8a1b9c12d18b3763de87c",
+    "label": "Unknown",
+    "correct": false
+  },
+  {
+    "result": {
+      "documentType": "Bank Statement"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 1961917250,
+      "load_duration": 5405125,
+      "prompt_eval_count": 716,
+      "prompt_eval_duration": 1595115000,
+      "eval_count": 9,
+      "eval_duration": 349161000,
+      "done_reason": "stop"
+    },
+    "seconds": 1.9627884159854148,
+    "model": "gemma4:e4b-it-q4_K_M",
+    "variant": "new",
+    "key": "s4-D1",
+    "split": "development",
+    "kind": "synthetic",
+    "mode": "text",
+    "pairPosition": 2,
+    "evidenceHash": "72049d7bc3082ee5f97a605f13ee482a55d6e124d6e995cff01f41b3a26b3a99",
+    "label": "Bank Statement",
+    "correct": true
+  },
+  {
+    "result": {
+      "documentType": "Document package"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 5820812333,
+      "load_duration": 4504000,
+      "prompt_eval_count": 1393,
+      "prompt_eval_duration": 5572411000,
+      "eval_count": 9,
+      "eval_duration": 193552000,
+      "done_reason": "stop"
+    },
+    "seconds": 5.822114208014682,
+    "model": "gemma4:e2b-it-q4_K_M",
+    "variant": "new",
+    "key": "s1-D1",
+    "split": "development",
+    "kind": "synthetic",
+    "mode": "image",
+    "pairPosition": 1,
+    "evidenceHash": "72b55610813d12e63d1cfbac795829d81e7ea8bcb7cbef9d9c915a0f97f788d2",
+    "label": "Document package",
+    "correct": false
+  },
+  {
+    "result": {
+      "documentType": "Bank Account Statement"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 1088135500,
+      "load_duration": 2000541,
+      "prompt_eval_count": 716,
+      "prompt_eval_duration": 857948000,
+      "eval_count": 10,
+      "eval_duration": 213709000,
+      "done_reason": "stop"
+    },
+    "seconds": 1.0895600829971954,
+    "model": "gemma4:e2b-it-q4_K_M",
+    "variant": "new",
+    "key": "s4-D1",
+    "split": "development",
+    "kind": "synthetic",
+    "mode": "text",
+    "pairPosition": 1,
+    "evidenceHash": "72049d7bc3082ee5f97a605f13ee482a55d6e124d6e995cff01f41b3a26b3a99",
+    "label": "Bank Account Statement",
+    "correct": true
+  },
+  {
+    "result": {
+      "documentType": "Document package"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 6274659708,
+      "load_duration": 5059875,
+      "prompt_eval_count": 1393,
+      "prompt_eval_duration": 5987515000,
+      "eval_count": 9,
+      "eval_duration": 216908000,
+      "done_reason": "stop"
+    },
+    "seconds": 6.276717082975665,
+    "model": "gemma4:e2b-it-q4_K_M",
+    "variant": "new",
+    "key": "s4-D1",
+    "split": "development",
+    "kind": "synthetic",
+    "mode": "image",
+    "pairPosition": 2,
+    "evidenceHash": "65ac9a75c85fe7142a77410f9786b1da54995eb11cdc4381ef434d15fe1e0ba9",
+    "label": "Document package",
+    "correct": false
+  },
+  {
+    "result": {
+      "documentType": "Certificate of Employment"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 8555920667,
+      "load_duration": 6425292,
+      "prompt_eval_count": 1393,
+      "prompt_eval_duration": 8077228000,
+      "eval_count": 10,
+      "eval_duration": 383633000,
+      "done_reason": "stop"
+    },
+    "seconds": 8.566392334003467,
+    "model": "gemma4:e4b-it-q4_K_M",
+    "variant": "new",
+    "key": "s2-D1",
+    "split": "development",
+    "kind": "synthetic",
+    "mode": "image",
+    "pairPosition": 1,
+    "evidenceHash": "c9328ba53a34604c312a888eb64f7c8b505cc799fe37f700f945f65653d8d251",
+    "label": "Certificate of Employment",
+    "correct": true
+  },
+  {
+    "result": {
+      "documentType": "ETA Confirmation"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 5543493375,
+      "load_duration": 4323042,
+      "prompt_eval_count": 1239,
+      "prompt_eval_duration": 5208744000,
+      "eval_count": 9,
+      "eval_duration": 293878000,
+      "done_reason": "stop"
+    },
+    "seconds": 5.546557124995161,
+    "model": "gemma4:e2b-it-q4_K_M",
+    "variant": "new",
+    "key": "h2",
+    "split": "fresh",
+    "kind": "personal",
+    "mode": "image",
+    "pairPosition": 2,
+    "evidenceHash": "f49cc92494c44090337956beac9a158b8177f636f13622df1df411d8772b505a",
+    "label": "ETA Confirmation",
+    "correct": false
+  },
+  {
+    "result": {
+      "documentType": "Booking Details"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 5387106792,
+      "load_duration": 3368584,
+      "prompt_eval_count": 1239,
+      "prompt_eval_duration": 5134412000,
+      "eval_count": 9,
+      "eval_duration": 216647000,
+      "done_reason": "stop"
+    },
+    "seconds": 5.3886236250109505,
+    "model": "gemma4:e2b-it-q4_K_M",
+    "variant": "new",
+    "key": "h3",
+    "split": "fresh",
+    "kind": "personal",
+    "mode": "image",
+    "pairPosition": 1,
+    "evidenceHash": "f114741f950dd9de5fb8c4ddb473b9cb85f771076c26816d4d51f57270d0bdc7",
+    "label": "Booking Details",
+    "correct": true
+  },
+  {
+    "result": {
+      "documentType": "Unknown"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 7756439750,
+      "load_duration": 5401292,
+      "prompt_eval_count": 1393,
+      "prompt_eval_duration": 7426432000,
+      "eval_count": 8,
+      "eval_duration": 236606000,
+      "done_reason": "stop"
+    },
+    "seconds": 7.763204916991526,
+    "model": "gemma4:e4b-it-q4_K_M",
+    "variant": "new",
+    "key": "s6-D1",
+    "split": "development",
+    "kind": "synthetic",
+    "mode": "image",
+    "pairPosition": 1,
+    "evidenceHash": "5e60765226814c7b1f1bcfe2a2918cfd55313e89011afd9258e275eda7986a3e",
+    "label": "Unknown",
+    "correct": true
+  },
+  {
+    "result": {
+      "documentType": "Document package"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 6416669416,
+      "load_duration": 6255583,
+      "prompt_eval_count": 1393,
+      "prompt_eval_duration": 6117237000,
+      "eval_count": 9,
+      "eval_duration": 221180000,
+      "done_reason": "stop"
+    },
+    "seconds": 6.418794625002192,
+    "model": "gemma4:e2b-it-q4_K_M",
+    "variant": "new",
+    "key": "s5-D1",
+    "split": "development",
+    "kind": "synthetic",
+    "mode": "image",
+    "pairPosition": 1,
+    "evidenceHash": "f5e776d8d2f24c1ce7d448033df3dbb83357212a2cde552138aee5bca2284158",
+    "label": "Document package",
+    "correct": false
+  },
+  {
+    "result": {
+      "documentType": "Unknown"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 7972573125,
+      "load_duration": 6860375,
+      "prompt_eval_count": 1393,
+      "prompt_eval_duration": 7490110000,
+      "eval_count": 8,
+      "eval_duration": 365846000,
+      "done_reason": "stop"
+    },
+    "seconds": 7.974984917003894,
+    "model": "gemma4:e4b-it-q4_K_M",
+    "variant": "new",
+    "key": "s3-D1",
+    "split": "development",
+    "kind": "synthetic",
+    "mode": "image",
+    "pairPosition": 2,
+    "evidenceHash": "cdf4c55bd596cc78da54cda264340dc5bb41d03068d8a1b9c12d18b3763de87c",
+    "label": "Unknown",
+    "correct": false
+  },
+  {
+    "result": {
+      "documentType": "Power of Attorney"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 7739725125,
+      "load_duration": 30356917,
+      "prompt_eval_count": 1239,
+      "prompt_eval_duration": 7195544000,
+      "eval_count": 10,
+      "eval_duration": 373464000,
+      "done_reason": "stop"
+    },
+    "seconds": 7.748163000011118,
+    "model": "gemma4:e4b-it-q4_K_M",
+    "variant": "new",
+    "key": "h1",
+    "split": "fresh",
+    "kind": "personal",
+    "mode": "image",
+    "pairPosition": 2,
+    "evidenceHash": "2b1e4785536308fa594e9e9204d9b3c71dd0902be6d0895e19149a6357b3ebf7",
+    "label": "Power of Attorney",
+    "correct": true
+  },
+  {
+    "result": {
+      "documentType": "Power of Attorney/Fullmakt"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 1711029125,
+      "load_duration": 2449084,
+      "prompt_eval_count": 934,
+      "prompt_eval_duration": 1503897000,
+      "eval_count": 13,
+      "eval_duration": 199982000,
+      "done_reason": "stop"
+    },
+    "seconds": 1.7116403330001049,
+    "model": "gemma4:e2b-it-q4_K_M",
+    "variant": "new",
+    "key": "h1",
+    "split": "fresh",
+    "kind": "personal",
+    "mode": "text",
+    "pairPosition": 2,
+    "evidenceHash": "03a609351d584b31f6beff5777bdd44786140c5acc4bd48e77da8db88edbba9c",
+    "label": "Power of Attorney/Fullmakt",
+    "correct": true
+  },
+  {
+    "result": {
+      "documentType": "Document package"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 5971039667,
+      "load_duration": 4803042,
+      "prompt_eval_count": 1393,
+      "prompt_eval_duration": 5629250000,
+      "eval_count": 9,
+      "eval_duration": 284378000,
+      "done_reason": "stop"
+    },
+    "seconds": 5.9725578330107965,
+    "model": "gemma4:e2b-it-q4_K_M",
+    "variant": "new",
+    "key": "s3-D1",
+    "split": "development",
+    "kind": "synthetic",
+    "mode": "image",
+    "pairPosition": 1,
+    "evidenceHash": "cdf4c55bd596cc78da54cda264340dc5bb41d03068d8a1b9c12d18b3763de87c",
+    "label": "Document package",
+    "correct": false
+  },
+  {
+    "result": {
+      "documentType": "Lease Agreement"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 1276521834,
+      "load_duration": 2333042,
+      "prompt_eval_count": 733,
+      "prompt_eval_duration": 913151000,
+      "eval_count": 10,
+      "eval_duration": 354073000,
+      "done_reason": "stop"
+    },
+    "seconds": 1.277139084006194,
+    "model": "gemma4:e2b-it-q4_K_M",
+    "variant": "new",
+    "key": "s5-D1",
+    "split": "development",
+    "kind": "synthetic",
+    "mode": "text",
+    "pairPosition": 2,
+    "evidenceHash": "e886a31cca635484a69d41eb02054eb96d4a92f081a10ed49e39f0d7780a0cbb",
+    "label": "Lease Agreement",
+    "correct": true
+  },
+  {
+    "result": {
+      "documentType": "Unknown"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 7903716417,
+      "load_duration": 5827042,
+      "prompt_eval_count": 1393,
+      "prompt_eval_duration": 7443398000,
+      "eval_count": 8,
+      "eval_duration": 351860000,
+      "done_reason": "stop"
+    },
+    "seconds": 7.905855499993777,
+    "model": "gemma4:e4b-it-q4_K_M",
+    "variant": "new",
+    "key": "s5-D1",
+    "split": "development",
+    "kind": "synthetic",
+    "mode": "image",
+    "pairPosition": 2,
+    "evidenceHash": "f5e776d8d2f24c1ce7d448033df3dbb83357212a2cde552138aee5bca2284158",
+    "label": "Unknown",
+    "correct": false
+  },
+  {
+    "result": {
+      "documentType": "Booking Confirmation"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 7359175500,
+      "load_duration": 4197042,
+      "prompt_eval_count": 1239,
+      "prompt_eval_duration": 6929524000,
+      "eval_count": 9,
+      "eval_duration": 380351000,
+      "done_reason": "stop"
+    },
+    "seconds": 7.361159541993402,
+    "model": "gemma4:e4b-it-q4_K_M",
+    "variant": "new",
+    "key": "h3",
+    "split": "fresh",
+    "kind": "personal",
+    "mode": "image",
+    "pairPosition": 2,
+    "evidenceHash": "f114741f950dd9de5fb8c4ddb473b9cb85f771076c26816d4d51f57270d0bdc7",
+    "label": "Booking Confirmation",
+    "correct": true
+  },
+  {
+    "result": {
+      "documentType": "Lease Agreement"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 2067865458,
+      "load_duration": 2159666,
+      "prompt_eval_count": 733,
+      "prompt_eval_duration": 1688466000,
+      "eval_count": 10,
+      "eval_duration": 352844000,
+      "done_reason": "stop"
+    },
+    "seconds": 2.0684384160267655,
+    "model": "gemma4:e4b-it-q4_K_M",
+    "variant": "new",
+    "key": "s5-D1",
+    "split": "development",
+    "kind": "synthetic",
+    "mode": "text",
+    "pairPosition": 1,
+    "evidenceHash": "e886a31cca635484a69d41eb02054eb96d4a92f081a10ed49e39f0d7780a0cbb",
+    "label": "Lease Agreement",
+    "correct": true
+  },
+  {
+    "result": {
+      "documentType": "Booking confirmation"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 2020442584,
+      "load_duration": 3727042,
+      "prompt_eval_count": 1236,
+      "prompt_eval_duration": 1772840000,
+      "eval_count": 9,
+      "eval_duration": 226242000,
+      "done_reason": "stop"
+    },
+    "seconds": 2.0222096249926835,
+    "model": "gemma4:e2b-it-q4_K_M",
+    "variant": "new",
+    "key": "r2-D3",
+    "split": "development",
+    "kind": "personal",
+    "mode": "text",
+    "pairPosition": 1,
+    "evidenceHash": "c3d4e3ab125fc38d76097daf09679dc4dcf35f1fdedaad0035d93e080a8c752b",
+    "label": "Booking confirmation",
+    "correct": true
+  },
+  {
+    "result": {
+      "documentType": "Document package"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 6259660792,
+      "load_duration": 5208334,
+      "prompt_eval_count": 1393,
+      "prompt_eval_duration": 5972939000,
+      "eval_count": 9,
+      "eval_duration": 213241000,
+      "done_reason": "stop"
+    },
+    "seconds": 6.26193554099882,
+    "model": "gemma4:e2b-it-q4_K_M",
+    "variant": "new",
+    "key": "s6-D1",
+    "split": "development",
+    "kind": "synthetic",
+    "mode": "image",
+    "pairPosition": 2,
+    "evidenceHash": "5e60765226814c7b1f1bcfe2a2918cfd55313e89011afd9258e275eda7986a3e",
+    "label": "Document package",
+    "correct": false
+  },
+  {
+    "result": {
+      "documentType": "Power of Attorney/Fullmakt"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 5650973500,
+      "load_duration": 27563583,
+      "prompt_eval_count": 1239,
+      "prompt_eval_duration": 5210993000,
+      "eval_count": 13,
+      "eval_duration": 290013000,
+      "done_reason": "stop"
+    },
+    "seconds": 5.657833125005709,
+    "model": "gemma4:e2b-it-q4_K_M",
+    "variant": "new",
+    "key": "h1",
+    "split": "fresh",
+    "kind": "personal",
+    "mode": "image",
+    "pairPosition": 1,
+    "evidenceHash": "2b1e4785536308fa594e9e9204d9b3c71dd0902be6d0895e19149a6357b3ebf7",
+    "label": "Power of Attorney/Fullmakt",
+    "correct": true
+  },
+  {
+    "result": {
+      "documentType": "Residence Permit Decision"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 6958627292,
+      "load_duration": 2174750,
+      "prompt_eval_count": 2275,
+      "prompt_eval_duration": 6386930000,
+      "eval_count": 10,
+      "eval_duration": 469801000,
+      "done_reason": "stop"
+    },
+    "seconds": 6.963625875010621,
+    "model": "gemma4:e4b-it-q4_K_M",
+    "variant": "new",
+    "key": "r1-D1",
+    "split": "development",
+    "kind": "personal",
+    "mode": "text",
+    "pairPosition": 1,
+    "evidenceHash": "88c1d2a1a0977596ce338edf636dc4387cf847b98553541ffc2d7281faf2f9d5",
+    "label": "Residence Permit Decision",
+    "correct": true
+  },
+  {
+    "result": {
+      "documentType": "Booking confirmation"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 4322753583,
+      "load_duration": 2925750,
+      "prompt_eval_count": 1236,
+      "prompt_eval_duration": 3996908000,
+      "eval_count": 9,
+      "eval_duration": 272312000,
+      "done_reason": "stop"
+    },
+    "seconds": 4.327243291016202,
+    "model": "gemma4:e4b-it-q4_K_M",
+    "variant": "new",
+    "key": "r2-D3",
+    "split": "development",
+    "kind": "personal",
+    "mode": "text",
+    "pairPosition": 2,
+    "evidenceHash": "c3d4e3ab125fc38d76097daf09679dc4dcf35f1fdedaad0035d93e080a8c752b",
+    "label": "Booking confirmation",
+    "correct": true
+  },
+  {
+    "result": {
+      "documentType": "Decision"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 3627076833,
+      "load_duration": 3418916,
+      "prompt_eval_count": 2275,
+      "prompt_eval_duration": 3410662000,
+      "eval_count": 8,
+      "eval_duration": 203935000,
+      "done_reason": "stop"
+    },
+    "seconds": 3.6278674580098595,
+    "model": "gemma4:e2b-it-q4_K_M",
+    "variant": "new",
+    "key": "r1-D1",
+    "split": "development",
+    "kind": "personal",
+    "mode": "text",
+    "pairPosition": 2,
+    "evidenceHash": "88c1d2a1a0977596ce338edf636dc4387cf847b98553541ffc2d7281faf2f9d5",
+    "label": "Decision",
+    "correct": true
+  },
+  {
+    "result": {
+      "documentType": "Document package"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 5776942083,
+      "load_duration": 4744917,
+      "prompt_eval_count": 1393,
+      "prompt_eval_duration": 5512448000,
+      "eval_count": 9,
+      "eval_duration": 204479000,
+      "done_reason": "stop"
+    },
+    "seconds": 5.779067208000924,
+    "model": "gemma4:e2b-it-q4_K_M",
+    "variant": "new",
+    "key": "s2-D1",
+    "split": "development",
+    "kind": "synthetic",
+    "mode": "image",
+    "pairPosition": 2,
+    "evidenceHash": "c9328ba53a34604c312a888eb64f7c8b505cc799fe37f700f945f65653d8d251",
+    "label": "Document package",
+    "correct": false
+  },
+  {
+    "result": {
+      "documentType": "Bank Account Statement"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 7967756917,
+      "load_duration": 5943583,
+      "prompt_eval_count": 1393,
+      "prompt_eval_duration": 7535714000,
+      "eval_count": 10,
+      "eval_duration": 365622000,
+      "done_reason": "stop"
+    },
+    "seconds": 7.9697024160122965,
+    "model": "gemma4:e4b-it-q4_K_M",
+    "variant": "new",
+    "key": "s4-D1",
+    "split": "development",
+    "kind": "synthetic",
+    "mode": "image",
+    "pairPosition": 1,
+    "evidenceHash": "65ac9a75c85fe7142a77410f9786b1da54995eb11cdc4381ef434d15fe1e0ba9",
+    "label": "Bank Account Statement",
+    "correct": true
+  },
+  {
+    "result": {
+      "documentType": "ETA Acknowledgement"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 7690949000,
+      "load_duration": 4287584,
+      "prompt_eval_count": 1239,
+      "prompt_eval_duration": 7244222000,
+      "eval_count": 10,
+      "eval_duration": 375829000,
+      "done_reason": "stop"
+    },
+    "seconds": 7.692831499996828,
+    "model": "gemma4:e4b-it-q4_K_M",
+    "variant": "new",
+    "key": "h2",
+    "split": "fresh",
+    "kind": "personal",
+    "mode": "image",
+    "pairPosition": 1,
+    "evidenceHash": "f49cc92494c44090337956beac9a158b8177f636f13622df1df411d8772b505a",
+    "label": "ETA Acknowledgement",
+    "correct": true
+  },
+  {
+    "result": {
+      "documentType": "Acknowledgement of ETA application"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 1353298750,
+      "load_duration": 4145750,
+      "prompt_eval_count": 600,
+      "prompt_eval_duration": 1051560999,
+      "eval_count": 11,
+      "eval_duration": 274954000,
+      "done_reason": "stop"
+    },
+    "seconds": 1.3547751670121215,
+    "model": "gemma4:e2b-it-q4_K_M",
+    "variant": "new",
+    "key": "h2",
+    "split": "fresh",
+    "kind": "personal",
+    "mode": "text",
+    "pairPosition": 1,
+    "evidenceHash": "d92461e0ea2fa181e8f7812a1e40a8883c24f6b196131582bf388e58c127d724",
+    "label": "Acknowledgement of ETA application",
+    "correct": true
+  },
+  {
+    "result": {
+      "documentType": "Residence Permit Decision"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 2909598750,
+      "load_duration": 2262417,
+      "prompt_eval_count": 727,
+      "prompt_eval_duration": 2301666000,
+      "eval_count": 10,
+      "eval_duration": 598904000,
+      "done_reason": "stop"
+    },
+    "seconds": 2.9107692499819677,
+    "model": "gemma4:e4b-it-q4_K_M",
+    "variant": "new",
+    "key": "s1-D1",
+    "split": "development",
+    "kind": "synthetic",
+    "mode": "text",
+    "pairPosition": 1,
+    "evidenceHash": "bcc039daeabab473e0987fb531be2b630e0da946d14af398713359f147e21451",
+    "label": "Residence Permit Decision",
+    "correct": true
+  },
+  {
+    "result": {
+      "documentType": "Administrative Record"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 8538733541,
+      "load_duration": 28572125,
+      "prompt_eval_count": 1393,
+      "prompt_eval_duration": 7888132000,
+      "eval_count": 9,
+      "eval_duration": 517982999,
+      "done_reason": "stop"
+    },
+    "seconds": 8.550952541991137,
+    "model": "gemma4:e4b-it-q4_K_M",
+    "variant": "new",
+    "key": "s1-D1",
+    "split": "development",
+    "kind": "synthetic",
+    "mode": "image",
+    "pairPosition": 2,
+    "evidenceHash": "72b55610813d12e63d1cfbac795829d81e7ea8bcb7cbef9d9c915a0f97f788d2",
+    "label": "Administrative Record",
+    "correct": false
+  },
+  {
+    "result": {
+      "documentType": "Booking Confirmation"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 1732907000,
+      "load_duration": 2512042,
+      "prompt_eval_count": 490,
+      "prompt_eval_duration": 1333038000,
+      "eval_count": 9,
+      "eval_duration": 367786000,
+      "done_reason": "stop"
+    },
+    "seconds": 1.7341959999757819,
+    "model": "gemma4:e4b-it-q4_K_M",
+    "variant": "new",
+    "key": "h3",
+    "split": "fresh",
+    "kind": "personal",
+    "mode": "text",
+    "pairPosition": 1,
+    "evidenceHash": "b41a5aea2bf448438f4069a55586cadd1e93e84e823842b4ef3f722556dac9c2",
+    "label": "Booking Confirmation",
+    "correct": true
+  },
+  {
+    "result": {
+      "documentType": "Residence Permit Decision"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 1422682375,
+      "load_duration": 2051250,
+      "prompt_eval_count": 727,
+      "prompt_eval_duration": 1091691000,
+      "eval_count": 10,
+      "eval_duration": 324123000,
+      "done_reason": "stop"
+    },
+    "seconds": 1.4232652909995522,
+    "model": "gemma4:e2b-it-q4_K_M",
+    "variant": "new",
+    "key": "s1-D1",
+    "split": "development",
+    "kind": "synthetic",
+    "mode": "text",
+    "pairPosition": 2,
+    "evidenceHash": "bcc039daeabab473e0987fb531be2b630e0da946d14af398713359f147e21451",
+    "label": "Residence Permit Decision",
+    "correct": true
+  },
+  {
+    "result": {
+      "documentType": "Booking Confirmation"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 4909075292,
+      "load_duration": 4165959,
+      "prompt_eval_count": 1390,
+      "prompt_eval_duration": 4487096000,
+      "eval_count": 9,
+      "eval_duration": 384330000,
+      "done_reason": "stop"
+    },
+    "seconds": 4.913797916990006,
+    "model": "gemma4:e4b-it-q4_K_M",
+    "variant": "new",
+    "key": "r2-D1",
+    "split": "development",
+    "kind": "personal",
+    "mode": "text",
+    "pairPosition": 2,
+    "evidenceHash": "d6e14193f632334046e99d4a3b2aec9f16aa627648607c33d65c0c290bb333e5",
+    "label": "Booking Confirmation",
+    "correct": true
+  },
+  {
+    "result": {
+      "documentType": "Booking confirmation"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 6433194583,
+      "load_duration": 5774875,
+      "prompt_eval_count": 1393,
+      "prompt_eval_duration": 6161782000,
+      "eval_count": 9,
+      "eval_duration": 203131000,
+      "done_reason": "stop"
+    },
+    "seconds": 6.435497792001115,
+    "model": "gemma4:e2b-it-q4_K_M",
+    "variant": "new",
+    "key": "r2-D1",
+    "split": "development",
+    "kind": "personal",
+    "mode": "image",
+    "pairPosition": 2,
+    "evidenceHash": "960bcd52aacf435d4dee5847152e3d193874d98b7e1f8938774a1842a421ce61",
+    "label": "Booking confirmation",
+    "correct": true
+  },
+  {
+    "result": {
+      "documentType": "Booking confirmation"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 6802473959,
+      "load_duration": 4328709,
+      "prompt_eval_count": 1239,
+      "prompt_eval_duration": 6480343000,
+      "eval_count": 9,
+      "eval_duration": 260570000,
+      "done_reason": "stop"
+    },
+    "seconds": 6.805817374988692,
+    "model": "gemma4:e4b-it-q4_K_M",
+    "variant": "new",
+    "key": "r2-D3",
+    "split": "development",
+    "kind": "personal",
+    "mode": "image",
+    "pairPosition": 1,
+    "evidenceHash": "4a383fbc2e649cb9f47b05dfdf844e37902d010665ea06ac4ee9b1760df33a59",
+    "label": "Booking confirmation",
+    "correct": true
+  },
+  {
+    "result": {
+      "documentType": "Booking confirmation"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 2463628459,
+      "load_duration": 2358250,
+      "prompt_eval_count": 1390,
+      "prompt_eval_duration": 2234491000,
+      "eval_count": 9,
+      "eval_duration": 213080000,
+      "done_reason": "stop"
+    },
+    "seconds": 2.4648937089950778,
+    "model": "gemma4:e2b-it-q4_K_M",
+    "variant": "new",
+    "key": "r2-D1",
+    "split": "development",
+    "kind": "personal",
+    "mode": "text",
+    "pairPosition": 1,
+    "evidenceHash": "d6e14193f632334046e99d4a3b2aec9f16aa627648607c33d65c0c290bb333e5",
+    "label": "Booking confirmation",
+    "correct": true
+  },
+  {
+    "result": {
+      "documentType": "Unknown"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 933602583,
+      "load_duration": 4638375,
+      "prompt_eval_count": 697,
+      "prompt_eval_duration": 776842000,
+      "eval_count": 8,
+      "eval_duration": 139588000,
+      "done_reason": "stop"
+    },
+    "seconds": 0.9352985839941539,
+    "model": "gemma4:e2b-it-q4_K_M",
+    "variant": "new",
+    "key": "s6-D1",
+    "split": "development",
+    "kind": "synthetic",
+    "mode": "text",
+    "pairPosition": 1,
+    "evidenceHash": "1d9e4be125296163a94a0cc3a0bca2cc31e78067bf1fea4707f0171c161d37d2",
+    "label": "Unknown",
+    "correct": true
+  },
+  {
+    "result": {
+      "documentType": "ETA Application Acknowledgement"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 2303553459,
+      "load_duration": 2771042,
+      "prompt_eval_count": 600,
+      "prompt_eval_duration": 1923564000,
+      "eval_count": 11,
+      "eval_duration": 366385000,
+      "done_reason": "stop"
+    },
+    "seconds": 2.305167500016978,
+    "model": "gemma4:e4b-it-q4_K_M",
+    "variant": "new",
+    "key": "h2",
+    "split": "fresh",
+    "kind": "personal",
+    "mode": "text",
+    "pairPosition": 2,
+    "evidenceHash": "d92461e0ea2fa181e8f7812a1e40a8883c24f6b196131582bf388e58c127d724",
+    "label": "ETA Application Acknowledgement",
+    "correct": true
+  },
+  {
+    "result": {
+      "documentType": "Residence Permit Decision"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 9356319292,
+      "load_duration": 121406375,
+      "prompt_eval_count": 1393,
+      "prompt_eval_duration": 8066748000,
+      "eval_count": 10,
+      "eval_duration": 633549000,
+      "done_reason": "stop"
+    },
+    "seconds": 9.392422707984224,
+    "model": "gemma4:e4b-it-q4_K_M",
+    "variant": "new",
+    "key": "r1-D1",
+    "split": "development",
+    "kind": "personal",
+    "mode": "image",
+    "pairPosition": 2,
+    "evidenceHash": "1752c8f323d86335b27e30c902f332bf77cdd3fe83a1b819d1402cf4a7ac6d4a",
+    "label": "Residence Permit Decision",
+    "correct": true
+  },
+  {
+    "result": {
+      "documentType": "Unknown"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 1740279709,
+      "load_duration": 2296709,
+      "prompt_eval_count": 697,
+      "prompt_eval_duration": 1477584000,
+      "eval_count": 8,
+      "eval_duration": 233844000,
+      "done_reason": "stop"
+    },
+    "seconds": 1.7414226660039276,
+    "model": "gemma4:e4b-it-q4_K_M",
+    "variant": "new",
+    "key": "s6-D1",
+    "split": "development",
+    "kind": "synthetic",
+    "mode": "text",
+    "pairPosition": 2,
+    "evidenceHash": "1d9e4be125296163a94a0cc3a0bca2cc31e78067bf1fea4707f0171c161d37d2",
+    "label": "Unknown",
+    "correct": true
+  },
+  {
+    "result": {
+      "documentType": "Booking Details"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 826720166,
+      "load_duration": 1842041,
+      "prompt_eval_count": 490,
+      "prompt_eval_duration": 679346000,
+      "eval_count": 9,
+      "eval_duration": 140156000,
+      "done_reason": "stop"
+    },
+    "seconds": 0.8272363750147633,
+    "model": "gemma4:e2b-it-q4_K_M",
+    "variant": "new",
+    "key": "h3",
+    "split": "fresh",
+    "kind": "personal",
+    "mode": "text",
+    "pairPosition": 2,
+    "evidenceHash": "b41a5aea2bf448438f4069a55586cadd1e93e84e823842b4ef3f722556dac9c2",
+    "label": "Booking Details",
+    "correct": true
+  },
+  {
+    "result": {
+      "documentType": "Power of Attorney"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 3740714584,
+      "load_duration": 3448375,
+      "prompt_eval_count": 934,
+      "prompt_eval_duration": 3216634000,
+      "eval_count": 10,
+      "eval_duration": 389118000,
+      "done_reason": "stop"
+    },
+    "seconds": 3.7428516250220127,
+    "model": "gemma4:e4b-it-q4_K_M",
+    "variant": "new",
+    "key": "h1",
+    "split": "fresh",
+    "kind": "personal",
+    "mode": "text",
+    "pairPosition": 1,
+    "evidenceHash": "03a609351d584b31f6beff5777bdd44786140c5acc4bd48e77da8db88edbba9c",
+    "label": "Power of Attorney",
+    "correct": true
+  },
+  {
+    "result": {
+      "documentType": "Certificate of Employment"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 2795856500,
+      "load_duration": 15180958,
+      "prompt_eval_count": 699,
+      "prompt_eval_duration": 2391024000,
+      "eval_count": 10,
+      "eval_duration": 373250000,
+      "done_reason": "stop"
+    },
+    "seconds": 2.7976671250071377,
+    "model": "gemma4:e4b-it-q4_K_M",
+    "variant": "new",
+    "key": "s2-D1",
+    "split": "development",
+    "kind": "synthetic",
+    "mode": "text",
+    "pairPosition": 2,
+    "evidenceHash": "c00ed750115b057d352e846bee6db64394d3a1f84582ed9d3f8ac7a5964ff49a",
+    "label": "Certificate of Employment",
+    "correct": true
+  },
+  {
+    "result": {
+      "documentType": "Certificate of Employment"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 990218458,
+      "load_duration": 2014833,
+      "prompt_eval_count": 699,
+      "prompt_eval_duration": 776226000,
+      "eval_count": 10,
+      "eval_duration": 199247000,
+      "done_reason": "stop"
+    },
+    "seconds": 0.9908666670089588,
+    "model": "gemma4:e2b-it-q4_K_M",
+    "variant": "new",
+    "key": "s2-D1",
+    "split": "development",
+    "kind": "synthetic",
+    "mode": "text",
+    "pairPosition": 1,
+    "evidenceHash": "c00ed750115b057d352e846bee6db64394d3a1f84582ed9d3f8ac7a5964ff49a",
+    "label": "Certificate of Employment",
+    "correct": true
+  },
+  {
+    "result": {
+      "documentType": "Membership Agreement"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 6956627167,
+      "load_duration": 9488208,
+      "prompt_eval_count": 1239,
+      "prompt_eval_duration": 6496297000,
+      "eval_count": 9,
+      "eval_duration": 369699000,
+      "done_reason": "stop"
+    },
+    "seconds": 6.958881540980656,
+    "model": "gemma4:e4b-it-q4_K_M",
+    "variant": "new",
+    "key": "r2-D2",
+    "split": "development",
+    "kind": "personal",
+    "mode": "image",
+    "pairPosition": 2,
+    "evidenceHash": "0ba5d3d631d67deb4cc3576483d54bb1ca3ce7ee09adcce7c8b16c961e65cee2",
+    "label": "Membership Agreement",
+    "correct": false
+  },
+  {
+    "result": {
+      "documentType": "Membership Agreement"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 2905640209,
+      "load_duration": 2145750,
+      "prompt_eval_count": 747,
+      "prompt_eval_duration": 2494880000,
+      "eval_count": 9,
+      "eval_duration": 369146000,
+      "done_reason": "stop"
+    },
+    "seconds": 2.9070776250155177,
+    "model": "gemma4:e4b-it-q4_K_M",
+    "variant": "new",
+    "key": "r2-D2",
+    "split": "development",
+    "kind": "personal",
+    "mode": "text",
+    "pairPosition": 1,
+    "evidenceHash": "e6354bff413bc77774fc2be430a0f67a1cb8a0473d5fb1355e22a2b24e1e9648",
+    "label": "Membership Agreement",
+    "correct": false
+  },
+  {
+    "result": {
+      "documentType": "Order Confirmation"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 1433467625,
+      "load_duration": 1720709,
+      "prompt_eval_count": 747,
+      "prompt_eval_duration": 1206955000,
+      "eval_count": 9,
+      "eval_duration": 218413000,
+      "done_reason": "stop"
+    },
+    "seconds": 1.434302583016688,
+    "model": "gemma4:e2b-it-q4_K_M",
+    "variant": "new",
+    "key": "r2-D2",
+    "split": "development",
+    "kind": "personal",
+    "mode": "text",
+    "pairPosition": 2,
+    "evidenceHash": "e6354bff413bc77774fc2be430a0f67a1cb8a0473d5fb1355e22a2b24e1e9648",
+    "label": "Order Confirmation",
+    "correct": true
+  },
+  {
+    "result": {
+      "documentType": "Order Confirmation"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 5217480333,
+      "load_duration": 7645375,
+      "prompt_eval_count": 1239,
+      "prompt_eval_duration": 4855597000,
+      "eval_count": 9,
+      "eval_duration": 303534000,
+      "done_reason": "stop"
+    },
+    "seconds": 5.219966000004206,
+    "model": "gemma4:e2b-it-q4_K_M",
+    "variant": "new",
+    "key": "r2-D2",
+    "split": "development",
+    "kind": "personal",
+    "mode": "image",
+    "pairPosition": 1,
+    "evidenceHash": "0ba5d3d631d67deb4cc3576483d54bb1ca3ce7ee09adcce7c8b16c961e65cee2",
+    "label": "Order Confirmation",
+    "correct": true
+  },
+  {
+    "result": {
+      "documentType": "Insurance Policy"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 1010394875,
+      "load_duration": 2510542,
+      "prompt_eval_count": 726,
+      "prompt_eval_duration": 807955000,
+      "eval_count": 9,
+      "eval_duration": 194623000,
+      "done_reason": "stop"
+    },
+    "seconds": 1.0109013330074959,
+    "model": "gemma4:e2b-it-q4_K_M",
+    "variant": "new",
+    "key": "s3-D1",
+    "split": "development",
+    "kind": "synthetic",
+    "mode": "text",
+    "pairPosition": 2,
+    "evidenceHash": "9d2c827755222d3a87ae091831cc1cc4b2dc95fe33f7b1abf505e938838b5c03",
+    "label": "Insurance Policy",
+    "correct": true
+  },
+  {
+    "result": {
+      "documentType": "Insurance Policy"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 2022538375,
+      "load_duration": 4212916,
+      "prompt_eval_count": 726,
+      "prompt_eval_duration": 1716954000,
+      "eval_count": 9,
+      "eval_duration": 266495999,
+      "done_reason": "stop"
+    },
+    "seconds": 2.0241795839974657,
+    "model": "gemma4:e4b-it-q4_K_M",
+    "variant": "new",
+    "key": "s3-D1",
+    "split": "development",
+    "kind": "synthetic",
+    "mode": "text",
+    "pairPosition": 1,
+    "evidenceHash": "9d2c827755222d3a87ae091831cc1cc4b2dc95fe33f7b1abf505e938838b5c03",
+    "label": "Insurance Policy",
+    "correct": true
+  },
+  {
+    "result": {
+      "documentType": "Application"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 6474223875,
+      "load_duration": 72130209,
+      "prompt_eval_count": 1393,
+      "prompt_eval_duration": 5909746000,
+      "eval_count": 8,
+      "eval_duration": 204225000,
+      "done_reason": "stop"
+    },
+    "seconds": 6.492092042026343,
+    "model": "gemma4:e2b-it-q4_K_M",
+    "variant": "new",
+    "key": "r1-D1",
+    "split": "development",
+    "kind": "personal",
+    "mode": "image",
+    "pairPosition": 1,
+    "evidenceHash": "1752c8f323d86335b27e30c902f332bf77cdd3fe83a1b819d1402cf4a7ac6d4a",
+    "label": "Application",
+    "correct": false
+  },
+  {
+    "result": {
+      "documentType": "Booking Confirmation"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 8274479667,
+      "load_duration": 21010709,
+      "prompt_eval_count": 1393,
+      "prompt_eval_duration": 7880934000,
+      "eval_count": 9,
+      "eval_duration": 257661000,
+      "done_reason": "stop"
+    },
+    "seconds": 8.284658042015508,
+    "model": "gemma4:e4b-it-q4_K_M",
+    "variant": "new",
+    "key": "r2-D1",
+    "split": "development",
+    "kind": "personal",
+    "mode": "image",
+    "pairPosition": 1,
+    "evidenceHash": "960bcd52aacf435d4dee5847152e3d193874d98b7e1f8938774a1842a421ce61",
+    "label": "Booking Confirmation",
+    "correct": true
+  },
+  {
+    "result": {
+      "documentType": "Booking confirmation"
+    },
+    "error": null,
+    "metrics": {
+      "total_duration": 5099191834,
+      "load_duration": 7674917,
+      "prompt_eval_count": 1239,
+      "prompt_eval_duration": 4833777000,
+      "eval_count": 9,
+      "eval_duration": 211723000,
+      "done_reason": "stop"
+    },
+    "seconds": 5.101745749998372,
+    "model": "gemma4:e2b-it-q4_K_M",
+    "variant": "new",
+    "key": "r2-D3",
+    "split": "development",
+    "kind": "personal",
+    "mode": "image",
+    "pairPosition": 2,
+    "evidenceHash": "4a383fbc2e649cb9f47b05dfdf844e37902d010665ea06ac4ee9b1760df33a59",
+    "label": "Booking confirmation",
+    "correct": true
+  }
+]

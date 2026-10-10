@@ -1,0 +1,30 @@
+{
+  "case": "en_employment_certificate",
+  "started": 1790855439.645599,
+  "seconds": 0.33671092987060547,
+  "request": {
+    "input": {
+      "evidence": "CERTIFICATE OF EMPLOYMENT\nThis is to certify that the holder is employed full-time as a software developer. This certificate confirms employment and is not a salary statement or employment contract.",
+      "rules": "Use clear English document names. Describe the document accurately without inventing names or dates.\n\nEmployment & Pay: Employment contracts, employment certificates, payslips and other employment or pay records.",
+      "understanding": {
+        "description": "This document is a Certificate of Employment confirming full-time employment as a software developer. It explicitly states the nature of the document and its limitations.",
+        "evidence": [
+          {
+            "page": null,
+            "quote": "CERTIFICATE OF EMPLOYMENT"
+          },
+          {
+            "page": null,
+            "quote": "This is to certify that the holder is employed full-time as a software developer. This certificate confirms employment and is not a salary statement or employment contract."
+          }
+        ],
+        "uncertainty": ""
+      }
+    },
+    "operation": "name"
+  },
+  "response": {
+    "title": "Certificate of Employment"
+  },
+  "exit": 0
+}

@@ -1,0 +1,98 @@
+{
+  "sv_residence_card|Identity & Immigration": {
+    "response": {
+      "supported": true
+    },
+    "seconds": 1.5809894580000048
+  },
+  "sv_bank_statement|Banking & Taxes": {
+    "response": {
+      "supported": true
+    },
+    "seconds": 0.33828845800000806
+  },
+  "sv_payslip|Employment & Pay": {
+    "response": {
+      "supported": true
+    },
+    "seconds": 0.33749579099999494
+  },
+  "sv_tenancy|Housing & Utilities": {
+    "response": {
+      "supported": true
+    },
+    "seconds": 0.34921350000000473
+  },
+  "sv_home_insurance|Insurance": {
+    "response": {
+      "supported": true
+    },
+    "seconds": 0.3181587919999913
+  },
+  "sv_medical_certificate|Medical Records": {
+    "response": {
+      "supported": true
+    },
+    "seconds": 0.3400408330000033
+  },
+  "en_agency_attachment|Identity & Immigration": {
+    "response": {
+      "supported": false
+    },
+    "seconds": 0.3261186659999993
+  },
+  "en_electricity_bill|Housing & Utilities": {
+    "response": {
+      "supported": true
+    },
+    "seconds": 0.3292843750000003
+  },
+  "en_injected_insurance|Insurance": {
+    "response": {
+      "supported": true
+    },
+    "seconds": 0.32480970800000364
+  },
+  "en_employment_certificate|Employment & Pay": {
+    "response": {
+      "supported": true
+    },
+    "seconds": 0.3454076250000071
+  },
+  "sv_residence_card_image|Identity & Immigration": {
+    "response": {
+      "supported": true
+    },
+    "seconds": 0.3448105840000011
+  },
+  "sv_home_insurance_image|Insurance": {
+    "response": {
+      "supported": false
+    },
+    "seconds": 0.31907679200000416
+  },
+  "en_employment_certificate_pdf|Employment & Pay": {
+    "response": {
+      "supported": false
+    },
+    "seconds": 0.3348016249999972
+  },
+  "en_later_page_maintenance|Maintenance & Repairs": {
+    "response": {
+      "supported": true
+    },
+    "seconds": 0.32828920800000105
+  },
+  "ambiguous_fragment|Maintenance & Repairs": {
+    "response": {
+      "supported": false
+    },
+    "seconds": 0.3268404579999924
+  },
+  "ambiguous_fragment|Identity & Immigration": {
+    "response": {
+      "supported": false
+    },
+    "seconds": 0.32132033300000273
+  }
+}
