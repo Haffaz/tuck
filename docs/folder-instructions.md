@@ -11,7 +11,7 @@ Documents/                         ← the destination root
 │   └── instructions.md            ← general organization and naming preferences
 ├── Migration/
 │   ├── .tuck/instructions.md       ← migration documents and shared preferences
-│   └── AGENCY/
+│   └── Cedar/
 │       └── .tuck/instructions.md   ← specific application bundle instructions
 ├── Finances/
 │   └── .tuck/instructions.md
@@ -35,7 +35,7 @@ enabled: true
 priority: 0
 ---
 
-All documents from AGENCY or its application folders belong here,
+All documents from Cedar or its application folders belong here,
 including employment certificates and other supporting documents.
 Name each attachment by its actual document type.
 ```
@@ -48,7 +48,7 @@ Name each attachment by its actual document type.
 2. A destination inherits each ancestor's instructions; the more specific prompt refines the parent. Siblings do not contribute naming preferences.
 3. Disabling a parent disables its entire branch, while retaining each child's own switch and text. Re-enabling the parent restores the enabled children.
 4. An ordinary folder without an instruction file is not an automatic destination. It can be a category containing configured children; those children inherit from the nearest configured ancestors.
-5. The model checks explicit source-folder associations first, so a AGENCY supporting attachment can remain in its application bundle. The cited name must appear in both the source folders and the selected destination prompt.
+5. The model checks explicit source-folder associations first, so a Cedar supporting attachment can remain in its application bundle. The cited name must appear in both the source folders and the selected destination prompt.
 6. Otherwise Apple makes one selection from enabled destinations, using their inherited prompts and document contents/filename. This keeps folder selection bounded without separate model calls for every level. After selection, naming uses root → parent → destination instructions.
 
 These are model instructions, not guaranteed semantic or factual enforcement. Rust enforces enabled destinations, depth, tool budgets, and file-operation constraints. Child prompts cannot override those application limits. After Start Tuck, clear validated matches file automatically; uncertainty stays for input. Uncertain routing leaves the destination blank for the user to choose; uncertain naming keeps the original filename.
@@ -82,7 +82,7 @@ See [file-based storage](storage.md) for persistence and recovery, and [AI accur
 
 A short sentence describing what belongs in the folder is enough. For a blank rule, enter a folder name and choose **Suggest description**. Apple uses that name and the current root/ancestor rules to write an editable draft. It does not read documents for this action. The draft stays in the UI until **Save rules**; generation does not create directories or change `.tuck` files. Existing descriptions are preserved. If the user edits the draft while generation is running, the stale result is discarded.
 
-A parent describes the broad category; a child describes its additional requirement. For example, Migration can contain immigration documents, while Migration/AGENCY requires an explicit AGENCY association. A child's exclusions apply only to that child. Avoid identical descriptions for sibling folders: Tuck asks you to distinguish them before making a destination suggestion.
+A parent describes the broad category; a child describes its additional requirement. For example, Migration can contain immigration documents, while Migration/Cedar requires an explicit Cedar association. A child's exclusions apply only to that child. Avoid identical descriptions for sibling folders: Tuck asks you to distinguish them before making a destination suggestion.
 
 ## Remembering a filing example
 
@@ -95,7 +95,7 @@ Examples are ordinary editable Markdown in the existing folder file:
 ```markdown
 ## Filing example
 
-Belongs here: A bank statement included in my AGENCY application.
+Belongs here: A bank statement included in my Cedar application.
 Does not belong here: An unrelated monthly bank statement.
 ```
 

@@ -1,1 +1,0 @@
-The original report describes description caching. The temporary baseline root did not contain `.tuck`, so description caching was not active. Later evaluations create `.tuck` and exercise the production cache. Semantic scores remain valid; timing is not a controlled comparison.

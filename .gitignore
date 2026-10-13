@@ -8,3 +8,9 @@ playwright-report/
 .DS_Store
 *.local
 src-tauri/resources/tuck-apple
+
+# Python bytecode
+__pycache__/
+
+# Claude Code worktrees
+.claude/worktrees/

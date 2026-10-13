@@ -1,1 +1,0 @@
-Reserved before inspecting candidate 27 results. Twelve clear records, two review records, three nesting ceilings, default and explicit rules. New entities and several unseen record types. Same 95 percent and zero wrong automatic acceptance criteria. No tuning against this set.

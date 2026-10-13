@@ -329,7 +329,7 @@ mod tests {
         ] {
             assert!(!valid_folder(folder, 2), "{folder}");
         }
-        assert!(valid_folder("Migration/AGENCY", 2));
+        assert!(valid_folder("Migration/Cedar", 2));
     }
     #[test]
     fn second_level_destinations_are_supported_and_third_levels_fail() {

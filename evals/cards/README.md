@@ -6,7 +6,7 @@ any commit. Never moves files.
 
 ```sh
 python3 evals/cards/make_corpus.py /private/tmp/tuck-corpus        # 35 mixed docs: long, scans, sv/de
-python3 evals/cards/from_fixtures.py /private/tmp/tuck-heldout     # 29 docs from rules-nesting "diverse"
+python3 evals/cards/from_fixtures.py /private/tmp/tuck-heldout     # 29 docs from evals/fixtures
 TUCK_CORPUS=/private/tmp/tuck-corpus TUCK_CORPUS_REPORT=/private/tmp/report.json TUCK_CORPUS_NESTING=2 \
   cargo test --manifest-path src-tauri/Cargo.toml live_corpus_suggest_and_file -- --ignored --nocapture
 ```
@@ -14,7 +14,7 @@ TUCK_CORPUS=/private/tmp/tuck-corpus TUCK_CORPUS_REPORT=/private/tmp/report.json
 Requires Apple Intelligence. `pairPrecision`/`pairRecall` compare top-level suggested folders with
 gold subjects over document pairs; documents with gold "Needs Review" are excluded from pairs.
 
-## Results, 10 October 2026 ([reports](../reports/2026-10-10/card-pipeline/))
+## Results, 10 October 2026
 
 Old = commit 49c1291 (describe → group → match → check). New = card clustering.
 

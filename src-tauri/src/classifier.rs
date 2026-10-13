@@ -225,7 +225,7 @@ mod tests {
             use_ai: false,
             ..Preferences::default()
         };
-        let d = classify("AGENCY insurance policy.txt", "bank statement", &p);
+        let d = classify("Cedar insurance policy.txt", "bank statement", &p);
         assert_eq!(d.folder, "Needs Review");
         assert!(d.title.is_empty());
         assert!(d.reason.contains("off"));
@@ -343,7 +343,7 @@ mod tests {
     fn live_apple_folder_instructions() {
         let reader = Path::new(env!("CARGO_MANIFEST_DIR")).join("resources/tuck-reader");
         let dir = tempfile::tempdir_in("/private/tmp").unwrap();
-        let parent = dir.path().join("AGENCY").join("Supporting documents");
+        let parent = dir.path().join("Cedar").join("Supporting documents");
         fs::create_dir_all(&parent).unwrap();
         let path = parent.join("scan.txt");
         let text = "Employment contract. The employee works as an engineer for Acme.";
@@ -354,7 +354,7 @@ mod tests {
             ..Preferences::default()
         };
         p.rules = vec![
-            crate::model::Rule { document_types: Vec::new(), folder: "Migration".into(), instruction: "All my migration documents should go here. Include files from AGENCY and all supporting documents in AGENCY folders, even employment contracts.".into(), enabled: true },
+            crate::model::Rule { document_types: Vec::new(), folder: "Migration".into(), instruction: "All my migration documents should go here. Include files from Cedar and all supporting documents in Cedar folders, even employment contracts.".into(), enabled: true },
             crate::model::Rule { document_types: Vec::new(), folder: "Work".into(), instruction: "Keep employment contracts here unless they belong to a migration application bundle.".into(), enabled: true },
         ];
         let d = classify_with_tools("scan.txt", text, &p, &[], Some((&path, &reader)));
@@ -390,7 +390,7 @@ mod tests {
             ..Preferences::default()
         };
         p.rules[0] =
-            serde_json::from_str(r#"{"folder":"Migration/AGENCY","keywords":"agency"}"#).unwrap();
+            serde_json::from_str(r#"{"folder":"Migration/Cedar","keywords":"cedar"}"#).unwrap();
         let text = "Employment contract. The employee works as an engineer for Acme.";
         fs::write(&path, text).unwrap();
         let d = classify_with_tools("scan.txt", text, &p, &[], Some((&path, &reader)));
@@ -398,7 +398,7 @@ mod tests {
             "Migrated bundle instruction: {}",
             serde_json::to_string(&d).unwrap()
         );
-        assert_eq!(d.folder, "Migration/AGENCY");
+        assert_eq!(d.folder, "Migration/Cedar");
         let unrelated = dir.path().join("Incoming");
         fs::create_dir(&unrelated).unwrap();
         let bank = unrelated.join("scan.txt");
@@ -410,11 +410,11 @@ mod tests {
             serde_json::to_string(&d).unwrap()
         );
         assert_eq!(d.folder, "Finances");
-        let named = dir.path().join("AGENCY employment contract.txt");
+        let named = dir.path().join("Cedar employment contract.txt");
         let text = "Employment contract. The employee works as an engineer for Acme.";
         fs::write(&named, text).unwrap();
         let d = classify_with_tools(
-            "AGENCY employment contract.txt",
+            "Cedar employment contract.txt",
             text,
             &p,
             &[],
@@ -424,7 +424,7 @@ mod tests {
             "Filename association: {}",
             serde_json::to_string(&d).unwrap()
         );
-        assert_eq!(d.folder, "Migration/AGENCY");
+        assert_eq!(d.folder, "Migration/Cedar");
     }
     #[test]
     #[ignore = "Requires Apple Intelligence; synthetic hierarchy and inherited naming"]

@@ -218,7 +218,7 @@ mod tests {
     use super::*;
     #[test]
     fn legacy_keywords_migrate_once_preserving_order_and_switches() {
-        let p: Preferences = serde_json::from_str(r#"{"rules":[{"folder":"Custom","keywords":"acme, Swedish letters","enabled":false},{"folder":"Migration","keywords":"agency"}]}"#).unwrap();
+        let p: Preferences = serde_json::from_str(r#"{"rules":[{"folder":"Custom","keywords":"acme, Swedish letters","enabled":false},{"folder":"Migration","keywords":"cedar"}]}"#).unwrap();
         assert_eq!(p.rules[0].folder, "Custom");
         assert!(!p.rules[0].enabled);
         assert!(p.rules[0].instruction.contains("acme, Swedish letters"));

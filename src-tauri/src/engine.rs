@@ -1420,7 +1420,7 @@ else:
             .unwrap();
         let item = engine.snapshot().items[0].clone();
         let mut p = engine.snapshot().preferences;
-        p.rules.iter_mut().find(|r| r.folder == "Banking & Taxes").unwrap().instruction.push_str("\n\n## Filing example\nBelongs here: An unrelated monthly bank statement.\nDoes not belong here: An attachment in a AGENCY application.");
+        p.rules.iter_mut().find(|r| r.folder == "Banking & Taxes").unwrap().instruction.push_str("\n\n## Filing example\nBelongs here: An unrelated monthly bank statement.\nDoes not belong here: An attachment in a Cedar application.");
         engine.save_preferences(p).unwrap();
         assert!(engine
             .organize(vec![Approval {

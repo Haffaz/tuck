@@ -1,9 +1,0 @@
-[
-  {
-    "pid": 16896,
-    "backend": "llama-server",
-    "draftMTP": true,
-    "context16384": true,
-    "offline": true
-  }
-]

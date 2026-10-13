@@ -28,7 +28,7 @@ Documents/
 │   └── instructions.md         # root prompt
 └── Migration/
     ├── .tuck/instructions.md   # migration prompt
-    └── AGENCY/
+    └── Cedar/
         └── .tuck/instructions.md
 ```
 

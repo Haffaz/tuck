@@ -1,7 +1,0 @@
-{
-  "frozenBeforeExecution": true,
-  "fixtureSha256": "50b6ea49c09b57bee07d9b9493bcc962e70b4d1405fb8e608d31949dcad93576",
-  "clearRecords": 13,
-  "reviewRecords": 2,
-  "acceptance": "95% filing and subjects, 95% requested grouping; zero wrong automatic destinations, depth/naming failures; all ambiguous and mixed records reviewed; absent project remains broad."
-}
