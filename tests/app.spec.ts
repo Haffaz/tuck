@@ -513,47 +513,55 @@ test("a waiting file with an unknown folder must have a folder chosen", async ({
   ).toBeDisabled();
 });
 
-test("each screen renders for visual review", async ({ page }) => {
-  await page.setViewportSize({ width: 1000, height: 760 });
-  await bridge(page);
-  await page.screenshot({ path: "test-results/screen-1-hero.png" });
-  await page.evaluate(() => {
-    const w = window as any;
-    w.holdSuggest = true;
-    w.state.processing = "Reading document 12 of 35";
-  });
-  await page.getByRole("button", { name: "Choose folder" }).click();
-  await expect(page.getByRole("status")).toContainText(
-    "Reading document 12 of 35",
-  );
-  await page.screenshot({ path: "test-results/screen-2-working.png" });
-  await page.evaluate(() => {
-    const w = window as any;
-    w.state.processing = null;
-    w.releaseSuggest();
-  });
-  await expect(
-    page.getByRole("region", { name: "Suggested folders" }),
-  ).toBeVisible();
-  await page
-    .getByRole("button", { name: "Show files in Finance", exact: true })
-    .click();
-  await page.screenshot({ path: "test-results/screen-3-proposal.png" });
-  await page.getByRole("button", { name: /^Organize 4 files$/ }).click();
-  await expect(page.getByText("1 file needs you.")).toBeVisible();
-  await page.screenshot({ path: "test-results/screen-4-results.png" });
-  await page.emulateMedia({ colorScheme: "dark" });
-  await page.screenshot({ path: "test-results/screen-5-results-dark.png" });
-});
+/** Screens for visual review; `npm run screenshots` writes them to docs/images at 2x. */
+const SHOTS = process.env.TUCK_SCREENSHOTS;
+const shot = (name: string) => `${SHOTS || "test-results"}/${name}.png`;
 
-test("dark mode screens render for visual review", async ({ page }) => {
-  await page.setViewportSize({ width: 1000, height: 760 });
-  await page.emulateMedia({ colorScheme: "dark" });
-  await bridge(page);
-  await page.screenshot({ path: "test-results/screen-6-hero-dark.png" });
-  await page.getByRole("button", { name: "Choose folder" }).click();
-  await page
-    .getByRole("button", { name: "Show files in Finance", exact: true })
-    .click();
-  await page.screenshot({ path: "test-results/screen-7-proposal-dark.png" });
+test.describe("screens", () => {
+  test.use({ deviceScaleFactor: SHOTS ? 2 : 1 });
+
+  test("each screen renders for visual review", async ({ page }) => {
+    await page.setViewportSize({ width: 1000, height: 760 });
+    await bridge(page);
+    await page.screenshot({ path: shot("start") });
+    await page.evaluate(() => {
+      const w = window as any;
+      w.holdSuggest = true;
+      w.state.processing = "Reading document 12 of 35";
+    });
+    await page.getByRole("button", { name: "Choose folder" }).click();
+    await expect(page.getByRole("status")).toContainText(
+      "Reading document 12 of 35",
+    );
+    await page.screenshot({ path: shot("reading") });
+    await page.evaluate(() => {
+      const w = window as any;
+      w.state.processing = null;
+      w.releaseSuggest();
+    });
+    await expect(
+      page.getByRole("region", { name: "Suggested folders" }),
+    ).toBeVisible();
+    await page
+      .getByRole("button", { name: "Show files in Finance", exact: true })
+      .click();
+    await page.screenshot({ path: shot("suggestion") });
+    await page.getByRole("button", { name: /^Organize 4 files$/ }).click();
+    await expect(page.getByText("1 file needs you.")).toBeVisible();
+    await page.screenshot({ path: shot("done") });
+    await page.emulateMedia({ colorScheme: "dark" });
+    await page.screenshot({ path: shot("done-dark") });
+  });
+
+  test("dark mode screens render for visual review", async ({ page }) => {
+    await page.setViewportSize({ width: 1000, height: 760 });
+    await page.emulateMedia({ colorScheme: "dark" });
+    await bridge(page);
+    await page.screenshot({ path: shot("start-dark") });
+    await page.getByRole("button", { name: "Choose folder" }).click();
+    await page
+      .getByRole("button", { name: "Show files in Finance", exact: true })
+      .click();
+    await page.screenshot({ path: shot("suggestion-dark") });
+  });
 });

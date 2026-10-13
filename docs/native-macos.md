@@ -1,41 +1,65 @@
 # Native macOS integration
 
-## Reading documents
+Tuck uses Apple frameworks for everything that touches documents and the system. This page lists
+which ones, and how they are wired into a Tauri app.
 
-Readable PDF pages retain the PDFKit embedded-text path. Pages with fewer than 40 trimmed characters, or explicitly requested OCR, are rendered at up to 1600 x 2200 and read with Vision `RecognizeDocumentsRequest` on macOS 26+. Images are oriented and bounded to 2200 pixels. Paragraphs, lists and table cells become text with HTML tables; merged-cell spans are retained. A serializer coverage check falls back to Vision's transcript when a word would be omitted. Geometric block ordering is a simple approximation, not a guarantee for complex multi-column layouts.
+## Reading documents (`tuck-reader`)
 
-On older systems, failed structured recognition or empty results use accurate `VNRecognizeTextRequest`. Language detection and correction are enabled. The reader does not log or persist full extracted text. The later understanding stage stores short verified evidence quotes alongside descriptions; see [storage](storage.md). Existing 12-page / 14 KB default bounds and the parent's timeout remain.
+- **PDFKit** extracts embedded text page by page (up to 12 pages). Pages with fewer than 40
+  characters are rendered at up to 1600 × 2200 and read with OCR.
+- **Vision `RecognizeDocumentsRequest`** (macOS 26) reads scans with structure: paragraphs, lists
+  and table cells, with tables kept as HTML. A coverage check falls back to Vision's plain transcript
+  if the structured output would drop a word. When the structured API gives no text,
+  **`VNRecognizeTextRequest`** is used, with automatic language detection and correction.
+- **OCR confidence** decides whether a scan is readable. The document API's confidence is coarse,
+  so pages below 0.6 are re-checked with `VNRecognizeTextRequest`; only pages that both rate low
+  are treated as unreadable.
+- **Vision document segmentation + Core Image** straighten a photographed page in memory when a
+  large, clearly skewed sheet is detected. Originals are never rewritten.
+- **`VNClassifyImageRequest`** labels photos that contain little text ("beach", "dog"), and tells
+  pictures of paper from scenes.
+- **`VNDetectFaceRectanglesRequest`** and **`VNDetectBarcodesRequest`** run on page 1 to find a
+  photo of a person (ID cards, passports) and barcodes or QR codes (tickets, payment slips).
+- **Extended attributes**: the reader reads `com.apple.metadata:kMDItemWhereFroms`, which Safari and
+  Mail set on downloads, directly with `getxattr`, so it works whether or not Spotlight indexed the
+  folder. Only the domain is kept.
 
-Photographs can be rectified in memory with Vision document detection and Core Image perspective correction. Only a large, high-confidence, visibly skewed detected sheet qualifies. Original files are never rewritten. If corrected recognition fails or is empty, the original image is read. Cropping still requires broader real-world evaluation; the confidence threshold is a detector heuristic, not proof that all relevant context was preserved.
+The reader does not log or store the text it extracts.
 
-## Preview
+## Models and embeddings (`tuck-apple`)
 
-Click a document name in Needs attention or Activity to open a reusable AppKit window containing `QLPreviewView`. Keyboard activation uses the native button behavior. Escape closes the preview, and closing releases its document. Rust accepts a session document ID, looks up the original or actual organized destination, and rejects unavailable/non-regular files. The Swift bridge runs on the main thread inside Tauri. Previewing never authorizes organization.
+- **Foundation Models** runs Apple's on-device language model. Document requests use the
+  `permissiveContentTransformations` guardrail mode, which Apple documents for transforming
+  user-provided text; guided output can still be refused, so card requests fall back to plain text.
+  Prompts are counted against the model's context size before sending.
+- **NaturalLanguage `NLEmbedding.sentenceEmbedding(for: .english)`** turns each card into a vector
+  for clustering and folder ranking. No language model is involved in that step.
+- **URLSession** talks to custom connections with an ephemeral configuration: no cookies, cache,
+  proxies or redirects (see [model connections](model-connections.md)).
+- **Security / Keychain** stores API keys per connection type and endpoint.
+
+## Preview and folder access (`TuckMac`)
+
+`TuckMac.swift` is compiled into a static library and linked into the Tauri binary.
+
+- **Quick Look**: clicking a file name opens a reusable AppKit window with `QLPreviewView`. Rust
+  passes only a session document ID; the path is looked up and checked in Rust.
+- **Security-scoped bookmarks**: after a folder is chosen, a bookmark is saved in the app support
+  folder (outside the document folder). On launch it is resolved and renewed, so a renamed folder is
+  found again.
+
+The app is not sandboxed yet. A Mac App Store build would need matching entitlements and checks
+that the helpers inherit the folder grant.
 
 ## Watching
 
-`notify` selects FSEvents on macOS. Notifications are advisory wakeups; the existing enumeration, six-second settling period, signatures, source hashes, settings revisions and move validation still decide what to process. Idle folders reconcile every 60 seconds. Pending changes poll every three seconds until settled. An unavailable or failed native subscription uses the previous polling behavior. Stopping/changing folders drops subscriptions and isolates callback flags by folder.
+The Rust `notify` crate uses **FSEvents**. Events only wake a scan; the scan, a six-second settling
+period, file signatures and hashes decide what is read. Idle folders are rescanned every minute to
+recover missed events, and if FSEvents is unavailable Tuck falls back to polling every three seconds.
 
-## Folder access
+## Building
 
-The in-process Swift bridge creates a security-scoped bookmark after folder selection, stored as `folder-access.json` beside the app's root pointer, outside the document folder. It contains a path and opaque bookmark data, not document contents or session history. On restart, it resolves the bookmark, renews stale data and retains the URL grant before Rust reads settings. A renamed folder can be resolved and the pointer updated. Older installations without a bookmark keep their saved path and create a bookmark when accessible. Failed grants ask the user to choose the folder again.
-
-The current distributed app is not App-Sandbox enabled. Bookmark round trips in this build do not certify an App Store sandbox configuration. A sandboxed distribution still needs matching entitlements, picker/import scope handling, and validation of the OCR helpers' inherited permissions.
-
-## Build and scope
-
-`build.rs` compiles the Swift preview/access bridge as a static library linked into Tauri, using system Swift runtime libraries. The reader remains a bounded subprocess. No extra UI helper app or local service is introduced. Separate language detection and Translation preflight are disabled; Vision OCR remains. Content tagging and Spotlight indexing are not added by this change.
-
-## Verification
-
-Rust tests cover idle scan suppression, event/settling/fallback scheduling, subscription shutdown, existing watcher/file-operation behavior, bookmark persistence and preview path selection. Playwright checks that preview dispatch uses a document ID without organizing. Live native checks use synthetic files only; accuracy comparisons are under `evals/reports/2026-09-30/apple-document-extraction/` and do not imply every OCR input improves.
-
-### Verification on 2026-09-30
-
-- Rust: 65 passed, 8 live-model tests ignored; Clippy passed with warnings denied.
-- UI: 31 Playwright tests passed; production frontend and macOS app bundle built.
-- Native smoke: a synthetic folder bookmark resolved after a rename; Quick Look opened and released its document when closed.
-- Reader smoke: embedded PDF text retained the expected bank-statement heading (0.19 s); forced OCR retained a synthetic table (0.29 s). These are individual warm smoke checks, not performance benchmarks.
-- Photo smoke: a synthetic perspective-distorted page was rectified and its bank-statement heading remained readable. Broader photograph accuracy is still unverified.
-
-The build output is `src-tauri/target/release/bundle/macos/Tuck.app`. These checks do not run a live personal-folder organization or the full Apple model accuracy suite.
+`src-tauri/build.rs` compiles the Swift sources with `swiftc` when Rust builds:
+`tuck-reader` and `tuck-apple` into `src-tauri/resources/` (bundled with the app), and `TuckMac`
+into a static library. A helper is recompiled only when its sources are newer than the binary,
+because Tauri's dev watcher would otherwise rebuild in a loop.

@@ -1,75 +1,142 @@
 # Tuck
 
-A little home for every document. A local macOS document organizer built with Tauri 2, React, TypeScript, Rust, PDFKit, Apple Vision, and Apple Intelligence.
+**A place for every document.** Tuck is a macOS app that reads a messy folder of PDFs, scans and
+photos on your Mac, suggests a tidy set of folders, and moves everything into place when you say
+so. With Apple Intelligence it runs entirely on device: no account, no cloud, no database.
 
-## How to use it
+<p align="center">
+  <img src="docs/images/suggestion.png" alt="Suggested folders with file counts, ready to organize" width="720">
+</p>
 
-1. **Choose folder.** Tuck reads every supported document in it (and its subfolders) on this Mac and suggests folders. Nothing moves yet.
-2. **Check the suggestion.** Each folder shows how many files it gets. Rename (✎) or remove (✕) a folder, open it to move a file elsewhere or edit what belongs there. Files Tuck could not read wait for you.
-3. **Organize.** The folders are saved and the files move in one step, renamed like `Bank Statement - Nordea - 2026-03` unless renaming is off. Tick **Keep watching for new files** to have new documents filed as they arrive; you can also drop files on the window.
-4. **Files that need you** are listed with a folder picker: **File** or **Skip**. **Done** ends the session.
+<p align="center">
+  <img src="docs/images/start.png" alt="Start screen" width="350">
+  <img src="docs/images/done-dark.png" alt="Organized, in dark mode" width="350">
+</p>
 
-A folder that already has Tuck folders shows them with **Organize new files** and **Suggest again**. Settings (gear, or Command-comma) holds the AI model, folder levels and renaming; folder preferences and filing instructions are under **Advanced**.
+## What it does
 
-Files inside the root are moved; external files are copied with originals preserved. Source hashes, rule revisions, enabled destinations and exclusive output paths are checked before each operation. Existing documents are never overwritten. The model can still make a wrong but plausible decision; automatic filing does not imply calibrated certainty.
+1. **Choose a folder.** Tuck reads every document in it: PDF text, OCR for scans, labels for photos.
+2. **Check the suggestion.** Folders such as Finance, Home and Health appear with their file counts.
+   Rename or remove a folder, move a file, or edit what belongs where. Nothing has moved yet.
+3. **Organize.** Folders are created and files move in one step, renamed like
+   `Bank Statement - Nordea - 2026-03`. Anything Tuck is unsure about waits for you.
 
-The session supports up to 2,000 PDF, PNG, JPEG, HEIC, TIFF, TXT or Markdown documents, each at most 100 MB. A folder exceeding the scan limits is rejected rather than partially organized. Unreadable and oversized documents are shown in the map. Reading uses bounded excerpts and optional page tools, not guaranteed exhaustive page comprehension. Reading and describing run a few documents at a time; the on-device model itself serves one request at a time.
+Tick **Keep watching for new files** and new downloads are filed as they arrive.
 
-The lightweight map connects documents to source folders and identical content. It is a setup snapshot, not a semantic knowledge graph or persistent search index. It stays in memory. Watching checks new/changed files every three seconds while the worker is available, waits at least six seconds of unchanged size/time, then reads them again. Own moves are recorded so they do not cause a filing loop. Rules edited on disk stop automatic filing.
+## How it works
 
-The interface follows system light/dark appearance and Reduce Motion. There is one root, no database, built-in cloud sync, saved operation history or durable undo. Reusable document cards live in `.tuck/cache/cards/`; folder choice uses those cards with your current rules. See [architecture diagrams](docs/architecture.md), [product experience](docs/product-experience.md), [category suggestions](docs/category-suggestions.md) and [automatic organization](docs/automatic-organization.md).
-
-## Simple local storage
-
-```text
-Documents/
-├── .tuck/
-│   ├── settings.json           # small preferences
-│   └── instructions.md         # root prompt
-└── Migration/
-    ├── .tuck/instructions.md   # migration prompt
-    └── Cedar/
-        └── .tuck/instructions.md
+```mermaid
+flowchart LR
+    A["Read<br/>PDFKit · Vision OCR"] --> B["Describe<br/>one card per document"]
+    B --> C["Group<br/>cluster by kind"]
+    C --> D["Name<br/>folders and subjects"]
+    D --> E["You review"]
+    E --> F["Move<br/>checked by Rust"]
 ```
 
-The app only remembers the destination root in `~/Library/Application Support/app.tuck.desktop/preferences.json`. The document map, session and analysis results are held in memory and disappear when Tuck closes. Organized files remain in place. Clearing a session does not undo completed operations.
+- Each document gets a **card**: what kind of document it is, who issued it, its date and three
+  tags, written by the language model, plus a sentence embedding from Apple's NaturalLanguage
+  framework.
+- Documents are **grouped mathematically**, with average-linkage clustering on those embeddings. The
+  model only names the groups and places them under broad subjects, so one odd answer cannot
+  scatter your files.
+- **Rust owns every file operation.** The models return short pieces of data and never touch files.
+  Each move re-checks the file's hash, the destination and the root, and never overwrites anything.
+- **Unreadable scans are not guessed.** Low text-recognition confidence (for scripts Apple's OCR does
+  not support) sends a file to you instead.
+- **Local clues** help with thin documents: the site a file was downloaded from, PDF properties and
+  form fields, a photo of a person, barcodes, and passport machine-readable lines.
 
-SQLite is not used. Existing database files, JSON state, and backups from previous builds are left untouched. On first use, the MVP can read the previous selected root and preferences from legacy JSON; it does not import queues, history, or saved corrections. Existing folder instruction files take precedence. It does not read settings changed exclusively inside an old SQLite database; review Preferences when switching from that build.
+The full story, with diagrams, is in [docs/architecture.md](docs/architecture.md).
 
-See [storage and recovery](docs/storage.md) and [folder rules](docs/folder-instructions.md).
+## Built with
 
-## AI connections
+| Layer                   | Technology                                                                                                             |
+| ----------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| App shell               | [Tauri 2](https://tauri.app)                                                                                           |
+| Interface               | React 19, TypeScript, Vite, [Lucide](https://lucide.dev) icons                                                         |
+| Core                    | Rust: session, clustering, file operations, FSEvents watching (`notify`)                                               |
+| On-device AI            | Apple **Foundation Models** (Apple Intelligence), **NaturalLanguage** sentence embeddings                              |
+| Reading                 | **PDFKit**, **Vision** document and text recognition, face and barcode detection, image classification, **Core Image** |
+| macOS                   | **Quick Look** preview, security-scoped bookmarks, **Keychain**                                                        |
+| Other models (optional) | Ollama, any OpenAI-compatible API, Anthropic, via [custom connections](docs/model-connections.md)                      |
+| Tests                   | Rust unit tests, Swift checks, Playwright UI tests, synthetic evaluation corpora                                       |
 
-**Settings → AI connection** defaults to Apple Intelligence on this Mac. Choose **Connect another model** to enter an Ollama, OpenAI-compatible or Anthropic endpoint and any supported text model ID. **Find models** can populate IDs from the service. API keys are optional where the service permits and are saved in macOS Keychain, separately from folder settings.
+The Swift parts are two small command-line helpers and a static library, compiled by `build.rs`,
+because Apple's frameworks are reachable only from Swift. Rust talks to the helpers with one JSON
+request per process.
 
-**Test connection** checks the draft with a short greeting. **Save settings** applies it explicitly. Custom services receive document text and filing instructions; the UI identifies the selected endpoint. There is no silent fallback. Legacy Gemma settings remain readable. See [model connections](docs/model-switching.md) for protocols, privacy and limits.
+## Privacy
 
-**Settings → Folder nesting** sets a maximum of one or two folder levels. Fewer levels are always allowed. Optional **Folder creation preferences** beside it describe how new folders should be grouped; saved folder rules describe what belongs in each folder. Technical limits are managed automatically. Review proposals before changing the structure.
+- With Apple Intelligence, documents never leave your Mac.
+- With a custom connection, the extracted text of each document (first 5,000 characters) is sent to
+  the endpoint you choose. API keys live in the macOS Keychain.
+- Folder rules and settings are plain files in a `.tuck` folder next to your documents. A rebuildable
+  cache of document cards lives there too. Nothing else is stored.
 
-Apple uses verified source lines and staged subject/subfolder suggestions for any identifiable document type. Short, complete documents receive proposals; long, incomplete or unclear documents require review. Suggested folders remain editable drafts. See [the current Apple workflow](docs/apple-evidence-workflow.md) for limits and validation. The [rules and nesting evaluation](evals/rules-nesting/README.md) exercises all three rule scopes across projects, invoices, health, education, warranties and travel. See the [measured results and limitations](evals/reports/2026-10-04/rules-nesting/README.md).
+## Requirements
 
-PDFKit and Vision extract document text for every model. The same serial workflow describes each document, suggests categories or chooses a folder, independently verifies the match, and optionally suggests an English filename. Production roles currently receive extracted text, not PDF/image attachments. Rust validates evidence, paths, source contents and preference revisions before file operations. Unclear results need input; naming failure preserves the original name.
+- macOS 26 or later on Apple silicon, with Apple Intelligence turned on (or a custom connection)
+- Xcode 26 or later (or its command-line tools) for `swiftc`
+- Rust (stable) and Node.js 20 or later
 
-Automatic language detection, translation preflight and download suggestions are disabled. See [architecture diagrams](docs/architecture.md), [model switching](docs/model-switching.md), and [accuracy evidence](docs/ai-accuracy.md). The header distinguishes on-device AI from a configured model connection.
-
-## Development
-
-Requires Node.js 22.12+ and Xcode Command Line Tools. Rust 1.90 is selected by `rust-toolchain.toml`.
+## Build and run
 
 ```sh
 npm install
-npm run tauri dev
-npm run check
-npm run lint:rust
-npm run tauri build -- --bundles app
+npm run tauri dev      # run the app; the Swift helpers are compiled on first build
+npm run tauri build    # Tuck.app and a .dmg in src-tauri/target/release/bundle
 ```
 
-The app bundle is `src-tauri/target/release/bundle/macos/Tuck.app`. This is a local development build, not a notarized distribution. The normal tests use synthetic documents and mock model outputs; Apple-dependent evaluations are opt-in ignored tests. UI tests mock the Tauri bridge.
+## Tests
 
-## Limits and later work
+```sh
+npm run check          # frontend build, clippy, Rust tests, Swift checks, Playwright UI tests
+npm run test:contracts # custom-connection protocols against local mock servers
+npm run screenshots    # regenerate the images in docs/images
+```
 
-No Google Drive integration or file synchronization yet. Back up the documents and hidden `.tuck` files together. Preferences and instruction text are plaintext; local storage is not additional encryption.
+UI tests run the real interface against a mocked Tauri bridge, so they need no model. Evaluations
+that call Apple Intelligence are opt-in (`cargo test -- --ignored`) and use synthetic documents; see
+[evals/cards](evals/cards/README.md) for the corpora and results.
 
-There is no persistent file-operation journal or automatic crash reconciliation. Copies are written through a synced temporary file and exclusive destination creation. Within-root moves use an exclusive hard link followed by removal of the source. Interruption between those steps can leave two copies; Tuck keeps them and does not silently clean them up or replay work on restart. While watching, Finder edits and moves are detected as changed/new paths and read again. There is no durable identity tracking across app restarts.
+## Project layout
 
-Reconsider SQLite if resumable jobs, durable undo or a persistent document index become necessary. Session-only watching does not require a database.
+```text
+src/                      React interface: App.tsx, screens/, components/
+src-tauri/src/            Rust core
+  engine/                 session, filing queue, organizing
+  reader.rs               reading documents and clues
+  cards.rs                document cards and their cache
+  suggest.rs, cluster.rs  folder suggestions
+  filing.rs               filing decisions
+  files.rs                checked file operations
+src-tauri/swift/          Swift helpers: reader, model helper, macOS integration
+evals/                    synthetic corpora and evaluation scripts
+tests/                    Playwright UI tests
+docs/                     architecture and design notes
+```
+
+## Documentation
+
+- [Architecture](docs/architecture.md): components, reading, cards, suggesting, filing, safety.
+- [Native macOS integration](docs/native-macos.md): the Apple frameworks used and how.
+- [Model connections](docs/model-connections.md): using Ollama, OpenAI-compatible or Anthropic models.
+- [Folder rules](docs/folder-rules.md): the `.tuck` files you can read and edit.
+- [History](docs/history.md): the earlier design, what changed, and lessons learned.
+
+## Limits
+
+Up to 2,000 documents per session; PDF, PNG, JPEG, HEIC, TIFF, text and Markdown up to 100 MB each.
+Cards read the first 5,000 characters. At most two folder levels. The model can still make a
+plausible mistake, so review the suggestion before organizing.
+
+## Acknowledgements
+
+Icons, and the shape of the app icon, come from [Lucide](https://lucide.dev) (ISC license). The
+card-and-cluster approach started as a small prototype called FolderSort; see
+[docs/history.md](docs/history.md).
+
+## License
+
+A license will be added before the first public release.

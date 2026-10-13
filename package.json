@@ -14,7 +14,8 @@
     "format": "prettier --write src tests *.ts *.json README.md",
     "lint:rust": "cargo clippy --manifest-path src-tauri/Cargo.toml --all-targets -- -D warnings",
     "test:swift": "mkdir -p .build && swiftc -parse-as-library src-tauri/swift/TuckModelTests.swift src-tauri/swift/TuckModelSupport.swift src-tauri/swift/TuckConnections.swift src-tauri/swift/TuckModelChoice.swift src-tauri/swift/TuckCards.swift -o .build/model-tests && .build/model-tests && swiftc -parse-as-library src-tauri/swift/TuckClues.swift evals/cards/clue-tests.swift -o .build/clue-tests && .build/clue-tests",
-    "test:contracts": "python3 evals/connection-contract.py > /dev/null && echo 'connection contract checks passed'"
+    "test:contracts": "python3 evals/connection-contract.py > /dev/null && echo 'connection contract checks passed'",
+    "screenshots": "TUCK_SCREENSHOTS=docs/images playwright test -g \"for visual review\""
   },
   "dependencies": {
     "@tauri-apps/api": "^2",

@@ -1,116 +1,238 @@
-# How Tuck works
+# Architecture
 
-Current implementation, checked against the source on 10 October 2026.
+Tuck is a macOS app that reads a folder of documents on your Mac, suggests folders for them and
+moves them when you approve. It is a [Tauri 2](https://tauri.app) app: a React interface, a Rust
+core that owns every file operation, and two small Swift programs that reach Apple frameworks
+Rust cannot call directly.
 
-Tuck reads documents, proposes a filing decision, and checks that decision before changing files. You choose the folder structure and start the filing session. The AI returns suggestions; Rust owns the file operations.
+The models never touch files. They return short pieces of data (a description of a document, a
+folder name, a choice from a list), and Rust checks each answer before anything moves.
 
-## Main components
+## Components
+
+```mermaid
+flowchart LR
+    subgraph UI["Interface · React + TypeScript"]
+        Screens["One screen<br/>folder → suggestion → organize<br/>Settings"]
+    end
+
+    subgraph Core["Core · Rust (Tauri commands)"]
+        Engine["engine/<br/>session, queue, organize"]
+        Reader["reader.rs"]
+        Suggest["suggest.rs + cluster.rs"]
+        Filing["filing.rs"]
+        Cards["cards.rs<br/>card cache"]
+        Files["files.rs<br/>checked moves"]
+        Rules["config.rs · instructions.rs<br/>.tuck settings and rules"]
+        Watch["watching.rs<br/>FSEvents"]
+        Native["native.rs"]
+    end
+
+    subgraph Swift["Swift helpers"]
+        TR["tuck-reader<br/>PDFKit · Vision OCR<br/>faces · barcodes · photo labels"]
+        TA["tuck-apple<br/>Foundation Models<br/>NaturalLanguage embeddings"]
+        TM["TuckMac (static library)<br/>Quick Look · folder bookmarks"]
+    end
+
+    subgraph Models["Models"]
+        Apple["Apple Intelligence<br/>on this Mac"]
+        Custom["Custom connection<br/>Ollama · OpenAI-compatible · Anthropic"]
+    end
+
+    Screens <-->|"invoke"| Engine
+    Engine --> Reader --> TR
+    Engine --> Suggest
+    Engine --> Filing
+    Suggest --> Cards
+    Filing --> Cards
+    Cards -->|"JSON over stdin/stdout"| TA
+    Suggest --> TA
+    Filing --> TA
+    TA --> Apple
+    TA --> Custom
+    Engine --> Files
+    Engine --> Rules
+    Engine --> Watch
+    Engine --> Native --> TM
+```
+
+| Part | Technology | Responsibility |
+| --- | --- | --- |
+| Interface | React 19, TypeScript, Vite | Screens and drafts; it calls Rust through Tauri commands and polls the session state once a second |
+| Core | Rust, Tauri 2 | Session state, scanning, the filing queue, every file operation and its checks |
+| `tuck-reader` | Swift: PDFKit, Vision, ImageIO | Text from PDFs, OCR for scans and photos, text-recognition confidence, photo labels, file clues |
+| `tuck-apple` | Swift: Foundation Models, NaturalLanguage, URLSession, Security | Model requests (Apple or custom), sentence embeddings, API keys in Keychain |
+| `TuckMac` | Swift: AppKit, Quick Look | Document preview and security-scoped folder bookmarks, linked into the app |
+
+Both Swift helpers are separate executables. Each request starts a fresh process that reads one JSON
+request and writes one JSON reply, with a deadline and an output cap. That keeps the model and OCR
+code out of the app process and makes each request independent.
+
+## Reading a document
+
+`reader.rs` runs `tuck-reader` on each file, four at a time.
+
+- **PDFs**: PDFKit text for each page, up to 12 pages. Pages with almost no text are rendered and
+  read with Vision's document recognition, which keeps paragraphs, lists and table cells.
+- **Images**: oriented and read with Vision; a skewed photo of a page is straightened with Core
+  Image first. If there is almost no text, Vision's image classifier labels what the picture shows,
+  so photos can still be grouped.
+- **Text and Markdown**: read directly by Rust.
+
+**Unreadable scans.** OCR reports a confidence for each line. When the fast document API scores a
+page below 0.6, the classic recogniser checks it again. Readable pages score 0.75–1.0, while
+scripts Vision does not support (such as Sinhala or Tamil) score 0.30–0.42. Such scans go to the
+user with a reason instead of being described from garbled text.
+
+**File clues.** The reader also collects facts that are not in the text and passes them to the
+model in a separate block:
+
+| Clue | Source |
+| --- | --- |
+| Downloaded from or sent by (domain only) | the `kMDItemWhereFroms` extended attribute that Safari and Mail write |
+| PDF title, subject, author, creator, producer | PDF document attributes |
+| Form field names | PDF widget annotations |
+| Photo of a person | Vision face detection on page 1 |
+| Barcodes and QR codes | Vision barcode detection; payment and boarding-pass codes are named, never copied |
+| Passport or ID machine-readable zone | the ICAO 9303 lines in the recognised text |
+
+## Cards
+
+Every document gets one **card**: what kind of document it is ("bank statement"), who issued it,
+its main date and three topic tags. `tuck-apple` asks the model for the card in one guided call and
+computes a sentence embedding of the kind and tags with Apple's NaturalLanguage framework.
+
+- Only the first 5,000 characters are read; long documents are read from the start rather than
+  rejected.
+- Cards are written in English whatever the document's language, so a Swedish and an English bank
+  statement look alike.
+- When guided output is refused (Apple applies guardrails to guided generation even in its
+  permissive mode), the helper asks again for a fixed plain-text format and parses it.
+- A card whose kind is only "unknown" or "document" counts as unidentified, and the file waits for
+  the user.
+- Cards are cached in `.tuck/cache/cards/`, keyed by the file's content hash, the extracted text and
+  clues, and the model and helper build. A second suggestion skips this step.
+
+## Suggesting folders
 
 ```mermaid
 flowchart TD
-    UI["Mac app · React in Tauri<br/>One screen: folder → suggestion → organize · Settings"]
-    CORE["Rust engine<br/>Session, queue, rules and revision checks"]
-    EXTRACT["Native document reader<br/>Swift · PDFKit · Vision OCR · text"]
-    AI["AI workflow<br/>Card per document · cluster · name · choose folder"]
-    SELECT["Configured model adapter<br/>Swift helper · validated responses"]
-    APPLE["Apple Intelligence<br/>Default · on this Mac"]
-    CUSTOM["Custom connection<br/>Ollama · OpenAI-compatible · Anthropic"]
-    STORE[("Folder-owned .tuck files<br/>Settings · instructions · evidence cache")]
-    KEYS[("macOS Keychain<br/>API keys by endpoint")]
-    FILES["Checked file operations<br/>Move within root · copy external files"]
-    UI <-->|"Commands and session state"| CORE
-    CORE -->|"Read supported documents"| EXTRACT
-    EXTRACT -->|"Extracted text and page evidence"| AI
-    CORE -->|"Schedule work with saved rules"| AI
-    AI <-->|"Role requests and results"| SELECT
-    SELECT <--> APPLE
-    SELECT <--> CUSTOM
-    KEYS -->|"Key lookup"| SELECT
-    CORE <--> STORE
-    AI -->|"Proposal or needs review"| CORE
-    CORE -->|"Authorized and validated"| FILES
+    A["Cards for every readable document<br/>(3 model requests at a time)"] --> B["Cluster by kind<br/>average-linkage, cosine ≥ 0.75"]
+    B --> C["Model names each cluster<br/>fallback: the most common kind"]
+    C --> D["Model pairs synonyms<br/>Banking + Bank Statements"]
+    D --> E["One model call places kinds under subjects<br/>Finance · Home · Work · Health · …"]
+    E --> F{"Two folder levels?"}
+    F -->|"no"| G["Subjects are the folders"]
+    F -->|"yes"| H["A kind becomes a subfolder only with ≥ 3 documents<br/>and another subfolder or ≥ 3 other documents beside it"]
+    G --> I["Proposal: folders, their rules,<br/>and each file's folder and new name"]
+    H --> I
 ```
 
-Apple processes text on this Mac. Custom connections receive extracted text and the instructions needed for the requested role; their endpoint may be local or remote. Models receive no file-writing tools. There is no automatic provider fallback. Older fixed Gemma configurations remain supported through the legacy local adapter.
+Grouping itself is deterministic. The model only names groups and places them under subjects, so a
+bad reply changes a name, not which documents belong together. Embeddings separate kinds well
+(same kind from different issuers ≈ 0.8, different kinds 0.55–0.73) but cannot tell that a payslip
+and an employment contract both belong under work, which is why one model call adds the subjects.
 
-## From documents to folders
+Each folder gets a rule built from the kinds inside it, for example "Documents such as bank
+statement, credit card statement." The user can rename or remove folders, move files and edit the
+rules before organizing.
+
+## Organizing
+
+**Organize** saves the folders and their rules, then moves each suggested file in one step
+(`engine/organize.rs`). Every move goes through the same checks as a manual one:
+
+- the folder is an enabled rule within two levels, and the name contains no path characters;
+- the source still has the hash it had when it was read;
+- the root has not moved, and the destination is inside it;
+- an existing file is never overwritten; a free name such as `Bank Statement 2.pdf` is chosen just
+  before the move;
+- a failure is recorded on that file, and the other files still move.
+
+Files outside the chosen folder (dropped onto the window) are copied, not moved.
+
+## Filing new documents
+
+After organizing, Tuck keeps running: dropped files, **Organize new files** and, if enabled, the
+folder watcher put documents in a queue that is read and filed one at a time
+(`engine/queue.rs`, `filing.rs`).
 
 ```mermaid
-flowchart TD
-    INPUT["Choose a folder, add files,<br/>or receive a watched-file change"]
-    READ["Extract text · PDFKit, Vision OCR<br/>Photos without text get Vision labels<br/>Local clues: download source, PDF properties,<br/>form fields, faces, barcodes, passport lines"]
-    CARD["One card per document<br/>kind · issuer · date · 3 tags · summary<br/>+ local NLEmbedding of kind and tags<br/>Cached by content"]
-    KINDS["Cluster cards by kind<br/>Average-linkage, cosine ≥ 0.75<br/>Model names each cluster; synonyms merged"]
-    SUBJECTS["One model call places kinds under subjects<br/>Finance, Home, Health, Identity & Immigration…"]
-    LAYOUT["Two levels: keep a kind as a subfolder only with ≥3 documents<br/>and a meaningful alternative; otherwise file in the subject"]
-    APPROVE["Review the suggestion<br/>Rename or remove folders, move files"]
-    MOVE["Organize: save folders, move each suggested file<br/>through the checked move path"]
-    MATCH["New or dropped files: rank folders by embedding<br/>One model choice per batch of six, rules visible"]
-    CHECK{"Authorized decision?<br/>Current rules, unchanged source,<br/>safe available destination?"}
-    WRITE["Rust moves or copies the file<br/>Existing files are never overwritten"]
-    REVIEW["Needs your input<br/>Review, choose a folder, retry or skip"]
-    INPUT --> READ --> CARD
-    CARD -->|"Suggest folders"| KINDS --> SUBJECTS --> LAYOUT --> APPROVE
-    APPROVE -->|"Organize"| MOVE
-    MOVE --> CHECK
-    MOVE -->|"Watching or dropped files"| MATCH
-    CARD -->|"Filing into existing folders"| MATCH
-    READ -->|"Scan in an unsupported script"| REVIEW
-    CARD -->|"Unidentified or model failure"| REVIEW
-    MATCH -->|"Chosen folder"| CHECK
-    MATCH -->|"No folder fits"| REVIEW
-    CHECK -->|"Yes"| WRITE
-    CHECK -->|"No"| REVIEW
-    REVIEW -->|"Explicit filing approval"| CHECK
+sequenceDiagram
+    participant Q as Queue (Rust)
+    participant R as tuck-reader
+    participant A as tuck-apple
+    participant F as files.rs
+    Q->>R: read file
+    R-->>Q: text, clues, or "unreadable"
+    Q->>A: card (cached when possible)
+    A-->>Q: kind, issuer, date, tags, embedding
+    Note over Q: rank enabled folders by embedding similarity
+    loop up to six folders per request
+        Q->>A: choose a folder (card, opening text, folder rules)
+        A-->>Q: a listed folder, or "None of these"
+    end
+    alt a folder was chosen
+        Q->>F: checked move, renamed "Kind - Issuer - Date"
+    else
+        Note over Q: the file waits in "Needs you"
+    end
 ```
 
-Reading also collects local clues that are not in the text: the domain a file was downloaded from or emailed by (macOS "Where from"; never the full link or address), PDF title, author, subject, creator and form field names, and on page 1 whether there is a photo of a person, a barcode or QR code (payment and boarding-pass codes are named, not copied) or a passport/ID machine-readable zone. Clues go to the describing model in a separate block and are part of the card cache key; files without clues get the same prompt as before. Scans whose text recognition confidence is low (unsupported scripts such as Sinhala and Tamil score 0.30–0.42, readable pages 0.75–1.0) go to review instead of being described from garbled text, as do cards whose kind is only "unknown" or "document".
+The folder choice is a plain-text answer matched against the listed names. Guided choice was both
+blocked by guardrails for some documents and erratic. The filename uses the card, and keeps the
+issuer and date only when the document text contains them, so a model cannot invent names into
+filenames.
 
-Grouping is deterministic once cards exist. The model writes cards, names groups, places kinds under subjects and chooses among folders; a failed naming or subject reply degrades a name, not a document's placement. Long documents are read from the start (first 5,000 characters) instead of being rejected. Apple's guardrails still apply to guided output in permissive mode, so cards and folder choices fall back to plain-text replies when guided output is blocked; identity, tax and immigration papers otherwise fail routinely. Filenames are built from the card as `Kind - Issuer - Date`; the issuer and date are kept only when the document text contains them.
+**Watching** uses FSEvents through the `notify` crate. A changed file must keep the same size and
+modification time for six seconds before it is read; idle folders are rescanned every minute in
+case an event was missed, and Tuck's own moves are recorded so they are not filed again.
 
-A suggestion creates no folders and moves nothing until you click Organize; then the files it placed move in one step and the rest wait for you. Optional watching lasts only for the active session.
+## Concurrency
 
-## Nesting and the three rules
-
-| Control                         | Used for                                                                                                     | Example                                           |
-| ------------------------------- | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------- |
-| **Document instructions**       | General filing and naming preferences. Combined with applicable folder rules.                                | Use short English filenames.                      |
-| **Folder creation preferences** | Grouping documents when proposing a new folder structure. Within the selected nesting limit.                 | Group by project, supplier or product.            |
-| **What belongs here?**          | Matching and checking a document against a particular folder. Parent folder rules are inherited by children. | Inspection reports for project Orion belong here. |
-
-The nesting setting is a maximum: one or two levels including the subject. Missing facts stay in a broader folder. Arbitrary source fields can define grouping; there is no employer-specific hierarchy. Changing folder creation preferences does not reorganize existing folders. Edits remain drafts until Save; saved settings and instructions are checked again before filing. Changing the model or saved rules stops the active filing session and requires fresh analysis.
+- Reading runs four documents at a time and card generation three at a time (`parallel.rs`).
+  Apple's on-device model serves one request at a time; three overlapping requests still saved
+  about a quarter of the wall time, and more saved nothing.
+- Whole model workflows hold one lock (`model_lock.rs`), so suggesting, filing and checking a
+  connection never interleave.
+- The interface polls `get_state` once a second and ignores responses that arrive out of order.
 
 ## What is stored
 
-| Location                              | Contents                                                                                                         |
-| ------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| Root `.tuck/settings.json`            | Model connection, folder nesting, folder creation preferences and other persisted settings. No API key.          |
-| Root `.tuck/instructions.md`          | Document instructions.                                                                                           |
-| Each folder's `.tuck/instructions.md` | Folder rule, complete accepted types, scope hash, saved examples, enabled state and priority.                    |
-| Root `.tuck/cache/cards/`             | Rebuildable document cards and embeddings, keyed by content, extracted text and model/helper identity.           |
-| macOS Keychain                        | Connection API keys, scoped to the connection type and endpoint.                                                 |
-| App memory                            | Collection map, queue, review decisions, activity and watch authorization. These are not resumed after quitting. |
+There is no database. Everything lives in the chosen folder, next to the documents.
 
-The app also remembers the last selected root in Application Support. There is no database, persistent undo or durable file-operation journal. An interrupted move can leave a duplicate; restart does not automatically delete or replay it.
+| Location | Contents |
+| --- | --- |
+| `.tuck/settings.json` | Model choice and custom connection (without the key), folder levels, renaming, folder preferences |
+| `.tuck/instructions.md` | General filing instructions |
+| `<folder>/.tuck/instructions.md` | That folder's rule: what belongs in it (see [folder rules](folder-rules.md)) |
+| `.tuck/cache/cards/` | Rebuildable cards, keyed by content |
+| macOS Keychain | API keys for custom connections, per endpoint |
+| App support folder | The last chosen folder and its security-scoped bookmark |
+
+The session (queue, decisions, activity) stays in memory. Quitting Tuck stops watching.
 
 ## Code map
 
-| Responsibility                            | Main files                                                                |
-| ----------------------------------------- | ------------------------------------------------------------------------- |
-| Screens and settings                      | `src/App.tsx`, `src/Home.tsx`, `src/Settings.tsx`                         |
-| Tauri commands and session lifecycle      | `src-tauri/src/lib.rs`, `src-tauri/src/engine.rs`                         |
-| Document extraction                       | `src-tauri/swift/TuckReader.swift`, `src-tauri/src/classifier.rs`         |
-| Cards and their cache                     | `src-tauri/src/cards.rs`, `src-tauri/swift/TuckCards.swift`               |
-| Folder suggestions                        | `src-tauri/src/card_suggest.rs`, `src-tauri/src/cluster.rs`               |
-| Filing                                    | `src-tauri/src/card_filing.rs`                                            |
-| Provider selection and request contracts  | `src-tauri/src/provider.rs`                                               |
-| Custom APIs and Keychain                  | `src-tauri/swift/TuckConnections.swift`                                   |
-| Settings, inherited rules and file writes | `src-tauri/src/config.rs`, `instructions.rs`, `files.rs`                  |
+| Area | Files |
+| --- | --- |
+| Interface | `src/App.tsx`, `src/screens/*`, `src/components/*`, `src/folders.ts`, `src/tuck.css` |
+| Tauri commands | `src-tauri/src/lib.rs` |
+| Session, queue, organizing | `src-tauri/src/engine/{mod,queue,organize}.rs` |
+| Reading and clues | `src-tauri/src/reader.rs`, `src-tauri/swift/TuckReader.swift`, `TuckClues.swift` |
+| Cards and their cache | `src-tauri/src/cards.rs`, `src-tauri/swift/TuckCards.swift` |
+| Suggesting | `src-tauri/src/suggest.rs`, `cluster.rs`, `parallel.rs` |
+| Filing | `src-tauri/src/filing.rs` |
+| Model helper bridge | `src-tauri/src/provider.rs`, `helper.rs`, `model_lock.rs`, `swift/TuckApple.swift`, `TuckModelSupport.swift`, `TuckModelChoice.swift`, `TuckConnections.swift` |
+| Files, settings, rules | `src-tauri/src/files.rs`, `config.rs`, `instructions.rs`, `collection.rs`, `model.rs` |
+| macOS integration | `src-tauri/src/native.rs`, `watching.rs`, `swift/TuckMac.swift` |
+| Build | `src-tauri/build.rs` compiles the Swift helpers into `src-tauri/resources/` |
 
-Valid output and a chosen folder do not guarantee a semantically correct classification; review the draft before approving it.
+## Limits
 
-## Work and compatibility limits
-
-New suggestions and active destinations have at most two levels and 40 folders. Old three-level rule files remain on disk and are excluded from active destinations. Cards read the first 5,000 characters (2,500 when dense text exceeds the model's context). Embeddings come from Apple's English sentence model; cards are written in English, so non-English documents group by their English description. Clustering is O(n³) and comfortable up to roughly 1,000 documents. Filing compares at most six folders per model call; the Rust filing deadline remains 90 seconds per document.
-
-Folder creation preferences are passed to folder naming and subject placement; they cannot force a grouping field (for example "group invoices by supplier"), which the previous pipeline supported.
+- Up to 2,000 documents per session and 10,000 entries per scan; documents up to 100 MB.
+- PDF, PNG, JPEG, HEIC, TIFF, plain text and Markdown.
+- Cards read the first 5,000 characters and up to 12 PDF pages.
+- Embeddings use Apple's English sentence model; cards are written in English for that reason.
+- At most two folder levels and 40 folders.
+- Clustering is O(n³) and comfortable up to about a thousand documents.

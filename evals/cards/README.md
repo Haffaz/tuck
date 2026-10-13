@@ -16,7 +16,7 @@ gold subjects over document pairs; documents with gold "Needs Review" are exclud
 
 ## Results, 10 October 2026
 
-Old = commit 49c1291 (describe → group → match → check). New = card clustering.
+Old = the earlier role pipeline (describe → group → match → check; see [history](../../docs/history.md)). New = card clustering.
 
 | Corpus | Measure | Old | New |
 | --- | --- | --- | --- |
