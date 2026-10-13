@@ -21,7 +21,7 @@ pub fn supported(path: &Path) -> bool {
         .is_some_and(|s| EXTENSIONS.contains(&s.to_lowercase().as_str()))
 }
 /// Collect document paths only after an explicit folder-review request. Never follows links.
-pub fn existing_documents(root: &Path, recursive: bool) -> Result<Vec<PathBuf>, String> {
+pub fn existing_documents(root: &Path) -> Result<Vec<PathBuf>, String> {
     let mut pending = vec![(root.to_path_buf(), 0usize)];
     let mut paths = Vec::new();
     let mut entries_seen = 0;
@@ -46,7 +46,7 @@ pub fn existing_documents(root: &Path, recursive: bool) -> Result<Vec<PathBuf>, 
             if kind.is_symlink() {
                 continue;
             }
-            if kind.is_dir() && recursive {
+            if kind.is_dir() {
                 if depth >= 32 {
                     return Err(
                         "This folder has too many nested folders. Choose files instead.".into(),

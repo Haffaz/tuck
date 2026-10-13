@@ -235,67 +235,10 @@ impl Engine {
         state.watching = false;
         Ok(())
     }
-    pub fn suggest_rule(&self, folder: &str, preferences: &Preferences) -> Result<String, String> {
-        if !files::valid_folder(folder, preferences.max_depth) || folder.chars().count() > 120 {
-            return Err("Enter a short folder name first.".into());
-        }
-        let context = preferences.destination_instructions(folder);
-        if context.chars().count() > 4000 {
-            return Err("Shorten the shared rules before asking for a description.".into());
-        }
-        let (original, selected_model) = {
-            let mut state = self.state.lock().unwrap();
-            Self::refresh(&mut state)?;
-            if preferences.root != state.preferences.root || !state.preferences.use_ai {
-                return Err("Choose a folder and enable local AI first.".into());
-            }
-            if state.processing.is_some() {
-                return Err("Wait for the current document to finish.".into());
-            }
-            state.processing = Some("Suggesting a folder description".into());
-            (
-                crate::config::revision(&state.preferences),
-                state.preferences.clone(),
-            )
-        };
-        let result = {
-            use crate::provider::ModelProvider;
-            let _serial = crate::coordinator::serial();
-            crate::provider::configured(&self.reader, &selected_model)
-                .suggest_rule(folder, &context)
-        };
-        let mut state = self.state.lock().unwrap();
-        state.processing = None;
-        Self::refresh(&mut state)?;
-        if crate::config::revision(&state.preferences) != original {
-            return Err("Folder settings changed. Ask for a description again.".into());
-        }
-        result
-    }
-    pub fn check_rules(
-        &self,
-        preferences: &Preferences,
-    ) -> Result<Vec<crate::rule_check::RuleIssue>, String> {
-        files::validate(preferences)?;
-        let mut state = self.state.lock().unwrap();
-        Self::refresh(&mut state)?;
-        if preferences.root != state.preferences.root {
-            return Err("The destination changed. Reload your rules.".into());
-        }
-        if preferences.instructions_revision != state.preferences.instructions_revision
-            || preferences.settings_revision != state.preferences.settings_revision
-        {
-            return Err("Rules changed on disk. Reload before checking them.".into());
-        }
-        if state.processing.is_some() {
-            return Err("Wait for the current task to finish.".into());
-        }
-        Ok(crate::rule_check::check(preferences))
-    }
     pub fn suggest_categories(&self) -> Result<crate::categories::Proposal, String> {
         let needs_map = {
             let state = self.state.lock().unwrap();
-            let paths = files::existing_documents(Path::new(&state.preferences.root), true)?;
+            let paths = files::existing_documents(Path::new(&state.preferences.root))?;
             state.collection.as_ref().is_none_or(|map| {
                 paths.len() != map.documents.len()
                     || paths.iter().zip(&map.documents).any(|(p, d)| {
@@ -357,7 +300,7 @@ impl Engine {
             (state.preferences.clone(), state.generation)
         };
         let result: Result<crate::collection::Collection, String> = (|| {
-            let paths = files::existing_documents(Path::new(&p.root), true)?;
+            let paths = files::existing_documents(Path::new(&p.root))?;
             let total = paths.len();
             // Text recognition runs several documents at once; order is preserved.
             let documents = crate::parallel::map(
@@ -449,7 +392,6 @@ impl Engine {
                 .to_string_lossy()
                 .into_owned();
             let mut item = ReviewItem {
-                language: None,
                 id: uuid::Uuid::new_v4().to_string(),
                 original: doc.path.clone(),
                 destination: String::new(),
@@ -535,7 +477,7 @@ impl Engine {
             .collection
             .clone()
             .ok_or("Map the folder before organizing.")?;
-        let paths = files::existing_documents(Path::new(&state.preferences.root), true)?;
+        let paths = files::existing_documents(Path::new(&state.preferences.root))?;
         if paths.len() != map.documents.len()
             || paths.iter().zip(&map.documents).any(|(p, d)| {
                 p != Path::new(&d.path) || files::signature(p).ok().as_ref() != Some(&d.signature)
@@ -581,7 +523,7 @@ impl Engine {
         if !state.running {
             return Ok(());
         }
-        let paths = files::existing_documents(Path::new(&state.preferences.root), true)?;
+        let paths = files::existing_documents(Path::new(&state.preferences.root))?;
         let current: BTreeMap<_, _> = paths
             .iter()
             .map(|p| Ok((p.to_string_lossy().into_owned(), files::signature(p)?)))
@@ -626,18 +568,6 @@ impl Engine {
         }
         Ok(())
     }
-    pub fn review_existing(&self, root: &str, recursive: bool) -> Result<usize, String> {
-        let mut state = self.state.lock().unwrap();
-        Self::refresh(&mut state)?;
-        if state.preferences.root != root {
-            return Err("The selected folder changed. Start review again.".into());
-        }
-        if !state.items.is_empty() || state.processing.is_some() {
-            return Err("Finish or clear the current batch before reviewing this folder.".into());
-        }
-        let paths = files::existing_documents(Path::new(root), recursive)?;
-        Self::enqueue_into(&mut state, paths)
-    }
     #[cfg(test)]
     pub fn enqueue(&self, paths: Vec<PathBuf>) -> Result<usize, String> {
         let mut state = self.state.lock().unwrap();
@@ -672,7 +602,6 @@ impl Engine {
         for path in valid {
             let copied = !path.starts_with(&state.preferences.root);
             state.items.push(ReviewItem {
-                language: None,
                 id: uuid::Uuid::new_v4().to_string(),
                 original: path.to_string_lossy().into_owned(),
                 destination: String::new(),
@@ -715,30 +644,6 @@ impl Engine {
             return Err("This document is already organized".into());
         }
         item.status = "skipped".into();
-        Ok(())
-    }
-    pub fn retry(&self, id: &str) -> Result<(), String> {
-        let mut state = self.state.lock().unwrap();
-        Self::refresh(&mut state)?;
-        let item = state
-            .items
-            .iter_mut()
-            .find(|i| i.id == id)
-            .ok_or("Document not found")?;
-        if !matches!(item.status.as_str(), "review" | "failed" | "skipped") {
-            return Err("Wait for this document to finish reading".into());
-        }
-        item.status = "queued".into();
-        item.destination.clear();
-        item.reason.clear();
-        item.language = None;
-        item.folder.clear();
-        item.confident = false;
-        item.title = Path::new(&item.original)
-            .file_stem()
-            .unwrap_or_default()
-            .to_string_lossy()
-            .into_owned();
         Ok(())
     }
     pub fn process_next(&self) -> Result<bool, String> {
@@ -854,7 +759,6 @@ impl Engine {
                 Some((source, &self.reader)),
             ),
             Err(e) => classifier::Decision {
-                language: None,
                 folder: "Needs Review".into(),
                 title: String::new(),
                 reason: e,
@@ -877,7 +781,6 @@ impl Engine {
         result.hash = hash;
         result.revision = config::revision(p);
         result.reason = decision.reason;
-        result.language = decision.language;
         result.confident = decision.confident;
         result.folder = if decision.confident {
             decision.folder
@@ -1249,51 +1152,17 @@ mod tests {
         assert!(engine.snapshot().items[0].destination.is_empty());
     }
     #[test]
-    fn folder_selection_waits_for_explicit_start_and_subfolder_choice() {
+    fn a_session_over_the_document_limit_enqueues_nothing() {
         let (_temp, engine, root) = category_setup(false);
-        fs::write(root.join("letter.txt"), "Synthetic source").unwrap();
-        fs::create_dir(root.join("nested")).unwrap();
-        fs::write(root.join("nested/letter.txt"), "Synthetic nested source").unwrap();
-        fs::write(root.join(".hidden.txt"), "Hidden").unwrap();
-        std::os::unix::fs::symlink(root.join("letter.txt"), root.join("link.txt")).unwrap();
-        engine.choose_folder(root.to_str().unwrap()).unwrap();
-        assert!(engine.snapshot().items.is_empty());
-        assert!(!engine.process_next().unwrap());
-        assert_eq!(
-            engine
-                .review_existing(root.to_str().unwrap(), false)
-                .unwrap(),
-            1
-        );
-        let item = engine.snapshot().items[0].clone();
-        assert_eq!(item.status, "queued");
-        assert!(!item.copied);
-        assert_eq!(
-            fs::read_to_string(root.join("letter.txt")).unwrap(),
-            "Synthetic source"
-        );
-        assert!(engine
-            .review_existing(root.to_str().unwrap(), true)
-            .is_err());
-        engine.clear();
-        assert_eq!(
-            engine
-                .review_existing(root.to_str().unwrap(), true)
-                .unwrap(),
-            2
-        );
-    }
-    #[test]
-    fn oversized_folder_and_stale_root_do_not_enqueue_anything() {
-        let (_temp, engine, root) = category_setup(false);
-        assert!(engine.review_existing("/different-root", true).is_err());
         for n in 0..2001 {
             fs::write(root.join(format!("{n}.txt")), "Synthetic").unwrap();
         }
-        assert!(engine
-            .review_existing(root.to_str().unwrap(), true)
+        // Scanning refuses first; the session limit also holds for files added directly.
+        assert!(files::existing_documents(&root)
             .unwrap_err()
             .contains("2,000"));
+        let paths = (0..2001).map(|n| root.join(format!("{n}.txt"))).collect();
+        assert!(engine.enqueue(paths).unwrap_err().contains("2,000"));
         assert!(engine.snapshot().items.is_empty());
         assert!(engine.snapshot().processing.is_none());
         assert_eq!(fs::read_to_string(root.join("0.txt")).unwrap(), "Synthetic");
@@ -1317,7 +1186,6 @@ request = json.load(sys.stdin)
 from pathlib import Path
 with Path(__file__).with_name('requests.jsonl').open('a') as log:
     log.write(json.dumps(request) + '\n')
-assert request.get('operation') != 'language', 'Language preflight was removed'
 if request.get('operation') == 'card':
     text = request['text']
     kind = 'rental agreement' if 'rental' in text else 'bank statement'
@@ -1357,53 +1225,6 @@ else:
         }).collect()
     }
     #[test]
-    fn description_generation_is_a_draft_and_failure_releases_processing() {
-        let (_temp, engine, root) = category_setup(false);
-        let before = engine.snapshot().preferences;
-        let settings = fs::read(root.join(".tuck/settings.json")).unwrap();
-        let description = engine.suggest_rule("Migration", &before).unwrap();
-        assert!(description.contains("residence permits"));
-        assert!(!root.join("Migration").exists());
-        assert!(engine.snapshot().preferences.rules.is_empty());
-        assert_eq!(
-            fs::read(root.join(".tuck/settings.json")).unwrap(),
-            settings
-        );
-        assert!(engine.snapshot().processing.is_none());
-        fs::write(
-            engine.reader.with_file_name("tuck-apple"),
-            "#!/bin/sh\nprintf '%s' '{\"error\":\"Synthetic unavailable model\"}'\n",
-        )
-        .unwrap();
-        assert!(engine.suggest_rule("Migration", &before).is_err());
-        assert!(engine.snapshot().processing.is_none());
-        assert!(engine.suggest_rule("../escape", &before).is_err());
-        assert!(!root.join("Migration").exists());
-    }
-    #[test]
-    fn rule_check_is_read_only_and_rejects_stale_drafts() {
-        let (_temp, engine, root) = category_setup(false);
-        let original = fs::read(root.join(".tuck/instructions.md")).unwrap();
-        let mut draft = engine.snapshot().preferences;
-        draft.rules = Preferences::default().rules;
-        draft.rules[2].instruction = draft.rules[3].instruction.clone();
-        draft.use_ai = false;
-        assert_eq!(engine.check_rules(&draft).unwrap().len(), 1);
-        assert!(engine.snapshot().preferences.rules.is_empty());
-        assert_eq!(
-            fs::read(root.join(".tuck/instructions.md")).unwrap(),
-            original
-        );
-        assert!(!root.join("Migration").exists());
-        assert!(engine.snapshot().processing.is_none());
-        fs::write(root.join(".tuck/instructions.md"), "Manual edit").unwrap();
-        assert!(engine
-            .check_rules(&draft)
-            .unwrap_err()
-            .contains("changed on disk"));
-        assert!(engine.snapshot().processing.is_none());
-    }
-    #[test]
     fn saved_example_survives_restart_and_requires_fresh_analysis() {
         let (_temp, engine, root) = category_setup(false);
         let mut p = engine.snapshot().preferences;
@@ -1434,7 +1255,11 @@ else:
         assert!(restarted
             .snapshot()
             .preferences
-            .destination_instructions("Banking & Taxes")
+            .rules
+            .iter()
+            .find(|r| r.folder == "Banking & Taxes")
+            .unwrap()
+            .instruction
             .contains("Does not belong here"));
         assert!(restarted.snapshot().items.is_empty());
     }
@@ -1468,7 +1293,7 @@ else:
         assert_eq!(proposal.rules.len(), 1);
         assert_eq!(proposal.rules[0].folder, "Banking & Taxes");
         assert!(engine.snapshot().items.is_empty());
-        assert_eq!(files::existing_documents(&root, true).unwrap().len(), 34);
+        assert_eq!(files::existing_documents(&root).unwrap().len(), 34);
     }
     #[test]
     fn cards_are_reused_across_suggestions_rules_renames_and_filing() {
@@ -1691,7 +1516,6 @@ else:
         p.rules = Preferences::default().rules;
         engine.save_preferences(p).unwrap();
         *engine.test_decision.lock().unwrap() = Some(classifier::Decision {
-            language: None,
             folder: "Banking & Taxes".into(),
             title: "Bank statement".into(),
             confident: true,
@@ -1824,9 +1648,8 @@ else:
             .contains("changed"));
         assert_eq!(fs::read_to_string(&path).unwrap(), "user edits");
         assert!(!Path::new(&item.destination).exists());
-        engine.retry(&item.id).unwrap();
-        engine.process_next().unwrap();
-        let item = engine.snapshot().items[0].clone();
+        engine.clear();
+        let item = analyze(&engine, &path);
         let mut p = engine.snapshot().preferences;
         p.rules
             .iter_mut()
@@ -1852,7 +1675,8 @@ else:
             state.watching = true;
         }
         let mut p = engine.snapshot().preferences;
-        p.ai_model = crate::model::LocalModel::GemmaE4b;
+        p.ai_model = crate::model::LocalModel::Custom;
+        p.connection.model = "local-model".into();
         engine.save_preferences(p).unwrap();
         assert!(!engine.snapshot().running);
         assert!(!engine.snapshot().watching);
@@ -1980,21 +1804,6 @@ else:
         let restarted = Engine::new(temp.path().join("app"), PathBuf::new()).unwrap();
         assert!(restarted.snapshot().items.is_empty());
         assert!(!restarted.snapshot().preferences.use_ai);
-        assert!(path.exists());
-    }
-    #[test]
-    fn retry_clears_a_previous_generated_name_and_language() {
-        let (_temp, engine, root) = setup();
-        let path = root.join("original.txt");
-        fs::write(&path, "Bank statement").unwrap();
-        let item = analyze(&engine, &path);
-        engine.retry(&item.id).unwrap();
-        let retried = engine.snapshot().items.remove(0);
-        assert_eq!(retried.title, "original");
-        assert!(retried.folder.is_empty());
-        assert!(retried.destination.is_empty());
-        assert!(retried.language.is_none());
-        assert!(!retried.confident);
         assert!(path.exists());
     }
     #[test]

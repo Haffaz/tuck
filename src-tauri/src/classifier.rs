@@ -11,8 +11,6 @@ use wait_timeout::ChildExt;
 
 #[derive(Clone, Deserialize, Serialize, Debug)]
 pub struct Decision {
-    #[serde(default)]
-    pub language: Option<crate::model::LanguageInfo>,
     pub folder: String,
     pub title: String,
     pub reason: String,
@@ -64,10 +62,6 @@ fn clues_of(value: &serde_json::Value) -> Vec<String> {
         .map(|c| c.chars().take(160).collect())
         .take(12)
         .collect()
-}
-#[cfg(test)]
-pub fn read_document(path: &Path, reader: &Path) -> Result<String, String> {
-    read(path, reader).map(|r| r.text)
 }
 fn run_reader(
     path: &Path,
@@ -161,7 +155,6 @@ pub(crate) fn finalize(result: Result<Decision, String>, p: &Preferences) -> Dec
 }
 fn review(reason: &str) -> Decision {
     Decision {
-        language: None,
         folder: "Needs Review".into(),
         title: String::new(),
         reason: reason.into(),
@@ -246,7 +239,6 @@ mod tests {
             .unwrap()
             .enabled = false;
         let suggestion = Decision {
-            language: None,
             folder: "Insurance".into(),
             title: "Policy".into(),
             reason: "AI suggestion".into(),
@@ -258,7 +250,6 @@ mod tests {
     fn uncertain_decisions_keep_original_names_and_require_review() {
         let p = Preferences::default();
         let uncertain = Decision {
-            language: None,
             folder: "Home".into(),
             title: "Made up name".into(),
             reason: "Not sure".into(),
@@ -271,7 +262,7 @@ mod tests {
     }
     #[test]
     #[ignore = "Requires Apple Intelligence enabled; uses only synthetic documents"]
-    fn live_apple_agent_smoke() {
+    fn live_apple_filing_smoke() {
         let reader = Path::new(env!("CARGO_MANIFEST_DIR")).join("resources/tuck-reader");
         println!(
             "{}",
@@ -309,25 +300,6 @@ mod tests {
                 // must retain the original filename without blocking a valid folder.
             }
         }
-        let index =
-            "Document index: the actual certificate is in text chunk 5. This is a cover sheet. ";
-        let mut data = format!("{index}{}", "Cover sheet. ".repeat(1400));
-        data.truncate(16000);
-        data.push_str(
-            "FÖRSÄKRINGSBREV. Home insurance certificate. Building and contents coverage.",
-        );
-        fs::write(&path, &data).unwrap();
-        let text = read_document(&path, &reader).unwrap();
-        let started = std::time::Instant::now();
-        let d = classify_with_tools("packet.txt", &text, &p, &[], Some((&path, &reader)));
-        println!(
-            "Apple late evidence: {:.2}s {}",
-            started.elapsed().as_secs_f64(),
-            serde_json::to_string(&d).unwrap()
-        );
-        assert_eq!(d.folder, "Insurance");
-        assert_eq!(fs::read_to_string(&path).unwrap(), data);
-        assert!(d.confident);
     }
 
     #[test]
@@ -337,129 +309,5 @@ mod tests {
         assert_eq!(d.folder, "Needs Review");
         assert!(d.title.is_empty());
         assert!(d.reason.contains("unavailable"));
-    }
-    #[test]
-    #[ignore = "Requires Apple Intelligence; synthetic semantic instructions and folder context"]
-    fn live_apple_folder_instructions() {
-        let reader = Path::new(env!("CARGO_MANIFEST_DIR")).join("resources/tuck-reader");
-        let dir = tempfile::tempdir_in("/private/tmp").unwrap();
-        let parent = dir.path().join("Cedar").join("Supporting documents");
-        fs::create_dir_all(&parent).unwrap();
-        let path = parent.join("scan.txt");
-        let text = "Employment contract. The employee works as an engineer for Acme.";
-        fs::write(&path, text).unwrap();
-        let mut p = Preferences {
-            root: dir.path().to_string_lossy().into_owned(),
-            rename: false,
-            ..Preferences::default()
-        };
-        p.rules = vec![
-            crate::model::Rule { document_types: Vec::new(), folder: "Migration".into(), instruction: "All my migration documents should go here. Include files from Cedar and all supporting documents in Cedar folders, even employment contracts.".into(), enabled: true },
-            crate::model::Rule { document_types: Vec::new(), folder: "Work".into(), instruction: "Keep employment contracts here unless they belong to a migration application bundle.".into(), enabled: true },
-        ];
-        let d = classify_with_tools("scan.txt", text, &p, &[], Some((&path, &reader)));
-        println!("Bundle context: {}", serde_json::to_string(&d).unwrap());
-        assert_eq!(d.folder, "Migration");
-        p.rules[0].enabled = false;
-        p.rules[1].instruction = "Keep all employment contracts here.".into();
-        let d = classify_with_tools("scan.txt", text, &p, &[], Some((&path, &reader)));
-        println!(
-            "Disabled bundle instruction: {}",
-            serde_json::to_string(&d).unwrap()
-        );
-        assert_eq!(d.folder, "Work");
-        p.rules =
-            vec![crate::model::Rule { document_types: Vec::new(),
-            folder: "Place to live".into(),
-            instruction:
-                "Agreements that let me occupy a home in exchange for monthly payment belong here."
-                    .into(),
-            enabled: true,
-        }];
-        let text = "HYRESAVTAL. Tenant and landlord agree to a twelve month tenancy of the apartment. Rent is paid monthly.";
-        fs::write(&path, text).unwrap();
-        let d = classify_with_tools("scan.txt", text, &p, &[], Some((&path, &reader)));
-        println!(
-            "Semantic description: {}",
-            serde_json::to_string(&d).unwrap()
-        );
-        assert_eq!(d.folder, "Place to live");
-        // The migrated seven-folder setup must retain bundle intent without matching unrelated parents.
-        p = Preferences {
-            root: dir.path().to_string_lossy().into_owned(),
-            ..Preferences::default()
-        };
-        p.rules[0] =
-            serde_json::from_str(r#"{"folder":"Migration/Cedar","keywords":"cedar"}"#).unwrap();
-        let text = "Employment contract. The employee works as an engineer for Acme.";
-        fs::write(&path, text).unwrap();
-        let d = classify_with_tools("scan.txt", text, &p, &[], Some((&path, &reader)));
-        println!(
-            "Migrated bundle instruction: {}",
-            serde_json::to_string(&d).unwrap()
-        );
-        assert_eq!(d.folder, "Migration/Cedar");
-        let unrelated = dir.path().join("Incoming");
-        fs::create_dir(&unrelated).unwrap();
-        let bank = unrelated.join("scan.txt");
-        let text = "Bank account statement. Opening balance, transactions and closing balance.";
-        fs::write(&bank, text).unwrap();
-        let d = classify_with_tools("scan.txt", text, &p, &[], Some((&bank, &reader)));
-        println!(
-            "Unrelated parent folder: {}",
-            serde_json::to_string(&d).unwrap()
-        );
-        assert_eq!(d.folder, "Finances");
-        let named = dir.path().join("Cedar employment contract.txt");
-        let text = "Employment contract. The employee works as an engineer for Acme.";
-        fs::write(&named, text).unwrap();
-        let d = classify_with_tools(
-            "Cedar employment contract.txt",
-            text,
-            &p,
-            &[],
-            Some((&named, &reader)),
-        );
-        println!(
-            "Filename association: {}",
-            serde_json::to_string(&d).unwrap()
-        );
-        assert_eq!(d.folder, "Migration/Cedar");
-    }
-    #[test]
-    #[ignore = "Requires Apple Intelligence; synthetic hierarchy and inherited naming"]
-    fn live_apple_hierarchical_instructions() {
-        use crate::model::Rule;
-        let dir = tempfile::tempdir_in("/private/tmp").unwrap();
-        let path = dir.path().join("scan.txt");
-        let reader = Path::new(env!("CARGO_MANIFEST_DIR")).join("resources/tuck-reader");
-        let mut p=Preferences {instructions:"Use short English document names without dates.".into(), rules:vec![
-            Rule { document_types: Vec::new(),folder:"Home".into(),instruction:"Housing and property documents belong here.".into(),enabled:true},
-            Rule { document_types: Vec::new(),folder:"Home/Rental".into(),instruction:"Tenancy agreements between a landlord and tenant belong here. Use the document type as the name.".into(),enabled:true},
-            Rule { document_types: Vec::new(),folder:"Finances".into(),instruction:"Bank account statements belong here.".into(),enabled:true},
-        ],..Preferences::default()};
-        let text="HYRESAVTAL. Tenant and landlord agree to a twelve month tenancy of the apartment. Rent is paid monthly.";
-        fs::write(&path, text).unwrap();
-        let d = classify_with_tools("scan.txt", text, &p, &[], Some((&path, &reader)));
-        println!(
-            "Hierarchical content routing: {}",
-            serde_json::to_string(&d).unwrap()
-        );
-        assert_eq!(d.folder, "Home/Rental");
-        assert!(!d.title.is_empty());
-        assert!(!d.title.chars().any(|c| c.is_ascii_digit()));
-        p.rules[0].enabled = false;
-        fs::write(&path, text).unwrap();
-        let d = classify_with_tools("scan.txt", text, &p, &[], Some((&path, &reader)));
-        println!("Disabled parent: {}", serde_json::to_string(&d).unwrap());
-        // This verifies the disabled branch, not semantic abstention: the current model
-        // may still choose an unrelated enabled destination (recorded in ai-accuracy.md).
-        assert!(!d.folder.starts_with("Home"));
-        assert!(
-            d.folder == "Needs Review"
-                || p.rules
-                    .iter()
-                    .any(|r| p.rule_enabled(r) && r.folder == d.folder)
-        );
     }
 }

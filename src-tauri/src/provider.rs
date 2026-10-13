@@ -20,7 +20,6 @@ pub struct Candidate {
 /// Adapters return data only. None receive document paths or write tools.
 pub trait ModelProvider: Sync {
     fn status(&self) -> Result<String, String>;
-    fn suggest_rule(&self, folder: &str, context: &str) -> Result<String, String>;
     /// Identifies the model and helper build; cached cards are keyed by it.
     fn identity(&self) -> Result<String, String>;
     /// One short guided description of a document plus a local embedding.
@@ -99,34 +98,18 @@ impl ModelProvider for LocalProvider {
             .map(str::to_owned)
             .ok_or_else(|| "Invalid model status response".into())
     }
-    fn suggest_rule(&self, folder: &str, context: &str) -> Result<String, String> {
-        let value = self.invoke(
-            json!({"operation":"rule","folder":folder,"context":context}),
-            Duration::from_secs(60),
-        )?;
-        let instruction = value["instruction"].as_str().unwrap_or_default().trim();
-        if instruction.is_empty() || instruction.chars().count() > 600 {
-            return Err("Invalid folder description. Try again or write a short sentence.".into());
-        }
-        Ok(instruction.into())
-    }
     fn identity(&self) -> Result<String, String> {
-        let digest = if self.model == crate::model::LocalModel::Custom {
-            serde_json::to_string(
+        // The cache key changes when the model, its connection or the helper build changes.
+        let digest = match self.model {
+            crate::model::LocalModel::Custom => serde_json::to_string(
                 &self
                     .preferences
                     .as_ref()
                     .ok_or("Missing connection")?
                     .connection,
             )
-            .map_err(|e| e.to_string())?
-        } else if self.model == crate::model::LocalModel::Apple {
-            "on-device".to_owned()
-        } else {
-            self.invoke(json!({"operation":"identity"}), Duration::from_secs(15))?["digest"]
-                .as_str()
-                .ok_or("Missing local model identity")?
-                .to_owned()
+            .map_err(|e| e.to_string())?,
+            crate::model::LocalModel::Apple => "on-device".to_owned(),
         };
         Ok(format!(
             "{}:cards-v2:{}:{}",

@@ -134,7 +134,6 @@ pub fn run(
             {
                 let folder = batch[index].folder.clone();
                 return Ok(Decision {
-                    language: None,
                     reason: format!("{} matches {folder}.", title(&card, text)),
                     folder,
                     title: if p.rename {
@@ -167,9 +166,6 @@ mod tests {
     impl ModelProvider for Chooser {
         fn status(&self) -> Result<String, String> {
             Ok("ok".into())
-        }
-        fn suggest_rule(&self, _: &str, _: &str) -> Result<String, String> {
-            unreachable!()
         }
         fn identity(&self) -> Result<String, String> {
             Ok("chooser".into())

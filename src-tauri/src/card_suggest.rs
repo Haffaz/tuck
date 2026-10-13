@@ -508,9 +508,6 @@ mod tests {
         fn status(&self) -> Result<String, String> {
             Ok("ok".into())
         }
-        fn suggest_rule(&self, _: &str, _: &str) -> Result<String, String> {
-            unreachable!()
-        }
         fn identity(&self) -> Result<String, String> {
             Ok("namer".into())
         }

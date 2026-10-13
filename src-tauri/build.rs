@@ -31,13 +31,13 @@ fn main() {
         );
     }
     println!("cargo:rerun-if-changed=swift/TuckConnections.swift");
-    println!("cargo:rerun-if-changed=swift/TuckLocalTransport.swift");
+    println!("cargo:rerun-if-changed=swift/TuckModelChoice.swift");
     println!("cargo:rerun-if-changed=swift/TuckApple.swift");
     println!("cargo:rerun-if-changed=swift/TuckCards.swift");
     println!("cargo:rerun-if-changed=swift/TuckModelSupport.swift");
     const HELPER_SOURCES: &[&str] = &[
         "swift/TuckApple.swift",
-        "swift/TuckLocalTransport.swift",
+        "swift/TuckModelChoice.swift",
         "swift/TuckConnections.swift",
         "swift/TuckModelSupport.swift",
         "swift/TuckCards.swift",

@@ -16,7 +16,7 @@ mod tests {
         let root = PathBuf::from(std::env::var("TUCK_SELECTED_ROOT").expect("Select a root"));
         let reader =
             PathBuf::from(std::env::var("TUCK_EVAL_READER").expect("Select a native reader"));
-        let paths = crate::files::existing_documents(&root, true).unwrap();
+        let paths = crate::files::existing_documents(&root).unwrap();
         let documents = paths
             .iter()
             .map(|path| crate::collection::read(path, &root, &reader))
@@ -84,7 +84,7 @@ mod tests {
             folder_nesting: nesting,
             ..Preferences::default()
         };
-        let mut paths = crate::files::existing_documents(&root, true).unwrap();
+        let mut paths = crate::files::existing_documents(&root).unwrap();
         paths.sort();
         let documents: Vec<_> = paths
             .iter()
@@ -161,7 +161,6 @@ mod tests {
             let started = Instant::now();
             let decision = match &doc.error {
                 Some(error) => crate::classifier::Decision {
-                    language: None,
                     folder: "Needs Review".into(),
                     title: String::new(),
                     reason: error.clone(),

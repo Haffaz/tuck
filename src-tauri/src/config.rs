@@ -13,7 +13,9 @@ struct Settings {
     use_ai: bool,
     #[serde(default)]
     ai_model: crate::model::LocalModel,
-    use_agent: bool,
+    /// Retired setting; read so older settings files still load.
+    #[serde(default, rename = "useAgent", skip_serializing)]
+    _legacy_use_agent: Option<bool>,
     #[serde(default)]
     connection: crate::model::ModelConnection,
     #[serde(default = "crate::model::default_folder_nesting")]
@@ -30,7 +32,7 @@ fn settings(p: &Preferences) -> Settings {
         max_depth: p.max_depth,
         use_ai: p.use_ai,
         ai_model: p.ai_model,
-        use_agent: p.use_agent,
+        _legacy_use_agent: None,
         connection: p.connection.clone(),
         folder_nesting: p.folder_nesting,
         _legacy_specificity: None,
@@ -91,7 +93,6 @@ pub fn load(p: &mut Preferences) -> Result<(), String> {
     p.max_depth = crate::model::MAX_FOLDER_DEPTH;
     p.use_ai = stored.use_ai;
     p.ai_model = stored.ai_model;
-    p.use_agent = stored.use_agent;
     p.connection = stored.connection;
     if !(1..=3).contains(&stored.folder_nesting) {
         return Err("Unsupported saved nesting preference; original settings kept".into());
@@ -100,7 +101,6 @@ pub fn load(p: &mut Preferences) -> Result<(), String> {
         .folder_nesting
         .min(crate::model::MAX_FOLDER_DEPTH as u8);
     p.category_instructions = stored.category_instructions;
-    p.use_memory = false;
     p.settings_revision = fingerprint(p);
     instructions::load(p)?.apply(p);
     files::validate(p)
@@ -254,14 +254,21 @@ mod tests {
         };
         initialize(&mut p).unwrap();
         let original = revision(&p);
-        p.ai_model = LocalModel::GemmaE2b;
+        p.ai_model = LocalModel::Custom;
+        p.connection.model = "local-model".into();
         save(&p).unwrap();
         p.ai_model = LocalModel::Apple;
         load(&mut p).unwrap();
-        assert_eq!(p.ai_model, LocalModel::GemmaE2b);
+        assert_eq!(p.ai_model, LocalModel::Custom);
         assert_ne!(revision(&p), original);
-        let e2b = revision(&p);
-        p.ai_model = LocalModel::GemmaE4b;
-        assert_ne!(revision(&p), e2b);
+
+        // Settings written by older versions: retired Gemma choice and agent flag.
+        let path = instructions::settings_path(Path::new(&p.root)).unwrap();
+        let mut old: serde_json::Value = serde_json::from_slice(&fs::read(&path).unwrap()).unwrap();
+        old["aiModel"] = "gemmaE4b".into();
+        old["useAgent"] = true.into();
+        fs::write(&path, serde_json::to_vec(&old).unwrap()).unwrap();
+        load(&mut p).unwrap();
+        assert_eq!(p.ai_model, LocalModel::Apple);
     }
 }

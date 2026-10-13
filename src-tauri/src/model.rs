@@ -41,42 +41,24 @@ impl From<StoredRule> for Rule {
     }
 }
 
-/// Compare saved scopes without treating ordering or casing as a distinction.
-pub fn same_document_types(left: &[String], right: &[String]) -> bool {
-    let normalized = |types: &[String]| -> std::collections::BTreeSet<String> {
-        types
-            .iter()
-            .map(|s| {
-                s.split_whitespace()
-                    .collect::<Vec<_>>()
-                    .join(" ")
-                    .to_lowercase()
-            })
-            .collect()
-    };
-    normalized(left) == normalized(right)
-}
-
 fn enabled_by_default() -> bool {
     true
 }
 
-/// Legacy selections remain readable; new connections use the custom adapter.
+/// Apple Intelligence on this Mac, or the user's own connection (`ModelConnection`).
+/// Settings saved with the retired built-in Gemma choices load as Apple Intelligence.
 #[derive(Clone, Copy, Default, PartialEq, Eq, Serialize, Deserialize, Debug)]
 #[serde(rename_all = "camelCase")]
 pub enum LocalModel {
     #[default]
+    #[serde(alias = "gemmaE2b", alias = "gemmaE4b")]
     Apple,
-    GemmaE2b,
-    GemmaE4b,
     Custom,
 }
 impl LocalModel {
     pub fn key(self) -> &'static str {
         match self {
             Self::Apple => "apple",
-            Self::GemmaE2b => "gemmaE2b",
-            Self::GemmaE4b => "gemmaE4b",
             Self::Custom => "custom",
         }
     }
@@ -109,7 +91,6 @@ pub const LEGACY_FOLDER_DEPTH: usize = 3;
 #[serde(rename_all = "camelCase", default)]
 pub struct Preferences {
     pub root: String,
-    pub recursive: bool,
     pub rename: bool,
     pub max_depth: usize,
     pub use_ai: bool,
@@ -118,8 +99,6 @@ pub struct Preferences {
     pub folder_nesting: u8,
     pub category_instructions: String,
 
-    pub use_agent: bool,
-    pub use_memory: bool,
     pub instructions: String,
     pub rules: Vec<Rule>,
     pub legacy_folders: Vec<String>,
@@ -129,8 +108,8 @@ pub struct Preferences {
 impl Default for Preferences {
     fn default() -> Self {
         Self {
-            root: String::new(), settings_revision: String::new(), instructions_revision: String::new(), recursive: true, rename: true, max_depth: MAX_FOLDER_DEPTH,
-            use_ai: true, ai_model: LocalModel::default(), connection: ModelConnection::default(), folder_nesting: default_folder_nesting(), category_instructions: String::new(), use_agent: true, use_memory: true,
+            root: String::new(), settings_revision: String::new(), instructions_revision: String::new(), rename: true, max_depth: MAX_FOLDER_DEPTH,
+            use_ai: true, ai_model: LocalModel::default(), connection: ModelConnection::default(), folder_nesting: default_folder_nesting(), category_instructions: String::new(),
             instructions: "Use clear English document names. Describe the document accurately without inventing names or dates.".into(),
             legacy_folders: vec![],
             rules: vec![
@@ -153,35 +132,11 @@ impl Preferences {
                 !parent.enabled && rule.folder.starts_with(&format!("{}/", parent.folder))
             })
     }
-    pub fn destination_instructions(&self, folder: &str) -> String {
-        let mut result = vec![self.instructions.clone()];
-        let mut ancestors: Vec<_> = self
-            .rules
-            .iter()
-            .filter(|r| r.folder == folder || folder.starts_with(&format!("{}/", r.folder)))
-            .collect();
-        ancestors.sort_by_key(|r| r.folder.split('/').count());
-        result.extend(
-            ancestors
-                .into_iter()
-                .map(|r| format!("{}: {}", r.folder, r.instruction)),
-        );
-        result.join("\n\n")
-    }
-}
-
-#[derive(Clone, Serialize, Deserialize, Debug)]
-pub struct LanguageInfo {
-    pub name: String,
-    pub code: String,
-    pub status: String,
-    pub message: String,
 }
 
 #[derive(Clone, Serialize, Debug)]
 #[serde(rename_all = "camelCase")]
 pub struct ReviewItem {
-    pub language: Option<LanguageInfo>,
     pub id: String,
     pub original: String,
     pub destination: String,

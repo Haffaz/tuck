@@ -86,9 +86,9 @@ func stringProperty(_ name: String, _ description: String) -> DynamicGenerationS
 func generate(model: SystemLanguageModel, instructions: String, prompt: String, schema: GenerationSchema,
               outputTokens: Int = 600) async throws -> [String: Any] {
     try await GenerationBudget.shared.take()
-    if LocalModelTransport.selection != "apple" {
+    if ModelChoice.selection != "apple" {
         let schemaObject = try JSONSerialization.jsonObject(with: JSONEncoder().encode(schema))
-        return try parseModelJSONObject(try await LocalModelTransport.generate(instructions: instructions, prompt: prompt, schema: schemaObject, outputTokens: outputTokens))
+        return try parseModelJSONObject(try await ModelChoice.generate(instructions: instructions, prompt: prompt, schema: schemaObject, outputTokens: outputTokens))
     }
     // Count the exact instructions + structured schema + prompt. Leave room for the answer
     // and framework overhead. Never truncate user preferences or silently drop a destination.
@@ -115,8 +115,8 @@ func generate(model: SystemLanguageModel, instructions: String, prompt: String, 
 @available(macOS 26.0, *)
 func generateText(model: SystemLanguageModel, instructions: String, prompt: String, outputTokens: Int = 700) async throws -> String {
     try await GenerationBudget.shared.take()
-    if LocalModelTransport.selection != "apple" {
-        return try await LocalModelTransport.generate(instructions: instructions, prompt: prompt, schema: nil, outputTokens: outputTokens)
+    if ModelChoice.selection != "apple" {
+        return try await ModelChoice.generate(instructions: instructions, prompt: prompt, schema: nil, outputTokens: outputTokens)
     }
     if #available(macOS 26.4, *) {
         let tokens = try await model.tokenCount(for: Instructions(instructions)) + model.tokenCount(for: Prompt(prompt))
@@ -128,21 +128,4 @@ func generateText(model: SystemLanguageModel, instructions: String, prompt: Stri
     let session = LanguageModelSession(model: model, instructions: instructions)
     let response = try await session.respond(to: prompt, options: GenerationOptions(sampling: .greedy, maximumResponseTokens: outputTokens))
     return response.content
-}
-// One-field guided matcher: read the typed property directly, without parsing model JSON.
-@available(macOS 26.0, *)
-func generateCategory(model: SystemLanguageModel, instructions: String, prompt: String, choices: [String]) async throws -> String {
-    if LocalModelTransport.selection != "apple" {
-        try await GenerationBudget.shared.take()
-        let schema: [String:Any] = ["type":"object", "properties":["category":["type":"string","enum":choices]],"required":["category"],"additionalProperties":false]
-        let result = try parseModelJSONObject(try await LocalModelTransport.generate(instructions:instructions, prompt:prompt, schema:schema, outputTokens:160))
-        guard let category = result["category"] as? String, choices.contains(category) else { throw LocalFailure(code:"invalid_destination") }
-        return category
-    }
-    let schema=try makeSchema("FilingBranch",[
-        .init(name:"category",description:"The best supported branch, or the supplied noMatch choice.",schema:DynamicGenerationSchema(type:String.self,guides:[.anyOf(choices)]))
-    ])
-    let result=try await generate(model:model,instructions:instructions,prompt:prompt,schema:schema,outputTokens:160)
-    guard let category=result["category"] as? String,choices.contains(category) else {throw LocalFailure(code:"invalid_destination")}
-    return category
 }

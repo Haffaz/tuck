@@ -1,16 +1,10 @@
-export type RuleIssue = {
-  folder: string;
-  otherFolder: string;
-  issue: string;
-  clarification: string;
-};
 export type Rule = {
   folder: string;
   instruction: string;
   enabled: boolean;
   documentTypes?: string[];
 };
-export type LocalModel = "apple" | "gemmaE2b" | "gemmaE4b" | "custom";
+export type LocalModel = "apple" | "custom";
 export type ModelConnection = {
   kind: "ollama" | "openai" | "anthropic";
   baseUrl: string;
@@ -18,7 +12,6 @@ export type ModelConnection = {
 };
 export type Preferences = {
   root: string;
-  recursive: boolean;
   rename: boolean;
   maxDepth: number;
   legacyFolders?: string[];
@@ -27,21 +20,12 @@ export type Preferences = {
   connection: ModelConnection;
   folderNesting: number;
   categoryInstructions: string;
-  useAgent: boolean;
-  useMemory: boolean;
   instructions: string;
   instructionsRevision: string;
   settingsRevision: string;
   rules: Rule[];
 };
-export type LanguageInfo = {
-  name: string;
-  code: string;
-  status: string;
-  message: string;
-};
 export type ReviewItem = {
-  language?: LanguageInfo | null;
   id: string;
   original: string;
   destination: string;
@@ -79,7 +63,6 @@ export const initial: Snapshot = {
   watching: false,
   preferences: {
     root: "",
-    recursive: true,
     rename: true,
     maxDepth: 2,
     useAi: true,
@@ -91,8 +74,6 @@ export const initial: Snapshot = {
     },
     folderNesting: 2,
     categoryInstructions: "",
-    useAgent: true,
-    useMemory: false,
     instructionsRevision: "",
     settingsRevision: "",
     instructions:

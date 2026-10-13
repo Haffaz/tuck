@@ -17,7 +17,6 @@ mod model;
 mod native;
 mod parallel;
 mod provider;
-mod rule_check;
 mod watching;
 use engine::Engine;
 use model::{Approval, Preferences, Snapshot};
@@ -72,27 +71,6 @@ async fn save_preferences(
     .map_err(|e| e.to_string())?
 }
 #[tauri::command]
-async fn suggest_folder_rule(
-    folder: String,
-    preferences: Preferences,
-    engine: tauri::State<'_, Arc<Engine>>,
-) -> Result<String, String> {
-    let engine = engine.inner().clone();
-    tauri::async_runtime::spawn_blocking(move || engine.suggest_rule(&folder, &preferences))
-        .await
-        .map_err(|e| e.to_string())?
-}
-#[tauri::command]
-async fn check_folder_rules(
-    preferences: Preferences,
-    engine: tauri::State<'_, Arc<Engine>>,
-) -> Result<Vec<rule_check::RuleIssue>, String> {
-    let engine = engine.inner().clone();
-    tauri::async_runtime::spawn_blocking(move || engine.check_rules(&preferences))
-        .await
-        .map_err(|e| e.to_string())?
-}
-#[tauri::command]
 async fn suggest_categories(
     engine: tauri::State<'_, Arc<Engine>>,
 ) -> Result<categories::Proposal, String> {
@@ -112,17 +90,6 @@ async fn import_documents(
     })
     .await
     .map_err(|e| e.to_string())?
-}
-#[tauri::command]
-async fn review_existing_documents(
-    root: String,
-    recursive: bool,
-    engine: tauri::State<'_, Arc<Engine>>,
-) -> Result<usize, String> {
-    let engine = engine.inner().clone();
-    tauri::async_runtime::spawn_blocking(move || engine.review_existing(&root, recursive))
-        .await
-        .map_err(|e| e.to_string())?
 }
 #[tauri::command]
 async fn update_review(
@@ -164,13 +131,6 @@ fn clear_batch(engine: tauri::State<Arc<Engine>>) {
 #[tauri::command]
 fn skip_document(id: String, engine: tauri::State<Arc<Engine>>) -> Result<(), String> {
     engine.skip(&id)
-}
-#[tauri::command]
-async fn retry_document(id: String, engine: tauri::State<'_, Arc<Engine>>) -> Result<(), String> {
-    let engine = engine.inner().clone();
-    tauri::async_runtime::spawn_blocking(move || engine.retry(&id))
-        .await
-        .map_err(|e| e.to_string())?
 }
 #[tauri::command]
 async fn preview_document(
@@ -261,16 +221,12 @@ pub fn run() {
             choose_folder,
             save_preferences,
             import_documents,
-            review_existing_documents,
             suggest_categories,
-            suggest_folder_rule,
-            check_folder_rules,
             update_review,
             organize_documents,
             organize_proposal,
             clear_batch,
             skip_document,
-            retry_document,
             check_model,
             check_connection,
             preview_document

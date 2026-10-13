@@ -73,15 +73,12 @@ try:
   checks.append(kind+' merges keep only distinct listed names')
 
   candidates=[{'folder':'Finance/Banking','instruction':'Bank statements.','documentTypes':['bank statement']},{'folder':'Work','instruction':'Employment.'}]
-  state['content']=json.dumps({'category':'Finance/Banking'})
+  # Folder choice is a plain-text reply naming one listed folder.
+  state['content']='Finance/Banking'
   assert call(kind,'choose_folder',card={'kind':'bank statement','tags':[]},candidates=candidates,rootRules='')['folder']=='Finance/Banking'
-  state['content']=json.dumps({'category':'Outside'})
-  assert 'error' in call(kind,'choose_folder',card={'kind':'bank statement','tags':[]},candidates=candidates,rootRules='')
+  state['content']='Outside'
+  assert call(kind,'choose_folder',card={'kind':'bank statement','tags':[]},candidates=candidates,rootRules='')['folder']=='None of these'
   checks.append(kind+' folder choice is limited to candidates')
-
-  state['content']=json.dumps({'instruction':'Bank statements and account letters.'})
-  assert call(kind,'rule',folder='Banking',context='')['instruction']=='Bank statements and account letters.'
-  checks.append(kind+' rule suggestion')
 
   # A service refusal must propagate instead of being converted to a card.
   state['mode']='auth';before=len(state['requests'])

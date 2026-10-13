@@ -165,7 +165,7 @@ mod tests {
         fs::write(root.join("one/two/three/deep.txt"), "Too deep").unwrap();
         std::os::unix::fs::symlink(root.join("letter.txt"), root.join("linked.txt")).unwrap();
         let root = root.canonicalize().unwrap();
-        let paths = files::existing_documents(&root, true).unwrap();
+        let paths = files::existing_documents(&root).unwrap();
         assert_eq!(
             paths,
             vec![root.join("letter.txt"), root.join("one/two/three/deep.txt")]

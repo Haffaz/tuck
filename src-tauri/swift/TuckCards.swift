@@ -83,7 +83,7 @@ func parsedTextCard(_ reply: String) -> [String: Any] {
 /// the framework reports an oversized prompt itself, which `describeCard` retries shorter.
 @available(macOS 26.0, *)
 func generateCard(model: SystemLanguageModel, instructions: String, prompt: String, schema: GenerationSchema) async throws -> [String: Any] {
-    guard LocalModelTransport.selection == "apple" else {
+    guard ModelChoice.selection == "apple" else {
         return try await generate(model: model, instructions: instructions, prompt: prompt, schema: schema, outputTokens: 160)
     }
     try await GenerationBudget.shared.take()
@@ -272,6 +272,6 @@ func handleCardOperation(_ request: [String: Any], model: SystemLanguageModel) a
             return nil
         }
     } catch {
-        return ["error": "\(LocalModelTransport.label) could not complete this step (\(errorCode(error))).", "code": errorCode(error)]
+        return ["error": "\(ModelChoice.label) could not complete this step (\(errorCode(error))).", "code": errorCode(error)]
     }
 }
