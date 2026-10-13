@@ -28,7 +28,7 @@ func cardExcerpt(_ text: String, limit: Int) -> String {
     return String(body.prefix(limit))
 }
 
-func photoLabels(_ text: String) -> [String]? {
+func photoLabelsInText(_ text: String) -> [String]? {
     guard let line = text.split(separator: "\n").first(where: { $0.hasPrefix(photoLabelPrefix) }) else { return nil }
     let letters = text.replacingOccurrences(of: String(line), with: "").filter(\.isLetter).count
     guard letters < 25 else { return nil }
@@ -88,7 +88,7 @@ func generateCard(model: SystemLanguageModel, instructions: String, prompt: Stri
     }
     try await GenerationBudget.shared.take()
     let response = try await LanguageModelSession(model: model, instructions: instructions).respond(
-        to: prompt, schema: schema, options: GenerationOptions(sampling: .greedy, maximumResponseTokens: 160))
+        to: prompt, schema: schema, options: GenerationOptions(samplingMode: .greedy, maximumResponseTokens: 160))
     guard let result = try JSONSerialization.jsonObject(with: Data(response.content.jsonString.utf8)) as? [String: Any] else {
         throw LocalFailure(code: "invalid_response")
     }
@@ -103,7 +103,7 @@ func clueBlock(_ clues: [String]) -> String {
 }
 
 func describeCard(text: String, fileName: String, clues: [String] = [], model: SystemLanguageModel) async throws -> [String: Any] {
-    if let labels = photoLabels(text) {
+    if let labels = photoLabelsInText(text) {
         let tags = Array(labels.prefix(3))
         return [
             "kind": "photo", "issuer": "", "date": "", "tags": tags,

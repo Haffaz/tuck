@@ -104,7 +104,7 @@ func generate(model: SystemLanguageModel, instructions: String, prompt: String, 
     }
     let session = LanguageModelSession(model: model, instructions: instructions)
     let response = try await session.respond(to: prompt, schema: schema,
-        options: GenerationOptions(sampling: .greedy, maximumResponseTokens: outputTokens))
+        options: GenerationOptions(samplingMode: .greedy, maximumResponseTokens: outputTokens))
     guard let result = try JSONSerialization.jsonObject(with: Data(response.content.jsonString.utf8)) as? [String: Any] else {
         throw LocalFailure(code: "invalid_response")
     }
@@ -126,6 +126,6 @@ func generateText(model: SystemLanguageModel, instructions: String, prompt: Stri
         guard instructions.utf8.count + prompt.utf8.count + outputTokens + 256 < 4096 else { throw LocalFailure(code: "context_limit") }
     }
     let session = LanguageModelSession(model: model, instructions: instructions)
-    let response = try await session.respond(to: prompt, options: GenerationOptions(sampling: .greedy, maximumResponseTokens: outputTokens))
+    let response = try await session.respond(to: prompt, options: GenerationOptions(samplingMode: .greedy, maximumResponseTokens: outputTokens))
     return response.content
 }

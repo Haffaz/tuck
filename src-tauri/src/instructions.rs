@@ -355,7 +355,7 @@ pub fn save(p: &Preferences, expected: &str) -> Result<Loaded, String> {
         ..p.clone()
     })?;
     if previous.revision != expected {
-        return Err("Rules changed on disk. Reload preferences before saving your edits.".into());
+        return Err("Folder rules changed on disk. Discard your changes and try again.".into());
     }
     let mut desired = BTreeMap::from([(String::new(), p.instructions.clone())]);
     for folder in &previous.legacy_folders {

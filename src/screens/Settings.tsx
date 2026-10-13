@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { invoke } from "@tauri-apps/api/core";
 import { LoaderCircle } from "lucide-react";
-import type { ModelConnection, Preferences } from "./types";
+import type { ModelConnection, Preferences } from "../types";
 
 const presets: Record<ModelConnection["kind"], string> = {
   ollama: "http://127.0.0.1:11434",

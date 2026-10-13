@@ -148,18 +148,11 @@ async fn preview_document(
 }
 #[tauri::command]
 async fn check_model(app: tauri::AppHandle, model: model::LocalModel) -> Result<String, String> {
-    let helper = if cfg!(debug_assertions) {
-        PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("resources/tuck-apple")
-    } else {
-        app.path()
-            .resource_dir()
-            .map_err(|e| e.to_string())?
-            .join("resources/tuck-apple")
-    };
+    let helper = bundled(&app, "tuck-apple")?;
     tauri::async_runtime::spawn_blocking(move || {
         use crate::provider::ModelProvider;
         let _serial = model_lock::hold();
-        provider::selected(&helper.with_file_name("tuck-reader"), model).status()
+        provider::selected(&helper, model).status()
     })
     .await
     .map_err(|e| e.to_string())?
@@ -171,14 +164,7 @@ async fn check_connection(
     api_key: Option<String>,
     list_models: bool,
 ) -> Result<String, String> {
-    let helper = if cfg!(debug_assertions) {
-        PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("resources/tuck-apple")
-    } else {
-        app.path()
-            .resource_dir()
-            .map_err(|e| e.to_string())?
-            .join("resources/tuck-apple")
-    };
+    let helper = bundled(&app, "tuck-apple")?;
     tauri::async_runtime::spawn_blocking(move || {
         files::validate_connection(&connection)?;
         let _serial = model_lock::hold();
@@ -188,6 +174,16 @@ async fn check_connection(
     })
     .await
     .map_err(|e| e.to_string())?
+}
+/// A Swift binary shipped in `resources/`: from the source tree in debug builds, from the
+/// app bundle otherwise.
+fn bundled(app: &tauri::AppHandle, name: &str) -> Result<PathBuf, String> {
+    let resources = if cfg!(debug_assertions) {
+        PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+    } else {
+        app.path().resource_dir().map_err(|e| e.to_string())?
+    };
+    Ok(resources.join("resources").join(name))
 }
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
@@ -202,11 +198,7 @@ pub fn run() {
         .plugin(tauri_plugin_opener::init())
         .setup(|app| {
             let storage = app.path().app_data_dir()?;
-            let reader = if cfg!(debug_assertions) {
-                PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("resources/tuck-reader")
-            } else {
-                app.path().resource_dir()?.join("resources/tuck-reader")
-            };
+            let reader = bundled(app.handle(), "tuck-reader").map_err(std::io::Error::other)?;
             let engine = Arc::new(Engine::new(storage, reader).map_err(std::io::Error::other)?);
             app.manage(engine.clone());
             Engine::start(engine);

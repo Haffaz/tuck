@@ -31,8 +31,8 @@ import FoundationModels
         for bad in ["", "a very long kind of document name here"] {
             do { _ = try cleanedCard(["kind": bad]); assertionFailure("Invalid kind accepted") } catch {}
         }
-        assert(photoLabels("[Photo labels: beach, dog]") == ["beach", "dog"])
-        assert(photoLabels("[Photo labels: sign]\nThis photo shows a long readable notice with text.") == nil)
+        assert(photoLabelsInText("[Photo labels: beach, dog]") == ["beach", "dog"])
+        assert(photoLabelsInText("[Photo labels: sign]\nThis photo shows a long readable notice with text.") == nil)
         assert(cardExcerpt("[Page 1]\nabc\n[Text truncated]\ndef", limit: 100) == "[Page 1]\nabc\ndef")
         let subjects = parsedSubjects("- Payslips -> Work\nbank statements -> Finance.\nInvented -> Other\nPayslips -> Home", names: ["Payslips", "Bank Statements"])
         assert(subjects == ["Payslips": "Work", "Bank Statements": "Finance"])

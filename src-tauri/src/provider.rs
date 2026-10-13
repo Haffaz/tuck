@@ -67,10 +67,11 @@ pub struct LocalProvider {
     helper: PathBuf,
     preferences: Option<crate::model::Preferences>,
 }
-/// One selection point for every role. Prompts and validators are shared in the helper.
-pub fn selected(reader: &Path, model: crate::model::LocalModel) -> LocalProvider {
+/// The provider for `model`. `resource` is any binary in Tuck's resources folder (usually the
+/// reader); the model helper `tuck-apple` sits next to it.
+pub fn selected(resource: &Path, model: crate::model::LocalModel) -> LocalProvider {
     LocalProvider {
-        helper: reader.with_file_name("tuck-apple"),
+        helper: resource.with_file_name("tuck-apple"),
         model,
         preferences: None,
     }

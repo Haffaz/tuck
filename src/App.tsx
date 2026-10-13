@@ -11,15 +11,13 @@ import {
   type ReviewItem,
   type Snapshot,
 } from "./types";
-import Settings from "./Settings";
-import {
-  ChooseFolder,
-  Proposal,
-  Results,
-  SavedFolders,
-  Working,
-  nameOf,
-} from "./Home";
+import Settings from "./screens/Settings";
+import { ChooseFolder } from "./screens/ChooseFolder";
+import { Proposal } from "./screens/Proposal";
+import { Results } from "./screens/Results";
+import { SavedFolders } from "./screens/SavedFolders";
+import { Working } from "./screens/Working";
+import { nameOf } from "./folders";
 import "./tuck.css";
 
 const desktop = isTauri();

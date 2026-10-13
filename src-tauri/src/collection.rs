@@ -55,7 +55,7 @@ pub fn read(path: &Path, root: &Path, reader: &Path) -> Document {
     };
     let result = (|| {
         if path.canonicalize().map_err(|e| e.to_string())? != path || !path.starts_with(root) {
-            return Err("Document moved during mapping. Map the folder again.".into());
+            return Err("A document moved while Tuck was reading. Choose the folder again.".into());
         }
         document.signature = files::signature(path)?;
         if fs::metadata(path).map_err(|e| e.to_string())?.len() > 100 * 1024 * 1024 {
@@ -66,7 +66,9 @@ pub fn read(path: &Path, root: &Path, reader: &Path) -> Document {
         document.text = reading.text;
         document.clues = reading.clues;
         if files::signature(path)? != document.signature || files::digest(path)? != document.hash {
-            return Err("Document changed during mapping. Map the folder again.".into());
+            return Err(
+                "A document changed while Tuck was reading. Choose the folder again.".into(),
+            );
         }
         if document.text.trim().is_empty() {
             return Err("No readable text found.".into());

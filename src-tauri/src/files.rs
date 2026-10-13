@@ -36,7 +36,9 @@ pub fn existing_documents(root: &Path) -> Result<Vec<PathBuf>, String> {
         for entry in fs::read_dir(&directory).map_err(|e| e.to_string())? {
             entries_seen += 1;
             if entries_seen > 10_000 {
-                return Err("This folder is too large to review at once. Choose files instead, or turn off Include subfolders.".into());
+                return Err(
+                    "This folder has more than 10,000 items. Choose a smaller folder.".into(),
+                );
             }
             let entry = entry.map_err(|e| e.to_string())?;
             if entry.file_name().to_string_lossy().starts_with('.') {
@@ -49,7 +51,7 @@ pub fn existing_documents(root: &Path) -> Result<Vec<PathBuf>, String> {
             if kind.is_dir() {
                 if depth >= 32 {
                     return Err(
-                        "This folder has too many nested folders. Choose files instead.".into(),
+                        "This folder has too many nested folders. Choose a smaller folder.".into(),
                     );
                 }
                 pending.push((entry.path(), depth + 1));

@@ -209,7 +209,7 @@ pub fn describe(
         return Err(UNIDENTIFIED.into());
     }
     if files::digest(path)? != hash {
-        return Err("Document changed while it was being read. Analyze it again.".into());
+        return Err("The document changed while Tuck was reading it. Try again.".into());
     }
     save(root, &hash, &input, &identity, &card);
     Ok(card)

@@ -497,7 +497,7 @@ fn suggest_with(
         .any(|(_, doc)| files::digest(Path::new(&doc.path)).ok().as_ref() != Some(&doc.hash))
     {
         return Err(
-            "A document changed. Map the folder again before suggesting categories.".into(),
+            "A document changed. Choose the folder again before suggesting folders.".into(),
         );
     }
     let results = crate::parallel::map(
@@ -559,7 +559,9 @@ fn suggest_with(
         if doc.error.is_none()
             && files::digest(Path::new(&doc.path)).ok().as_ref() != Some(&doc.hash)
         {
-            return Err("A document changed during grouping. Map the folder again.".into());
+            return Err(
+                "A document changed while Tuck was grouping. Choose the folder again.".into(),
+            );
         }
     }
     let files = placements(&groups, &described, |card, position| {
