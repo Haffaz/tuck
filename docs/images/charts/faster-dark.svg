@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="294" viewBox="0 0 720 294" role="img" aria-label="Mixed corpus: 3.1 seconds per document before, 0.8 now. Held-out corpus: 3.2 seconds before, 0.6 now." font-family="system-ui, -apple-system, 'Segoe UI', sans-serif">
+<title>About four times faster</title><desc>Mixed corpus: 3.1 seconds per document before, 0.8 now. Held-out corpus: 3.2 seconds before, 0.6 now.</desc>
+<rect x="0.5" y="0.5" width="719" height="293" rx="16" fill="#28211b" stroke="#3d3229"/>
+<text x="28" y="40" font-size="16" font-weight="650" fill="#f6ede3" text-anchor="start">About four times faster</text>
+<text x="28" y="62" font-size="12.5" font-weight="400" fill="#c9b8a6" text-anchor="start">Median seconds to file one document, Apple Intelligence on device. Same harness, same documents.</text>
+<rect x="28" y="79" width="10" height="10" rx="2" fill="#3987e5"/>
+<text x="44" y="88" font-size="12" font-weight="400" fill="#c9b8a6" text-anchor="start">Before (role pipeline)</text>
+<rect x="199.2" y="79" width="10" height="10" rx="2" fill="#d95926"/>
+<text x="215.2" y="88" font-size="12" font-weight="400" fill="#c9b8a6" text-anchor="start">Now (card pipeline)</text>
+<line x1="190.0" y1="104" x2="190.0" y2="250" stroke="#352c24" stroke-width="1"/>
+<text x="190.0" y="266" font-size="11" font-weight="400" fill="#9a8a7a" text-anchor="middle">0 s</text>
+<line x1="297.5" y1="104" x2="297.5" y2="250" stroke="#352c24" stroke-width="1"/>
+<text x="297.5" y="266" font-size="11" font-weight="400" fill="#9a8a7a" text-anchor="middle">1 s</text>
+<line x1="405.0" y1="104" x2="405.0" y2="250" stroke="#352c24" stroke-width="1"/>
+<text x="405.0" y="266" font-size="11" font-weight="400" fill="#9a8a7a" text-anchor="middle">2 s</text>
+<line x1="512.5" y1="104" x2="512.5" y2="250" stroke="#352c24" stroke-width="1"/>
+<text x="512.5" y="266" font-size="11" font-weight="400" fill="#9a8a7a" text-anchor="middle">3 s</text>
+<line x1="620.0" y1="104" x2="620.0" y2="250" stroke="#352c24" stroke-width="1"/>
+<text x="620.0" y="266" font-size="11" font-weight="400" fill="#9a8a7a" text-anchor="middle">4 s</text>
+<line x1="190" y1="104" x2="190" y2="250" stroke="#4a3d32" stroke-width="1"/>
+<text x="176" y="142.0" font-size="12.5" font-weight="600" fill="#f6ede3" text-anchor="end">Mixed corpus (35)</text>
+<path d="M190,112 H519.25 Q523.25,112 523.25,116 V132 Q523.25,136 519.25,136 H190 Z" fill="#3987e5"/>
+<text x="531.25" y="128.0" font-size="12.5" font-weight="600" fill="#f6ede3" text-anchor="start">3.1 s</text>
+<path d="M190,140 H272.0 Q276.0,140 276.0,144 V160 Q276.0,164 272.0,164 H190 Z" fill="#d95926"/>
+<text x="284.0" y="156.0" font-size="12.5" font-weight="600" fill="#f6ede3" text-anchor="start">0.8 s</text>
+<text x="176" y="220.0" font-size="12.5" font-weight="600" fill="#f6ede3" text-anchor="end">Held-out corpus (29)</text>
+<path d="M190,190 H530.0 Q534.0,190 534.0,194 V210 Q534.0,214 530.0,214 H190 Z" fill="#3987e5"/>
+<text x="542.0" y="206.0" font-size="12.5" font-weight="600" fill="#f6ede3" text-anchor="start">3.2 s</text>
+<path d="M190,218 H250.5 Q254.5,218 254.5,222 V238 Q254.5,242 250.5,242 H190 Z" fill="#d95926"/>
+<text x="262.5" y="234.0" font-size="12.5" font-weight="600" fill="#f6ede3" text-anchor="start">0.6 s</text>
+</svg>

@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="238" viewBox="0 0 720 238" role="img" aria-label="Before: 29 of 35 documents filed correctly, 6 waited for review. Now: 35 of 35 filed correctly, none waited. No document was filed wrongly in either run." font-family="system-ui, -apple-system, 'Segoe UI', sans-serif">
+<title>Every file placed</title><desc>Before: 29 of 35 documents filed correctly, 6 waited for review. Now: 35 of 35 filed correctly, none waited. No document was filed wrongly in either run.</desc>
+<rect x="0.5" y="0.5" width="719" height="237" rx="16" fill="#28211b" stroke="#3d3229"/>
+<text x="28" y="40" font-size="16" font-weight="650" fill="#f6ede3" text-anchor="start">Every file placed</text>
+<text x="28" y="62" font-size="12.5" font-weight="400" fill="#c9b8a6" text-anchor="start">Filing the same 35 synthetic documents (long, scanned, Swedish, German). 0 filed wrong in either.</text>
+<rect x="28" y="79" width="10" height="10" rx="2" fill="#0ca30c"/>
+<text x="44" y="88" font-size="12" font-weight="400" fill="#c9b8a6" text-anchor="start">Filed correctly</text>
+<rect x="153.0" y="79" width="10" height="10" rx="2" fill="#fab219"/>
+<text x="169.0" y="88" font-size="12" font-weight="400" fill="#c9b8a6" text-anchor="start">Waited for you</text>
+<line x1="110.0" y1="96" x2="110.0" y2="194" stroke="#352c24" stroke-width="1"/>
+<text x="110.0" y="210" font-size="11" font-weight="400" fill="#9a8a7a" text-anchor="middle">0</text>
+<line x1="238.57142857142858" y1="96" x2="238.57142857142858" y2="194" stroke="#352c24" stroke-width="1"/>
+<text x="238.57142857142858" y="210" font-size="11" font-weight="400" fill="#9a8a7a" text-anchor="middle">10</text>
+<line x1="367.14285714285717" y1="96" x2="367.14285714285717" y2="194" stroke="#352c24" stroke-width="1"/>
+<text x="367.14285714285717" y="210" font-size="11" font-weight="400" fill="#9a8a7a" text-anchor="middle">20</text>
+<line x1="495.7142857142857" y1="96" x2="495.7142857142857" y2="194" stroke="#352c24" stroke-width="1"/>
+<text x="495.7142857142857" y="210" font-size="11" font-weight="400" fill="#9a8a7a" text-anchor="middle">30</text>
+<line x1="560.0" y1="96" x2="560.0" y2="194" stroke="#352c24" stroke-width="1"/>
+<text x="560.0" y="210" font-size="11" font-weight="400" fill="#9a8a7a" text-anchor="middle">35</text>
+<line x1="110" y1="96" x2="110" y2="194" stroke="#4a3d32" stroke-width="1"/>
+<text x="96" y="123.0" font-size="13" font-weight="600" fill="#f6ede3" text-anchor="end">Before</text>
+<path d="M110,104 H480.85714285714283 Q480.85714285714283,104 480.85714285714283,104 V134 Q480.85714285714283,134 480.85714285714283,134 H110 Z" fill="#0ca30c"/>
+<path d="M482.85714285714283,104 H556.0 Q560.0,104 560.0,108 V130 Q560.0,134 556.0,134 H482.85714285714283 Z" fill="#fab219"/>
+<text x="572" y="123.0" font-size="12.5" font-weight="600" fill="#f6ede3" text-anchor="start">29 filed · 6 waited</text>
+<text x="96" y="175.0" font-size="13" font-weight="600" fill="#f6ede3" text-anchor="end">Now</text>
+<path d="M110,156 H556.0 Q560.0,156 560.0,160 V182 Q560.0,186 556.0,186 H110 Z" fill="#0ca30c"/>
+<text x="572" y="175.0" font-size="12.5" font-weight="600" fill="#f6ede3" text-anchor="start">35 filed</text>
+</svg>

@@ -26,13 +26,52 @@ Tick **Keep watching for new files** and new downloads are filed as they arrive.
 ## How it works
 
 ```mermaid
-flowchart LR
-    A["Read<br/>PDFKit · Vision OCR"] --> B["Describe<br/>one card per document"]
-    B --> C["Group<br/>cluster by kind"]
-    C --> D["Name<br/>folders and subjects"]
-    D --> E["You review"]
-    E --> F["Move<br/>checked by Rust"]
+flowchart TB
+    pick(["You choose<br/>a folder"])
+
+    subgraph reader["tuck-reader · Swift"]
+        pdf["PDFKit text"]
+        ocr["Vision OCR<br/>+ confidence"]
+        clues["Clues: download site,<br/>PDF fields, faces,<br/>barcodes, passport lines"]
+    end
+
+    subgraph apple["tuck-apple · Swift"]
+        card["Card<br/>kind · issuer · date · tags"]
+        embed["NLEmbedding<br/>sentence vector"]
+        name["Name groups,<br/>place under subjects"]
+        choose["Choose a folder<br/>for a new file"]
+    end
+
+    subgraph core["Rust core"]
+        cache[("Card cache")]
+        cluster["Average-linkage<br/>clustering"]
+        rank["Rank folders<br/>by similarity"]
+        rules[("Folder rules")]
+        move["Checked move<br/>hash · root · no overwrite"]
+    end
+
+    review(["You check<br/>the suggestion"])
+    waits(["Waits for you"])
+
+    pick --> pdf & ocr & clues
+    pdf & ocr & clues --> card --> embed --> cache
+    cache --> cluster --> name --> review --> rules --> move
+    cache -. "new file<br/>while watching" .-> rank --> choose --> move
+    ocr -- "confidence < 0.6" --> waits
+    choose -- "unsure" --> waits
+
+    classDef model fill:#fde3d3,stroke:#eb6834,color:#2b2118
+    classDef rust fill:#dce9fa,stroke:#2a78d6,color:#2b2118
+    classDef swift fill:#f4ecdf,stroke:#b59a7a,color:#2b2118
+    classDef person fill:#dcf2dc,stroke:#0ca30c,color:#2b2118
+    class card,name,choose model
+    class cache,cluster,rules,rank,move rust
+    class pdf,ocr,clues,embed swift
+    class pick,review,waits person
 ```
+
+Orange steps call the language model; everything else is deterministic code. The model only
+returns short pieces of text, and Rust decides what happens to files.
 
 - Each document gets a **card**: what kind of document it is, who issued it, its date and three
   tags, written by the language model, plus a sentence embedding from Apple's NaturalLanguage
@@ -48,6 +87,38 @@ flowchart LR
   form fields, a photo of a person, barcodes, and passport machine-readable lines.
 
 The full story, with diagrams, is in [docs/architecture.md](docs/architecture.md).
+
+## Results
+
+Measured on synthetic documents with Apple Intelligence, using the same harness for the earlier
+design and the current one. These are small test sets, not a real-world accuracy estimate.
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/images/charts/placed-dark.svg">
+  <img src="docs/images/charts/placed-light.svg" alt="Before: 29 of 35 documents filed correctly and 6 waited for review. Now: all 35 filed correctly. None filed wrongly in either run." width="720">
+</picture>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/images/charts/faster-dark.svg">
+  <img src="docs/images/charts/faster-light.svg" alt="Median seconds to file one document. Mixed corpus: 3.1 before, 0.8 now. Held-out corpus: 3.2 before, 0.6 now." width="720">
+</picture>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/images/charts/confidence-dark.svg">
+  <img src="docs/images/charts/confidence-light.svg" alt="Text-recognition confidence: readable scans 0.75 to 1.0; Tamil 0.42 and Sinhala 0.30, below the 0.6 cut-off, so they wait for you." width="720">
+</picture>
+
+| Measure                                                | Before (role pipeline) | Now (card pipeline) |
+| ------------------------------------------------------ | ---------------------- | ------------------- |
+| Mixed corpus (35): filed correctly / wrong / waited    | 29 / 0 / 6             | 35 / 0 / 0          |
+| Held-out corpus: clear documents filed correctly       | 25 / 25                | 25 / 25             |
+| Median seconds to file one document (mixed / held-out) | 3.1 / 3.2              | 0.8 / 0.6           |
+| Unreadable Sinhala and Tamil scans                     | guessed                | wait for you        |
+
+The current design places more and asks less: of four deliberately ambiguous held-out documents it
+holds one for review, where the old design held all four. Details and method are in
+[evals/cards](evals/cards/README.md); the charts are drawn by
+[docs/charts/make_charts.py](docs/charts/make_charts.py).
 
 ## Built with
 
