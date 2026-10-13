@@ -18,7 +18,18 @@ pub struct Decision {
     pub reason: String,
     pub confident: bool,
 }
-pub fn read_document(path: &Path, reader: &Path) -> Result<String, String> {
+/// Text plus local clues that are not in the text (download source, PDF properties,
+/// faces, barcodes, passport lines). See TuckClues.swift.
+#[derive(Clone, Debug, Default)]
+pub struct Reading {
+    pub text: String,
+    pub clues: Vec<String>,
+}
+
+pub const UNREADABLE_SCAN: &str =
+    "Tuck can't read the text in this scan yet (its script or quality isn't supported). Choose a folder for it.";
+
+pub fn read(path: &Path, reader: &Path) -> Result<Reading, String> {
     let ext = path
         .extension()
         .unwrap_or_default()
@@ -26,16 +37,44 @@ pub fn read_document(path: &Path, reader: &Path) -> Result<String, String> {
         .to_lowercase();
     if ext == "txt" || ext == "md" {
         let data = fs::read(path).map_err(|e| e.to_string())?;
-        return Ok(String::from_utf8_lossy(&data).chars().take(14000).collect());
+        // Text files only have download clues; failing to read them is not an error.
+        let clues = run_reader(path, reader, &["--clues".into()], Duration::from_secs(10))
+            .map(|value| clues_of(&value))
+            .unwrap_or_default();
+        return Ok(Reading {
+            text: String::from_utf8_lossy(&data).chars().take(14000).collect(),
+            clues,
+        });
     }
-    run_reader(path, reader, &[], Duration::from_secs(60))
+    let value = run_reader(path, reader, &[], Duration::from_secs(60))?;
+    if value["unreadable"].as_bool() == Some(true) {
+        return Err(UNREADABLE_SCAN.into());
+    }
+    Ok(Reading {
+        text: value["text"].as_str().unwrap_or_default().to_string(),
+        clues: clues_of(&value),
+    })
+}
+fn clues_of(value: &serde_json::Value) -> Vec<String> {
+    value["clues"]
+        .as_array()
+        .into_iter()
+        .flatten()
+        .filter_map(|c| c.as_str())
+        .map(|c| c.chars().take(160).collect())
+        .take(12)
+        .collect()
+}
+#[cfg(test)]
+pub fn read_document(path: &Path, reader: &Path) -> Result<String, String> {
+    read(path, reader).map(|r| r.text)
 }
 fn run_reader(
     path: &Path,
     reader: &Path,
     args: &[String],
     timeout: Duration,
-) -> Result<String, String> {
+) -> Result<serde_json::Value, String> {
     let mut child = Command::new(reader)
         .arg(path)
         .args(args)
@@ -63,8 +102,7 @@ fn run_reader(
     if !status.success() {
         return Err("Could not read this document locally".into());
     }
-    let value: serde_json::Value = serde_json::from_slice(&output).map_err(|e| e.to_string())?;
-    Ok(value["text"].as_str().unwrap_or_default().to_string())
+    serde_json::from_slice(&output).map_err(|e| e.to_string())
 }
 #[cfg(test)]
 pub fn classify(name: &str, text: &str, p: &Preferences) -> Decision {
@@ -75,7 +113,7 @@ pub fn classify_with_tools(
     name: &str,
     text: &str,
     p: &Preferences,
-    _memories: &[crate::model::Correction],
+    clues: &[String],
     source: Option<(&Path, &Path)>,
 ) -> Decision {
     if !p.rules.iter().any(|r| p.rule_enabled(r)) {
@@ -90,7 +128,13 @@ pub fn classify_with_tools(
         return review("Local model helper unavailable");
     };
     let _ = name;
-    crate::card_filing::run(text, p, path, &crate::provider::configured(reader, p))
+    crate::card_filing::run(
+        text,
+        clues,
+        p,
+        path,
+        &crate::provider::configured(reader, p),
+    )
 }
 
 pub(crate) fn finalize(result: Result<Decision, String>, p: &Preferences) -> Decision {
@@ -128,6 +172,53 @@ fn review(reason: &str) -> Decision {
 #[cfg(test)]
 mod tests {
     use super::*;
+    /// A stand-in reader that prints `output` as its JSON reply.
+    fn fake_reader(dir: &Path, output: &str) -> std::path::PathBuf {
+        use std::os::unix::fs::PermissionsExt;
+        let reader = dir.join("tuck-reader");
+        fs::write(&reader, format!("#!/bin/sh\nprintf '%s' '{output}'\n")).unwrap();
+        fs::set_permissions(&reader, fs::Permissions::from_mode(0o700)).unwrap();
+        reader
+    }
+    #[test]
+    fn unreadable_scans_need_review_and_clues_are_kept() {
+        let dir = tempfile::tempdir().unwrap();
+        let scan = dir.path().join("scan.png");
+        fs::write(&scan, "image").unwrap();
+        let reader = fake_reader(
+            dir.path(),
+            r#"{"text":"@ .12,450","clues":[],"unreadable":true}"#,
+        );
+        assert_eq!(read(&scan, &reader).unwrap_err(), UNREADABLE_SCAN);
+        let reader = fake_reader(
+            dir.path(),
+            r#"{"text":"Passport","clues":["Has a photo of one person","Machine-readable zone: passport"],"unreadable":false}"#,
+        );
+        let reading = read(&scan, &reader).unwrap();
+        assert_eq!(reading.text, "Passport");
+        assert_eq!(
+            reading.clues,
+            [
+                "Has a photo of one person",
+                "Machine-readable zone: passport"
+            ]
+        );
+    }
+    #[test]
+    fn text_files_get_download_clues_and_survive_a_failing_reader() {
+        let dir = tempfile::tempdir().unwrap();
+        let note = dir.path().join("note.txt");
+        fs::write(&note, "Kontoutdrag mars").unwrap();
+        let reader = fake_reader(
+            dir.path(),
+            r#"{"text":"","clues":["Downloaded from or sent by: nordea.se"],"unreadable":false}"#,
+        );
+        let reading = read(&note, &reader).unwrap();
+        assert_eq!(reading.text, "Kontoutdrag mars");
+        assert_eq!(reading.clues, ["Downloaded from or sent by: nordea.se"]);
+        let missing = read(&note, &dir.path().join("no-reader")).unwrap();
+        assert!(missing.clues.is_empty());
+    }
     #[test]
     fn disabled_ai_and_disabled_instructions_require_review() {
         let mut p = Preferences {

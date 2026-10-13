@@ -3,7 +3,7 @@
 //! A failed model reply degrades a name or a subject, never a document's placement.
 use crate::{
     cards::Card,
-    categories::{generic_category_name, Proposal, ReviewFile},
+    categories::{generic_category_name, Placement, Proposal, ReviewFile},
     cluster, files,
     model::{Preferences, Rule},
     provider::ModelProvider,
@@ -328,6 +328,32 @@ pub fn rules(groups: &[Group], cards: &[Card]) -> Vec<Rule> {
     rules
 }
 
+/// Each placed document with its folder path and suggested name.
+fn placements(
+    groups: &[Group],
+    described: &[(String, Card, usize)],
+    title: impl Fn(&Card, usize) -> String,
+) -> Vec<Placement> {
+    let mut placed = Vec::new();
+    for group in groups {
+        let mut add = |members: &[usize], folder: String| {
+            for &m in members {
+                placed.push(Placement {
+                    path: described[m].0.clone(),
+                    folder: folder.clone(),
+                    title: files::safe_stem(&title(&described[m].1, described[m].2)),
+                });
+            }
+        };
+        add(&group.members, group.name.clone());
+        for child in &group.children {
+            add(&child.members, format!("{}/{}", group.name, child.name));
+        }
+    }
+    placed.sort_by(|a, b| a.path.cmp(&b.path));
+    placed
+}
+
 #[cfg(test)]
 fn assignments(
     groups: &[Group],
@@ -397,6 +423,7 @@ pub fn suggest(
                 Path::new(&p.root),
                 Path::new(&doc.path),
                 &doc.text,
+                &doc.clues,
                 model,
                 Duration::from_secs(90),
             )
@@ -450,7 +477,15 @@ pub fn suggest(
             return Err("A document changed during grouping. Map the folder again.".into());
         }
     }
+    let files = placements(&groups, &described, |card, position| {
+        if p.rename {
+            crate::card_filing::title(card, &ordered[position].text)
+        } else {
+            String::new()
+        }
+    });
     Ok(Proposal {
+        files,
         sampled: described.len() - unplaced.len(),
         skipped: review_files.len(),
         review_files,
@@ -479,7 +514,7 @@ mod tests {
         fn identity(&self) -> Result<String, String> {
             Ok("namer".into())
         }
-        fn card(&self, _: &str, _: &str, _: Duration) -> Result<Card, String> {
+        fn card(&self, _: &str, _: &str, _: &[String], _: Duration) -> Result<Card, String> {
             unreachable!()
         }
         fn embed(&self, _: &[String], _: Duration) -> Result<Vec<Vec<f64>>, String> {

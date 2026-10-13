@@ -6,7 +6,6 @@ enum LocalModelTransport {
     @TaskLocal static var selection = "apple"
     static let choices = ["apple", "gemmaE2b", "gemmaE4b", "custom"]
     static var tag: String { selection == "gemmaE2b" ? "gemma4:e2b-it-q4_K_M" : "gemma4:e4b-it-q4_K_M" }
-    static var evidenceWorkflow: Bool { selection == "apple" || selection == "custom" }
     static var label: String { selection == "custom" ? "Connected model" : selection == "apple" ? "Apple Intelligence" : (selection == "gemmaE2b" ? "Gemma E2B" : "Gemma E4B") }
 
     // A fixed loopback endpoint, no proxies, cookies, redirects, cloud tags or downloads.

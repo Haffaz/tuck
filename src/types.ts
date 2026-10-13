@@ -146,8 +146,11 @@ export const initial: Snapshot = {
   error: null,
 };
 
+/** Where a suggestion puts one document; title is empty when renaming is off. */
+export type Placement = { path: string; folder: string; title: string };
 export type CategoryProposal = {
   rules: Rule[];
+  files: Placement[];
   sampled: number;
   skipped: number;
   reviewFiles?: { path: string; reason: string }[];

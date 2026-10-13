@@ -147,6 +147,17 @@ async fn organize_documents(
         .map_err(|e| e.to_string())?
 }
 #[tauri::command]
+async fn organize_proposal(
+    files: Vec<categories::Placement>,
+    watch: bool,
+    engine: tauri::State<'_, Arc<Engine>>,
+) -> Result<usize, String> {
+    let engine = engine.inner().clone();
+    tauri::async_runtime::spawn_blocking(move || engine.organize_proposal(files, watch))
+        .await
+        .map_err(|e| e.to_string())?
+}
+#[tauri::command]
 fn clear_batch(engine: tauri::State<Arc<Engine>>) {
     engine.clear();
 }
@@ -256,6 +267,7 @@ pub fn run() {
             check_folder_rules,
             update_review,
             organize_documents,
+            organize_proposal,
             clear_batch,
             skip_document,
             retry_document,

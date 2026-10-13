@@ -29,7 +29,7 @@ Description caches include the model and native helper hash. Only grounded descr
 
 ## Evaluation
 
-`evals/rules-nesting/run.py` runs synthetic files through the production reader, planner, matcher, verifier and naming code with real Apple Intelligence. The core matrix combines two nesting ceilings with all eight combinations of the three rule scopes, plus repeats. The diverse suite includes projects, invoices, clinical reports, education, warranties and travel. Separate controls file into generated rules and test aliases, exclusions, missing details, unclear content and mixed pages.
+The removed `evals/rules-nesting/run.py` ran synthetic files through the production reader, planner, matcher, verifier and naming code with real Apple Intelligence. The core matrix combines two nesting ceilings with all eight combinations of the three rule scopes, plus repeats. The diverse suite includes projects, invoices, clinical reports, education, warranties and travel. Separate controls file into generated rules and test aliases, exclusions, missing details, unclear content and mixed pages.
 
 Scores measure semantic outcomes independently of Rust test process success. Safe review counts against clear-document recall; incorrect automatic filing has a zero tolerance target. Source hashes are checked and no preferences or documents are moved. The reports retain baseline measurements and unsuccessful iterations. Results from small readable fixtures do not establish accuracy for every document type, long PDFs, poor OCR or large folder collections. Custom adapter protocol tests use local mocks; their model accuracy needs separate live evaluation.
 

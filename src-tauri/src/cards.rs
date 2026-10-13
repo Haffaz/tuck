@@ -8,7 +8,9 @@ use std::{
     time::Duration,
 };
 
-const VERSION: u32 = 1;
+const VERSION: u32 = 2;
+pub const UNIDENTIFIED: &str =
+    "Tuck couldn't tell what kind of document this is. Choose a folder for it.";
 const MAX_CACHE_BYTES: u64 = 64 * 1024;
 
 #[derive(Clone, Debug, Default, Serialize, Deserialize, PartialEq)]
@@ -26,6 +28,32 @@ pub struct Card {
 }
 
 impl Card {
+    /// The model could not tell what the document is ("unknown", "document", "scan").
+    /// Such a card would otherwise become an "Unknown" folder.
+    pub fn unidentified(&self) -> bool {
+        const VAGUE: &[&str] = &[
+            "unknown",
+            "unidentified",
+            "unclear",
+            "unreadable",
+            "document",
+            "documents",
+            "file",
+            "scan",
+            "scanned",
+            "image",
+            "page",
+            "text",
+            "other",
+            "misc",
+            "miscellaneous",
+            "blank",
+        ];
+        self.kind
+            .split_whitespace()
+            .all(|word| VAGUE.contains(&word))
+    }
+
     /// Rejects replies that cannot be grouped or shown. The helper already cleans fields.
     pub fn valid(&self) -> bool {
         let words = self.kind.split_whitespace().count();
@@ -142,12 +170,15 @@ pub fn describe(
     root: &Path,
     path: &Path,
     text: &str,
+    clues: &[String],
     model: &dyn ModelProvider,
     timeout: Duration,
 ) -> Result<Card, String> {
     let hash = files::digest(path)?;
     let identity = model.identity()?;
-    if let Some(card) = load(root, &hash, text, &identity) {
+    // Clues are part of what the model saw, so they are part of the cache key.
+    let input = format!("{text}\n[clues]\n{}", clues.join("\n"));
+    if let Some(card) = load(root, &hash, &input, &identity) {
         return Ok(card);
     }
     let name: String = path
@@ -157,14 +188,17 @@ pub fn describe(
         .chars()
         .take(200)
         .collect();
-    let card = model.card(text, &name, timeout)?;
+    let card = model.card(text, &name, clues, timeout)?;
     if !card.valid() {
         return Err("The model could not describe this document.".into());
+    }
+    if card.unidentified() {
+        return Err(UNIDENTIFIED.into());
     }
     if files::digest(path)? != hash {
         return Err("Document changed while it was being read. Analyze it again.".into());
     }
-    save(root, &hash, text, &identity, &card);
+    save(root, &hash, &input, &identity, &card);
     Ok(card)
 }
 
@@ -179,6 +213,27 @@ mod tests {
             date: String::new(),
             tags: vec!["tag".into()],
             embedding,
+        }
+    }
+
+    #[test]
+    fn vague_kinds_are_unidentified_but_real_kinds_are_not() {
+        for kind in [
+            "unknown",
+            "document",
+            "scanned document",
+            "unknown image",
+            "blank page",
+        ] {
+            assert!(card(kind, vec![1.0]).unidentified(), "{kind}");
+        }
+        for kind in [
+            "photo",
+            "bank statement",
+            "passport",
+            "unknown sender letter",
+        ] {
+            assert!(!card(kind, vec![1.0]).unidentified(), "{kind}");
         }
     }
 

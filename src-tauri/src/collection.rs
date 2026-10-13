@@ -15,6 +15,9 @@ pub struct Document {
     pub error: Option<String>,
     #[serde(skip)]
     pub text: String,
+    /// Local clues outside the text: download source, PDF properties, faces, barcodes.
+    #[serde(skip)]
+    pub clues: Vec<String>,
     #[serde(skip)]
     pub hash: String,
     #[serde(skip)]
@@ -46,6 +49,7 @@ pub fn read(path: &Path, root: &Path, reader: &Path) -> Document {
         duplicate_of: None,
         error: None,
         text: String::new(),
+        clues: Vec::new(),
         hash: String::new(),
         signature: String::new(),
     };
@@ -58,7 +62,9 @@ pub fn read(path: &Path, root: &Path, reader: &Path) -> Document {
             return Err("Document exceeds 100 MB; original kept.".into());
         }
         document.hash = files::digest(path)?;
-        document.text = classifier::read_document(path, reader)?;
+        let reading = classifier::read(path, reader)?;
+        document.text = reading.text;
+        document.clues = reading.clues;
         if files::signature(path)? != document.signature || files::digest(path)? != document.hash {
             return Err("Document changed during mapping. Map the folder again.".into());
         }
@@ -157,6 +163,7 @@ impl Collection {
                     duplicate_of: d.duplicate_of.clone(),
                     error: d.error.clone(),
                     text: String::new(),
+                    clues: Vec::new(),
                     hash: String::new(),
                     signature: String::new(),
                 })

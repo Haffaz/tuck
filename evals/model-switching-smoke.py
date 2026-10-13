@@ -8,14 +8,7 @@ for model in ['apple', 'gemmaE2b', 'gemmaE4b']:
     for request in [
         {'operation':'status'},
         {'operation':'rule','folder':'Insurance','context':'Use clear English document names.'},
-        {'operation':'categories','samples':[
-            'A home insurance policy covering household property.',
-            'A travel insurance certificate covering medical emergencies.',
-            'An employment contract describing salary and working hours.',
-            'A payslip listing monthly wages and deductions.',
-            'A bank account statement listing transactions and balances.',
-            'An income tax assessment listing taxes due.',
-        ]},
+        {'operation':'card','fileName':'a.txt','text':'Chase Bank checking account statement February 2026 ending balance $4,528'},
     ]:
         started=time.monotonic()
         raw=subprocess.run([str(helper)],input=json.dumps({**request,'model':model}),capture_output=True,text=True,timeout=90,check=True)
@@ -27,8 +20,7 @@ for model in ['apple', 'gemmaE2b', 'gemmaE4b']:
         if request['operation']=='status': assert 'ready' in value['status']
         elif request['operation']=='rule': assert 0<len(value['instruction'].strip())<=600
         else:
-            assert 1<=len(value['rules'])<=6
-            assert all(set(r)=={'folder','instruction'} for r in value['rules'])
+            assert value['kind'] and len(value['tags'])<=3 and value['embedding']
         row={'model':model,'operation':request['operation'],'seconds':time.monotonic()-started,'output':value}
         rows.append(row)
         print(json.dumps(row),flush=True)

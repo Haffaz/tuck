@@ -4,13 +4,18 @@ import Vision
 import Foundation
 import CoreImage
 
-func plainOCR(_ image: CGImage) throws -> String {
+/// Recognized text plus each line's confidence; low confidence means an unsupported
+/// script or a poor scan (measured: good scans 0.74-1.0, Sinhala/Tamil 0.10-0.42).
+struct Recognized { var text: String; var confidences: [Float] }
+
+func plainOCR(_ image: CGImage) throws -> Recognized {
     let request = VNRecognizeTextRequest()
     request.recognitionLevel = .accurate
     request.automaticallyDetectsLanguage = true
     request.usesLanguageCorrection = true
     try VNImageRequestHandler(cgImage: image, options: [:]).perform([request])
-    return (request.results ?? []).compactMap { $0.topCandidates(1).first?.string }.joined(separator: "\n")
+    let best = (request.results ?? []).compactMap { $0.topCandidates(1).first }
+    return Recognized(text: best.map(\.string).joined(separator: "\n"), confidences: best.map(\.confidence))
 }
 func photoLabels(_ image: CGImage) -> [String] {
     let request = VNClassifyImageRequest()
@@ -65,14 +70,24 @@ func structuredText(_ doc: DocumentObservation.Container) -> String {
     if text.isEmpty || !words(doc.text.transcript).isSubset(of: words(text)) { return doc.text.transcript }
     return text
 }
-func recognize(_ image: CGImage) async throws -> String {
+func recognize(_ image: CGImage) async throws -> Recognized {
     if #available(macOS 26.0, *) {
         var request = RecognizeDocumentsRequest()
         request.textRecognitionOptions.automaticallyDetectLanguage = true
         request.textRecognitionOptions.useLanguageCorrection = true
         if let documents = try? await request.perform(on: image) {
             let text = documents.map { structuredText($0.document) }.joined(separator: "\n\n")
-            if !text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty { return text }
+            let confidences = documents.flatMap { $0.document.text.lines.map(\.confidence) }
+            if !text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                // This API's confidence is coarse (clean pages can score ~0.5). When it looks
+                // low, confirm with the classic recogniser, which separates unsupported scripts
+                // (0.30-0.42) from readable pages (0.75-1.0). Clean pages skip the second pass.
+                guard average(confidences) < unreadableConfidence,
+                      let check = try? plainOCR(image), !check.confidences.isEmpty else {
+                    return Recognized(text: text, confidences: confidences)
+                }
+                return Recognized(text: text, confidences: check.confidences)
+            }
         }
     }
     return try plainOCR(image)
@@ -93,26 +108,51 @@ func correctedPhoto(_ image: CGImage) -> CGImage? {
     ])
     return CIContext().createCGImage(output, from: output.extent)
 }
+let unreadableConfidence: Float = 0.6
+
+func average(_ values: [Float]) -> Float {
+    values.isEmpty ? 1 : values.reduce(0, +) / Float(values.count)
+}
+
 @main struct TuckReader {
     static func main() async {
-        guard CommandLine.arguments.count == 2 || CommandLine.arguments.count == 4 else { exit(1) }
-        let requestedPage = CommandLine.arguments.count == 4 ? Int(CommandLine.arguments[2]) : nil
-        let forceOCR = CommandLine.arguments.count == 4 && CommandLine.arguments[3] == "true"
-        if CommandLine.arguments.count == 4 && (requestedPage == nil || requestedPage! < 1 || requestedPage! > 50) { exit(1) }
-        let url = URL(fileURLWithPath: CommandLine.arguments[1])
+        let arguments = CommandLine.arguments
+        // `tuck-reader <file> --clues`: only file clues, for text files Rust reads itself.
+        if arguments.count == 3 && arguments[2] == "--clues" {
+            let url = URL(fileURLWithPath: arguments[1])
+            emitReading(text: "", clues: whereFromDomains(url).map { "Downloaded from or sent by: \($0)" }, confidences: [], unreadable: false)
+            return
+        }
+        guard arguments.count == 2 || arguments.count == 4 else { exit(1) }
+        let requestedPage = arguments.count == 4 ? Int(arguments[2]) : nil
+        let forceOCR = arguments.count == 4 && arguments[3] == "true"
+        if arguments.count == 4 && (requestedPage == nil || requestedPage! < 1 || requestedPage! > 50) { exit(1) }
+        let url = URL(fileURLWithPath: arguments[1])
+        var clues = whereFromDomains(url).map { "Downloaded from or sent by: \($0)" }
+        var confidences: [Float] = []
+        var paper = true
         do {
             var text = ""
             if url.pathExtension.lowercased() == "pdf" {
                 guard let document = PDFDocument(url: url), !document.isLocked else { exit(2) }
                 if let requestedPage, requestedPage > document.pageCount { exit(5) }
+                clues += pdfClues(document)
                 let indices = requestedPage.map { ($0 - 1)..<$0 } ?? (0..<min(document.pageCount, 12))
                 text = "[Document has \(document.pageCount) pages.]\n"
                 for index in indices {
                     guard let page = document.page(at: index) else { continue }
                     var content = page.string ?? ""
-                    if forceOCR || content.trimmingCharacters(in: .whitespacesAndNewlines).count < 40 {
+                    let scanned = forceOCR || content.trimmingCharacters(in: .whitespacesAndNewlines).count < 40
+                    if scanned || index == indices.lowerBound {
                         let preview = page.thumbnail(of: NSSize(width: 1600, height: 2200), for: .mediaBox)
-                        if let image = preview.cgImage(forProposedRect: nil, context: nil, hints: nil) { content = try await recognize(image) }
+                        if let image = preview.cgImage(forProposedRect: nil, context: nil, hints: nil) {
+                            if index == indices.lowerBound { clues += imageClues(image) }
+                            if scanned {
+                                let recognized = try await recognize(image)
+                                content = recognized.text
+                                confidences += recognized.confidences
+                            }
+                        }
                     }
                     text += "\n[Page \(index + 1)]\n" + content
                     if text.utf8.count >= 14000 { break }
@@ -121,18 +161,31 @@ func correctedPhoto(_ image: CGImage) -> CGImage? {
                 if let requestedPage, requestedPage != 1 { exit(5) }
                 guard let source = CGImageSourceCreateWithURL(url as CFURL, nil),
                       let image = CGImageSourceCreateThumbnailAtIndex(source, 0, [kCGImageSourceCreateThumbnailFromImageAlways: true, kCGImageSourceThumbnailMaxPixelSize: 2200, kCGImageSourceCreateThumbnailWithTransform: true] as CFDictionary) else { exit(3) }
-                if let corrected = correctedPhoto(image), let recognized = try? await recognize(corrected), !recognized.isEmpty { text = recognized }
-                else { text = try await recognize(image) }
+                clues += imageClues(image)
+                var recognized: Recognized
+                if let corrected = correctedPhoto(image), let fixed = try? await recognize(corrected), !fixed.text.isEmpty { recognized = fixed }
+                else { recognized = try await recognize(image) }
+                text = recognized.text
+                confidences = recognized.confidences
                 // A picture rather than a document: describe what it shows so it can still be grouped.
                 if text.filter(\.isLetter).count < 25 {
                     let labels = photoLabels(image)
+                    paper = looksLikeDocument(labels)
                     if !labels.isEmpty { text += "\n[Photo labels: \(labels.joined(separator: ", "))]" }
                 }
             }
+            if let zone = machineReadableClue(text) { clues.append(zone) }
             let bounded = String(decoding: Array(text.utf8.prefix(14000)), as: UTF8.self)
                 + (text.utf8.count > 14000 ? "\n[Text truncated]" : "")
-            let data = try JSONSerialization.data(withJSONObject: ["text": bounded])
-            FileHandle.standardOutput.write(data)
+            emitReading(text: bounded, clues: clues, confidences: confidences,
+                        unreadable: paper && !confidences.isEmpty && average(confidences) < unreadableConfidence)
         } catch { exit(4) }
     }
+}
+
+func emitReading(text: String, clues: [String], confidences: [Float], unreadable: Bool) {
+    var output: [String: Any] = ["text": text, "clues": Array(clues.prefix(12)), "unreadable": unreadable]
+    if !confidences.isEmpty { output["ocrConfidence"] = Double(average(confidences)) }
+    guard let data = try? JSONSerialization.data(withJSONObject: output) else { exit(4) }
+    FileHandle.standardOutput.write(data)
 }

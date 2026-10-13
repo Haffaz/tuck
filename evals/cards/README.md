@@ -33,3 +33,23 @@ inspecting the mixed corpus (no leftover attachment; "Identity & Immigration" as
 so its numbers are not held out; the held-out corpus was run once after those changes. The new
 pipeline files most deliberately unclear or two-record documents instead of holding them; this is the
 chosen "place more, review less" trade-off. Small synthetic sets; not a real-world accuracy estimate.
+
+## Clues and unreadable scans, 13 October 2026
+
+`make_clue_fixtures.swift` builds a PDF with properties, form fields and a "Where from" mark, an
+invoice with a SEPA payment QR code and a passport page with a machine-readable zone;
+`clue-tests.swift` checks the parsers. Added to the 35-document corpus with synthetic Sinhala and
+Tamil bank-statement scans (text recognition does not support either script):
+
+| Measure | Before | After |
+| --- | --- | --- |
+| Sinhala scan | card "unknown" → "Unknown" folder | Needs you, with reason |
+| Tamil scan | card "payslip" (wrong) | Needs you, with reason |
+| Residence-permit form (text only says "Application form") | issuer "Reference 48319" | issuer Migrationsverket, filed under Identity & Immigration |
+| Filing on the other 35 documents | 35/35 | 35/35, 0 wrong |
+
+Text recognition confidence on readable synthetic scans was 0.61–1.0 with the fast document API;
+pages it scores below 0.6 are re-checked with the classic recogniser (readable 0.75–1.0,
+unsupported scripts 0.30–0.42). Face detection is implemented but untested: there are no
+synthetic face images in these fixtures. Real documents will show whether clues are common enough
+to matter.

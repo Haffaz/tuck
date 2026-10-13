@@ -108,7 +108,13 @@ pub fn title(card: &Card, text: &str) -> String {
     parts.join(" - ")
 }
 
-pub fn run(text: &str, p: &Preferences, path: &Path, model: &dyn ModelProvider) -> Decision {
+pub fn run(
+    text: &str,
+    clues: &[String],
+    p: &Preferences,
+    path: &Path,
+    model: &dyn ModelProvider,
+) -> Decision {
     let _serial = crate::coordinator::serial();
     let started = Instant::now();
     let remaining = || {
@@ -118,7 +124,8 @@ pub fn run(text: &str, p: &Preferences, path: &Path, model: &dyn ModelProvider) 
             .ok_or_else(|| "Document time limit reached".to_string())
     };
     let result = (|| -> Result<Decision, String> {
-        let card = crate::cards::describe(Path::new(&p.root), path, text, model, remaining()?)?;
+        let card =
+            crate::cards::describe(Path::new(&p.root), path, text, clues, model, remaining()?)?;
         let ordered = ranked(&card, candidates(p), model, remaining()?);
         let excerpt: String = text.chars().take(EXCERPT_CHARS).collect();
         for batch in ordered.chunks(CHOICES_PER_CALL) {
@@ -181,7 +188,7 @@ mod tests {
         fn merge_names(&self, _: &[String], _: Duration) -> Result<Vec<(String, String)>, String> {
             unreachable!()
         }
-        fn card(&self, _: &str, _: &str, _: Duration) -> Result<Card, String> {
+        fn card(&self, _: &str, _: &str, _: &[String], _: Duration) -> Result<Card, String> {
             Ok(Card {
                 kind: "electricity bill".into(),
                 issuer: "Vattenfall".into(),
@@ -239,7 +246,7 @@ mod tests {
             rules,
             ..Preferences::default()
         };
-        run(text, &p, &path, model)
+        run(text, &[], &p, &path, model)
     }
 
     #[test]

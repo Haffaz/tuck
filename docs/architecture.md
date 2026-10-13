@@ -8,7 +8,7 @@ Tuck reads documents, proposes a filing decision, and checks that decision befor
 
 ```mermaid
 flowchart TD
-    UI["Mac app · React in Tauri<br/>Organize · Folders · Settings"]
+    UI["Mac app · React in Tauri<br/>One screen: folder → suggestion → organize · Settings"]
     CORE["Rust engine<br/>Session, queue, rules and revision checks"]
     EXTRACT["Native document reader<br/>Swift · PDFKit · Vision OCR · text"]
     AI["AI workflow<br/>Card per document · cluster · name · choose folder"]
@@ -38,21 +38,25 @@ Apple processes text on this Mac. Custom connections receive extracted text and 
 ```mermaid
 flowchart TD
     INPUT["Choose a folder, add files,<br/>or receive a watched-file change"]
-    READ["Extract text · PDFKit, Vision OCR<br/>Photos without text get Vision labels"]
+    READ["Extract text · PDFKit, Vision OCR<br/>Photos without text get Vision labels<br/>Local clues: download source, PDF properties,<br/>form fields, faces, barcodes, passport lines"]
     CARD["One card per document<br/>kind · issuer · date · 3 tags · summary<br/>+ local NLEmbedding of kind and tags<br/>Cached by content"]
     KINDS["Cluster cards by kind<br/>Average-linkage, cosine ≥ 0.75<br/>Model names each cluster; synonyms merged"]
     SUBJECTS["One model call places kinds under subjects<br/>Finance, Home, Health, Identity & Immigration…"]
     LAYOUT["Two levels: keep a kind as a subfolder only with ≥3 documents<br/>and a meaningful alternative; otherwise file in the subject"]
-    APPROVE["Review and approve the folder draft<br/>Save folder rules; documents stay put"]
-    MATCH["Start Tuck: rank enabled folders by embedding<br/>One model choice per batch of six, rules visible"]
+    APPROVE["Review the suggestion<br/>Rename or remove folders, move files"]
+    MOVE["Organize: save folders, move each suggested file<br/>through the checked move path"]
+    MATCH["New or dropped files: rank folders by embedding<br/>One model choice per batch of six, rules visible"]
     CHECK{"Authorized decision?<br/>Current rules, unchanged source,<br/>safe available destination?"}
     WRITE["Rust moves or copies the file<br/>Existing files are never overwritten"]
     REVIEW["Needs your input<br/>Review, choose a folder, retry or skip"]
     INPUT --> READ --> CARD
     CARD -->|"Suggest folders"| KINDS --> SUBJECTS --> LAYOUT --> APPROVE
-    APPROVE -->|"Start Tuck"| MATCH
+    APPROVE -->|"Organize"| MOVE
+    MOVE --> CHECK
+    MOVE -->|"Watching or dropped files"| MATCH
     CARD -->|"Filing into existing folders"| MATCH
-    CARD -->|"Unreadable or model failure"| REVIEW
+    READ -->|"Scan in an unsupported script"| REVIEW
+    CARD -->|"Unidentified or model failure"| REVIEW
     MATCH -->|"Chosen folder"| CHECK
     MATCH -->|"No folder fits"| REVIEW
     CHECK -->|"Yes"| WRITE
@@ -60,9 +64,11 @@ flowchart TD
     REVIEW -->|"Explicit filing approval"| CHECK
 ```
 
+Reading also collects local clues that are not in the text: the domain a file was downloaded from or emailed by (macOS "Where from"; never the full link or address), PDF title, author, subject, creator and form field names, and on page 1 whether there is a photo of a person, a barcode or QR code (payment and boarding-pass codes are named, not copied) or a passport/ID machine-readable zone. Clues go to the describing model in a separate block and are part of the card cache key; files without clues get the same prompt as before. Scans whose text recognition confidence is low (unsupported scripts such as Sinhala and Tamil score 0.30–0.42, readable pages 0.75–1.0) go to review instead of being described from garbled text, as do cards whose kind is only "unknown" or "document".
+
 Grouping is deterministic once cards exist. The model writes cards, names groups, places kinds under subjects and chooses among folders; a failed naming or subject reply degrades a name, not a document's placement. Long documents are read from the start (first 5,000 characters) instead of being rejected. Apple's guardrails still apply to guided output in permissive mode, so cards and folder choices fall back to plain-text replies when guided output is blocked; identity, tax and immigration papers otherwise fail routinely. Filenames are built from the card as `Kind - Issuer - Date`; the issuer and date are kept only when the document text contains them.
 
-Category planning and document filing are separate operations. A category proposal creates no files until you approve it, and approving categories does not start filing. Optional watching lasts only for the active session.
+A suggestion creates no folders and moves nothing until you click Organize; then the files it placed move in one step and the rest wait for you. Optional watching lasts only for the active session.
 
 ## Nesting and the three rules
 
@@ -91,7 +97,7 @@ The app also remembers the last selected root in Application Support. There is n
 
 | Responsibility                            | Main files                                                                |
 | ----------------------------------------- | ------------------------------------------------------------------------- |
-| Screens, drafts and folder editor         | `src/App.tsx`, `src/Settings.tsx`, `src/FolderTree.tsx`                   |
+| Screens and settings                      | `src/App.tsx`, `src/Home.tsx`, `src/Settings.tsx`                         |
 | Tauri commands and session lifecycle      | `src-tauri/src/lib.rs`, `src-tauri/src/engine.rs`                         |
 | Document extraction                       | `src-tauri/swift/TuckReader.swift`, `src-tauri/src/classifier.rs`         |
 | Cards and their cache                     | `src-tauri/src/cards.rs`, `src-tauri/swift/TuckCards.swift`               |

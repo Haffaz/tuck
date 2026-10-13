@@ -24,7 +24,13 @@ pub trait ModelProvider: Sync {
     /// Identifies the model and helper build; cached cards are keyed by it.
     fn identity(&self) -> Result<String, String>;
     /// One short guided description of a document plus a local embedding.
-    fn card(&self, text: &str, file_name: &str, timeout: Duration) -> Result<Card, String>;
+    fn card(
+        &self,
+        text: &str,
+        file_name: &str,
+        clues: &[String],
+        timeout: Duration,
+    ) -> Result<Card, String>;
     /// Local sentence embeddings; no language model is involved.
     fn embed(&self, texts: &[String], timeout: Duration) -> Result<Vec<Vec<f64>>, String>;
     fn name_group(
@@ -123,15 +129,21 @@ impl ModelProvider for LocalProvider {
                 .to_owned()
         };
         Ok(format!(
-            "{}:cards-v1:{}:{}",
+            "{}:cards-v2:{}:{}",
             self.model.key(),
             digest,
             crate::files::digest(&self.helper)?
         ))
     }
-    fn card(&self, text: &str, file_name: &str, timeout: Duration) -> Result<Card, String> {
+    fn card(
+        &self,
+        text: &str,
+        file_name: &str,
+        clues: &[String],
+        timeout: Duration,
+    ) -> Result<Card, String> {
         let value = self.invoke(
-            json!({"operation":"card", "text":text, "fileName":file_name}),
+            json!({"operation":"card", "text":text, "fileName":file_name, "clues":clues}),
             timeout,
         )?;
         serde_json::from_value(value).map_err(|_| "Invalid document description".into())

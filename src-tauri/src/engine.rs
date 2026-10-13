@@ -401,23 +401,11 @@ impl Engine {
         {
             return Err("Choose a folder structure first.".into());
         }
-        let map = state
-            .collection
-            .clone()
-            .ok_or("Map the folder before starting Tuck.")?;
-        let paths = files::existing_documents(Path::new(&state.preferences.root), true)?;
-        if paths.len() != map.documents.len()
-            || paths.iter().zip(&map.documents).any(|(p, d)| {
-                p != Path::new(&d.path) || files::signature(p).ok().as_ref() != Some(&d.signature)
-            })
-        {
-            state.collection = None;
-            return Err(
-                "Documents changed since mapping. Map the folder again before starting.".into(),
-            );
-        }
-        let eligible: Vec<_> = paths
-            .into_iter()
+        let map = Self::unchanged_map(&mut state)?;
+        let eligible: Vec<_> = map
+            .documents
+            .iter()
+            .map(|d| PathBuf::from(&d.path))
             .filter(|p| fs::metadata(p).is_ok_and(|m| m.len() <= 100 * 1024 * 1024))
             .collect();
         let count = Self::enqueue_into(&mut state, eligible)?;
@@ -432,6 +420,133 @@ impl Engine {
         state.running = true;
         state.watching = watch;
         Ok(count)
+    }
+    /// Applies an approved suggestion: files the suggestion placed move straight to their
+    /// folders through the same checks as manual filing; the rest wait for a decision.
+    /// Tuck then keeps running so dropped (and, with `watch`, new) files are filed too.
+    pub fn organize_proposal(
+        &self,
+        placements: Vec<crate::categories::Placement>,
+        watch: bool,
+    ) -> Result<usize, String> {
+        let mut state = self.state.lock().unwrap();
+        Self::refresh(&mut state)?;
+        if state.processing.is_some() || !state.items.is_empty() {
+            return Err("Finish or clear the current session first.".into());
+        }
+        let map = Self::unchanged_map(&mut state)?;
+        let p = state.preferences.clone();
+        let revision = config::revision(&p);
+        let placements: BTreeMap<&str, &crate::categories::Placement> =
+            placements.iter().map(|pl| (pl.path.as_str(), pl)).collect();
+        let mut items = Vec::new();
+        for doc in &map.documents {
+            let placement = placements.get(doc.path.as_str()).copied();
+            let original = Path::new(&doc.path);
+            let stem = original
+                .file_stem()
+                .unwrap_or_default()
+                .to_string_lossy()
+                .into_owned();
+            let mut item = ReviewItem {
+                language: None,
+                id: uuid::Uuid::new_v4().to_string(),
+                original: doc.path.clone(),
+                destination: String::new(),
+                folder: placement.map(|pl| pl.folder.clone()).unwrap_or_default(),
+                title: placement
+                    .map(|pl| files::safe_stem(&pl.title))
+                    .filter(|t| p.rename && !t.is_empty())
+                    .unwrap_or_else(|| files::safe_stem(&stem)),
+                reason: doc
+                    .error
+                    .clone()
+                    .unwrap_or_else(|| "Choose a folder for this document.".into()),
+                status: "review".into(),
+                copied: false,
+                confident: false,
+                hash: doc.hash.clone(),
+                revision: revision.clone(),
+            };
+            if doc.error.is_none() && placement.is_some() {
+                match Self::destination(&p, &item) {
+                    Ok(destination) if doc.duplicate_of.is_none() => {
+                        item.destination = destination;
+                        item.reason = format!("Suggested folder: {}.", item.folder);
+                        item.confident = true;
+                    }
+                    Ok(destination) => {
+                        item.destination = destination;
+                        item.reason = "Identical content exists elsewhere in this folder. Choose whether to keep this copy.".into();
+                    }
+                    Err(e) => item.reason = e,
+                }
+            }
+            items.push(item);
+        }
+        state.items = items;
+        state.seen = map
+            .documents
+            .iter()
+            .map(|d| (d.path.clone(), d.signature.clone()))
+            .collect();
+        state.pending.clear();
+        let ready: Vec<String> = state
+            .items
+            .iter()
+            .filter(|i| i.confident)
+            .map(|i| i.id.clone())
+            .collect();
+        // Destinations are recomputed just before each move so documents with the same
+        // suggested name get distinct files. A failure stays on its file; others continue.
+        let mut organized = 0;
+        for id in ready {
+            let Some(item) = state.items.iter_mut().find(|i| i.id == id) else {
+                continue;
+            };
+            match Self::destination(&p, item) {
+                Ok(destination) => item.destination = destination.clone(),
+                Err(e) => {
+                    item.confident = false;
+                    item.reason = e;
+                    continue;
+                }
+            }
+            let approval = Approval {
+                id: id.clone(),
+                destination: item.destination.clone(),
+            };
+            if Self::organize_locked(&mut state, vec![approval]).is_ok() {
+                organized += 1;
+            } else if let Some(item) = state.items.iter_mut().find(|i| i.id == id) {
+                // organize_locked already recorded the reason and marked it failed.
+                item.confident = false;
+            }
+        }
+        state.run_revision = revision;
+        state.notice = None;
+        state.running = true;
+        state.watching = watch;
+        Ok(organized)
+    }
+    /// The mapped collection, provided the folder has not changed since mapping.
+    fn unchanged_map(state: &mut Runtime) -> Result<crate::collection::Collection, String> {
+        let map = state
+            .collection
+            .clone()
+            .ok_or("Map the folder before organizing.")?;
+        let paths = files::existing_documents(Path::new(&state.preferences.root), true)?;
+        if paths.len() != map.documents.len()
+            || paths.iter().zip(&map.documents).any(|(p, d)| {
+                p != Path::new(&d.path) || files::signature(p).ok().as_ref() != Some(&d.signature)
+            })
+        {
+            state.collection = None;
+            return Err(
+                "Documents changed since mapping. Map the folder again before organizing.".into(),
+            );
+        }
+        Ok(map)
     }
     pub fn stop_tuck(&self) {
         let mut state = self.state.lock().unwrap();
@@ -720,17 +835,24 @@ impl Engine {
             .iter()
             .any(|i| i.id != item.id && i.status == "organized" && i.hash == hash);
         let duplicate = already_filed || mapped.as_ref().is_some_and(|d| d.duplicate_of.is_some());
-        let text = match mapped {
+        let reading = match mapped {
             Some(doc) if doc.hash == hash => match doc.error {
                 Some(error) => Err(error),
-                None => Ok(doc.text),
+                None => Ok(classifier::Reading {
+                    text: doc.text,
+                    clues: doc.clues,
+                }),
             },
-            _ => classifier::read_document(source, &self.reader),
+            _ => classifier::read(source, &self.reader),
         };
-        let decision = match text {
-            Ok(text) => {
-                classifier::classify_with_tools(&name, &text, p, &[], Some((source, &self.reader)))
-            }
+        let decision = match reading {
+            Ok(reading) => classifier::classify_with_tools(
+                &name,
+                &reading.text,
+                p,
+                &reading.clues,
+                Some((source, &self.reader)),
+            ),
             Err(e) => classifier::Decision {
                 language: None,
                 folder: "Needs Review".into(),
@@ -1390,6 +1512,102 @@ else:
         engine.suggest_categories().unwrap();
         assert_eq!(count(), 4);
         assert!(renamed.exists()); // Suggestions and classification themselves do not move files.
+    }
+    #[test]
+    fn approved_suggestions_move_files_in_one_step_and_keep_the_rest_for_review() {
+        let (_temp, engine, root) = category_setup(false);
+        let documents = category_documents(&root);
+        fs::write(root.join("blank.txt"), "").unwrap();
+        let proposal = engine.suggest_categories().unwrap();
+        assert_eq!(proposal.files.len(), 3);
+        assert!(proposal
+            .files
+            .iter()
+            .all(|f| f.title == "Bank Statement" || f.title == "Rental Agreement"));
+        let mut approved = proposal.preferences.clone();
+        approved.rules = proposal.rules.clone();
+        engine.save_preferences(approved).unwrap();
+        engine.map_folder().unwrap();
+        assert_eq!(
+            engine
+                .organize_proposal(proposal.files.clone(), false)
+                .unwrap(),
+            3
+        );
+        let state = engine.snapshot();
+        assert!(state.running && !state.watching);
+        for (path, hash) in &documents {
+            assert!(!path.exists(), "{} was not moved", path.display());
+            let item = state
+                .items
+                .iter()
+                .find(|i| Path::new(&i.original) == path)
+                .unwrap();
+            assert_eq!(item.status, "organized");
+            assert!(item.destination.starts_with(root.to_str().unwrap()));
+            assert_eq!(&files::digest(Path::new(&item.destination)).unwrap(), hash);
+        }
+        let blank = state
+            .items
+            .iter()
+            .find(|i| i.original.ends_with("blank.txt"))
+            .unwrap();
+        assert_eq!((blank.status.as_str(), blank.confident), ("review", false));
+        assert!(root.join("blank.txt").exists());
+        assert!(engine
+            .organize_proposal(proposal.files, false)
+            .unwrap_err()
+            .contains("Finish or clear"));
+    }
+    #[test]
+    fn forged_placements_move_nothing_outside_the_plan() {
+        let (_temp, engine, root) = category_setup(false);
+        let documents = category_documents(&root);
+        let mut p = engine.snapshot().preferences;
+        p.rules = vec![crate::model::Rule {
+            document_types: Vec::new(),
+            folder: "Home".into(),
+            instruction: "Housing.".into(),
+            enabled: true,
+        }];
+        engine.save_preferences(p).unwrap();
+        engine.map_folder().unwrap();
+        let outside = root.parent().unwrap().join("outside.txt");
+        fs::write(&outside, "Not part of the folder").unwrap();
+        let forged = |path: &Path, folder: &str, title: &str| crate::categories::Placement {
+            path: path.to_string_lossy().into_owned(),
+            folder: folder.into(),
+            title: title.into(),
+        };
+        let moved = engine
+            .organize_proposal(
+                vec![
+                    forged(&outside, "Home", "Outside"),
+                    forged(&documents[0].0, "Nowhere", "Bank"),
+                    forged(&documents[1].0, "../escape", "Rent"),
+                    forged(&documents[2].0, "Home", "../../x"),
+                ],
+                false,
+            )
+            .unwrap();
+        assert_eq!(moved, 1, "only the in-plan file with a real folder moves");
+        assert!(outside.exists());
+        assert!(documents[0].0.exists() && documents[1].0.exists());
+        let state = engine.snapshot();
+        let renamed = state
+            .items
+            .iter()
+            .find(|i| Path::new(&i.original) == documents[2].0)
+            .unwrap();
+        assert!(renamed
+            .destination
+            .starts_with(root.join("Home").to_str().unwrap()));
+        assert!(!renamed.destination.contains(".."));
+        assert!(state
+            .items
+            .iter()
+            .filter(|i| Path::new(&i.original) != documents[2].0)
+            .all(|i| i.status == "review" && !i.confident));
     }
     #[test]
     fn category_preview_requires_approval_and_preserves_existing_roots() {

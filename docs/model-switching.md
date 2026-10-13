@@ -32,6 +32,6 @@ Changing nesting from two to one affects new suggestions and leaves existing two
 
 - `cargo test --manifest-path src-tauri/Cargo.toml`: settings migration, revisions, URL constraints, filing behavior.
 - `npm run test:ui`: explicit save/discard, category tree, nesting and API credentials.
-- `python3 evals/connection-contract.py`: local synthetic servers test all three protocols, arbitrary IDs, discovery, auth errors, redirects, truncation and category evidence. These are protocol tests, not live provider accuracy claims.
+- `python3 evals/connection-contract.py`: local synthetic servers test all three protocols, arbitrary IDs, discovery, auth errors, redirects, truncation and the card operations. These are protocol tests, not live provider accuracy claims.
 
 Protocol references: [OpenAI Chat Completions](https://developers.openai.com/api/reference/resources/chat/subresources/completions/methods/create), [Ollama chat](https://docs.ollama.com/api/chat), [Anthropic Messages](https://platform.claude.com/docs/en/api/messages/create).

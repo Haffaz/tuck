@@ -170,18 +170,6 @@ impl Preferences {
     }
 }
 
-// Legacy structured corrections are not persisted; explicit examples live in rule Markdown.
-#[derive(Clone, Serialize, Deserialize, Debug)]
-#[serde(rename_all = "camelCase")]
-pub struct Correction {
-    pub id: String,
-    pub root: String,
-    pub cue: String,
-    pub folder: String,
-    pub title: String,
-    pub activity_id: String,
-}
-
 #[derive(Clone, Serialize, Deserialize, Debug)]
 pub struct LanguageInfo {
     pub name: String,

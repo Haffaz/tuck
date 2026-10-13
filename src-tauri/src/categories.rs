@@ -5,7 +5,7 @@ use crate::{
     model::{Preferences, Rule},
     provider::ModelProvider,
 };
-use serde::Serialize;
+use serde::{Deserialize, Serialize};
 use std::path::Path;
 #[derive(Serialize)]
 #[serde(rename_all = "camelCase")]
@@ -20,10 +20,20 @@ pub struct Assignment {
     pub id: String,
     pub category: String,
 }
+/// Where a suggestion puts one document. `title` is empty when renaming is off.
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[serde(rename_all = "camelCase")]
+pub struct Placement {
+    pub path: String,
+    pub folder: String,
+    pub title: String,
+}
 #[derive(Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Proposal {
     pub rules: Vec<Rule>,
+    /// Every document that got a folder; the rest are in `review_files`.
+    pub files: Vec<Placement>,
     /// Evaluation hook: `d{index}` (path order, all mapped documents) to folder or "Needs review".
     #[cfg(test)]
     pub assignments: Vec<Assignment>,

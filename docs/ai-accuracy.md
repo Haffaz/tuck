@@ -157,7 +157,7 @@ Use synthetic fixtures only. Quality is reported separately from whether the tes
 ```sh
 TUCK_EVAL_REPORT=/private/tmp/tuck-apple-eval.json cargo test --manifest-path src-tauri/Cargo.toml live_apple_accuracy_eval -- --ignored --nocapture
 TUCK_EVAL_FIXTURES="$PWD/evals/multilingual.json" TUCK_EVAL_REPORT=/private/tmp/tuck-multilingual-eval.json cargo test --manifest-path src-tauri/Cargo.toml live_apple_accuracy_eval -- --ignored --nocapture
-swiftc -parse-as-library src-tauri/swift/TuckModelSupport.swift src-tauri/swift/TuckModelTests.swift -o /private/tmp/tuck-model-tests
+swiftc -parse-as-library src-tauri/swift/TuckLocalTransport.swift src-tauri/swift/TuckConnections.swift src-tauri/swift/TuckModelSupport.swift src-tauri/swift/TuckCards.swift src-tauri/swift/TuckModelTests.swift -o /private/tmp/tuck-model-tests
 /private/tmp/tuck-model-tests
 ```
 

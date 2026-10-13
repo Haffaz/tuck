@@ -13,18 +13,16 @@ fn up_to_date(output: &str, sources: &[&str]) -> bool {
 
 fn main() {
     println!("cargo:rerun-if-changed=swift/TuckReader.swift");
+    println!("cargo:rerun-if-changed=swift/TuckClues.swift");
+    const READER_SOURCES: &[&str] = &["swift/TuckReader.swift", "swift/TuckClues.swift"];
     if std::env::var("CARGO_CFG_TARGET_OS").as_deref() == Ok("macos")
-        && !up_to_date("resources/tuck-reader", &["swift/TuckReader.swift"])
+        && !up_to_date("resources/tuck-reader", READER_SOURCES)
     {
         std::fs::create_dir_all("resources").expect("create reader directory");
         let status = std::process::Command::new("swiftc")
-            .args([
-                "-parse-as-library",
-                "-O",
-                "swift/TuckReader.swift",
-                "-o",
-                "resources/tuck-reader",
-            ])
+            .args(["-parse-as-library", "-O"])
+            .args(READER_SOURCES)
+            .args(["-o", "resources/tuck-reader"])
             .status()
             .expect("Swift compiler is required for local OCR");
         assert!(
@@ -34,19 +32,13 @@ fn main() {
     }
     println!("cargo:rerun-if-changed=swift/TuckConnections.swift");
     println!("cargo:rerun-if-changed=swift/TuckLocalTransport.swift");
-    println!("cargo:rerun-if-changed=swift/TuckCategorization.swift");
-    println!("cargo:rerun-if-changed=swift/TuckRoles.swift");
-    println!("cargo:rerun-if-changed=swift/TuckRoleValidation.swift");
     println!("cargo:rerun-if-changed=swift/TuckApple.swift");
     println!("cargo:rerun-if-changed=swift/TuckCards.swift");
     println!("cargo:rerun-if-changed=swift/TuckModelSupport.swift");
     const HELPER_SOURCES: &[&str] = &[
         "swift/TuckApple.swift",
-        "swift/TuckRoles.swift",
-        "swift/TuckCategorization.swift",
         "swift/TuckLocalTransport.swift",
         "swift/TuckConnections.swift",
-        "swift/TuckRoleValidation.swift",
         "swift/TuckModelSupport.swift",
         "swift/TuckCards.swift",
     ];
