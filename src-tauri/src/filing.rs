@@ -1,16 +1,54 @@
-//! Filing with document cards: one cached card, then one model choice among a short,
+//! Filing one document: its cached card, then one model choice among a short,
 //! embedding-ranked list of enabled folders whose rules are shown to the model.
+//! Anything uncertain becomes a `NEEDS_REVIEW` decision; Rust still checks every move.
 use crate::{
-    cards::Card,
-    classifier::{self, Decision},
-    cluster,
+    cards::{title_case, Card},
+    cluster, files,
     model::Preferences,
     provider::{Candidate, ModelProvider},
 };
+use serde::{Deserialize, Serialize};
 use std::{
     path::Path,
     time::{Duration, Instant},
 };
+
+/// The folder name a decision carries when it needs the user.
+pub const NEEDS_REVIEW: &str = "Needs Review";
+
+#[derive(Clone, Deserialize, Serialize, Debug)]
+pub struct Decision {
+    pub folder: String,
+    pub title: String,
+    pub reason: String,
+    pub confident: bool,
+}
+
+/// Decides where a document goes. `source` is the document and the reader binary, whose
+/// sibling is the model helper; without it nothing can be decided.
+pub fn decide(
+    text: &str,
+    clues: &[String],
+    p: &Preferences,
+    source: Option<(&Path, &Path)>,
+) -> Decision {
+    if !p.rules.iter().any(|r| p.rule_enabled(r)) {
+        return review("All folders are turned off. Turn a folder on to file documents.");
+    }
+    if !p.use_ai {
+        return review("The AI model is off. Turn it on in Settings to file documents.");
+    }
+    let Some((path, reader)) = source else {
+        return review("The model helper is unavailable.");
+    };
+    run(
+        text,
+        clues,
+        p,
+        path,
+        &crate::provider::configured(reader, p),
+    )
+}
 
 const DOCUMENT_BUDGET: Duration = Duration::from_secs(90);
 /// Small enough that every folder rule fits the on-device model's context.
@@ -88,17 +126,7 @@ fn grounded(value: &str, text: &str) -> bool {
 /// "Bank Statement - Nordea Bank Abp - 2026-03". Issuer and date are included only when
 /// the document itself contains them, so a model cannot invent names into filenames.
 pub fn title(card: &Card, text: &str) -> String {
-    let kind = card
-        .kind
-        .split_whitespace()
-        .map(|w| {
-            let mut c = w.chars();
-            c.next()
-                .map_or_else(String::new, |f| f.to_uppercase().chain(c).collect())
-        })
-        .collect::<Vec<_>>()
-        .join(" ");
-    let mut parts = vec![kind];
+    let mut parts = vec![title_case(&card.kind)];
     if grounded(&card.issuer, text) {
         parts.push(card.issuer.trim().to_owned());
     }
@@ -108,14 +136,14 @@ pub fn title(card: &Card, text: &str) -> String {
     parts.join(" - ")
 }
 
-pub fn run(
+fn run(
     text: &str,
     clues: &[String],
     p: &Preferences,
     path: &Path,
     model: &dyn ModelProvider,
 ) -> Decision {
-    let _serial = crate::coordinator::serial();
+    let _serial = crate::model_lock::hold();
     let started = Instant::now();
     let remaining = || {
         DOCUMENT_BUDGET
@@ -150,7 +178,35 @@ pub fn run(
             card.kind
         ))
     })();
-    classifier::finalize(result, p)
+    finalize(result, p)
+}
+
+pub(crate) fn finalize(result: Result<Decision, String>, p: &Preferences) -> Decision {
+    match result {
+        Ok(mut decision) => {
+            if !decision.confident {
+                return review(&format!("The model was not sure. {}", decision.reason));
+            }
+            if !p
+                .rules
+                .iter()
+                .any(|r| p.rule_enabled(r) && r.folder == decision.folder)
+            {
+                return review("The model suggested a folder outside your enabled folders.");
+            }
+            decision.title = files::safe_stem(&decision.title);
+            decision
+        }
+        Err(error) => review(&error),
+    }
+}
+fn review(reason: &str) -> Decision {
+    Decision {
+        folder: NEEDS_REVIEW.into(),
+        title: String::new(),
+        reason: reason.into(),
+        confident: false,
+    }
 }
 
 #[cfg(test)]
@@ -272,7 +328,7 @@ mod tests {
         };
         let decision = file(&model, vec![rule("Finances", "Bank records.")]);
         assert!(!decision.confident);
-        assert_eq!(decision.folder, "Needs Review");
+        assert_eq!(decision.folder, NEEDS_REVIEW);
         assert!(decision.reason.contains("electricity bill"));
     }
 
@@ -321,5 +377,107 @@ mod tests {
         };
         assert_eq!(title(&card, "Salary from Acme AB"), "Payslip - Acme AB");
         assert_eq!(title(&card, "Salary 2031"), "Payslip - 2031-01");
+    }
+    #[test]
+    fn disabled_ai_and_disabled_instructions_require_review() {
+        let mut p = Preferences {
+            use_ai: false,
+            ..Preferences::default()
+        };
+        let d = classify("bank statement", &p);
+        assert_eq!(d.folder, NEEDS_REVIEW);
+        assert!(d.title.is_empty());
+        assert!(d.reason.contains("off"));
+        p.use_ai = true;
+        for rule in &mut p.rules {
+            rule.enabled = false;
+        }
+        let d = classify("insurance policy", &p);
+        assert_eq!(d.folder, NEEDS_REVIEW);
+        assert!(d.reason.contains("turned off"));
+    }
+    #[test]
+    fn ai_cannot_route_to_disabled_folder() {
+        let mut p = Preferences::default();
+        p.rules
+            .iter_mut()
+            .find(|r| r.folder == "Insurance")
+            .unwrap()
+            .enabled = false;
+        let suggestion = Decision {
+            folder: "Insurance".into(),
+            title: "Policy".into(),
+            reason: "AI suggestion".into(),
+            confident: true,
+        };
+        assert_eq!(finalize(Ok(suggestion), &p).folder, NEEDS_REVIEW);
+    }
+    #[test]
+    fn uncertain_decisions_keep_original_names_and_require_review() {
+        let p = Preferences::default();
+        let uncertain = Decision {
+            folder: "Home".into(),
+            title: "Made up name".into(),
+            reason: "Not sure".into(),
+            confident: false,
+        };
+        let decision = finalize(Ok(uncertain), &p);
+        assert_eq!(decision.folder, NEEDS_REVIEW);
+        assert!(decision.title.is_empty());
+        assert!(!decision.confident);
+    }
+    #[test]
+    #[ignore = "Requires Apple Intelligence enabled; uses only synthetic documents"]
+    fn live_apple_filing_smoke() {
+        let reader = Path::new(env!("CARGO_MANIFEST_DIR")).join("resources/tuck-reader");
+        println!(
+            "{}",
+            crate::helper::check(&reader.with_file_name("tuck-apple")).unwrap()
+        );
+        let dir = tempfile::tempdir_in("/private/tmp").unwrap();
+        let path = dir.path().join("scan.txt");
+        let p = Preferences {
+            root: dir.path().to_string_lossy().into_owned(),
+            ..Preferences::default()
+        };
+        for (text, expected) in [
+            (
+                "KONTOUTDRAG. Banken. Transaktioner: lön in, hyra ut. Saldo 100 kronor.",
+                "Banking & Taxes",
+            ),
+            (
+                "This certificate confirms cover for damage to your building and its contents.",
+                "Insurance",
+            ),
+            ("[unreadable scan; no recognizable text]", NEEDS_REVIEW),
+        ] {
+            fs::write(&path, text).unwrap();
+            let started = std::time::Instant::now();
+            let d = decide(text, &[], &p, Some((&path, &reader)));
+            println!(
+                "Apple synthetic: {:.2}s {}",
+                started.elapsed().as_secs_f64(),
+                serde_json::to_string(&d).unwrap()
+            );
+            assert_eq!(d.folder, expected);
+            if expected != NEEDS_REVIEW {
+                assert!(d.confident);
+                // Naming is now independent: a refused/uncertain naming call
+                // must retain the original filename without blocking a valid folder.
+            }
+        }
+    }
+
+    #[test]
+    fn model_failure_requires_review_without_keyword_override() {
+        let p = Preferences::default();
+        let d = finalize(Err("Apple is unavailable".into()), &p);
+        assert_eq!(d.folder, NEEDS_REVIEW);
+        assert!(d.title.is_empty());
+        assert!(d.reason.contains("unavailable"));
+    }
+
+    fn classify(text: &str, p: &Preferences) -> Decision {
+        decide(text, &[], p, None)
     }
 }

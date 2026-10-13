@@ -1,22 +1,21 @@
-mod apple;
-mod card_filing;
-mod card_suggest;
 mod cards;
-mod categories;
-mod classifier;
 mod cluster;
 mod collection;
 mod config;
-mod coordinator;
 mod engine;
 #[cfg(test)]
 mod evaluation;
 mod files;
+mod filing;
+mod helper;
 mod instructions;
 mod model;
+mod model_lock;
 mod native;
 mod parallel;
 mod provider;
+mod reader;
+mod suggest;
 mod watching;
 use engine::Engine;
 use model::{Approval, Preferences, Snapshot};
@@ -73,7 +72,7 @@ async fn save_preferences(
 #[tauri::command]
 async fn suggest_categories(
     engine: tauri::State<'_, Arc<Engine>>,
-) -> Result<categories::Proposal, String> {
+) -> Result<suggest::Proposal, String> {
     let engine = engine.inner().clone();
     tauri::async_runtime::spawn_blocking(move || engine.suggest_categories())
         .await
@@ -115,7 +114,7 @@ async fn organize_documents(
 }
 #[tauri::command]
 async fn organize_proposal(
-    files: Vec<categories::Placement>,
+    files: Vec<suggest::Placement>,
     watch: bool,
     engine: tauri::State<'_, Arc<Engine>>,
 ) -> Result<usize, String> {
@@ -159,7 +158,7 @@ async fn check_model(app: tauri::AppHandle, model: model::LocalModel) -> Result<
     };
     tauri::async_runtime::spawn_blocking(move || {
         use crate::provider::ModelProvider;
-        let _serial = coordinator::serial();
+        let _serial = model_lock::hold();
         provider::selected(&helper.with_file_name("tuck-reader"), model).status()
     })
     .await
@@ -182,8 +181,8 @@ async fn check_connection(
     };
     tauri::async_runtime::spawn_blocking(move || {
         files::validate_connection(&connection)?;
-        let _serial = coordinator::serial();
-        let response = apple::invoke(&helper, Some(serde_json::json!({"model":"custom", "operation":if list_models { "models" } else { "status" }, "connection":connection, "apiKey":api_key})), std::time::Duration::from_secs(90))?;
+        let _serial = model_lock::hold();
+        let response = helper::invoke(&helper, Some(serde_json::json!({"model":"custom", "operation":if list_models { "models" } else { "status" }, "connection":connection, "apiKey":api_key})), std::time::Duration::from_secs(90))?;
         if list_models { serde_json::to_string(&response["models"]).map_err(|e| e.to_string()) }
         else { response["status"].as_str().map(str::to_owned).ok_or("Invalid connection response".into()) }
     })

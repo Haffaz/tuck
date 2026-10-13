@@ -2,7 +2,7 @@
 //! corpora (see evals/cards) or an explicitly chosen folder, and never move documents.
 #[cfg(test)]
 mod tests {
-    use crate::{classifier, model::Preferences};
+    use crate::model::Preferences;
     use serde_json::{json, Value};
     use std::{
         fs,
@@ -36,7 +36,7 @@ mod tests {
             .iter()
             .map(|path| crate::files::digest(path).unwrap())
             .collect();
-        let result = crate::categories::suggest_map(&p, &reader, &map, |_| Ok(()));
+        let result = crate::suggest::suggest(&p, &reader, &map, |_| Ok(()));
         for (path, hash) in paths.iter().zip(before) {
             assert_eq!(crate::files::digest(path).unwrap(), hash);
         }
@@ -107,7 +107,7 @@ mod tests {
         };
 
         let started = Instant::now();
-        let proposal = crate::categories::suggest_map(&p, &reader, &map, |_| Ok(()));
+        let proposal = crate::suggest::suggest(&p, &reader, &map, |_| Ok(()));
         let suggest_seconds = started.elapsed().as_secs_f64();
         let mut ordered: Vec<_> = map.documents.iter().collect();
         ordered.sort_by(|a, b| a.path.cmp(&b.path));
@@ -160,17 +160,16 @@ mod tests {
             let path = Path::new(&doc.path);
             let started = Instant::now();
             let decision = match &doc.error {
-                Some(error) => crate::classifier::Decision {
+                Some(error) => crate::filing::Decision {
                     folder: "Needs Review".into(),
                     title: String::new(),
                     reason: error.clone(),
                     confident: false,
                 },
-                None => classifier::classify_with_tools(
-                    &path.file_name().unwrap().to_string_lossy(),
+                None => crate::filing::decide(
                     &doc.text,
+                    &doc.clues,
                     &filing_preferences,
-                    &[],
                     Some((path, &reader)),
                 ),
             };

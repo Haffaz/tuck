@@ -1,5 +1,5 @@
 //! Provider-neutral role contracts. Add another adapter here without giving models file access.
-use crate::{apple, cards::Card};
+use crate::{cards::Card, helper};
 use serde::Serialize;
 use serde_json::{json, Value};
 use std::{
@@ -88,7 +88,7 @@ impl LocalProvider {
             input["folderNesting"] = json!(p.folder_nesting);
             input["categoryInstructions"] = json!(p.category_instructions);
         }
-        apple::invoke(&self.helper, Some(input), timeout)
+        helper::invoke(&self.helper, Some(input), timeout)
     }
 }
 impl ModelProvider for LocalProvider {

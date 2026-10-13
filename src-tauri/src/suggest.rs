@@ -1,14 +1,111 @@
 //! Folder suggestions from document cards. Embeddings group documents of the same kind;
 //! the model names those groups and, in one call, places them under broader subjects.
 //! A failed model reply degrades a name or a subject, never a document's placement.
+//! Nothing is created until the user organizes the suggestion.
 use crate::{
-    cards::Card,
-    categories::{generic_category_name, Placement, Proposal, ReviewFile},
+    cards::{title_case, Card},
     cluster, files,
     model::{Preferences, Rule},
     provider::ModelProvider,
 };
+use serde::{Deserialize, Serialize};
 use std::{collections::BTreeMap, path::Path, time::Duration};
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct ReviewFile {
+    pub path: String,
+    pub reason: String,
+}
+
+#[cfg(test)]
+#[derive(Serialize, Debug, Clone)]
+pub struct Assignment {
+    pub id: String,
+    pub category: String,
+}
+/// Where a suggestion puts one document. `title` is empty when renaming is off.
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[serde(rename_all = "camelCase")]
+pub struct Placement {
+    pub path: String,
+    pub folder: String,
+    pub title: String,
+}
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct Proposal {
+    pub rules: Vec<Rule>,
+    /// Every document that got a folder; the rest are in `review_files`.
+    pub files: Vec<Placement>,
+    /// Evaluation hook: `d{index}` (path order, all mapped documents) to folder or "Needs review".
+    #[cfg(test)]
+    pub assignments: Vec<Assignment>,
+    pub sampled: usize,
+    pub skipped: usize,
+    pub review_files: Vec<ReviewFile>,
+    pub limited: bool,
+    pub preferences: Preferences,
+}
+// Apply only to AI suggestions: existing/user-chosen names remain valid.
+pub(crate) fn generic_category_name(name: &str) -> bool {
+    const GENERIC: &[&str] = &[
+        "a",
+        "an",
+        "the",
+        "and",
+        "or",
+        "my",
+        "all",
+        "of",
+        "document",
+        "documents",
+        "documentation",
+        "file",
+        "files",
+        "record",
+        "records",
+        "paper",
+        "papers",
+        "paperwork",
+        "item",
+        "items",
+        "stuff",
+        "general",
+        "other",
+        "misc",
+        "miscellaneous",
+        "personal",
+        "important",
+        "official",
+        "assorted",
+        "uncategorized",
+        "unclassified",
+        "archive",
+        "archives",
+        "archived",
+        "certificate",
+        "certificates",
+        "form",
+        "forms",
+        "letter",
+        "letters",
+    ];
+    name.to_lowercase()
+        .split(|c: char| !c.is_alphanumeric())
+        .filter(|s| !s.is_empty())
+        .all(|s| GENERIC.contains(&s))
+}
+
+/// Suggests folders for every readable document in the mapped folder.
+pub fn suggest(
+    p: &Preferences,
+    reader: &Path,
+    map: &crate::collection::Collection,
+    progress: impl FnMut(String) -> Result<(), String>,
+) -> Result<Proposal, String> {
+    suggest_with(p, map, progress, &crate::provider::configured(reader, p))
+}
 
 /// Cosine threshold for average-linkage clustering of card embeddings. Measured with
 /// NLEmbedding: the same document kind from different issuers scores about 0.8, while
@@ -59,18 +156,6 @@ pub fn form_groups(
             .map(|g| g.into_iter().map(|k| items[k]).collect::<Vec<_>>())
             .partition(|g| g.len() >= min_size);
     (groups, small.into_iter().flatten().collect())
-}
-
-fn title_case(text: &str) -> String {
-    text.split_whitespace()
-        .map(|word| {
-            let mut chars = word.chars();
-            chars.next().map_or_else(String::new, |first| {
-                first.to_uppercase().chain(chars).collect()
-            })
-        })
-        .collect::<Vec<_>>()
-        .join(" ")
 }
 
 fn usable_name(name: &str) -> bool {
@@ -359,7 +444,7 @@ fn assignments(
     groups: &[Group],
     described: &[(String, Card, usize)],
     total: usize,
-) -> Vec<crate::categories::Assignment> {
+) -> Vec<Assignment> {
     let mut categories = vec!["Needs review".to_string(); total];
     for group in groups {
         for &m in &group.members {
@@ -374,7 +459,7 @@ fn assignments(
     categories
         .into_iter()
         .enumerate()
-        .map(|(i, category)| crate::categories::Assignment {
+        .map(|(i, category)| Assignment {
             id: format!("d{i:04}"),
             category,
         })
@@ -382,13 +467,13 @@ fn assignments(
 }
 
 /// Describes every readable mapped document, then groups the cards.
-pub fn suggest(
+fn suggest_with(
     p: &Preferences,
     map: &crate::collection::Collection,
     mut progress: impl FnMut(String) -> Result<(), String>,
     model: &dyn ModelProvider,
 ) -> Result<Proposal, String> {
-    let _serial = crate::coordinator::serial();
+    let _model = crate::model_lock::hold();
     let mut ordered: Vec<_> = map.documents.iter().collect();
     ordered.sort_by(|a, b| a.path.cmp(&b.path));
     let mut review_files: Vec<ReviewFile> = ordered
@@ -479,7 +564,7 @@ pub fn suggest(
     }
     let files = placements(&groups, &described, |card, position| {
         if p.rename {
-            crate::card_filing::title(card, &ordered[position].text)
+            crate::filing::title(card, &ordered[position].text)
         } else {
             String::new()
         }
@@ -500,6 +585,39 @@ pub fn suggest(
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn generated_categories_need_subjects_but_subject_qualified_names_are_allowed() {
+        for name in [
+            "Documents",
+            "PERSONAL DOCUMENTS",
+            "General & Other",
+            "Official Records",
+            "Misc.",
+            "Certificates",
+        ] {
+            assert!(generic_category_name(name), "{name}");
+        }
+        for name in [
+            "Travel",
+            "Identification",
+            "Medical Records",
+            "Employment Documents",
+            "Education Certificates",
+        ] {
+            assert!(!generic_category_name(name), "{name}");
+        }
+        // This validation belongs to suggestions, not preferences or file operations.
+        assert!(files::validate(&Preferences {
+            rules: vec![Rule {
+                document_types: Vec::new(),
+                folder: "Documents".into(),
+                instruction: "User choice".into(),
+                enabled: true
+            }],
+            ..Preferences::default()
+        })
+        .is_ok());
+    }
 
     /// Names groups after their first card's kind, merges "Bankings" into "Bank Statements"
     /// and puts bank statements and payslips under Finance.

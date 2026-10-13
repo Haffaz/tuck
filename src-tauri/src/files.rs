@@ -395,4 +395,22 @@ mod tests {
         )));
         assert!(supported(Path::new("/documents/notes.md")));
     }
+    #[test]
+    fn mapping_skips_links_and_hidden_metadata_but_includes_deep_documents() {
+        let temp = tempfile::tempdir().unwrap();
+        let root = temp.path();
+        fs::write(root.join("letter.txt"), "Synthetic letter").unwrap();
+        fs::create_dir(root.join(".tuck")).unwrap();
+        fs::write(root.join(".tuck/instructions.md"), "Private rules").unwrap();
+        fs::create_dir_all(root.join("one/two/three")).unwrap();
+        fs::write(root.join("one/two/three/deep.txt"), "Too deep").unwrap();
+        std::os::unix::fs::symlink(root.join("letter.txt"), root.join("linked.txt")).unwrap();
+        let root = root.canonicalize().unwrap();
+        let paths = existing_documents(&root).unwrap();
+        assert_eq!(
+            paths,
+            vec![root.join("letter.txt"), root.join("one/two/three/deep.txt")]
+        );
+        assert!(!root.join("Finances").exists());
+    }
 }

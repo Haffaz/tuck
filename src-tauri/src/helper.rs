@@ -1,4 +1,6 @@
-//! Bounded subprocess bridge to Apple's on-device Foundation Models framework.
+//! Runs the Swift model helper (`tuck-apple`) as a subprocess: one JSON request on stdin,
+//! one JSON reply on stdout, with a deadline and an output cap. The helper talks to Apple
+//! Intelligence or to the user's custom connection; it has no access to files.
 #[cfg(test)]
 use serde_json::json;
 use serde_json::Value;
@@ -20,8 +22,11 @@ pub(crate) fn invoke(
         command.arg("--check");
     }
     let mut child = command.stdin(Stdio::piped()).stdout(Stdio::piped()).stderr(Stdio::null())
-        .spawn().map_err(|_| "Apple Intelligence helper could not start. Requires macOS 26 or later; check Apple Intelligence in System Settings or reinstall Tuck.")?;
-    let stdout = child.stdout.take().ok_or("Missing Local model output")?;
+        .spawn().map_err(|_| "The model helper could not start. Tuck needs macOS 26 or later; check Apple Intelligence in System Settings or reinstall Tuck.")?;
+    let stdout = child
+        .stdout
+        .take()
+        .ok_or("The model helper produced no output.")?;
     // Concurrent pipe handling keeps the deadline effective even if the helper stalls.
     let reader = std::thread::spawn(move || {
         let mut bytes = Vec::new();
@@ -30,7 +35,10 @@ pub(crate) fn invoke(
             .read_to_end(&mut bytes)
             .map(|_| bytes)
     });
-    let mut stdin = child.stdin.take().ok_or("Missing Local model input")?;
+    let mut stdin = child
+        .stdin
+        .take()
+        .ok_or("The model helper did not accept input.")?;
     let writer = std::thread::spawn(move || {
         if let Some(input) = input {
             stdin.write_all(input.to_string().as_bytes())?;

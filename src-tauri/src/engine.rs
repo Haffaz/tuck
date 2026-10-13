@@ -1,5 +1,5 @@
 use crate::{
-    classifier, config, files, instructions,
+    config, files, instructions,
     model::{Approval, Preferences, ReviewItem, Snapshot},
 };
 use std::{
@@ -32,7 +32,7 @@ pub struct Engine {
     directory: PathBuf,
     reader: PathBuf,
     #[cfg(test)]
-    test_decision: Mutex<Option<classifier::Decision>>,
+    test_decision: Mutex<Option<crate::filing::Decision>>,
 }
 impl Engine {
     pub fn new(directory: PathBuf, reader: PathBuf) -> Result<Self, String> {
@@ -216,7 +216,7 @@ impl Engine {
         }
         if let Some(key) = api_key.filter(|k| !k.is_empty()) {
             crate::files::validate_connection(&p.connection)?;
-            crate::apple::invoke(
+            crate::helper::invoke(
                 &self.reader.with_file_name("tuck-apple"),
                 Some(
                     serde_json::json!({"model":"custom","operation":"save_key","connection":p.connection,"apiKey":key}),
@@ -235,7 +235,7 @@ impl Engine {
         state.watching = false;
         Ok(())
     }
-    pub fn suggest_categories(&self) -> Result<crate::categories::Proposal, String> {
+    pub fn suggest_categories(&self) -> Result<crate::suggest::Proposal, String> {
         let needs_map = {
             let state = self.state.lock().unwrap();
             let paths = files::existing_documents(Path::new(&state.preferences.root))?;
@@ -266,7 +266,7 @@ impl Engine {
         let result = match collection {
             Some(map) => {
                 let generation = self.state.lock().unwrap().generation;
-                crate::categories::suggest_map(&p, &self.reader, &map, |message| {
+                crate::suggest::suggest(&p, &self.reader, &map, |message| {
                     let mut state = self.state.lock().unwrap();
                     if state.generation != generation {
                         return Err("Suggestions cancelled.".into());
@@ -369,7 +369,7 @@ impl Engine {
     /// Tuck then keeps running so dropped (and, with `watch`, new) files are filed too.
     pub fn organize_proposal(
         &self,
-        placements: Vec<crate::categories::Placement>,
+        placements: Vec<crate::suggest::Placement>,
         watch: bool,
     ) -> Result<usize, String> {
         let mut state = self.state.lock().unwrap();
@@ -380,7 +380,7 @@ impl Engine {
         let map = Self::unchanged_map(&mut state)?;
         let p = state.preferences.clone();
         let revision = config::revision(&p);
-        let placements: BTreeMap<&str, &crate::categories::Placement> =
+        let placements: BTreeMap<&str, &crate::suggest::Placement> =
             placements.iter().map(|pl| (pl.path.as_str(), pl)).collect();
         let mut items = Vec::new();
         for doc in &map.documents {
@@ -723,7 +723,6 @@ impl Engine {
             return Err("Document is now larger than 100 MB; original kept".into());
         }
         let hash = files::digest(source)?;
-        let name = source.file_name().unwrap_or_default().to_string_lossy();
         let mapped = self
             .state
             .lock()
@@ -743,22 +742,21 @@ impl Engine {
         let reading = match mapped {
             Some(doc) if doc.hash == hash => match doc.error {
                 Some(error) => Err(error),
-                None => Ok(classifier::Reading {
+                None => Ok(crate::reader::Reading {
                     text: doc.text,
                     clues: doc.clues,
                 }),
             },
-            _ => classifier::read(source, &self.reader),
+            _ => crate::reader::read(source, &self.reader),
         };
         let decision = match reading {
-            Ok(reading) => classifier::classify_with_tools(
-                &name,
+            Ok(reading) => crate::filing::decide(
                 &reading.text,
-                p,
                 &reading.clues,
+                p,
                 Some((source, &self.reader)),
             ),
-            Err(e) => classifier::Decision {
+            Err(e) => crate::filing::Decision {
                 folder: "Needs Review".into(),
                 title: String::new(),
                 reason: e,
@@ -771,7 +769,7 @@ impl Engine {
             .lock()
             .unwrap()
             .clone()
-            .map(|d| classifier::finalize(Ok(d), p))
+            .map(|d| crate::filing::finalize(Ok(d), p))
             .unwrap_or(decision);
         if files::signature(source)? != before || files::digest(source)? != hash {
             return Err("Document changed during reading. Analyze it again.".into());
@@ -1320,11 +1318,10 @@ else:
         engine.suggest_categories().unwrap();
         assert_eq!(count(), 3);
         let text = fs::read_to_string(&renamed).unwrap();
-        let decision = classifier::classify_with_tools(
-            "renamed.txt",
+        let decision = crate::filing::decide(
             &text,
-            &engine.snapshot().preferences,
             &[],
+            &engine.snapshot().preferences,
             Some((&renamed, &engine.reader)),
         );
         assert!(decision.confident, "{}", decision.reason);
@@ -1399,7 +1396,7 @@ else:
         engine.map_folder().unwrap();
         let outside = root.parent().unwrap().join("outside.txt");
         fs::write(&outside, "Not part of the folder").unwrap();
-        let forged = |path: &Path, folder: &str, title: &str| crate::categories::Placement {
+        let forged = |path: &Path, folder: &str, title: &str| crate::suggest::Placement {
             path: path.to_string_lossy().into_owned(),
             folder: folder.into(),
             title: title.into(),
@@ -1515,7 +1512,7 @@ else:
         p.use_ai = false;
         p.rules = Preferences::default().rules;
         engine.save_preferences(p).unwrap();
-        *engine.test_decision.lock().unwrap() = Some(classifier::Decision {
+        *engine.test_decision.lock().unwrap() = Some(crate::filing::Decision {
             folder: "Banking & Taxes".into(),
             title: "Bank statement".into(),
             confident: true,

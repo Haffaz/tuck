@@ -1,6 +1,6 @@
 //! A session-only document map. Text stays on this Mac and is never written to settings.
 use crate::{
-    classifier, files,
+    files,
     model::{Preferences, Rule},
 };
 use serde::Serialize;
@@ -62,7 +62,7 @@ pub fn read(path: &Path, root: &Path, reader: &Path) -> Document {
             return Err("Document exceeds 100 MB; original kept.".into());
         }
         document.hash = files::digest(path)?;
-        let reading = classifier::read(path, reader)?;
+        let reading = crate::reader::read(path, reader)?;
         document.text = reading.text;
         document.clues = reading.clues;
         if files::signature(path)? != document.signature || files::digest(path)? != document.hash {
