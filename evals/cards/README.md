@@ -16,17 +16,17 @@ gold subjects over document pairs; documents with gold "Needs Review" are exclud
 
 ## Results, 10 October 2026
 
-Old = the earlier role pipeline (describe → group → match → check; see [history](../../docs/history.md)). New = card clustering.
+Old = the earlier role pipeline (describe → group → match → check). New = card clustering.
 
-| Corpus | Measure | Old | New |
-| --- | --- | --- | --- |
-| Mixed (35) | Files with a suggested folder | 29 | 35 |
-| | Filing correct / wrong / review | 29 / 0 / 6 | 35 / 0 / 0 |
-| | Median filing time | 3.1 s | 0.8 s |
-| Held-out (29) | Clear docs filed correctly | 25/25 | 25/25 |
-| | Unclear or mixed docs held for review | 4/4 | 1/4 |
-| | Pair precision / recall | 0.78 / 0.90 | 0.97 / 0.83 |
-| | Median filing time | 3.2 s | 0.6 s |
+| Corpus        | Measure                               | Old         | New         |
+| ------------- | ------------------------------------- | ----------- | ----------- |
+| Mixed (35)    | Files with a suggested folder         | 29          | 35          |
+|               | Filing correct / wrong / review       | 29 / 0 / 6  | 35 / 0 / 0  |
+|               | Median filing time                    | 3.1 s       | 0.8 s       |
+| Held-out (29) | Clear docs filed correctly            | 25/25       | 25/25       |
+|               | Unclear or mixed docs held for review | 4/4         | 1/4         |
+|               | Pair precision / recall               | 0.78 / 0.90 | 0.97 / 0.83 |
+|               | Median filing time                    | 3.2 s       | 0.6 s       |
 
 The old pipeline sent every document over 5,000 characters to review. Two changes were made after
 inspecting the mixed corpus (no leftover attachment; "Identity & Immigration" as a subject example),
@@ -41,12 +41,12 @@ invoice with a SEPA payment QR code and a passport page with a machine-readable 
 `clue-tests.swift` checks the parsers. Added to the 35-document corpus with synthetic Sinhala and
 Tamil bank-statement scans (text recognition does not support either script):
 
-| Measure | Before | After |
-| --- | --- | --- |
-| Sinhala scan | card "unknown" → "Unknown" folder | Needs you, with reason |
-| Tamil scan | card "payslip" (wrong) | Needs you, with reason |
-| Residence-permit form (text only says "Application form") | issuer "Reference 48319" | issuer Migrationsverket, filed under Identity & Immigration |
-| Filing on the other 35 documents | 35/35 | 35/35, 0 wrong |
+| Measure                                                   | Before                            | After                                                       |
+| --------------------------------------------------------- | --------------------------------- | ----------------------------------------------------------- |
+| Sinhala scan                                              | card "unknown" → "Unknown" folder | Needs you, with reason                                      |
+| Tamil scan                                                | card "payslip" (wrong)            | Needs you, with reason                                      |
+| Residence-permit form (text only says "Application form") | issuer "Reference 48319"          | issuer Migrationsverket, filed under Identity & Immigration |
+| Filing on the other 35 documents                          | 35/35                             | 35/35, 0 wrong                                              |
 
 Text recognition confidence on readable synthetic scans was 0.61–1.0 with the fast document API;
 pages it scores below 0.6 are re-checked with the classic recogniser (readable 0.75–1.0,
