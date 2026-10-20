@@ -4,11 +4,26 @@
 fn up_to_date(output: &str, sources: &[&str]) -> bool {
     let modified = |path: &str| std::fs::metadata(path).and_then(|m| m.modified()).ok();
     match modified(output) {
+        // build.rs counts as a source so changed compiler flags rebuild the helpers.
         Some(built) => sources
             .iter()
+            .chain(&["build.rs"])
             .all(|source| modified(source).is_some_and(|changed| changed <= built)),
         None => false,
     }
+}
+
+/// Matches LSMinimumSystemVersion in Info.plist. Without an explicit target, swiftc builds
+/// for the build Mac's macOS version, so a release built on a newer Mac would not start
+/// on older supported ones.
+const MACOS_MINIMUM: &str = "26.0";
+
+fn swift_target() -> String {
+    let arch = match std::env::var("CARGO_CFG_TARGET_ARCH").as_deref() {
+        Ok("x86_64") => "x86_64",
+        _ => "arm64",
+    };
+    format!("{arch}-apple-macos{MACOS_MINIMUM}")
 }
 
 fn main() {
@@ -20,7 +35,7 @@ fn main() {
     {
         std::fs::create_dir_all("resources").expect("create reader directory");
         let status = std::process::Command::new("swiftc")
-            .args(["-parse-as-library", "-O"])
+            .args(["-parse-as-library", "-O", "-target", &swift_target()])
             .args(READER_SOURCES)
             .args(["-o", "resources/tuck-reader"])
             .status()
@@ -46,7 +61,7 @@ fn main() {
         && !up_to_date("resources/tuck-apple", HELPER_SOURCES)
     {
         let status = std::process::Command::new("swiftc")
-            .args(["-parse-as-library", "-O"])
+            .args(["-parse-as-library", "-O", "-target", &swift_target()])
             .args(HELPER_SOURCES)
             .args(["-o", "resources/tuck-apple"])
             .status()
@@ -65,6 +80,8 @@ fn main() {
                 "-emit-library",
                 "-static",
                 "-O",
+                "-target",
+                &swift_target(),
                 "swift/TuckMac.swift",
                 "-o",
             ])

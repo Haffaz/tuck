@@ -13,6 +13,36 @@ so. With Apple Intelligence it runs entirely on device: no account, no cloud, no
   <img src="docs/images/done-dark.png" alt="Organized, in dark mode" width="350">
 </p>
 
+## Install
+
+Tuck runs on **macOS 26 or later on an Apple silicon Mac** (M1 or newer). For on-device AI, turn on
+Apple Intelligence in **System Settings → Apple Intelligence & Siri**. Without it, you can connect
+another model in Tuck's Settings instead.
+
+1. Download `Tuck_<version>_aarch64.dmg` from the
+   [latest release](https://github.com/Haffaz/tuck/releases/latest).
+2. Open the `.dmg` and drag **Tuck** into **Applications**.
+3. Open Tuck from Applications. The first time, macOS says it could not verify the app, because
+   Tuck is not yet notarized by Apple. Click **Done**, open **System Settings → Privacy & Security**,
+   scroll to **Security** and click **Open Anyway** next to Tuck, then confirm. macOS remembers this.
+
+If you prefer Terminal, this removes the download quarantine flag instead of step 3:
+
+```sh
+xattr -dr com.apple.quarantine /Applications/Tuck.app
+```
+
+Each release also lists SHA-256 checksums. To check a download, run this in the folder that holds
+both files:
+
+```sh
+shasum -a 256 -c SHA256SUMS.txt --ignore-missing
+```
+
+**Update:** download the new `.dmg` and replace Tuck in Applications. Your folder rules and settings
+live next to your documents and are kept. **Uninstall:** move Tuck to the Trash. To remove its small
+preferences file too, delete `~/Library/Application Support/app.tuck.desktop`.
+
 ## What it does
 
 1. **Choose a folder.** Tuck reads every document in it: PDF text, OCR for scans, labels for photos.
@@ -42,29 +72,6 @@ flowchart LR
 
 More detail is in [docs/architecture.md](docs/architecture.md).
 
-## Results
-
-Same synthetic test documents, earlier design versus now, with Apple Intelligence.
-
-```mermaid
-xychart-beta
-    title "Files filed correctly (out of 35)"
-    x-axis ["Before", "Now"]
-    y-axis "Files" 0 --> 35
-    bar [29, 35]
-```
-
-```mermaid
-xychart-beta
-    title "Seconds to file one document"
-    x-axis ["Before", "Now"]
-    y-axis "Seconds" 0 --> 4
-    bar [3.2, 0.6]
-```
-
-No document was filed wrongly in either run; before, the other 6 waited for review. These are small
-test sets, not a real-world accuracy estimate. See [evals/cards](evals/cards/README.md).
-
 ## Built with
 
 | Layer                   | Technology                                                                                                             |
@@ -90,13 +97,10 @@ request per process.
 - Folder rules and settings are plain files in a `.tuck` folder next to your documents. A rebuildable
   cache of document cards lives there too. Nothing else is stored.
 
-## Requirements
+## Build from source
 
-- macOS 26 or later on Apple silicon, with Apple Intelligence turned on (or a custom connection)
-- Xcode 26 or later (or its command-line tools) for `swiftc`
-- Rust (stable) and Node.js 20 or later
-
-## Build and run
+You need macOS 26 or later on Apple silicon, Xcode 27 or later (or its command-line tools) for
+`swiftc` and the macOS 27 SDK, Rust (stable) and Node.js 20 or later.
 
 ```sh
 npm install
@@ -115,6 +119,28 @@ npm run screenshots    # regenerate the images in docs/images
 UI tests run the real interface against a mocked Tauri bridge, so they need no model. Evaluations
 that call Apple Intelligence are opt-in (`cargo test -- --ignored`) and use synthetic documents; see
 [evals/cards](evals/cards/README.md) for the corpora and results.
+
+## Releases
+
+GitHub Actions runs `npm run check` on every pull request and push to `main`
+([ci.yml](.github/workflows/ci.yml)). To publish a version:
+
+```sh
+npm run version:set 0.2.0      # package.json, package-lock.json, tauri.conf.json, Cargo.toml, Cargo.lock
+git commit -am "chore: release 0.2.0"
+git tag v0.2.0
+git push origin main v0.2.0
+```
+
+The tag starts [release.yml](.github/workflows/release.yml). It checks that the tag matches the
+version and runs the tests. Then [tauri-action](https://github.com/tauri-apps/tauri-action) builds
+the app and creates a **draft** GitHub release with the `.dmg`, `Tuck.app.tar.gz` and
+`SHA256SUMS.txt`. Review the draft on GitHub and click **Publish release**. A version with a suffix
+such as `0.2.0-beta.1` becomes a pre-release. Running the workflow by hand builds the same files as
+workflow artifacts without creating a release.
+
+Builds are ad-hoc signed, not notarized, which is why the first launch needs **Open Anyway**.
+Notarization needs an Apple Developer ID certificate.
 
 ## Project layout
 
