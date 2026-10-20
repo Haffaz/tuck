@@ -1,0 +1,85 @@
+name: Release
+
+# Push a tag such as v0.2.0 to build, test and publish a release.
+# Run manually to build the same files as a workflow artifact without publishing.
+on:
+  push:
+    tags: ["v*.*.*"]
+  workflow_dispatch:
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: xcode-27
+    timeout-minutes: 60
+    env:
+      PUBLISH: ${{ startsWith(github.ref, 'refs/tags/v') }}
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: clippy
+
+      - name: Check version
+        id: version
+        run: |
+          if [ "$PUBLISH" = "true" ]; then
+            version=$(node scripts/version.mjs --check "$GITHUB_REF_NAME")
+          else
+            version=$(node scripts/version.mjs --check)
+          fi
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+
+      - run: npm ci
+
+      - run: npx playwright install chromium
+
+      - run: npm run check
+
+      # Ad-hoc signed (bundle.macOS.signingIdentity "-"), not notarized.
+      - run: npm run tauri build
+
+      - name: Package
+        id: package
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          bundle=src-tauri/target/release/bundle
+          mkdir -p dist-release
+          cp "$bundle/dmg/Tuck_${VERSION}_aarch64.dmg" dist-release/
+          ditto -c -k --keepParent "$bundle/macos/Tuck.app" "dist-release/Tuck_${VERSION}_aarch64.app.zip"
+          codesign --verify --deep --strict "$bundle/macos/Tuck.app"
+          cd dist-release
+          shasum -a 256 Tuck_* > SHA256SUMS.txt
+          cat SHA256SUMS.txt
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Tuck-${{ steps.version.outputs.version }}
+          path: dist-release/*
+
+      - name: Publish GitHub release
+        if: env.PUBLISH == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          prerelease=""
+          case "$VERSION" in *-*) prerelease="--prerelease" ;; esac
+          gh release create "$GITHUB_REF_NAME" dist-release/* \
+            --verify-tag $prerelease \
+            --title "Tuck $VERSION" \
+            --notes-file .github/release-notes.md \
+            --generate-notes

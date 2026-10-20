@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!-- Merged into the bundle by Tauri. Keep in step with MACOS_MINIMUM in build.rs.
+	     bundle.macOS.minimumSystemVersion is not used: it sets MACOSX_DEPLOYMENT_TARGET,
+	     which breaks proc-macro builds with the Xcode 27 linker. -->
+	<key>LSMinimumSystemVersion</key>
+	<string>26.0</string>
+</dict>
+</plist>

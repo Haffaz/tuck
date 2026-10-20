@@ -27,7 +27,8 @@
   "bundle": {
     "active": true,
     "targets": [
-      "app"
+      "app",
+      "dmg"
     ],
     "icon": [
       "icons/32x32.png",
@@ -40,6 +41,10 @@
       "resources/tuck-reader",
       "resources/tuck-apple"
     ],
-    "shortDescription": "A little home for every document."
+    "shortDescription": "A little home for every document.",
+    "category": "Productivity",
+    "macOS": {
+      "signingIdentity": "-"
+    }
   }
 }

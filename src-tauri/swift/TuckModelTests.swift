@@ -37,7 +37,8 @@ import FoundationModels
         let subjects = parsedSubjects("- Payslips -> Work\nbank statements -> Finance.\nInvented -> Other\nPayslips -> Home", names: ["Payslips", "Bank Statements"])
         assert(subjects == ["Payslips": "Work", "Bank Statements": "Finance"])
 
-        if #available(macOS 26.0, *) {
+        // Token counting needs the on-device model; CI runners have no Apple Intelligence.
+        if #available(macOS 26.0, *), SystemLanguageModel.default.isAvailable {
             let schema = try makeSchema("Test", [stringProperty("value", "A value")])
             do {
                 _ = try await generate(model: .default, instructions: String(repeating: "long preference ", count: 20000), prompt: "test", schema: schema)
