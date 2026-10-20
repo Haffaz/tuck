@@ -133,10 +133,11 @@ git push origin main v0.2.0
 ```
 
 The tag starts [release.yml](.github/workflows/release.yml). It checks that the tag matches the
-version, runs the tests, builds the app, and publishes a GitHub release with the `.dmg`, a zipped
-`Tuck.app` and `SHA256SUMS.txt`. A version with a suffix such as `0.2.0-beta.1` becomes a
-pre-release. Running the workflow by hand builds the same files as a workflow artifact without
-publishing.
+version and runs the tests. Then [tauri-action](https://github.com/tauri-apps/tauri-action) builds
+the app and creates a **draft** GitHub release with the `.dmg`, `Tuck.app.tar.gz` and
+`SHA256SUMS.txt`. Review the draft on GitHub and click **Publish release**. A version with a suffix
+such as `0.2.0-beta.1` becomes a pre-release. Running the workflow by hand builds the same files as
+workflow artifacts without creating a release.
 
 Builds are ad-hoc signed, not notarized, which is why the first launch needs **Open Anyway**.
 Notarization needs an Apple Developer ID certificate.
